@@ -123,12 +123,50 @@
 
   @media screen and (max-width: 749px) {
     .pukenga-hero {
-      min-height: 520px;
+      height: 500px;
+    }
+
+    .pukenga-hero__media img {
+      object-position: 50% 25%;
+    }
+
+    .pukenga-hero__overlay--diagonal {
+      display: none;
+    }
+
+    .pukenga-hero__overlay--vertical {
+      background: linear-gradient(rgba(15, 25, 15, 0.5) 0%, rgba(15, 25, 15, 0.1) 30%, rgba(15, 25, 15, 0.82) 100%);
     }
 
     .pukenga-hero__content {
-      padding-top: 90px;
-      padding-bottom: 48px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 34px;
+      text-align: center;
+      padding: 0 26px;
+    }
+
+    .pukenga-hero__heading {
+      font-size: 38px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .pukenga-hero__subheading {
+      font-style: italic;
+      font-size: 18px;
+      opacity: 0.85;
+      margin: 0 auto 24px;
+    }
+
+    .pukenga-hero__actions {
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .pukenga-hero__actions .pukenga-btn {
+      width: 100%;
     }
   }
 {% endstylesheet %}
