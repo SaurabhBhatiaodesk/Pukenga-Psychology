@@ -1,0 +1,700 @@
+<section
+  class="pukenga-section section--full-width pukenga-about-left pukenga-about"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="section">
+
+    <div class="pukenga-about-left__grid">
+
+      <div class="pukenga-about-left__media">
+
+        {%- if section.settings.image != blank -%}
+          <img
+            class="pukenga-about-left__image pukenga-about-left__image--desktop"
+            src="{{ section.settings.image | image_url: width: 1800 }}"
+            srcset="
+              {{ section.settings.image | image_url: width: 800 }} 800w,
+              {{ section.settings.image | image_url: width: 1200 }} 1200w,
+              {{ section.settings.image | image_url: width: 1600 }} 1600w,
+              {{ section.settings.image | image_url: width: 1800 }} 1800w
+            "
+            sizes="50vw"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+
+        {%- if section.settings.mobile_image != blank -%}
+          <img
+            class="pukenga-about-left__image pukenga-about-left__image--mobile"
+            src="{{ section.settings.mobile_image | image_url: width: 1200 }}"
+            srcset="
+              {{ section.settings.mobile_image | image_url: width: 500 }} 500w,
+              {{ section.settings.mobile_image | image_url: width: 750 }} 750w,
+              {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w,
+              {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w
+            "
+            sizes="100vw"
+            width="{{ section.settings.mobile_image.width }}"
+            height="{{ section.settings.mobile_image.height }}"
+            alt="{{ section.settings.mobile_image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+          >
+        {%- elsif section.settings.image != blank -%}
+          <img
+            class="pukenga-about-left__image pukenga-about-left__image--mobile"
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+
+      </div>
+
+      <div class="pukenga-about-left__content">
+
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pukenga-eyebrow">
+            {{ section.settings.eyebrow | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pukenga-heading pukenga-about-left__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="pukenga-body pukenga-about-left__text">
+            {{ section.settings.text }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.signature != blank -%}
+          <p class="pukenga-about-left__signature">
+            {{ section.settings.signature | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="pukenga-link pukenga-about-left__link"
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+
+  .pukenga-about-left {
+    width: 100%;
+    background: {{ section.settings.background_color }};
+    overflow: hidden;
+  }
+
+
+  .pukenga-about-left__grid {
+    display: grid;
+    grid-template-columns:
+      {{ section.settings.desktop_image_width }}
+      {{ section.settings.desktop_content_width }};
+    gap: {{ section.settings.desktop_gap }}px;
+    align-items: {{ section.settings.vertical_alignment }};
+    width: 100%;
+  }
+
+
+  .pukenga-about-left__media {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    grid-column: 1;
+    grid-row: 1;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+
+  .pukenga-about-left__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  .pukenga-about-left__image--desktop {
+    display: block;
+    aspect-ratio: {{ section.settings.desktop_image_ratio }};
+    object-position:
+      {{ section.settings.desktop_image_position_x }}%
+      {{ section.settings.desktop_image_position_y }}%;
+  }
+
+
+  .pukenga-about-left__image--mobile {
+    display: none;
+  }
+
+
+  .pukenga-about-left__content {
+    width: 100%;
+    min-width: 0;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+
+  .pukenga-about-left__heading {
+    font-size: {{ section.settings.heading_max_size }}px;
+    margin-top: 0;
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+  }
+
+
+  .pukenga-about-left__text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: #ece5d4;
+    opacity: 0.85;
+    margin-bottom: {{ section.settings.text_margin_bottom }}px;
+  }
+
+
+  .pukenga-about-left__signature {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-style: italic;
+    color: var(--pukenga-gold, #e0b784);
+    margin: 0 0 {{ section.settings.signature_margin_bottom }}px;
+  }
+
+
+  .pukenga-about-left__link {
+    display: inline-block;
+  }
+
+
+  @media screen and (max-width: 989px) {
+
+    .pukenga-about-left__grid {
+      grid-template-columns: 1fr;
+      gap: {{ section.settings.mobile_gap }}px;
+    }
+
+
+    .pukenga-about-left__media {
+      grid-column: 1;
+      grid-row: 1;
+      border-radius: {{ section.settings.mobile_image_border_radius }}px;
+    }
+
+    .pukenga-about-left__content {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 44px 26px 0;
+        border-bottom: 1px solid      #313932;
+    }
+
+
+    .pukenga-about-left__image--desktop {
+      display: none;
+    }
+
+
+    .pukenga-about-left__image--mobile {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: {{ section.settings.mobile_image_ratio }};
+      object-fit: cover;
+      object-position:
+        {{ section.settings.mobile_image_position_x }}%
+        {{ section.settings.mobile_image_position_y }}%;
+    }
+
+  }
+
+
+  @media screen and (max-width: 749px) {
+
+    .pukenga-about-left__heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+      line-height: 1.12;
+    }
+
+  }
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Pūkenga About Left",
+  "tag": "section",
+  "class": "section-pukenga-about-left",
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Images"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Use a separate image for mobile."
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop Layout"
+    },
+
+    {
+      "type": "select",
+      "id": "desktop_image_width",
+      "label": "Desktop image width",
+      "options": [
+        {
+          "value": "0.8fr",
+          "label": "45%"
+        },
+        {
+          "value": "0.9fr",
+          "label": "47%"
+        },
+        {
+          "value": "1fr",
+          "label": "50%"
+        },
+        {
+          "value": "1.1fr",
+          "label": "52%"
+        },
+        {
+          "value": "1.2fr",
+          "label": "55%"
+        }
+      ],
+      "default": "1fr"
+    },
+
+    {
+      "type": "select",
+      "id": "desktop_content_width",
+      "label": "Desktop content width",
+      "options": [
+        {
+          "value": "0.8fr",
+          "label": "45%"
+        },
+        {
+          "value": "0.9fr",
+          "label": "47%"
+        },
+        {
+          "value": "1fr",
+          "label": "50%"
+        },
+        {
+          "value": "1.1fr",
+          "label": "52%"
+        },
+        {
+          "value": "1.2fr",
+          "label": "55%"
+        }
+      ],
+      "default": "0.9fr"
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "label": "Image and content gap",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop Image"
+    },
+
+    {
+      "type": "select",
+      "id": "desktop_image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "1:1"
+        },
+        {
+          "value": "4 / 5",
+          "label": "4:5"
+        },
+        {
+          "value": "3 / 4",
+          "label": "3:4"
+        },
+        {
+          "value": "4 / 3",
+          "label": "4:3"
+        },
+        {
+          "value": "16 / 10",
+          "label": "16:10"
+        },
+        {
+          "value": "16 / 9",
+          "label": "16:9"
+        }
+      ],
+      "default": "4 / 5"
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_image_position_x",
+      "label": "Horizontal image position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_image_position_y",
+      "label": "Vertical image position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Desktop image radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Ko wai au"
+    },
+
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Kia ora, I'm Dr Jessica</p>"
+    },
+
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>A Registered Clinical Psychologist committed to creating Māori wellbeing resources for everyday people, to help you whakapiki your hauora.</p><p>I make aspects of Te Ao Māori easily accessible for those who need it.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Signature line"
+    },
+
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Link label",
+      "default": "Pānui atu · Read more"
+    },
+
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link URL"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background colour",
+      "default": "#1d3323"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Content Spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_max_size",
+      "label": "Desktop heading size",
+      "min": 24,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 38
+    },
+
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading bottom spacing",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "range",
+      "id": "text_margin_bottom",
+      "label": "Text bottom spacing",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "range",
+      "id": "signature_margin_bottom",
+      "label": "Signature bottom spacing",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile Image"
+    },
+
+    {
+      "type": "select",
+      "id": "mobile_image_ratio",
+      "label": "Mobile image ratio",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "1:1"
+        },
+        {
+          "value": "4 / 5",
+          "label": "4:5"
+        },
+        {
+          "value": "3 / 4",
+          "label": "3:4"
+        },
+        {
+          "value": "16 / 10",
+          "label": "16:10"
+        },
+        {
+          "value": "16 / 9",
+          "label": "16:9"
+        }
+      ],
+      "default": "16 / 10"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_position_x",
+      "label": "Horizontal image position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_position_y",
+      "label": "Vertical image position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_border_radius",
+      "label": "Mobile image radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 38
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Image/content gap",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+
+
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+
+  ],
+
+  "presets": [
+    {
+      "name": "Pūkenga About Left"
+    }
+  ]
+}
+{% endschema %}
