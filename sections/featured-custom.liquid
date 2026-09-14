@@ -1,0 +1,693 @@
+<section class="pukenga-values" id="pukenga-values-{{ section.id }}">
+  <div class="pukenga-values__inner">
+
+    <div class="pukenga-values__slider">
+      {%- for block in section.blocks -%}
+        <div
+          class="pukenga-values__item"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.heading != blank -%}
+            <h2 class="pukenga-values__heading">
+              {{ block.settings.heading | escape }}
+            </h2>
+          {%- endif -%}
+
+          {%- if block.settings.text != blank -%}
+            <div class="pukenga-values__text">
+              {{ block.settings.text }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Mobile slider dots -->
+    <div class="pukenga-values__dots" aria-label="Values slider navigation">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="pukenga-values__dot{% if forloop.first %} is-active{% endif %}"
+          data-slide="{{ forloop.index0 }}"
+          aria-label="Go to value {{ forloop.index }}"
+          aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+        ></button>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #pukenga-values-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__inner {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* =========================================
+     DESKTOP
+  ========================================= */
+
+  #pukenga-values-{{ section.id }} .pukenga-values__slider {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__item {
+    min-width: 0;
+    padding:
+      {{ section.settings.padding_y }}px
+      {{ section.settings.padding_x }}px;
+
+    text-align: center;
+
+    border-right:
+      1px solid {{ section.settings.divider_color }};
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__item:last-child {
+    border-right: 0;
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__heading {
+    margin: 0 0 9px;
+
+    color: {{ section.settings.heading_color }};
+
+    font-family: Marcellus, serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__text {
+    max-width: 360px;
+    margin: 0 auto;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    opacity: 0.75;
+  }
+
+  #pukenga-values-{{ section.id }} .pukenga-values__text p {
+    margin: 0;
+  }
+
+  /* Hide dots on desktop */
+
+  #pukenga-values-{{ section.id }} .pukenga-values__dots {
+    display: none;
+  }
+
+
+  /* =========================================
+     MOBILE SLIDER
+  ========================================= */
+
+  @media screen and (max-width: 749px) {
+
+    #pukenga-values-{{ section.id }} {
+      overflow: hidden;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__inner {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__slider {
+      display: flex;
+      width: 100%;
+
+      transform: translate3d(0, 0, 0);
+
+      transition:
+        transform 0.55s ease-in-out;
+
+      will-change: transform;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__item {
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+
+      box-sizing: border-box;
+
+      padding:
+        {{ section.settings.mobile_padding_y }}px 24px;
+
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__heading {
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__text {
+      max-width: 360px;
+      font-size: 14px;
+    }
+
+
+    /* =========================================
+       DOTS
+    ========================================= */
+
+    #pukenga-values-{{ section.id }} .pukenga-values__dots {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      gap: 10px;
+
+      padding-bottom: 24px;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__dot {
+      appearance: none;
+
+      width: 10px;
+      height: 10px;
+
+      padding: 0;
+      margin: 0;
+
+      border: 0;
+      border-radius: 50%;
+
+      background: {{ section.settings.dot_color }};
+
+      opacity: 0.45;
+
+      cursor: pointer;
+
+      transition:
+        width 0.25s ease,
+        border-radius 0.25s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__dot.is-active {
+      width: 26px;
+
+      border-radius: 20px;
+
+      background: {{ section.settings.active_dot_color }};
+
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const section = document.getElementById(
+      'pukenga-values-{{ section.id }}'
+    );
+
+    if (!section) return;
+
+    const slider = section.querySelector(
+      '.pukenga-values__slider'
+    );
+
+    const dots = section.querySelectorAll(
+      '.pukenga-values__dot'
+    );
+
+    if (!slider) return;
+
+    let slides = Array.from(
+      slider.querySelectorAll('.pukenga-values__item')
+    );
+
+    if (slides.length <= 1) return;
+
+    let currentSlide = 0;
+    let autoSlide = null;
+    let isTransitioning = false;
+
+    function isMobile() {
+      return window.matchMedia(
+        '(max-width: 749px)'
+      ).matches;
+    }
+
+    /* =========================================
+       CREATE LOOP CLONES
+    ========================================= */
+
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+
+    firstClone.classList.add('pukenga-values__clone');
+    lastClone.classList.add('pukenga-values__clone');
+
+    slider.appendChild(firstClone);
+    slider.insertBefore(lastClone, slider.firstChild);
+
+    slides = Array.from(
+      slider.querySelectorAll('.pukenga-values__item')
+    );
+
+    /* Start from real first slide */
+    currentSlide = 1;
+
+    function updateDots(index) {
+      dots.forEach(function(dot, dotIndex) {
+        const active = dotIndex === index;
+
+        dot.classList.toggle(
+          'is-active',
+          active
+        );
+
+        dot.setAttribute(
+          'aria-current',
+          active ? 'true' : 'false'
+        );
+      });
+    }
+
+    function setPosition(index, animate) {
+
+      slider.style.transition = animate
+        ? 'transform 0.55s ease-in-out'
+        : 'none';
+
+      slider.style.transform =
+        'translate3d(-' +
+        (index * 100) +
+        '%, 0, 0)';
+    }
+
+    function goToSlide(index, animate = true) {
+
+      if (!isMobile()) {
+        setPosition(0, false);
+        return;
+      }
+
+      currentSlide = index;
+
+      setPosition(
+        currentSlide,
+        animate
+      );
+
+      let dotIndex = currentSlide - 1;
+
+      if (dotIndex < 0) {
+        dotIndex = slides.length - 3;
+      }
+
+      if (dotIndex >= slides.length - 2) {
+        dotIndex = 0;
+      }
+
+      updateDots(dotIndex);
+    }
+
+    /* =========================================
+       SEAMLESS LOOP
+    ========================================= */
+
+    slider.addEventListener(
+      'transitionend',
+      function() {
+
+        if (!isMobile()) return;
+
+        /*
+          Last clone reached
+          → jump silently to real first
+        */
+
+        if (currentSlide === slides.length - 1) {
+
+          currentSlide = 1;
+
+          setPosition(
+            currentSlide,
+            false
+          );
+
+          updateDots(0);
+        }
+
+        /*
+          First clone reached
+          → jump silently to real last
+        */
+
+        if (currentSlide === 0) {
+
+          currentSlide =
+            slides.length - 2;
+
+          setPosition(
+            currentSlide,
+            false
+          );
+
+          updateDots(
+            slides.length - 3
+          );
+        }
+
+      }
+    );
+
+    /* =========================================
+       AUTOPLAY
+    ========================================= */
+
+    function startAutoSlide() {
+
+      clearInterval(autoSlide);
+
+      if (!isMobile()) return;
+
+      autoSlide = setInterval(function() {
+
+        if (isTransitioning) return;
+
+        goToSlide(
+          currentSlide + 1,
+          true
+        );
+
+      }, {{ section.settings.autoplay_speed }});
+    }
+
+    /* =========================================
+       DOT CLICK
+    ========================================= */
+
+    dots.forEach(function(dot) {
+
+      dot.addEventListener(
+        'click',
+        function() {
+
+          const index = parseInt(
+            dot.getAttribute('data-slide'),
+            10
+          );
+
+          goToSlide(
+            index + 1,
+            true
+          );
+
+          startAutoSlide();
+        }
+      );
+
+    });
+
+    /* =========================================
+       TOUCH SWIPE
+    ========================================= */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener(
+      'touchstart',
+      function(event) {
+
+        if (!isMobile()) return;
+
+        touchStartX =
+          event.changedTouches[0].screenX;
+
+      },
+      { passive: true }
+    );
+
+    slider.addEventListener(
+      'touchend',
+      function(event) {
+
+        if (!isMobile()) return;
+
+        touchEndX =
+          event.changedTouches[0].screenX;
+
+        const distance =
+          touchStartX - touchEndX;
+
+        if (Math.abs(distance) < 40) return;
+
+        if (distance > 0) {
+
+          goToSlide(
+            currentSlide + 1,
+            true
+          );
+
+        } else {
+
+          goToSlide(
+            currentSlide - 1,
+            true
+          );
+
+        }
+
+        startAutoSlide();
+
+      },
+      { passive: true }
+    );
+
+    /* =========================================
+       RESIZE
+    ========================================= */
+
+    window.addEventListener(
+      'resize',
+      function() {
+
+        if (isMobile()) {
+
+          goToSlide(
+            currentSlide,
+            false
+          );
+
+          startAutoSlide();
+
+        } else {
+
+          clearInterval(autoSlide);
+
+          slider.style.transition = 'none';
+
+          slider.style.transform =
+            'translate3d(0, 0, 0)';
+        }
+
+      }
+    );
+
+    /* =========================================
+       INITIALISE
+    ========================================= */
+
+    if (isMobile()) {
+
+      setPosition(
+        1,
+        false
+      );
+
+      updateDots(0);
+
+      startAutoSlide();
+
+    } else {
+
+      setPosition(
+        0,
+        false
+      );
+
+    }
+
+  })();
+</script>
+{% schema %}
+{
+  "name": "Pukenga Values",
+  "tag": "section",
+  "class": "section-pukenga-values",
+
+  "settings": [
+
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#10291B"
+    },
+
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#E5B76D"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#D8D3C5"
+    },
+
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#304637"
+    },
+
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Inactive dot color",
+      "default": "#D8D3C5"
+    },
+
+    {
+      "type": "color",
+      "id": "active_dot_color",
+      "label": "Active dot color",
+      "default": "#E5B76D"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Desktop vertical padding",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Desktop horizontal padding",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_y",
+      "label": "Mobile vertical padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Mobile autoplay speed",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 3500
+    }
+
+  ],
+
+  "blocks": [
+
+    {
+      "type": "value",
+      "name": "Value",
+
+      "settings": [
+
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Matauranga"
+        },
+
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Bring Te Ao Maori into everyday life.</p>"
+        }
+
+      ]
+    }
+
+  ],
+
+  "presets": [
+
+    {
+      "name": "Pukenga Values",
+
+      "blocks": [
+
+        {
+          "type": "value",
+          "settings": {
+            "heading": "Matauranga",
+            "text": "<p>Bring Te Ao Maori into everyday life.</p>"
+          }
+        },
+
+        {
+          "type": "value",
+          "settings": {
+            "heading": "Mo te katoa",
+            "text": "<p>Taonga made for ages 5+, can be used anywhere, anytime.</p>"
+          }
+        },
+
+        {
+          "type": "value",
+          "settings": {
+            "heading": "Hauora",
+            "text": "<p>Settle and nourish your mauri.</p>"
+          }
+        }
+
+      ]
+    }
+
+  ]
+}
+{% endschema %}
