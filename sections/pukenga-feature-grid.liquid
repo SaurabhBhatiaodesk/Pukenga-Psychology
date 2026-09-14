@@ -10,17 +10,25 @@
     <div class="pukenga-features__grid">
       {%- for block in section.blocks -%}
         {%- if block.type == 'quote' -%}
+          {%- liquid
+            assign quote_alt = block.settings.quote | strip_html
+            if block.settings.attribution != blank
+              assign quote_alt = quote_alt | append: ' — ' | append: block.settings.attribution
+            endif
+          -%}
           <div class="pukenga-features__item pukenga-features__item--quote" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'pukenga-features__quote-image' }}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'pukenga-features__quote-image', alt: quote_alt }}
             {%- else -%}
-              <img src="{{ 'pukenga-feature-banner.jpg' | asset_url }}" alt="" loading="lazy" class="pukenga-features__quote-image">
+              <img src="{{ 'pukenga-feature-banner.jpg' | asset_url }}" alt="{{ quote_alt | escape }}" loading="lazy" class="pukenga-features__quote-image">
             {%- endif -%}
-            {%- if block.settings.quote != blank -%}
-              <blockquote class="pukenga-features__quote-text">{{ block.settings.quote }}</blockquote>
-            {%- endif -%}
-            {%- if block.settings.attribution != blank -%}
-              <cite class="pukenga-features__quote-cite">{{ block.settings.attribution | escape }}</cite>
+            {%- if block.settings.show_text_overlay -%}
+              {%- if block.settings.quote != blank -%}
+                <blockquote class="pukenga-features__quote-text">{{ block.settings.quote }}</blockquote>
+              {%- endif -%}
+              {%- if block.settings.attribution != blank -%}
+                <cite class="pukenga-features__quote-cite">{{ block.settings.attribution | escape }}</cite>
+              {%- endif -%}
             {%- endif -%}
           </div>
         {%- else -%}
@@ -220,13 +228,20 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Background image"
+          "label": "Background image",
+          "info": "The default image already has the quote printed on the photographed card, so no text overlay is needed by default."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_text_overlay",
+          "label": "Show quote text as an overlay on the image",
+          "info": "Turn this on only if you upload a plain photo that doesn't already have the quote printed on it.",
+          "default": false
         },
         {
           "type": "richtext",
           "id": "quote",
-          "label": "Quote",
-          "default": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>"
+          "label": "Quote"
         },
         {
           "type": "text",
