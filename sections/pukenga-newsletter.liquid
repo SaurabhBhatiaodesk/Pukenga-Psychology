@@ -129,6 +129,8 @@
   .pukenga-newsletter__text {
     max-width: {{ section.settings.text_max_width }}px;
     margin-left: auto;
+    opacity: 0.8;
+    margin-bottom: 20px;
     margin-right: auto;
     color: {{ section.settings.text_color }};
   }
@@ -159,8 +161,8 @@
     font-size: {{ section.settings.input_font_size }}px;
 
     color: {{ section.settings.input_text_color }};
-
-    background: {{ section.settings.input_background_color }};
+    background-color:transparent;
+    background:transparent;
 
     border: {{ section.settings.input_border_width }}px solid
       {{ section.settings.input_border_color }};
@@ -178,7 +180,11 @@
   .pukenga-newsletter__input::placeholder {
     color: {{ section.settings.placeholder_color }};
   }
-
+  .pukenga-newsletter__input:focus-visible,
+  .pukenga-newsletter__input:focus{
+    box-shadow:none;
+    border-color:none;
+  }
 
   .pukenga-newsletter__submit {
     flex-shrink: 0;
@@ -328,13 +334,6 @@
       "id": "heading_color",
       "label": "Heading colour",
       "default": "#F2ECDC"
-    },
-
-    {
-      "type": "color",
-      "id": "input_background_color",
-      "label": "Input background colour",
-      "default": "transparent"
     },
 
     {
