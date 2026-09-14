@@ -25,7 +25,7 @@
       }
     },
     "pukenga_features": {
-      "type": "pukenga-feature-grid",
+      "type": "pukenga-values",
       "blocks": {
         "feature_1": {
           "type": "feature",
