@@ -1,302 +1,859 @@
 {{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
 
-<div class="pukenga-best-sellers pukenga-section section">
-  <div class="pukenga-container">
+<section
+  class="pukenga-section pukenga-best-sellers"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="section">
+
     <div class="pukenga-best-sellers__header">
-      <div>
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="pukenga-eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
+
+      <div class="pukenga-best-sellers__title-wrap">
+
         {%- if section.settings.heading != blank -%}
-          <h2 class="pukenga-heading pukenga-best-sellers__heading">{{ section.settings.heading }}</h2>
+          <h2 class="pukenga-heading pukenga-best-sellers__heading">
+            {{ section.settings.heading }}
+          </h2>
         {%- endif -%}
+
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="pukenga-best-sellers__eyebrow">
+            {{ section.settings.eyebrow | escape }}
+          </span>
+        {%- endif -%}
+
       </div>
+
       {%- if section.settings.view_all_link != blank -%}
-        <a href="{{ section.settings.view_all_link }}" class="pukenga-link">{{ section.settings.view_all_label }}</a>
+        <a
+          href="{{ section.settings.view_all_link }}"
+          class="pukenga-best-sellers__view-all"
+        >
+          {{ section.settings.view_all_label | escape }}
+        </a>
       {%- endif -%}
+
     </div>
 
-    <div class="pukenga-best-sellers__grid">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'product' -%}
-          {%- assign product = block.settings.product -%}
-          <div class="pukenga-product-card" {{ block.shopify_attributes }}>
+
+    {%- assign selected_collection = section.settings.collection -%}
+
+    {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+
+      <div class="pukenga-best-sellers__grid">
+
+        {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
+
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+          <article class="pukenga-product-card">
+
             <div class="pukenga-product-card__media">
-              {%- if block.settings.custom_image != blank -%}
-                {{ block.settings.custom_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'pukenga-product-card__image', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900' }}
-              {%- elsif product != blank and product.featured_image -%}
-                {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'pukenga-product-card__image', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900' }}
-              {%- else -%}
-                {%- case forloop.index0 -%}
-                  {%- when 0 -%}{%- assign fallback_image = 'pukenga-product-karakia-set.jpg' -%}
-                  {%- when 1 -%}{%- assign fallback_image = 'pukenga-product-maha-bundle.jpg' -%}
-                  {%- else -%}{%- assign fallback_image = 'pukenga-product-audio-collection.jpg' -%}
-                {%- endcase -%}
-                <img src="{{ fallback_image | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" class="pukenga-product-card__image">
-              {%- endif -%}
-              {%- if block.settings.show_sale_badge -%}
-                <span class="pukenga-product-card__badge">Sale</span>
-              {%- endif -%}
-            </div>
-            <div class="pukenga-product-card__info">
-              <h3 class="pukenga-product-card__title">
-                {{ block.settings.title | default: product.title }}
-              </h3>
-              <div class="pukenga-product-card__price-row">
-                <p class="pukenga-product-card__price">
-                  {%- if product != blank -%}
-                    {{ product.price | money }}
-                    {%- if product.compare_at_price > product.price -%}
-                      <s class="pukenga-product-card__compare">{{ product.compare_at_price | money }}</s>
-                    {%- endif -%}
-                  {%- else -%}
-                    {{ block.settings.price }}
-                    {%- if block.settings.compare_at_price != blank -%}
-                      <s class="pukenga-product-card__compare">{{ block.settings.compare_at_price }}</s>
-                    {%- endif -%}
-                  {%- endif -%}
-                </p>
-                {%- if product != blank -%}
-                  {%- form 'product', product -%}
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <button type="submit" class="pukenga-product-card__add">Add</button>
-                  {%- endform -%}
-                {%- else -%}
-                  <a href="{{ block.settings.link | default: '#' }}" class="pukenga-product-card__add">Add</a>
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  </div>
-</div>
 
-{% stylesheet %}
+              <a
+                href="{{ product.url }}"
+                class="pukenga-product-card__image-link"
+                aria-label="{{ product.title | escape }}"
+              >
+
+                {%- if product.featured_image != blank -%}
+
+                  {{
+                    product.featured_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'pukenga-product-card__image',
+                      widths: '500, 700, 900, 1200',
+                      sizes: '(min-width: 990px) 33vw, (min-width: 550px) 50vw, 100vw'
+                  }}
+
+                  {%- if product.images.size > 1 -%}
+
+                    {{
+                      product.images[1]
+                      | image_url: width: 1200
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'pukenga-product-card__image pukenga-product-card__image--hover',
+                        widths: '500, 700, 900, 1200',
+                        sizes: '(min-width: 990px) 33vw, (min-width: 550px) 50vw, 100vw'
+                    }}
+
+                  {%- endif -%}
+
+                {%- else -%}
+
+                  {{ 'product-1' | placeholder_svg_tag: 'pukenga-product-card__image pukenga-product-card__placeholder' }}
+
+                {%- endif -%}
+
+              </a>
+
+
+              {%- if product.compare_at_price > product.price -%}
+
+                <span class="pukenga-product-card__badge">
+                  {{ section.settings.sale_label | escape }}
+                </span>
+
+              {%- endif -%}
+
+            </div>
+
+
+            <div class="pukenga-product-card__info">
+
+              <h3 class="pukenga-product-card__title">
+                <a href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              </h3>
+
+
+              <div class="pukenga-product-card__bottom">
+
+                <div class="pukenga-product-card__price">
+
+                  <span class="pukenga-product-card__price-current">
+                    {{ product.price | money }}
+                  </span>
+
+                  {%- if product.compare_at_price > product.price -%}
+
+                    <s class="pukenga-product-card__compare">
+                      {{ product.compare_at_price | money }}
+                    </s>
+
+                  {%- endif -%}
+
+                </div>
+
+
+                {%- if current_variant.available -%}
+
+                  <button
+                    type="button"
+                    class="pukenga-product-card__add"
+                    data-add-to-cart
+                    data-variant-id="{{ current_variant.id }}"
+                    aria-label="Add {{ product.title | escape }} to cart"
+                  >
+                    {{ section.settings.add_button_label | escape }}
+                  </button>
+
+                {%- else -%}
+
+                  <button
+                    type="button"
+                    class="pukenga-product-card__add pukenga-product-card__add--disabled"
+                    disabled
+                  >
+                    {{ section.settings.sold_out_label | escape }}
+                  </button>
+
+                {%- endif -%}
+
+              </div>
+
+            </div>
+
+          </article>
+
+        {%- endfor -%}
+
+      </div>
+
+    {%- else -%}
+
+      <div class="pukenga-best-sellers__empty">
+        <p>Please select a collection from the section settings.</p>
+      </div>
+
+    {%- endif -%}
+
+  </div>
+</section>
+
+
+<style>
+
   .pukenga-best-sellers {
-    padding-block: 88px;
+    width: 100%;
+    background: var(--pukenga-bg, #0f2116);
+    color: var(--pukenga-cream, #f2ecdc);
   }
+
+
+  /* HEADER */
 
   .pukenga-best-sellers__header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    gap: 30px;
     margin-bottom: 48px;
-    gap: 24px;
+  }
+
+  .pukenga-best-sellers__title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .pukenga-best-sellers__heading {
-    font-size: 40px;
     margin: 0;
+    color: var(--pukenga-cream, #f2ecdc);
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 300;
   }
+
+  .pukenga-best-sellers__eyebrow {
+    color: var(--pukenga-muted, #a8a087);
+    font-family: var(
+      --pukenga-font-heading,
+      'Spectral',
+      Georgia,
+      serif
+    );
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.1;
+  }
+
+
+  /* VIEW ALL */
+
+  .pukenga-best-sellers__view-all {
+    flex-shrink: 0;
+    color: var(--pukenga-gold, #e0b784);
+    font-family: var(
+      --pukenga-font-body,
+      'Instrument Sans',
+      sans-serif
+    );
+    font-size: 14px;
+    line-height: 1.3;
+    text-decoration: none;
+    border-bottom: 1px solid var(--pukenga-gold, #e0b784);
+    padding-bottom: 5px;
+    transition: opacity 0.2s ease;
+  }
+
+  .pukenga-best-sellers__view-all:hover {
+    opacity: 0.7;
+  }
+
+
+  /* PRODUCT GRID */
 
   .pukenga-best-sellers__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
   }
+
+
+  /* PRODUCT CARD */
+
+  .pukenga-product-card {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #1d3826;
+  }
+
+
+  /* IMAGE */
 
   .pukenga-product-card__media {
     position: relative;
-    border-radius: 18px;
-    overflow: hidden;
+    width: 100%;
     aspect-ratio: 3 / 4;
-    background: var(--pukenga-bg-soft);
+    overflow: hidden;
+    background: #17291d;
+  }
+
+  .pukenga-product-card__image-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   .pukenga-product-card__image {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition:
+      opacity 0.35s ease,
+      transform 0.45s ease;
   }
+
+  .pukenga-product-card__image--hover {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+  }
+
+
+  /* HOVER PREVIEW ONLY WHEN SECOND IMAGE EXISTS */
+
+  @media (hover: hover) and (pointer: fine) {
+
+    .pukenga-product-card:hover
+    .pukenga-product-card__image--hover {
+      opacity: 1;
+    }
+
+    .pukenga-product-card:hover
+    .pukenga-product-card__image:not(.pukenga-product-card__image--hover) {
+      opacity: 0;
+    }
+
+  }
+
+
+  .pukenga-product-card__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  /* SALE BADGE */
 
   .pukenga-product-card__badge {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: var(--pukenga-gold);
-    color: var(--pukenga-bg);
-    font-size: 11px;
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+    padding: 6px 15px;
+
+    border-radius: 30px;
+
+    background: #c95e3d;
+    color: #ffffff;
+
+    font-family: var(
+      --pukenga-font-body,
+      'Instrument Sans',
+      sans-serif
+    );
+
+    font-size: 12px;
     font-weight: 600;
+    line-height: 1;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 40px;
   }
 
+
+  /* PRODUCT INFO */
+
   .pukenga-product-card__info {
-    padding-top: 16px;
+    padding: 25px 25px 26px;
   }
 
   .pukenga-product-card__title {
-    font-family: var(--pukenga-font-body);
+    margin: 0 0 14px;
+
+    font-family: var(
+      --pukenga-font-heading,
+      'Spectral',
+      Georgia,
+      serif
+    );
+
+    font-size: 21px;
     font-weight: 500;
-    font-size: 16px;
-    color: var(--pukenga-cream-soft);
-    margin: 0 0 8px;
+    line-height: 1.25;
+
+    color: var(--pukenga-cream, #f2ecdc);
   }
 
-  .pukenga-product-card__price-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .pukenga-product-card__price {
-    margin: 0;
-    font-size: 15px;
-    color: var(--pukenga-cream-soft);
-  }
-
-  .pukenga-product-card__compare {
-    color: var(--pukenga-muted);
-    margin-left: 8px;
-    font-size: 13px;
-  }
-
-  .pukenga-product-card__add {
-    font-family: var(--pukenga-font-body);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--pukenga-gold);
-    background: transparent;
-    border: 1px solid rgba(224, 183, 132, 0.5);
-    border-radius: 40px;
-    padding: 9px 16px;
-    cursor: pointer;
+  .pukenga-product-card__title a {
+    color: inherit;
     text-decoration: none;
   }
 
-  .pukenga-product-card__add:hover {
-    background: rgba(224, 183, 132, 0.1);
+
+  /* PRICE */
+
+  .pukenga-product-card__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
   }
+
+  .pukenga-product-card__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .pukenga-product-card__price-current {
+    color: var(--pukenga-gold, #e0b784);
+
+    font-family: var(
+      --pukenga-font-body,
+      'Instrument Sans',
+      sans-serif
+    );
+
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .pukenga-product-card__compare {
+    color: rgba(168, 160, 135, 0.7);
+
+    font-family: var(
+      --pukenga-font-body,
+      'Instrument Sans',
+      sans-serif
+    );
+
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+
+  /* ADD BUTTON */
+
+  .pukenga-product-card__add {
+    flex-shrink: 0;
+
+    min-width: 72px;
+    min-height: 40px;
+
+    padding: 8px 17px;
+
+    border: 1px solid rgba(224, 183, 132, 0.65);
+    border-radius: 40px;
+
+    background: transparent;
+    color: var(--pukenga-gold, #e0b784);
+
+    font-family: var(
+      --pukenga-font-body,
+      'Instrument Sans',
+      sans-serif
+    );
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .pukenga-product-card__add:hover {
+    background: var(--pukenga-gold, #e0b784);
+    border-color: var(--pukenga-gold, #e0b784);
+    color: #16281b;
+  }
+
+  .pukenga-product-card__add--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .pukenga-product-card__add--loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+
+  /* EMPTY */
+
+  .pukenga-best-sellers__empty {
+    padding: 40px 0;
+    color: var(--pukenga-cream-soft, #ece5d4);
+  }
+
+
+  /* TABLET */
 
   @media screen and (max-width: 989px) {
+
     .pukenga-best-sellers__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+      gap: 20px;
     }
+
+    .pukenga-best-sellers__heading {
+      font-size: 36px;
+    }
+
   }
 
-  @media screen and (max-width: 549px) {
+
+  /* MOBILE */
+
+  @media screen and (max-width: 749px) {
+
+    .pukenga-best-sellers {
+      padding-top: {{ section.settings.mobile_padding_top }}px !important;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px !important;
+    }
+
     .pukenga-best-sellers__header {
-      flex-direction: column;
       align-items: flex-start;
-      gap: 12px;
+      margin-bottom: 30px;
     }
-    .pukenga-best-sellers__grid {
-      grid-template-columns: 1fr;
+
+    .pukenga-best-sellers__title-wrap {
+      gap: 8px;
     }
+
     .pukenga-best-sellers__heading {
       font-size: 30px;
     }
+
+    .pukenga-best-sellers__eyebrow {
+      font-size: 21px;
+    }
+
+    .pukenga-best-sellers__view-all {
+      font-size: 13px;
+    }
+
+    .pukenga-best-sellers__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .pukenga-product-card__media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .pukenga-product-card__info {
+      padding: 20px;
+    }
+    .pukenga-product-card__price-current{
+      font-size:15px;
+    }
+    .pukenga-product-card__title {
+      font-size:19px;
+      margin-bottom:8px;
+    }
+
   }
-{% endstylesheet %}
+
+
+  /* SMALL MOBILE */
+
+  @media screen and (max-width: 480px) {
+
+    .pukenga-best-sellers__header {
+      display: block;
+    }
+
+    .pukenga-best-sellers__view-all {
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .pukenga-product-card__bottom {
+      gap: 12px;
+    }
+
+  }
+
+</style>
+
+
+<script>
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+      const addButtons =
+        document.querySelectorAll(
+          '[data-add-to-cart]'
+        );
+
+
+      addButtons.forEach(
+        function (button) {
+
+          button.addEventListener(
+            'click',
+            function () {
+
+              const variantId =
+                button.getAttribute(
+                  'data-variant-id'
+                );
+
+
+              if (
+                !variantId ||
+                button.disabled
+              ) {
+                return;
+              }
+
+
+              button.classList.add(
+                'pukenga-product-card__add--loading'
+              );
+
+
+              button.textContent = 'ADDING';
+
+
+              fetch(
+                window.Shopify.routes.root +
+                'cart/add.js',
+                {
+                  method: 'POST',
+
+                  headers: {
+                    'Content-Type':
+                      'application/json',
+
+                    'Accept':
+                      'application/json'
+                  },
+
+                  body: JSON.stringify({
+                    items: [
+                      {
+                        id: Number(variantId),
+                        quantity: 1
+                      }
+                    ]
+                  })
+                }
+              )
+
+              .then(
+                function (response) {
+
+                  if (!response.ok) {
+                    throw new Error(
+                      'Unable to add product to cart.'
+                    );
+                  }
+
+                  return response.json();
+
+                }
+              )
+
+              .then(
+                function () {
+
+                  /*
+                    Product is successfully added.
+                    Open Shopify cart page directly.
+                  */
+
+                  window.location.href = '/cart';
+
+                }
+              )
+
+              .catch(
+                function (error) {
+
+                  console.error(error);
+
+                  button.textContent = 'ERROR';
+
+                  button.classList.remove(
+                    'pukenga-product-card__add--loading'
+                  );
+
+                  setTimeout(
+                    function () {
+
+                      button.textContent =
+                        '{{ section.settings.add_button_label | escape }}';
+
+                    },
+                    1500
+                  );
+
+                }
+              );
+
+            }
+          );
+
+        }
+      );
+
+    }
+  );
+
+</script>
+
 
 {% schema %}
 {
   "name": "Pukenga Best Sellers",
   "tag": "section",
+
   "settings": [
+
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "best sellers"
+      "type": "collection",
+      "id": "collection",
+      "label": "Product collection",
+      "info": "Select the collection whose products should appear here."
     },
+
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 3
+    },
+
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Ngā mea rongonui"
     },
+
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "/ best sellers"
+    },
+
     {
       "type": "text",
       "id": "view_all_label",
       "label": "View all label",
       "default": "Toa katoa · View all"
     },
+
     {
       "type": "url",
       "id": "view_all_link",
       "label": "View all link"
-    }
-  ],
-  "blocks": [
+    },
+
     {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product",
-          "info": "Uses the product's live price/image. Leave blank to use manual fields below."
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Manual title override"
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_image",
-          "label": "Manual image override"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Manual price (used if no product selected)"
-        },
-        {
-          "type": "text",
-          "id": "compare_at_price",
-          "label": "Manual compare-at price"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_sale_badge",
-          "label": "Show sale badge",
-          "default": false
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Manual link (used if no product selected)"
-        }
-      ]
+      "type": "text",
+      "id": "add_button_label",
+      "label": "Add button label",
+      "default": "ADD"
+    },
+
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "SOLD OUT"
+    },
+
+    {
+      "type": "text",
+      "id": "sale_label",
+      "label": "Sale badge label",
+      "default": "SALE"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     }
+
   ],
-  "max_blocks": 6,
+
   "presets": [
     {
-      "name": "Pukenga Best Sellers",
-      "blocks": [
-        {
-          "type": "product",
-          "settings": {
-            "title": "Ngākau Karakia Set",
-            "price": "$55"
-          }
-        },
-        {
-          "type": "product",
-          "settings": {
-            "title": "Maha Oranga Bundle",
-            "price": "$140",
-            "compare_at_price": "$486",
-            "show_sale_badge": true
-          }
-        },
-        {
-          "type": "product",
-          "settings": {
-            "title": "Audio Karakia Collection",
-            "price": "$19.99"
-          }
-        }
-      ]
+      "name": "Pukenga Best Sellers"
     }
   ]
 }
