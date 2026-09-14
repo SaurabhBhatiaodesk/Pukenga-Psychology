@@ -3,7 +3,7 @@
   assign subheading = section.settings.subheading
 %}
 
-<section class="pukenga-hero section color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-hero color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-hero__media">
     {%- if section.settings.image != blank -%}
       <img
@@ -27,7 +27,7 @@
     <div class="pukenga-hero__overlay"></div>
   </div>
 
-  <div class="pukenga-hero__content pukenga-container">
+  <div class="pukenga-hero__content section pukenga-container">
     {%- if section.settings.eyebrow != blank -%}
       <p class="pukenga-eyebrow">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
