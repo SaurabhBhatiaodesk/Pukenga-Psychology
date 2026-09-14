@@ -1,158 +1,629 @@
-<section class="pukenga-section section section--full-width pukenga-promo" style="{% render 'spacing-style', settings: section.settings %}">
-  <div class="pukenga-promo__media">
-    {%- if section.settings.image != blank -%}
-      <img
-        src="{{ section.settings.image | image_url: width: 1800 }}"
-        srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1400 }} 1400w, {{ section.settings.image | image_url: width: 1800 }} 1800w"
-        sizes="100vw"
-        alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
-        loading="lazy"
-      >
-    {%- else -%}
-      <img src="{{ 'pukenga-promo-banner.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
-    {%- endif -%}
-    <div class="pukenga-promo__overlay"></div>
-  </div>
+<section class="pukenga-section on-demand section--full-width pukenga-promo">
+  <div class="pukenga-promo__overlay"></div>
 
-  <div class="pukenga-promo__content pukenga-container">
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="pukenga-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    {%- endif -%}
-    {%- if section.settings.heading != blank -%}
-      <h2 class="pukenga-promo__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.text != blank -%}
-      <div class="pukenga-promo__text">{{ section.settings.text }}</div>
-    {%- endif -%}
-    {%- if section.settings.button_label != blank -%}
-      <a href="{{ section.settings.button_link | default: '#' }}" class="pukenga-btn pukenga-btn--primary">
-        {{ section.settings.button_label | escape }}
-      </a>
-    {%- endif -%}
+  <div class="section">
+    <div class="pukenga-promo__content">
+
+      {% if section.settings.eyebrow != blank %}
+        <p class="pukenga-eyebrow">
+          {{ section.settings.eyebrow | escape }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="pukenga-promo__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="pukenga-promo__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a
+          href="{{ section.settings.button_link | default: '#' }}"
+          class="pukenga-btn pukenga-btn--primary"
+        >
+          {{ section.settings.button_label | escape }}
+        </a>
+      {% endif %}
+
+    </div>
   </div>
 </section>
 
-{% stylesheet %}
+<style>
+
+  /* =========================================
+     PROMO BANNER
+  ========================================= */
+
   .pukenga-promo {
     position: relative;
-    min-height: 460px;
-    display: grid;
-    align-items: center;
+
+    min-height: {{ section.settings.desktop_height }}px;
+
+    display: flex;
+    align-items: {{ section.settings.content_vertical_alignment }};
+
     overflow: hidden;
+
+    background-color: {{ section.settings.background_color }};
+
+    {% if section.settings.image != blank %}
+      background-image: url('{{ section.settings.image | image_url: width: 2000 }}');
+    {% endif %}
+
+    background-size: {{ section.settings.background_size }};
+    background-position:
+      {{ section.settings.desktop_image_position_x }}%
+      {{ section.settings.desktop_image_position_y }}%;
+    background-repeat: no-repeat;
   }
 
-  .pukenga-promo__media {
-    position: absolute;
-    inset: 0;
-  }
 
-  .pukenga-promo__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  /* =========================================
+     OVERLAY
+  ========================================= */
 
   .pukenga-promo__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(15, 25, 15, 0.85) 0%, rgba(15, 25, 15, 0.5) 60%, rgba(15, 25, 15, 0.2) 100%);
+
+    background:
+      {{ section.settings.overlay_color }};
+
+    opacity:
+      {{ section.settings.overlay_opacity | divided_by: 100.0 }};
   }
+
+
+  /* =========================================
+     CONTENT
+  ========================================= */
 
   .pukenga-promo__content {
     position: relative;
-    z-index: 1;
-    max-width: 460px;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width:
+      {{ section.settings.content_max_width }}px;
+
+    margin-left: 0;
+    margin-right: auto;
+
+    text-align:
+      {{ section.settings.text_alignment }};
   }
 
+
+  /* =========================================
+     HEADING
+  ========================================= */
+
   .pukenga-promo__heading {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-family:
+      var(--pukenga-font-heading, 'Spectral', serif);
+
     font-weight: 300;
-    font-size: clamp(2rem, 3.5vw, 2.75rem);
-    color: var(--pukenga-cream, #f2ecdc);
-    margin: 0 0 18px;
+
+    font-size:
+      {{ section.settings.heading_size }}px;
+
+    color:
+      {{ section.settings.heading_color }};
+
+    margin:
+      0 0 {{ section.settings.heading_margin_bottom }}px;
+
     line-height: 1.15;
   }
 
+
+  /* =========================================
+     TEXT
+  ========================================= */
+
   .pukenga-promo__text {
-    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
-    font-size: 15.5px;
+    font-family:
+      var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    opacity: 0.86;
+    font-size:
+      {{ section.settings.text_size }}px;
+
     line-height: 1.6;
-    color: var(--pukenga-cream-soft, #ece5d4);
-    margin: 0 0 28px;
+
+    color:
+      {{ section.settings.text_color }};
+
+    margin:
+      0 0 {{ section.settings.text_margin_bottom }}px;
+
+    max-width:
+      {{ section.settings.text_max_width }}px;
   }
+
+
+  /* =========================================
+     MOBILE
+  ========================================= */
 
   @media screen and (max-width: 749px) {
+
     .pukenga-promo {
-      min-height: 380px;
+      min-height:
+        {{ section.settings.mobile_height }}px;
+
+      align-items:
+        {{ section.settings.mobile_content_vertical_alignment }};
+
+      background-position:
+        {{ section.settings.mobile_image_position_x }}%
+        {{ section.settings.mobile_image_position_y }}%;
     }
 
-    .pukenga-promo__overlay {
-      background: linear-gradient(180deg, rgba(15, 25, 15, 0.5) 0%, rgba(15, 25, 15, 0.92) 70%);
+
+    {% if section.settings.mobile_image != blank %}
+
+      .pukenga-promo {
+        background-image:
+          url('{{ section.settings.mobile_image | image_url: width: 1400 }}');
+      }
+
+    {% endif %}
+
+
+    .pukenga-promo__content {
+      max-width:
+        {{ section.settings.mobile_content_max_width }}px;
+
+      text-align:
+        {{ section.settings.mobile_text_alignment }};
     }
+
+
+    .pukenga-promo__heading {
+      font-size:
+        {{ section.settings.mobile_heading_size }}px;
+    }
+
+
+    .pukenga-promo__text {
+      font-size:
+        {{ section.settings.mobile_text_size }}px;
+
+      max-width: 100%;
+    }
+
   }
-{% endstylesheet %}
+
+</style>
+
 
 {% schema %}
 {
   "name": "Pūkenga Promo Banner",
   "tag": "section",
   "class": "section-pukenga-promo",
+
   "settings": [
+
+    {
+      "type": "header",
+      "content": "Background"
+    },
+
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Background image"
+      "label": "Desktop background image"
     },
+
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image"
+    },
+
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#16281b"
+    },
+
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background image size",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "100% 100%",
+          "label": "Stretch"
+        }
+      ],
+      "default": "cover"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop image position"
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_image_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_image_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile image position"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_image_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+
+
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay colour",
+      "default": "#0f190f"
+    },
+
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 55
+    },
+
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
     {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow text",
       "default": "On-demand program"
     },
+
     {
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
       "default": "<p>Discover the power of Mauri Tau</p>"
     },
+
     {
       "type": "richtext",
       "id": "text",
       "label": "Text",
       "default": "<p>Grounded in mātauranga Māori. Learn to cultivate a state of inner calm and balance to support your wellbeing.</p>"
     },
+
     {
       "type": "text",
       "id": "button_label",
       "label": "Button label",
       "default": "Join now"
     },
+
     {
       "type": "url",
       "id": "button_link",
       "label": "Button link"
     },
+
+
     {
-      "type": "range",
-      "id": "padding-block-start",
-      "label": "Top padding",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 0
+      "type": "header",
+      "content": "Desktop content"
     },
+
+    {
+      "type": "select",
+      "id": "content_vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+
     {
       "type": "range",
-      "id": "padding-block-end",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 100,
-      "step": 4,
+      "id": "desktop_height",
+      "label": "Banner height",
+      "min": 300,
+      "max": 800,
+      "step": 10,
       "unit": "px",
-      "default": 0
+      "default": 460
+    },
+
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 460
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "Text max width",
+      "min": 250,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "default": 460
+    },
+
+
+    {
+      "type": "header",
+      "content": "Text colours"
+    },
+
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading colour",
+      "default": "#f2ecdc"
+    },
+
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ece5d4"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading bottom spacing",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+
+    {
+      "type": "range",
+      "id": "text_margin_bottom",
+      "label": "Text bottom spacing",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile banner height",
+      "min": 250,
+      "max": 650,
+      "step": 10,
+      "unit": "px",
+      "default": 380
+    },
+
+    {
+      "type": "select",
+      "id": "mobile_content_vertical_alignment",
+      "label": "Mobile vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Mobile text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_content_max_width",
+      "label": "Mobile content max width",
+      "min": 250,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 460
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 20,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Mobile text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
     }
+
   ],
+
   "presets": [
     {
       "name": "Pūkenga Promo Banner"
