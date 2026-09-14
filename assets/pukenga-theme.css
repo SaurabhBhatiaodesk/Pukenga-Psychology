@@ -13,20 +13,15 @@
   --pukenga-radius-pill: 40px;
 }
 
+
+/* banner  */
 .pukenga-section {
   background: var(--pukenga-bg);
   color: var(--pukenga-cream-soft);
   font-family: var(--pukenga-font-body);
 }
 
-.pukenga-eyebrow {
-  font-family: var(--pukenga-font-body);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--pukenga-gold);
-  margin: 0 0 16px;
-}
+
 
 .pukenga-heading {
   font-family: var(--pukenga-font-heading);
@@ -90,17 +85,7 @@
   opacity: 0.85;
 }
 
-.pukenga-container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
 
-@media screen and (max-width: 749px) {
-  .pukenga-container {
-    padding: 0 20px;
-  }
-}
 
 /* Shared star-rating glyphs */
 .pukenga-stars {

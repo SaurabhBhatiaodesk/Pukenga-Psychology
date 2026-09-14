@@ -11,143 +11,59 @@
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
-    "footer_m9NzUG": {
-      "type": "footer",
+    "pukenga_footer": {
+      "type": "pukenga-footer",
       "blocks": {
-        "text_footer_toa": {
-          "type": "text",
+        "footer_toa": {
+          "type": "link_column",
           "settings": {
-            "text": "<h4>Toa</h4><p><a href=\"/collections/all\">Karakia packs</a><br><a href=\"/collections/all\">Audio</a><br><a href=\"/collections/all\">Bundles</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "heading": "Toa",
+            "link_label_1": "Karakia packs",
+            "link_url_1": "/collections/all",
+            "link_label_2": "Audio",
+            "link_url_2": "/collections/all",
+            "link_label_3": "Bundles",
+            "link_url_3": "/collections/all"
+          }
         },
-        "text_footer_tuhono": {
-          "type": "text",
+        "footer_tuhono": {
+          "type": "link_column",
           "settings": {
-            "text": "<h4>Tūhono</h4><p><a href=\"/#mauritau\">Mauri Tau</a><br><a href=\"/#services\">Services</a><br><a href=\"/#journal\">Journal</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "heading": "Tūhono",
+            "link_label_1": "Mauri Tau",
+            "link_url_1": "/#mauritau",
+            "link_label_2": "Services",
+            "link_url_2": "/#services",
+            "link_label_3": "Journal",
+            "link_url_3": "/#journal"
+          }
         },
-        "text_footer_whakapa": {
-          "type": "text",
+        "footer_whakapa": {
+          "type": "link_column",
           "settings": {
-            "text": "<h4>Whakapā</h4><p><a href=\"https://instagram.com\">Instagram</a><br><a href=\"https://facebook.com\">Facebook</a><br><a href=\"/pages/contact\">Contact</a></p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": ["text_footer_toa", "text_footer_tuhono", "text_footer_whakapa"],
-      "name": "t:names.footer",
-      "settings": {
-        "section_width": "page-width",
-        "gap": 20,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 30
-      }
-    },
-    "footer_utilities_jLGE8U": {
-      "type": "footer-utilities",
-      "blocks": {
-        "footer_copyright_jweRK8": {
-          "type": "footer-copyright",
-          "settings": {
-            "show_powered_by": true,
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "footer_policy_list_VCdnpa": {
-          "type": "footer-policy-list",
-          "settings": {
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "social_links_Ew63Kq": {
-          "type": "social-links",
-          "settings": {
-            "facebook_url": "https://www.facebook.com/",
-            "instagram_url": "https://www.instagram.com/",
-            "youtube_url": "https://www.youtube.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "twitter_url": "https://x.com/"
-          },
-          "blocks": {}
+            "heading": "Whakapā",
+            "link_label_1": "Instagram",
+            "link_url_1": "https://instagram.com",
+            "link_label_2": "Facebook",
+            "link_url_2": "https://facebook.com",
+            "link_label_3": "Contact",
+            "link_url_3": "/pages/contact"
+          }
         }
       },
       "block_order": [
-        "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa",
-        "social_links_Ew63Kq"
+        "footer_toa",
+        "footer_tuhono",
+        "footer_whakapa"
       ],
-      "name": "t:names.utilities",
       "settings": {
-        "section_width": "page-width",
-        "gap": 24,
-        "divider_thickness": 1,
-        "divider_color": "{{ settings.color_palette.color2 }}",
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 20,
-        "padding-block-end": 48
+        "description": "<p>Māori wellbeing resources to whakapiki your hauora.</p>",
+        "copyright_text": "© Pūkenga Psychology 2026 · All rights reserved",
+        "background_color": "#07180f"
       }
     }
   },
   "order": [
-    "footer_m9NzUG",
-    "footer_utilities_jLGE8U"
+    "pukenga_footer"
   ]
 }

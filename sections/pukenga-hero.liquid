@@ -68,7 +68,7 @@
     position: relative;
     overflow: hidden;
     background: var(--pukenga-bg, #16281b);
-    min-height: 780px;
+    min-height: 660px; 
   }
 
   .pukenga-hero__media {
@@ -103,7 +103,6 @@
   .pukenga-hero__content {
     position: relative;
     z-index: 1;
-    min-height: 780px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,25 +111,35 @@
     padding-top: 120px;
     padding-bottom: 50px;
   }
+  .pukenga-eyebrow {
+    font-size: 12.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgb(224, 183, 132);
+    margin-bottom: 22px;
+  }
 
   .pukenga-hero__heading {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
-    font-weight: 300;
-    font-size: clamp(3.75rem, 5.2vw, 5.25rem);
-    line-height: 1.02;
-    color: var(--pukenga-cream, #f2ecdc);
-    margin: 0 0 18px;
-    max-width: 980px;
+      font-family: var(--pukenga-font-heading, "Spectral", serif);
+      color: var(--pukenga-cream, #f2ecdc);
+      margin: 0 0 18px;
+      max-width: 980px;
+      font-weight: 300;
+      font-size: 60px;
+      line-height: 1.04;
+      margin-bottom: 12px;
   }
 
   .pukenga-hero__subheading {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
-    font-size: 27px;
-    font-style: italic;
-    line-height: 1.35;
-    color: var(--pukenga-cream-soft, #ece5d4);
-    margin: 0 0 32px;
-    max-width: 720px;
+      font-family: var(--pukenga-font-heading, "Spectral", serif);
+      line-height: 1.35;
+      color: var(--pukenga-cream-soft, #ece5d4);
+      margin: 0 0 32px;
+      max-width: 720px;
+      font-style: italic;
+      font-size: 26px;
+      opacity: 0.85;
+      margin-bottom: 30px;
   }
 
   .pukenga-hero__actions {
@@ -139,10 +148,12 @@
     justify-content: center;
     gap: 14px;
   }
-
   .pukenga-hero__actions .pukenga-btn {
-    min-width: 148px;
-    padding: 17px 38px;
+      min-width: 148px;
+      padding: 15px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
   }
 
   @media screen and (max-width: 749px) {
@@ -181,20 +192,29 @@
     }
 
     .pukenga-hero__subheading {
-      font-style: italic;
-      font-size: 18px;
-      opacity: 0.85;
-      margin: 0 auto 24px;
+        margin: 0 auto 24px;
+        font-style: italic;
+        font-size: 18px;
+        opacity: 0.85;
+        margin-bottom: 24px;
     }
 
     .pukenga-hero__actions {
       flex-direction: column;
       gap: 11px;
     }
-
+    .pukenga-eyebrow{
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
     .pukenga-hero__actions .pukenga-btn {
       width: 100%;
       min-width: 0;
+      padding: 14px 24px;
+      border-radius: 40px;
+      font-size: 14px;
     }
   }
 {% endstylesheet %}

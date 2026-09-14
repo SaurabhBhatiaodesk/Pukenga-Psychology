@@ -1,0 +1,377 @@
+<section class="pukenga-footer" style="--pukenga-footer-bg: {{ section.settings.background_color }};">
+  <div class="pukenga-footer__inner">
+    <div class="pukenga-footer__top">
+      <div class="pukenga-footer__brand">
+        <a class="pukenga-footer__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: 440 }}"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img
+              src="{{ 'pukenga-logo-mark.png' | asset_url }}"
+              width="36"
+              height="67"
+              alt=""
+              loading="lazy"
+            >
+            <span class="pukenga-footer__wordmark" aria-hidden="true">
+              <span>Pūkenga</span>
+              <span>Psychology</span>
+            </span>
+          {%- endif -%}
+        </a>
+
+        {%- if section.settings.description != blank -%}
+          <div class="pukenga-footer__description">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <nav class="pukenga-footer__nav" aria-label="Footer navigation">
+        {%- for block in section.blocks -%}
+          <div class="pukenga-footer__column" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h2>{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
+
+            <ul>
+              {%- if block.settings.link_label_1 != blank -%}
+                <li>
+                  <a href="{{ block.settings.link_url_1 | default: '#' }}">
+                    {{ block.settings.link_label_1 | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if block.settings.link_label_2 != blank -%}
+                <li>
+                  <a href="{{ block.settings.link_url_2 | default: '#' }}">
+                    {{ block.settings.link_label_2 | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if block.settings.link_label_3 != blank -%}
+                <li>
+                  <a href="{{ block.settings.link_url_3 | default: '#' }}">
+                    {{ block.settings.link_label_3 | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <div class="pukenga-footer__bottom">
+      <p>{{ section.settings.copyright_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pukenga-footer {
+    background: var(--pukenga-footer-bg, #07180f);
+    color: var(--pukenga-cream-soft, #ece5d4);
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  }
+
+  .pukenga-footer__inner {
+    max-width: 1798px;
+    margin: 0 auto;
+    padding: 72px 53px 40px;
+  }
+
+  .pukenga-footer__top {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) auto;
+    gap: 72px;
+    align-items: start;
+    padding-bottom: 43px;
+    border-bottom: 1px solid rgba(242, 236, 220, 0.13);
+  }
+
+  .pukenga-footer__brand {
+    max-width: 400px;
+  }
+
+  .pukenga-footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--pukenga-cream, #f2ecdc);
+    text-decoration: none;
+  }
+
+  .pukenga-footer__logo img {
+    display: block;
+    width: auto;
+    max-width: 220px;
+    height: 67px;
+    object-fit: contain;
+  }
+
+  .pukenga-footer__wordmark {
+    display: grid;
+    gap: 2px;
+    color: var(--pukenga-cream, #f2ecdc);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .pukenga-footer__wordmark span:first-child {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-size: 31px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+  }
+
+  .pukenga-footer__wordmark span:last-child {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-size: 17px;
+    letter-spacing: 0.34em;
+  }
+
+  .pukenga-footer__description {
+    margin-top: 26px;
+    color: rgba(236, 229, 212, 0.82);
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .pukenga-footer__description p {
+    margin: 0;
+  }
+
+  .pukenga-footer__nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(116px, 1fr));
+    gap: 58px;
+    min-width: 382px;
+  }
+
+  .pukenga-footer__column h2 {
+    margin: 0 0 16px;
+    color: var(--pukenga-cream, #f2ecdc);
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .pukenga-footer__column ul {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pukenga-footer__column a {
+    color: rgba(236, 229, 212, 0.76);
+    font-size: 16px;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .pukenga-footer__column a:hover {
+    color: var(--pukenga-gold, #e0b784);
+  }
+
+  .pukenga-footer__bottom {
+    padding-top: 27px;
+  }
+
+  .pukenga-footer__bottom p {
+    margin: 0;
+    color: rgba(236, 229, 212, 0.42);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .pukenga-footer__inner {
+      padding: 51px 31px 33px;
+    }
+
+    .pukenga-footer__top {
+      display: block;
+      padding-bottom: 32px;
+    }
+
+    .pukenga-footer__brand {
+      max-width: none;
+    }
+
+    .pukenga-footer__logo {
+      gap: 13px;
+    }
+
+    .pukenga-footer__logo img {
+      height: 56px;
+      max-width: 190px;
+    }
+
+    .pukenga-footer__wordmark span:first-child {
+      font-size: 23px;
+    }
+
+    .pukenga-footer__wordmark span:last-child {
+      font-size: 13px;
+    }
+
+    .pukenga-footer__description {
+      margin-top: 22px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .pukenga-footer__nav {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      min-width: 0;
+      margin-top: 35px;
+    }
+
+    .pukenga-footer__column h2 {
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .pukenga-footer__column ul {
+      gap: 11px;
+    }
+
+    .pukenga-footer__column a {
+      font-size: 16px;
+    }
+
+    .pukenga-footer__bottom {
+      padding-top: 24px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga Footer",
+  "tag": "section",
+  "class": "section-pukenga-footer",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Māori wellbeing resources to whakapiki your hauora.</p>"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© Pūkenga Psychology 2026 · All rights reserved"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#07180f"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Toa"
+        },
+        {
+          "type": "text",
+          "id": "link_label_1",
+          "label": "Link 1 label",
+          "default": "Karakia packs"
+        },
+        {
+          "type": "url",
+          "id": "link_url_1",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_label_2",
+          "label": "Link 2 label",
+          "default": "Audio"
+        },
+        {
+          "type": "url",
+          "id": "link_url_2",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_label_3",
+          "label": "Link 3 label",
+          "default": "Bundles"
+        },
+        {
+          "type": "url",
+          "id": "link_url_3",
+          "label": "Link 3 URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga Footer",
+      "blocks": [
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Toa",
+            "link_label_1": "Karakia packs",
+            "link_label_2": "Audio",
+            "link_label_3": "Bundles"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Tūhono",
+            "link_label_1": "Mauri Tau",
+            "link_label_2": "Services",
+            "link_label_3": "Journal"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Whakapā",
+            "link_label_1": "Instagram",
+            "link_label_2": "Facebook",
+            "link_label_3": "Contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
