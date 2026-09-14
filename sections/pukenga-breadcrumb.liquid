@@ -1,0 +1,73 @@
+{{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
+
+<div class="pukenga-breadcrumb pukenga-section section">
+  <div class="pukenga-container">
+    <nav class="pukenga-breadcrumb__nav" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}" class="pukenga-breadcrumb__link">{{ section.settings.home_label }}</a>
+      <span class="pukenga-breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ routes.all_products_collection_url }}" class="pukenga-breadcrumb__link">{{ section.settings.shop_label }}</a>
+      {%- if product != blank -%}
+        <span class="pukenga-breadcrumb__sep" aria-hidden="true">/</span>
+        <span class="pukenga-breadcrumb__current">{{ product.title }}</span>
+      {%- endif -%}
+    </nav>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pukenga-breadcrumb {
+    padding-block: 18px 0;
+  }
+
+  .pukenga-breadcrumb__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--pukenga-muted);
+  }
+
+  .pukenga-breadcrumb__link {
+    color: var(--pukenga-muted);
+    text-decoration: none;
+  }
+
+  .pukenga-breadcrumb__link:hover {
+    color: var(--pukenga-gold);
+  }
+
+  .pukenga-breadcrumb__sep {
+    opacity: 0.5;
+  }
+
+  .pukenga-breadcrumb__current {
+    color: var(--pukenga-cream-soft);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pukenga Breadcrumb",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Kāinga · Home"
+    },
+    {
+      "type": "text",
+      "id": "shop_label",
+      "label": "Shop label",
+      "default": "Toa · Shop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pukenga Breadcrumb"
+    }
+  ]
+}
+{% endschema %}

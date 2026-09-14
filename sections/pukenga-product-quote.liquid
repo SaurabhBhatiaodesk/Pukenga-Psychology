@@ -1,0 +1,139 @@
+{{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
+
+<div class="pukenga-product-quote pukenga-section section" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="pukenga-container pukenga-product-quote__inner">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        srcset="{{ section.settings.image | image_url: width: 450 }} 450w, {{ section.settings.image | image_url: width: 900 }} 900w"
+        sizes="(max-width: 749px) 100vw, 480px"
+        alt="{{ section.settings.image.alt | default: section.settings.caption | escape }}"
+        class="pukenga-product-quote__image"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    {%- else -%}
+      <img
+        src="{{ 'pukenga-product-quote-card.jpg' | asset_url }}"
+        alt="{{ section.settings.caption | escape }}"
+        class="pukenga-product-quote__image"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pukenga-eyebrow pukenga-product-quote__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.quote != blank -%}
+      <blockquote class="pukenga-product-quote__quote">{{ section.settings.quote }}</blockquote>
+    {%- endif -%}
+
+    {%- if section.settings.caption != blank -%}
+      <p class="pukenga-product-quote__caption">{{ section.settings.caption | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .pukenga-product-quote__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .pukenga-product-quote__image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .pukenga-product-quote__eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .pukenga-product-quote__quote {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.375rem, 2.6vw, 1.875rem);
+    line-height: 1.45;
+    color: var(--pukenga-cream-soft);
+    margin: 0 0 20px;
+  }
+
+  .pukenga-product-quote__caption {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pukenga-muted);
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga Product Quote",
+  "tag": "section",
+  "class": "section-pukenga-product-quote",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Card image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "He kupu"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Quote",
+      "default": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "One of 20 karakia in the set"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga Product Quote"
+    }
+  ]
+}
+{% endschema %}

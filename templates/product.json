@@ -8,28 +8,88 @@
  * ------------------------------------------------------------
  */{
   "sections": {
+    "pukenga_breadcrumb": {
+      "type": "pukenga-breadcrumb",
+      "settings": {
+        "home_label": "Kāinga · Home",
+        "shop_label": "Toa · Shop"
+      }
+    },
+    "pukenga_product_accordion": {
+      "type": "pukenga-product-accordion",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "heading": "Kei roto · What's inside",
+            "body": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "heading": "Me pēhea te whakamahi · How to use",
+            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "heading": "Tuku & whakahoki · Shipping & returns",
+            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
+          }
+        }
+      },
+      "block_order": ["item_1", "item_2", "item_3"]
+    },
+    "pukenga_product_quote": {
+      "type": "pukenga-product-quote",
+      "settings": {
+        "eyebrow": "He kupu",
+        "quote": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>",
+        "caption": "One of 20 karakia in the set",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
+    "pukenga_product_reviews": {
+      "type": "pukenga-product-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "I keep the smaller cards in my bag to use on the go and the larger ones on my desk. Thoroughly recommend.",
+            "name": "Julie C."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Utilise them with whānau and mahi when I get stumped for the right karakia. Ngā mihi maioha.",
+            "name": "Rauweti S."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Reconnecting me back to tikanga. I'm rediscovering my heritage. A true testament to relearn what was lost.",
+            "name": "Vanessa P."
+          }
+        }
+      },
+      "block_order": ["review_1", "review_2", "review_3"],
+      "settings": {
+        "heading": "Arotakenga · Reviews",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
-        "disclosures_g9mWze": {
-          "type": "disclosures",
-          "name": "t:names.disclosures",
-          "settings": {
-            "heading": "Disclosures",
-            "heading_preset": "h5",
-            "open_by_default": false,
-            "icon": "caret",
-            "disclosure_heading_preset": "h6",
-            "text_color": "",
-            "dividers": true,
-            "divider_color": "{{ settings.color_palette.color2 }}",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -309,9 +369,7 @@
           ]
         }
       },
-      "block_order": [
-        "disclosures_g9mWze"
-      ],
+      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -468,7 +526,11 @@
     }
   },
   "order": [
+    "pukenga_breadcrumb",
     "main",
+    "pukenga_product_accordion",
+    "pukenga_product_quote",
+    "pukenga_product_reviews",
     "product_recommendations_qggXJq"
   ]
 }
