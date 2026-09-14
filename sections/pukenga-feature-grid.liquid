@@ -1,0 +1,195 @@
+<section class="pukenga-section pukenga-features" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="pukenga-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pukenga-eyebrow pukenga-features__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pukenga-heading pukenga-features__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="pukenga-features__grid">
+      {%- for block in section.blocks -%}
+        <div class="pukenga-features__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="pukenga-features__icon">{{ block.settings.icon }}</div>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="pukenga-features__item-title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="pukenga-features__item-text">{{ block.settings.text }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pukenga-features__eyebrow {
+    text-align: center;
+  }
+
+  .pukenga-features__heading {
+    text-align: center;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
+
+  .pukenga-features__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .pukenga-features__item {
+    text-align: center;
+    padding: 32px 20px;
+    border: 1px solid rgba(242, 236, 220, 0.12);
+    border-radius: 12px;
+  }
+
+  .pukenga-features__icon {
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+
+  .pukenga-features__item-title {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--pukenga-cream-soft, #ece5d4);
+    margin: 0 0 10px;
+  }
+
+  .pukenga-features__item-text {
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--pukenga-muted, #a8a087);
+  }
+
+  @media screen and (max-width: 989px) {
+    .pukenga-features__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .pukenga-features__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga Feature Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Why Pūkenga"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Care rooted in te ao Māori, shaped for everyday life</p>"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "◈"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Rongoā Māori"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Traditional plant-based remedies woven into your wellbeing plan.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga Feature Grid",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "◈",
+            "title": "Rongoā Māori",
+            "text": "<p>Traditional plant-based remedies woven into your wellbeing plan.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "◎",
+            "title": "Karakia & Ritual",
+            "text": "<p>Guided practices that ground each session in intention and respect.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "△",
+            "title": "Clinical Care",
+            "text": "<p>Registered psychologists working alongside cultural practitioners.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "○",
+            "title": "Whānau Centred",
+            "text": "<p>Support that extends to family and community, not just the individual.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

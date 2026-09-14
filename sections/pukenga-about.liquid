@@ -1,0 +1,152 @@
+<section class="pukenga-section pukenga-about" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="pukenga-container pukenga-about__grid">
+    <div class="pukenga-about__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 749px) 100vw, 45vw"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        <img src="{{ 'pukenga-about-portrait.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+
+    <div class="pukenga-about__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pukenga-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pukenga-heading pukenga-about__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="pukenga-body pukenga-about__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.signature != blank -%}
+        <p class="pukenga-about__signature">{{ section.settings.signature | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="pukenga-link">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pukenga-about__grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .pukenga-about__media img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+  }
+
+  .pukenga-about__heading {
+    font-size: clamp(1.75rem, 3vw, 2.375rem);
+  }
+
+  .pukenga-about__signature {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-style: italic;
+    color: var(--pukenga-gold, #e0b784);
+    margin: -8px 0 24px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .pukenga-about__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .pukenga-about__media img {
+      aspect-ratio: 16 / 10;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga About",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Portrait image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Story"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Bridging tradition and clinical psychology</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pūkenga Psychology was founded to hold space for both mātauranga Māori and modern clinical practice. Every product and programme we offer is developed alongside cultural advisors and registered psychologists.</p>"
+    },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Signature line",
+      "default": "— Dr. Aroha Ngata, Founder"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Link label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link URL"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga About"
+    }
+  ]
+}
+{% endschema %}

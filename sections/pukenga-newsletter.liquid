@@ -1,0 +1,186 @@
+<section class="pukenga-section pukenga-newsletter" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="pukenga-container pukenga-newsletter__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pukenga-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pukenga-heading pukenga-newsletter__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="pukenga-body pukenga-newsletter__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- form 'customer', class: 'pukenga-newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+
+      {%- if form.posted_successfully? -%}
+        <p class="pukenga-newsletter__success" role="status">
+          {{ section.settings.success_text | default: 'Thanks — you are on the list.' }}
+        </p>
+      {%- else -%}
+        <div class="pukenga-newsletter__field-group">
+          <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">
+            {{ 'blocks.email_signup.label' | t }}
+          </label>
+          <input
+            id="NewsletterEmail-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="pukenga-newsletter__input"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            placeholder="Your email address"
+            required
+            {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="NewsletterEmail-error-{{ section.id }}"
+            {% endif %}
+          >
+          <button type="submit" class="pukenga-btn pukenga-btn--primary pukenga-newsletter__submit">
+            {{ section.settings.button_label | default: 'Subscribe' }}
+          </button>
+        </div>
+
+        {%- if form.errors -%}
+          <p id="NewsletterEmail-error-{{ section.id }}" class="pukenga-newsletter__error">
+            {{ form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pukenga-newsletter__inner {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pukenga-newsletter__heading {
+    font-size: clamp(1.75rem, 3vw, 2.375rem);
+  }
+
+  .pukenga-newsletter__text {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pukenga-newsletter__form {
+    margin-top: 8px;
+  }
+
+  .pukenga-newsletter__field-group {
+    display: flex;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .pukenga-newsletter__input {
+    flex: 1;
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    font-size: 14.5px;
+    color: var(--pukenga-cream, #f2ecdc);
+    background: transparent;
+    border: 1px solid rgba(242, 236, 220, 0.4);
+    border-radius: 40px;
+    padding: 14px 20px;
+  }
+
+  .pukenga-newsletter__input::placeholder {
+    color: var(--pukenga-muted, #a8a087);
+  }
+
+  .pukenga-newsletter__submit {
+    flex-shrink: 0;
+  }
+
+  .pukenga-newsletter__error {
+    color: #e0a0a0;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  .pukenga-newsletter__success {
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    color: var(--pukenga-gold, #e0b784);
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .pukenga-newsletter__field-group {
+      flex-direction: column;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga Newsletter",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Join our whānau list</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Seasonal rongoā guidance, new product drops, and reflections from our practitioners — straight to your inbox.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "Thanks — you are on the list."
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga Newsletter"
+    }
+  ]
+}
+{% endschema %}

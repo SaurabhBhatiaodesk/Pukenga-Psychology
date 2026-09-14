@@ -1,0 +1,103 @@
+/* Pūkenga Psychology — shared design tokens for custom homepage sections */
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --pukenga-bg: #16281b;
+  --pukenga-bg-soft: #1c2f21;
+  --pukenga-cream: #f2ecdc;
+  --pukenga-cream-soft: #ece5d4;
+  --pukenga-muted: #a8a087;
+  --pukenga-gold: #e0b784;
+  --pukenga-font-heading: 'Spectral', serif;
+  --pukenga-font-body: 'Instrument Sans', system-ui, sans-serif;
+  --pukenga-radius-pill: 40px;
+}
+
+.pukenga-section {
+  background: var(--pukenga-bg);
+  color: var(--pukenga-cream-soft);
+  font-family: var(--pukenga-font-body);
+}
+
+.pukenga-eyebrow {
+  font-family: var(--pukenga-font-body);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pukenga-gold);
+  margin: 0 0 16px;
+}
+
+.pukenga-heading {
+  font-family: var(--pukenga-font-heading);
+  font-weight: 300;
+  color: var(--pukenga-cream-soft);
+  margin: 0 0 18px;
+  line-height: 1.15;
+}
+
+.pukenga-body {
+  font-family: var(--pukenga-font-body);
+  color: var(--pukenga-muted);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.pukenga-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pukenga-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--pukenga-radius-pill);
+  padding: 15px 32px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pukenga-btn:hover {
+  opacity: 0.88;
+}
+
+.pukenga-btn--primary {
+  background: var(--pukenga-gold);
+  color: var(--pukenga-bg);
+  border: none;
+}
+
+.pukenga-btn--outline {
+  background: transparent;
+  color: var(--pukenga-cream);
+  border: 1px solid rgba(242, 236, 220, 0.55);
+}
+
+.pukenga-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--pukenga-font-body);
+  font-size: 13.5px;
+  color: var(--pukenga-gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(224, 183, 132, 0.5);
+  padding-bottom: 3px;
+}
+
+.pukenga-link:hover {
+  opacity: 0.85;
+}
+
+.pukenga-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media screen and (max-width: 749px) {
+  .pukenga-container {
+    padding: 0 20px;
+  }
+}

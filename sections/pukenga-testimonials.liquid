@@ -1,0 +1,215 @@
+<section class="pukenga-section pukenga-testimonials" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="pukenga-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pukenga-eyebrow pukenga-testimonials__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pukenga-heading pukenga-testimonials__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="pukenga-testimonials__grid">
+      {%- for block in section.blocks -%}
+        <blockquote class="pukenga-testimonials__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.rating > 0 -%}
+            <div class="pukenga-testimonials__stars" aria-hidden="true">
+              {%- for i in (1..5) -%}
+                {%- if i <= block.settings.rating -%}★{%- else -%}☆{%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.quote != blank -%}
+            <p class="pukenga-testimonials__quote">{{ block.settings.quote }}</p>
+          {%- endif -%}
+          <footer class="pukenga-testimonials__author">
+            {%- if block.settings.name != blank -%}
+              <span class="pukenga-testimonials__name">{{ block.settings.name | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.role != blank -%}
+              <span class="pukenga-testimonials__role">{{ block.settings.role | escape }}</span>
+            {%- endif -%}
+          </footer>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pukenga-testimonials__eyebrow,
+  .pukenga-testimonials__heading {
+    text-align: center;
+  }
+
+  .pukenga-testimonials__heading {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
+
+  .pukenga-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .pukenga-testimonials__item {
+    margin: 0;
+    padding: 32px;
+    background: var(--pukenga-bg-soft, #1c2f21);
+    border-radius: 14px;
+  }
+
+  .pukenga-testimonials__stars {
+    color: var(--pukenga-gold, #e0b784);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .pukenga-testimonials__quote {
+    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--pukenga-cream-soft, #ece5d4);
+    margin: 0 0 24px;
+  }
+
+  .pukenga-testimonials__author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  }
+
+  .pukenga-testimonials__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pukenga-cream, #f2ecdc);
+  }
+
+  .pukenga-testimonials__role {
+    font-size: 12.5px;
+    color: var(--pukenga-muted, #a8a087);
+  }
+
+  @media screen and (max-width: 989px) {
+    .pukenga-testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Pūkenga Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Kōrero"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Stories from our community</p>"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Quote",
+          "default": "<p>Working with Pūkenga gave me tools grounded in both science and tikanga. I feel more like myself.</p>"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Hine T."
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role or location",
+          "default": "Client, Tāmaki Makaurau"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pūkenga Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Working with Pūkenga gave me tools grounded in both science and tikanga. I feel more like myself.</p>",
+            "name": "Hine T.",
+            "role": "Client, Tāmaki Makaurau"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The Mauri Tau programme changed how I move through stress. It is the first approach that felt truly mine.</p>",
+            "name": "Wiremu K.",
+            "role": "Client, Ōtautahi"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>A gentle, grounded space. I finally feel supported by people who understand where I come from.</p>",
+            "name": "Aroha P.",
+            "role": "Client, Kirikiriroa"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
