@@ -1,9 +1,13 @@
 {% liquid
   assign heading = section.settings.heading
   assign subheading = section.settings.subheading
+  assign width_class = 'section--page-width'
+  if section.settings.section_width == 'full-width'
+    assign width_class = 'section--full-width'
+  endif
 %}
 
-<section class="pukenga-hero section section--full-width color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-hero section {{ width_class }} color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-hero__media">
     {%- if section.settings.image != blank -%}
       <img
@@ -177,6 +181,16 @@
   "tag": "section",
   "class": "section-pukenga-hero",
   "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "full-width", "label": "Full width" },
+        { "value": "page-width", "label": "Page width" }
+      ],
+      "default": "full-width"
+    },
     {
       "type": "image_picker",
       "id": "image",
