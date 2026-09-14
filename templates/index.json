@@ -12,6 +12,7 @@
     "pukenga_hero": {
       "type": "pukenga-hero",
       "settings": {
+        "section_width": "full-width",
         "image": "shopify://shop_images/1d0febc5-0019-4e42-9469-d49f46d766e5.jpg",
         "eyebrow": "Oranga Ngākau",
         "heading": "Whakatōngia te karakia",
@@ -20,119 +21,138 @@
         "button_link": "",
         "button_label_2": "Mauri Tau",
         "button_link_2": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 52,
+        "padding-block-end": 52
       }
     },
-    "pukenga_values": {
-      "type": "pukenga-values",
-      "blocks": {
-        "value_1": {
-          "type": "value",
-          "settings": {
-            "heading": "Mātauranga",
-            "text": "<p>Bring Te Ao Māori into everyday life.</p>"
-          }
-        },
-        "value_2": {
-          "type": "value",
-          "settings": {
-            "heading": "Mō te katoa",
-            "text": "<p>Taonga made for ages 5+, can be used anywhere, anytime.</p>"
-          }
-        },
-        "value_3": {
-          "type": "value",
-          "settings": {
-            "heading": "Hauora",
-            "text": "<p>Settle and nourish your mauri.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "value_1",
-        "value_2",
-        "value_3"
-      ],
+    "pukenga_about_eNePzt": {
+      "type": "pukenga-about",
       "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "image": "shopify://shop_images/773f9f74-e8a9-4753-887f-e73b5648024a.jpg",
+        "desktop_image_position": "right",
+        "desktop_content_width": "0.9fr",
+        "desktop_image_width": "1.1fr",
+        "desktop_image_ratio": "1 / 1",
+        "desktop_image_position_x": 50,
+        "desktop_image_position_y": 50,
+        "image_border_radius": 0,
+        "mobile_image_ratio": "4 / 5",
+        "mobile_image_position_x": 50,
+        "mobile_image_position_y": 45,
+        "mobile_image_border_radius": 0,
+        "eyebrow": "He kupu",
+        "heading": "<p>\"Papatūānuku welcomes your heaviness.<br/>Let it pour into her.\"</p>",
+        "text": "<p>From the Hinātore set<br/><br/></p>",
+        "signature": "",
+        "button_label": "",
+        "button_link": "",
+        "background_color": "#1d3323",
+        "desktop_gap": 64,
+        "vertical_alignment": "center",
+        "heading_max_size": 38,
+        "heading_margin_bottom": 20,
+        "text_margin_bottom": 20,
+        "signature_margin_bottom": 24,
+        "mobile_gap": 32,
+        "small_mobile_gap": 24,
+        "mobile_heading_size": 32,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     },
     "pukenga_best_sellers": {
       "type": "pukenga-best-sellers",
-      "blocks": {
-        "product_1": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "title": "Ngākau Karakia Set",
-            "price": "$55",
-            "compare_at_price": "",
-            "show_sale_badge": false,
-            "link": ""
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "title": "Maha Oranga Bundle",
-            "price": "$140",
-            "compare_at_price": "$486",
-            "show_sale_badge": true,
-            "link": ""
-          }
-        },
-        "product_3": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "title": "Audio Karakia Collection",
-            "price": "$19.99",
-            "compare_at_price": "",
-            "show_sale_badge": false,
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_1",
-        "product_2",
-        "product_3"
-      ],
       "settings": {
-        "eyebrow": "best sellers",
+        "collection": "bestseller",
+        "products_to_show": 3,
         "heading": "Ngā mea rongonui",
+        "eyebrow": "/ best sellers",
         "view_all_label": "Toa katoa · View all",
-        "view_all_link": ""
+        "view_all_link": "shopify://collections/bestseller",
+        "add_button_label": "Add",
+        "sold_out_label": "Sold out",
+        "sale_label": "SALE",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
       }
     },
     "pukenga_promo": {
       "type": "pukenga-promo-banner",
       "settings": {
+        "image": "shopify://shop_images/254684b2-0ba9-443e-8891-1b0a8fd7cbb3.jpg",
+        "mobile_image": "shopify://shop_images/254684b2-0ba9-443e-8891-1b0a8fd7cbb3.jpg",
+        "background_color": "#16281b",
+        "background_size": "cover",
+        "desktop_image_position_x": 50,
+        "desktop_image_position_y": 50,
+        "mobile_image_position_x": 50,
+        "mobile_image_position_y": 50,
+        "overlay_color": "#0f190f",
+        "overlay_opacity": 55,
         "eyebrow": "On-demand program",
         "heading": "<p>Discover the power of Mauri Tau</p>",
         "text": "<p>Grounded in mātauranga Māori. Learn to cultivate a state of inner calm and balance to support your wellbeing.</p>",
         "button_label": "Join now",
         "button_link": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "content_vertical_alignment": "center",
+        "text_alignment": "left",
+        "desktop_height": 460,
+        "content_max_width": 460,
+        "heading_size": 44,
+        "text_size": 16,
+        "text_max_width": 460,
+        "heading_color": "#f2ecdc",
+        "text_color": "#ece5d4",
+        "heading_margin_bottom": 18,
+        "text_margin_bottom": 28,
+        "mobile_height": 380,
+        "mobile_content_vertical_alignment": "center",
+        "mobile_text_alignment": "left",
+        "mobile_content_max_width": 460,
+        "mobile_heading_size": 32,
+        "mobile_text_size": 15
       }
     },
     "pukenga_about": {
       "type": "pukenga-about",
       "settings": {
+        "image": "shopify://shop_images/c6ce96ec-cc98-4c88-bc26-2a2193ea51ed.jpg",
+        "mobile_image": "shopify://shop_images/88d83923-64cd-4eaf-8e0c-f4daba7d1d2f.jpg",
+        "desktop_image_position": "right",
+        "desktop_content_width": "1fr",
+        "desktop_image_width": "0.9fr",
+        "desktop_image_ratio": "1 / 1",
+        "desktop_image_position_x": 50,
+        "desktop_image_position_y": 50,
+        "image_border_radius": 0,
+        "mobile_image_ratio": "4 / 5",
+        "mobile_image_position_x": 50,
+        "mobile_image_position_y": 45,
+        "mobile_image_border_radius": 0,
         "eyebrow": "Ko wai au",
         "heading": "<p>Kia ora, I'm Dr Jessica</p>",
         "text": "<p>A Registered Clinical Psychologist committed to creating Māori wellbeing resources for everyday people, to help you whakapiki your hauora.</p><p>I make aspects of Te Ao Māori easily accessible for those who need it.</p>",
         "signature": "",
         "button_label": "Pānui atu · Read more",
         "button_link": "",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "background_color": "#1d3323",
+        "desktop_gap": 64,
+        "vertical_alignment": "center",
+        "heading_max_size": 38,
+        "heading_margin_bottom": 20,
+        "text_margin_bottom": 20,
+        "signature_margin_bottom": 24,
+        "mobile_gap": 32,
+        "small_mobile_gap": 24,
+        "mobile_heading_size": 32,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
       }
     },
     "pukenga_testimonials": {
@@ -141,7 +161,7 @@
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
-            "rating": 5,
+            "rating": 0,
             "quote": "<p>The English translation on the back makes me feel more empowered to choose a karakia suited to what I need.</p>",
             "name": "Julie C.",
             "role": "Maha Bundle"
@@ -150,7 +170,7 @@
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
-            "rating": 5,
+            "rating": 0,
             "quote": "<p>My team feel more comfortable using karakia regularly. Thank you for such a fine set.</p>",
             "name": "Kathryn M.",
             "role": "A7 Set"
@@ -159,7 +179,7 @@
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
-            "rating": 5,
+            "rating": 0,
             "quote": "<p>A game changer for my pronunciation. The audio really brings the karakia to life.</p>",
             "name": "Rebecca S.",
             "role": "Audio Collection"
@@ -174,8 +194,45 @@
       "settings": {
         "eyebrow": "",
         "heading": "<p>What people are saying</p>",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "background_color": "#0f1d13",
+        "heading_color": "#ece5d4",
+        "card_border_color": "#313932",
+        "star_color": "#e0b784",
+        "quote_color": "#ece5d4",
+        "name_color": "#e0b784",
+        "role_color": "#e0b784",
+        "text_alignment": "center",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "columns": 3,
+        "grid_gap": 24,
+        "heading_max_width": 640,
+        "heading_bottom_spacing": 40,
+        "heading_min_size": 28,
+        "heading_max_size": 35,
+        "quote_font_size": 17,
+        "quote_bottom_spacing": 18,
+        "star_size": 14,
+        "star_spacing": 2,
+        "star_bottom_spacing": 16,
+        "card_padding_top": 30,
+        "card_padding_bottom": 30,
+        "card_padding_horizontal": 28,
+        "card_border_width": 1,
+        "card_border_radius": 14,
+        "author_gap": 10,
+        "name_font_size": 13,
+        "role_font_size": 13,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48,
+        "mobile_columns": 1.2,
+        "mobile_grid_gap": 20,
+        "mobile_heading_size": 28,
+        "mobile_heading_bottom_spacing": 32,
+        "mobile_card_padding_top": 28,
+        "mobile_card_padding_bottom": 28,
+        "mobile_card_padding_horizontal": 24,
+        "mobile_quote_font_size": 16
       }
     },
     "pukenga_newsletter": {
@@ -184,16 +241,49 @@
         "eyebrow": "",
         "heading": "<p>Hauora to your inbox</p>",
         "text": "<p>Hauora practices, karakia and gentle prompts, whenever we share them.</p>",
+        "input_placeholder": "you@email.com",
         "button_label": "Tuhi · Sign up",
         "success_text": "Thanks — you are on the list.",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "background_color": "#1d3323",
+        "text_color": "#ece5d4",
+        "heading_color": "{{ settings.color_palette.foreground }}",
+        "input_text_color": "#ece5d4",
+        "input_border_color": "{{ settings.color_palette.color2 }}",
+        "placeholder_color": "#a8a087",
+        "success_color": "#e0b784",
+        "error_color": "#e0a0a0",
+        "text_alignment": "center",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "content_max_width": 620,
+        "text_max_width": 460,
+        "form_max_width": 440,
+        "form_top_spacing": 8,
+        "input_button_gap": 10,
+        "heading_min_size": 28,
+        "heading_max_size": 34,
+        "input_font_size": 15,
+        "input_padding_vertical": 14,
+        "input_padding_horizontal": 20,
+        "input_border_width": 1,
+        "input_border_radius": 40,
+        "success_font_size": 15,
+        "error_font_size": 13,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48,
+        "mobile_text_max_width": 460,
+        "mobile_form_top_spacing": 8,
+        "mobile_input_button_gap": 10,
+        "mobile_heading_size": 28,
+        "mobile_input_font_size": 15,
+        "mobile_input_padding_vertical": 14,
+        "mobile_input_padding_horizontal": 18
       }
     }
   },
   "order": [
     "pukenga_hero",
-    "pukenga_values",
+    "pukenga_about_eNePzt",
     "pukenga_best_sellers",
     "pukenga_promo",
     "pukenga_about",
