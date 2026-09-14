@@ -27,44 +27,32 @@
     "pukenga_features": {
       "type": "pukenga-values",
       "blocks": {
-        "feature_1": {
-          "type": "feature",
+        "value_1": {
+          "type": "value",
           "settings": {
-            "icon": "◈",
-            "title": "Mātauranga",
+            "heading": "Mātauranga",
             "text": "<p>Bring Te Ao Māori into everyday life.</p>"
           }
         },
-        "feature_2": {
-          "type": "feature",
+        "value_2": {
+          "type": "value",
           "settings": {
-            "icon": "◎",
-            "title": "Mō te katoa",
+            "heading": "Mō te katoa",
             "text": "<p>Taonga made for ages 5+, can be used anywhere, anytime.</p>"
           }
         },
-        "feature_3": {
-          "type": "feature",
+        "value_3": {
+          "type": "value",
           "settings": {
-            "icon": "△",
-            "title": "Hauora",
+            "heading": "Hauora",
             "text": "<p>Settle and nourish your mauri.</p>"
-          }
-        },
-        "quote_1": {
-          "type": "quote",
-          "settings": {
-            "show_text_overlay": false,
-            "quote": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>",
-            "attribution": "From the Hinātore set"
           }
         }
       },
       "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3",
-        "quote_1"
+        "value_1",
+        "value_2",
+        "value_3"
       ],
       "settings": {
         "eyebrow": "",
