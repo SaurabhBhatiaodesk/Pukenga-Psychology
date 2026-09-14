@@ -3,7 +3,7 @@
   assign subheading = section.settings.subheading
 %}
 
-<section class="pukenga-hero section color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-hero section section--full-width color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-hero__media">
     {%- if section.settings.image != blank -%}
       <img
@@ -24,7 +24,8 @@
         fetchpriority="high"
       >
     {%- endif -%}
-    <div class="pukenga-hero__overlay"></div>
+    <div class="pukenga-hero__overlay pukenga-hero__overlay--vertical"></div>
+    <div class="pukenga-hero__overlay pukenga-hero__overlay--diagonal"></div>
   </div>
 
   <div class="pukenga-hero__content section pukenga-container">
@@ -79,7 +80,14 @@
   .pukenga-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(22, 40, 27, 0.15) 0%, rgba(22, 40, 27, 0.85) 100%);
+  }
+
+  .pukenga-hero__overlay--vertical {
+    background: linear-gradient(rgba(15, 25, 15, 0.5) 0%, rgba(15, 25, 15, 0.1) 35%, rgba(15, 25, 15, 0.75) 100%);
+  }
+
+  .pukenga-hero__overlay--diagonal {
+    background: linear-gradient(90deg, rgba(15, 25, 15, 0.85) 0%, rgba(15, 25, 15, 0.5) 60%, rgba(15, 25, 15, 0.2) 100%);
   }
 
   .pukenga-hero__content {

@@ -1,4 +1,4 @@
-<section class="pukenga-section section pukenga-promo" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-section section section--full-width pukenga-promo" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-promo__media">
     {%- if section.settings.image != blank -%}
       <img
@@ -55,7 +55,7 @@
   .pukenga-promo__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(22, 40, 27, 0.92) 0%, rgba(22, 40, 27, 0.55) 55%, rgba(22, 40, 27, 0.15) 100%);
+    background: linear-gradient(90deg, rgba(15, 25, 15, 0.85) 0%, rgba(15, 25, 15, 0.5) 60%, rgba(15, 25, 15, 0.2) 100%);
   }
 
   .pukenga-promo__content {
@@ -87,7 +87,7 @@
     }
 
     .pukenga-promo__overlay {
-      background: linear-gradient(180deg, rgba(22, 40, 27, 0.5) 0%, rgba(22, 40, 27, 0.92) 70%);
+      background: linear-gradient(180deg, rgba(15, 25, 15, 0.5) 0%, rgba(15, 25, 15, 0.92) 70%);
     }
   }
 {% endstylesheet %}
