@@ -11,7 +11,6 @@
   <div class="section">
     <div class="pukenga-container pukenga-about__grid">
 
-      <!-- CONTENT -->
       <div class="pukenga-about__content">
 
         {%- if section.settings.eyebrow != blank -%}
@@ -50,10 +49,8 @@
       </div>
 
 
-      <!-- IMAGE -->
       <div class="pukenga-about__media">
 
-        <!-- Desktop Image -->
         {%- if section.settings.image != blank -%}
 
           <img
@@ -75,7 +72,6 @@
         {%- endif -%}
 
 
-        <!-- Mobile Image -->
         {%- if section.settings.mobile_image != blank -%}
 
           <img
@@ -95,7 +91,6 @@
 
         {%- elsif section.settings.image != blank -%}
 
-          <!-- Desktop image fallback on mobile -->
           <img
             class="pukenga-about__image pukenga-about__image--mobile"
             src="{{ section.settings.image | image_url: width: 1000 }}"
@@ -116,10 +111,6 @@
 
 <style>
 
-  /* =========================================
-     MAIN SECTION
-  ========================================= */
-
   .pukenga-about {
     width: 100%;
     background: var(--about-bg);
@@ -129,27 +120,9 @@
   }
 
 
-  /* =========================================
-     CONTAINER
-  ========================================= */
-
-  .pukenga-about .pukenga-container {
-    width: 100%;
-  }
-
-
-  /* =========================================
-     DESKTOP GRID
-     CONTENT LEFT
-     IMAGE RIGHT
-  ========================================= */
-
   .pukenga-about__grid {
-    display: grid;
-
-    grid-template-columns:
-      {{ section.settings.desktop_content_width }}
-      {{ section.settings.desktop_image_width }};
+    display: flex;
+    flex-direction: row;
 
     gap: {{ section.settings.desktop_gap }}px;
 
@@ -157,33 +130,45 @@
   }
 
 
-  /* =========================================
-     CONTENT
-  ========================================= */
+  /* DEFAULT:
+     CONTENT LEFT
+     IMAGE RIGHT
+  */
 
   .pukenga-about__content {
-    grid-column: 1;
-    grid-row: 1;
-
-    width: 100%;
+    flex: {{ section.settings.desktop_content_width }};
+    order: 1;
+    min-width: 0;
   }
 
-
-  /* =========================================
-     IMAGE
-  ========================================= */
-
   .pukenga-about__media {
-    grid-column: 2;
-    grid-row: 1;
-
-    width: 100%;
+    flex: {{ section.settings.desktop_image_width }};
+    order: 2;
+    min-width: 0;
 
     overflow: hidden;
 
     border-radius:
       {{ section.settings.image_border_radius }}px;
   }
+
+
+  /* REVERSE:
+     IMAGE LEFT
+     CONTENT RIGHT
+  */
+
+  {% if section.settings.desktop_column_reverse %}
+
+    .pukenga-about__content {
+      order: 2;
+    }
+
+    .pukenga-about__media {
+      order: 1;
+    }
+
+  {% endif %}
 
 
   .pukenga-about__image {
@@ -195,10 +180,6 @@
     object-fit: cover;
   }
 
-
-  /* =========================================
-     DESKTOP IMAGE
-  ========================================= */
 
   .pukenga-about__image--desktop {
     display: block;
@@ -212,43 +193,32 @@
   }
 
 
-  /* =========================================
-     MOBILE IMAGE HIDDEN BY DEFAULT
-  ========================================= */
-
   .pukenga-about__image--mobile {
     display: none;
   }
 
 
-  /* =========================================
-     HEADING
-  ========================================= */
-
   .pukenga-about__heading {
-    font-size: {{ section.settings.heading_max_size }}px;
+    font-size:
+      {{ section.settings.heading_max_size }}px;
+
     margin-bottom:
       {{ section.settings.heading_margin_bottom }}px;
   }
 
 
-  /* =========================================
-     TEXT
-  ========================================= */
-
   .pukenga-about__text {
     font-size: 15.5px;
     line-height: 1.75;
+
     opacity: 0.85;
-    color:#ece5d4;
+
+    color: #ece5d4;
+
     margin-bottom:
       {{ section.settings.text_margin_bottom }}px;
   }
 
-
-  /* =========================================
-     SIGNATURE
-  ========================================= */
 
   .pukenga-about__signature {
     font-family:
@@ -264,18 +234,10 @@
   }
 
 
-  /* =========================================
-     LINK
-  ========================================= */
-
   .pukenga-about__link {
     display: inline-block;
   }
 
-
-  /* =========================================
-     TABLET
-  ========================================= */
 
   @media screen and (max-width: 989px) {
 
@@ -286,41 +248,37 @@
 
 
     .pukenga-about__grid {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
 
       gap:
         {{ section.settings.mobile_gap }}px;
     }
 
 
-    /* IMAGE FIRST */
-
     .pukenga-about__media {
-      grid-column: 1;
-      grid-row: 1;
+      order: 1;
+
+      width: 100%;
 
       border-radius:
         {{ section.settings.mobile_image_border_radius }}px;
     }
 
 
-    /* CONTENT SECOND */
-
     .pukenga-about__content {
-      grid-column: 1;
-      grid-row: 2;
+      order: 2;
+
+      width: 100%;
+
       padding: 44px 26px;
     }
 
-
-    /* Desktop image hidden */
 
     .pukenga-about__image--desktop {
       display: none;
     }
 
-
-    /* Mobile image shown */
 
     .pukenga-about__image--mobile {
       display: block;
@@ -341,25 +299,23 @@
   }
 
 
-  /* =========================================
-     MOBILE
-  ========================================= */
-
   @media screen and (max-width: 749px) {
 
     .pukenga-about {
       padding-top: var(--about-mobile-top);
       padding-bottom: var(--about-mobile-bottom);
     }
-    .pukenga-about .section {
-        display: block;
-    }
-    .pukenga-about__content{
-      padding: 44px 26px;
-    }
+
+
     .pukenga-about__grid {
       gap:
         {{ section.settings.small_mobile_gap }}px;
+    }
+
+
+    .pukenga-about__content {
+      padding:
+        44px 26px;
     }
 
 
@@ -403,34 +359,57 @@
 
 
     {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "desktop_column_reverse",
+      "label": "Reverse desktop columns",
+      "info": "Turn on to place the image on the left and content on the right.",
+      "default": false
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "label": "Image and content gap",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+
+    {
       "type": "select",
       "id": "desktop_content_width",
       "label": "Desktop content width",
       "options": [
         {
-          "value": "0.8fr",
+          "value": "0.8",
           "label": "45%"
         },
         {
-          "value": "0.9fr",
+          "value": "0.9",
           "label": "47%"
         },
         {
-          "value": "1fr",
+          "value": "1",
           "label": "50%"
         },
         {
-          "value": "1.1fr",
+          "value": "1.1",
           "label": "52%"
         },
         {
-          "value": "1.2fr",
+          "value": "1.2",
           "label": "55%"
         }
       ],
-      "default": "1fr"
+      "default": "1"
     },
-
 
     {
       "type": "select",
@@ -438,29 +417,28 @@
       "label": "Desktop image width",
       "options": [
         {
-          "value": "0.8fr",
+          "value": "0.8",
           "label": "45%"
         },
         {
-          "value": "0.9fr",
+          "value": "0.9",
           "label": "47%"
         },
         {
-          "value": "1fr",
+          "value": "1",
           "label": "50%"
         },
         {
-          "value": "1.1fr",
+          "value": "1.1",
           "label": "52%"
         },
         {
-          "value": "1.2fr",
+          "value": "1.2",
           "label": "55%"
         }
       ],
-      "default": "0.9fr"
+      "default": "0.9"
     },
-
 
     {
       "type": "select",
@@ -498,13 +476,13 @@
 
     {
       "type": "header",
-      "content": "Desktop image position"
+      "content": "Desktop image crop"
     },
 
     {
       "type": "range",
       "id": "desktop_image_position_x",
-      "label": "Horizontal position",
+      "label": "Horizontal image position",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -515,14 +493,13 @@
     {
       "type": "range",
       "id": "desktop_image_position_y",
-      "label": "Vertical position",
+      "label": "Vertical image position",
       "min": 0,
       "max": 100,
       "step": 1,
       "unit": "%",
       "default": 50
     },
-
 
     {
       "type": "range",
@@ -573,13 +550,13 @@
 
     {
       "type": "header",
-      "content": "Mobile image position"
+      "content": "Mobile image crop"
     },
 
     {
       "type": "range",
       "id": "mobile_image_position_x",
-      "label": "Horizontal position",
+      "label": "Horizontal image position",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -590,14 +567,13 @@
     {
       "type": "range",
       "id": "mobile_image_position_y",
-      "label": "Vertical position",
+      "label": "Vertical image position",
       "min": 0,
       "max": 100,
       "step": 1,
       "unit": "%",
       "default": 25
     },
-
 
     {
       "type": "range",
@@ -672,27 +648,16 @@
 
     {
       "type": "header",
-      "content": "Desktop layout"
-    },
-
-    {
-      "type": "range",
-      "id": "desktop_gap",
-      "label": "Image and content gap",
-      "min": 20,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 64
+      "content": "Vertical alignment"
     },
 
     {
       "type": "select",
       "id": "vertical_alignment",
-      "label": "Vertical alignment",
+      "label": "Content alignment",
       "options": [
         {
-          "value": "start",
+          "value": "flex-start",
           "label": "Top"
         },
         {
@@ -700,7 +665,7 @@
           "label": "Centre"
         },
         {
-          "value": "end",
+          "value": "flex-end",
           "label": "Bottom"
         }
       ],
@@ -713,12 +678,10 @@
       "content": "Heading"
     },
 
-
-
     {
       "type": "range",
       "id": "heading_max_size",
-      "label": "Maximum heading size",
+      "label": "Desktop heading size",
       "min": 24,
       "max": 64,
       "step": 1,
