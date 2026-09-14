@@ -1,156 +1,1090 @@
-<section class="pukenga-section section pukenga-testimonials" style="{% render 'spacing-style', settings: section.settings %}">
-  <div class="pukenga-container">
+<section class="pukenga-section pukenga-testimonials">
+  <div class="section">
+
     {%- if section.settings.eyebrow != blank -%}
-      <p class="pukenga-eyebrow pukenga-testimonials__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <p class="pukenga-eyebrow pukenga-testimonials__eyebrow">
+        {{ section.settings.eyebrow | escape }}
+      </p>
     {%- endif -%}
+
     {%- if section.settings.heading != blank -%}
-      <h2 class="pukenga-heading pukenga-testimonials__heading">{{ section.settings.heading }}</h2>
+      <h2 class="pukenga-heading pukenga-testimonials__heading">
+        {{ section.settings.heading }}
+      </h2>
     {%- endif -%}
 
     <div class="pukenga-testimonials__grid">
+
       {%- for block in section.blocks -%}
-        <blockquote class="pukenga-testimonials__item" {{ block.shopify_attributes }}>
+
+        <blockquote
+          class="pukenga-testimonials__item"
+          {{ block.shopify_attributes }}
+        >
+
           {%- if block.settings.rating > 0 -%}
-            <div class="pukenga-testimonials__stars" aria-hidden="true">
+            <div
+              class="pukenga-testimonials__stars"
+              aria-label="{{ block.settings.rating }} out of 5 stars"
+            >
               {%- for i in (1..5) -%}
-                {%- if i <= block.settings.rating -%}★{%- else -%}☆{%- endif -%}
+                {%- if i <= block.settings.rating -%}
+                  ★
+                {%- else -%}
+                  ☆
+                {%- endif -%}
               {%- endfor -%}
             </div>
           {%- endif -%}
+
           {%- if block.settings.quote != blank -%}
-            <p class="pukenga-testimonials__quote">{{ block.settings.quote }}</p>
+            <div class="pukenga-testimonials__quote">
+              {{ block.settings.quote }}
+            </div>
           {%- endif -%}
-          <footer class="pukenga-testimonials__author">
-            {%- if block.settings.name != blank -%}
-              <span class="pukenga-testimonials__name">{{ block.settings.name | escape }}</span>
-            {%- endif -%}
-            {%- if block.settings.role != blank -%}
-              <span class="pukenga-testimonials__role">{{ block.settings.role | escape }}</span>
-            {%- endif -%}
-          </footer>
+
+          {%- if block.settings.name != blank or block.settings.role != blank -%}
+            <footer class="pukenga-testimonials__author">
+
+              {%- if block.settings.name != blank -%}
+                <span class="pukenga-testimonials__name">
+                  {{ block.settings.name | escape }}
+                </span>
+              {%- endif -%}
+
+              {%- if block.settings.role != blank -%}
+                <span class="pukenga-testimonials__role">
+                  {{ block.settings.role | escape }}
+                </span>
+              {%- endif -%}
+
+            </footer>
+          {%- endif -%}
+
         </blockquote>
+
       {%- endfor -%}
+
     </div>
+
+    <div
+      class="pukenga-testimonials__dots"
+      aria-label="Testimonials navigation"
+    ></div>
+
   </div>
 </section>
 
-{% stylesheet %}
+
+<style>
+
+  /* =========================================
+     MAIN SECTION
+     ========================================= */
+
   .pukenga-testimonials {
-    background: #0f1d13;
+    width: 100%;
+    background: {{ section.settings.background_color }};
+
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
+
+
+  /* =========================================
+     EYEBROW
+     ========================================= */
 
   .pukenga-testimonials__eyebrow,
   .pukenga-testimonials__heading {
-    text-align: center;
+    text-align: {{ section.settings.text_alignment }};
   }
 
+
+  /* =========================================
+     HEADING
+     ========================================= */
+
   .pukenga-testimonials__heading {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    max-width: 640px;
+    font-size: clamp(
+      {{ section.settings.heading_min_size }}px,
+      3vw,
+      {{ section.settings.heading_max_size }}px
+    );
+
+    max-width: {{ section.settings.heading_max_width }}px;
+
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 48px;
+
+    margin-bottom: {{ section.settings.heading_bottom_spacing }}px;
+
+    color: {{ section.settings.heading_color }};
   }
+
+
+  /* =========================================
+     DESKTOP GRID
+     ========================================= */
 
   .pukenga-testimonials__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+
+    grid-template-columns:
+      repeat(
+        {{ section.settings.columns }},
+        minmax(0, 1fr)
+      );
+
+    gap: {{ section.settings.grid_gap }}px;
   }
+
+
+  /* =========================================
+     TESTIMONIAL CARD
+     ========================================= */
 
   .pukenga-testimonials__item {
     margin: 0;
-    padding: 32px;
-    background: var(--pukenga-bg-soft, #1c2f21);
-    border-radius: 14px;
+
+    padding-top: {{ section.settings.card_padding_top }}px;
+    padding-bottom: {{ section.settings.card_padding_bottom }}px;
+    padding-left: {{ section.settings.card_padding_horizontal }}px;
+    padding-right: {{ section.settings.card_padding_horizontal }}px;
+
+    border:
+      {{ section.settings.card_border_width }}px solid
+      {{ section.settings.card_border_color }};
+
+    border-radius: {{ section.settings.card_border_radius }}px;
+
+    box-sizing: border-box;
   }
+
+
+  /* =========================================
+     STARS
+     ========================================= */
 
   .pukenga-testimonials__stars {
-    color: var(--pukenga-gold, #e0b784);
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-    font-size: 14px;
+    color: {{ section.settings.star_color }};
+
+    letter-spacing: {{ section.settings.star_spacing }}px;
+
+    margin-bottom: {{ section.settings.star_bottom_spacing }}px;
+
+    font-size: {{ section.settings.star_size }}px;
   }
 
+
+  /* =========================================
+     QUOTE
+     ========================================= */
+
   .pukenga-testimonials__quote {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
+    font-family:
+      var(
+        --pukenga-font-heading,
+        'Spectral',
+        serif
+      );
+
     font-weight: 300;
+
     font-style: italic;
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--pukenga-cream-soft, #ece5d4);
-    margin: 0 0 24px;
+
+    font-size: {{ section.settings.quote_font_size }}px;
+
+    color: {{ section.settings.quote_color }};
+
+    margin: 0 0 {{ section.settings.quote_bottom_spacing }}px;
   }
+
+
+  .pukenga-testimonials__quote p {
+    margin: 0;
+  }
+
+
+  /* =========================================
+     AUTHOR
+     ========================================= */
 
   .pukenga-testimonials__author {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+
+    gap: {{ section.settings.author_gap }}px;
+
+    align-items: center;
+
+    font-family:
+      var(
+        --pukenga-font-body,
+        'Instrument Sans',
+        sans-serif
+      );
   }
+
 
   .pukenga-testimonials__name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--pukenga-cream, #f2ecdc);
+    font-size: {{ section.settings.name_font_size }}px;
+
+    color: {{ section.settings.name_color }};
   }
+
 
   .pukenga-testimonials__role {
-    font-size: 12.5px;
-    color: var(--pukenga-muted, #a8a087);
+    font-size: {{ section.settings.role_font_size }}px;
+
+    color: {{ section.settings.role_color }};
   }
 
-  @media screen and (max-width: 989px) {
-    .pukenga-testimonials__grid {
-      grid-template-columns: 1fr;
-    }
+
+  /* =========================================
+     DOTS
+     HIDDEN ON DESKTOP
+     ========================================= */
+
+  .pukenga-testimonials__dots {
+    display: none;
   }
-{% endstylesheet %}
+
+
+  /* =========================================
+     MOBILE SLIDER
+     ========================================= */
+
+  @media screen and (max-width: 989px) {
+
+    .pukenga-testimonials {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+
+    /* -------------------------------
+       MOBILE HEADING
+       ------------------------------- */
+
+    .pukenga-testimonials__heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+
+      margin-bottom: {{ section.settings.mobile_heading_bottom_spacing }}px;
+    }
+
+
+    /* -------------------------------
+       MOBILE HORIZONTAL SLIDER
+       ------------------------------- */
+
+    .pukenga-testimonials__grid {
+      display: flex;
+
+      width: 100%;
+
+      gap: {{ section.settings.mobile_grid_gap }}px;
+
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      scroll-snap-type: x mandatory;
+
+      scroll-behavior: smooth;
+
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      overscroll-behavior-x: contain;
+    }
+
+
+    .pukenga-testimonials__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    /* -------------------------------
+       MOBILE CARD WIDTH
+       Uses mobile_columns setting
+       Example:
+       1 = full card
+       1.2 = 1 card + next card preview
+       1.5 = smaller cards
+       2 = two cards
+       ------------------------------- */
+
+    .pukenga-testimonials__item {
+
+      flex: 0 0 calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      width: calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      min-width: calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      box-sizing: border-box;
+
+      padding-top: {{ section.settings.mobile_card_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_card_padding_bottom }}px;
+      padding-left: {{ section.settings.mobile_card_padding_horizontal }}px;
+      padding-right: {{ section.settings.mobile_card_padding_horizontal }}px;
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+
+      margin: 0;
+    }
+
+
+    /* -------------------------------
+       MOBILE QUOTE
+       ------------------------------- */
+
+    .pukenga-testimonials__quote {
+      font-size: {{ section.settings.mobile_quote_font_size }}px;
+    }
+
+
+    /* -------------------------------
+       MOBILE DOTS
+       ------------------------------- */
+
+    .pukenga-testimonials__dots {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      gap: 10px;
+
+      margin-top: 26px;
+    }
+
+
+    .pukenga-testimonials__dot {
+      display: block;
+
+      width: 10px;
+      height: 10px;
+
+      padding: 0;
+      margin: 0;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background: rgba(242, 236, 220, 0.28);
+
+      cursor: pointer;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      transition:
+        width 0.25s ease,
+        background 0.25s ease,
+        border-radius 0.25s ease;
+    }
+
+
+    .pukenga-testimonials__dot.is-active {
+      width: 26px;
+
+      border-radius: 10px;
+
+      background: {{ section.settings.star_color }};
+    }
+
+  }
+
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const section = document.querySelector(
+      '#shopify-section-{{ section.id }}'
+    );
+
+    if (!section) return;
+
+
+    const slider = section.querySelector(
+      '.pukenga-testimonials__grid'
+    );
+
+    const dotsContainer = section.querySelector(
+      '.pukenga-testimonials__dots'
+    );
+
+
+    if (!slider || !dotsContainer) return;
+
+
+    const cards = Array.from(
+      slider.querySelectorAll(
+        '.pukenga-testimonials__item'
+      )
+    );
+
+
+    if (cards.length <= 1) {
+      dotsContainer.style.display = 'none';
+      return;
+    }
+
+
+    /* =========================================
+       CREATE DOTS
+       ========================================= */
+
+    dotsContainer.innerHTML = '';
+
+
+    cards.forEach(function (card, index) {
+
+      const dot = document.createElement('button');
+
+      dot.type = 'button';
+
+      dot.className =
+        'pukenga-testimonials__dot' +
+        (index === 0 ? ' is-active' : '');
+
+      dot.setAttribute(
+        'aria-label',
+        'Go to testimonial ' + (index + 1)
+      );
+
+
+      dot.addEventListener('click', function () {
+
+        slider.scrollTo({
+          left: card.offsetLeft,
+          behavior: 'smooth'
+        });
+
+      });
+
+
+      dotsContainer.appendChild(dot);
+
+    });
+
+
+    const dots = Array.from(
+      dotsContainer.querySelectorAll(
+        '.pukenga-testimonials__dot'
+      )
+    );
+
+
+    /* =========================================
+       FIND CURRENT SLIDE
+       ========================================= */
+
+    function updateActiveDot() {
+
+      let closestIndex = 0;
+
+      let closestDistance = Infinity;
+
+
+      cards.forEach(function (card, index) {
+
+        const distance = Math.abs(
+          card.offsetLeft - slider.scrollLeft
+        );
+
+
+        if (distance < closestDistance) {
+
+          closestDistance = distance;
+
+          closestIndex = index;
+
+        }
+
+      });
+
+
+      dots.forEach(function (dot, index) {
+
+        dot.classList.toggle(
+          'is-active',
+          index === closestIndex
+        );
+
+      });
+
+    }
+
+
+    /* =========================================
+       UPDATE DOTS WHILE SWIPING
+       ========================================= */
+
+    let ticking = false;
+
+
+    slider.addEventListener('scroll', function () {
+
+      if (ticking) return;
+
+
+      window.requestAnimationFrame(function () {
+
+        updateActiveDot();
+
+        ticking = false;
+
+      });
+
+
+      ticking = true;
+
+    });
+
+
+    /* =========================================
+       RESIZE
+       ========================================= */
+
+    window.addEventListener(
+      'resize',
+      function () {
+        updateActiveDot();
+      }
+    );
+
+
+    updateActiveDot();
+
+  });
+</script>
+
 
 {% schema %}
 {
   "name": "Pūkenga Testimonials",
   "tag": "section",
   "class": "section-pukenga-testimonials",
+
   "settings": [
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
     {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow text",
-      "info": "Leave blank to match the original design, which has no eyebrow here."
+      "info": "Leave blank if not required."
     },
+
     {
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
       "default": "<p>What people are saying</p>"
     },
+
+
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background colour",
+      "default": "#0F1D13"
+    },
+
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading colour",
+      "default": "#F2ECDC"
+    },
+
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border colour",
+      "default": "#1C2F21"
+    },
+
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star colour",
+      "default": "#E0B784"
+    },
+
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote colour",
+      "default": "#ECE5D4"
+    },
+
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name colour",
+      "default": "#F2ECDC"
+    },
+
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role colour",
+      "default": "#A8A087"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Alignment"
+    },
+
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+
+      "default": "center"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop Section Spacing"
+    },
+
     {
       "type": "range",
-      "id": "padding-block-start",
+      "id": "padding_top",
       "label": "Top padding",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 200,
+      "step": 2,
       "unit": "px",
       "default": 72
     },
+
     {
       "type": "range",
-      "id": "padding-block-end",
+      "id": "padding_bottom",
       "label": "Bottom padding",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 200,
+      "step": 2,
       "unit": "px",
       "default": 72
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Card gap",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading maximum width",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 640
+    },
+
+    {
+      "type": "range",
+      "id": "heading_bottom_spacing",
+      "label": "Heading bottom spacing",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_min_size",
+      "label": "Heading minimum size",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "heading_max_size",
+      "label": "Heading maximum size",
+      "min": 24,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+
+    {
+      "type": "range",
+      "id": "quote_font_size",
+      "label": "Quote font size",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+
+    {
+      "type": "range",
+      "id": "quote_bottom_spacing",
+      "label": "Quote bottom spacing",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+
+    {
+      "type": "range",
+      "id": "star_spacing",
+      "label": "Star spacing",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+
+    {
+      "type": "range",
+      "id": "star_bottom_spacing",
+      "label": "Star bottom spacing",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
+      "id": "card_padding_top",
+      "label": "Card top padding",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "card_padding_bottom",
+      "label": "Card bottom padding",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "card_padding_horizontal",
+      "label": "Card horizontal padding",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+
+    {
+      "type": "range",
+      "id": "author_gap",
+      "label": "Author gap",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+
+    {
+      "type": "range",
+      "id": "name_font_size",
+      "label": "Name font size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+
+    {
+      "type": "range",
+      "id": "role_font_size",
+      "label": "Role font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile Section Spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile Layout"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Mobile columns",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1.2
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_grid_gap",
+      "label": "Mobile card gap",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_bottom_spacing",
+      "label": "Mobile heading bottom spacing",
+      "min": 10,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_card_padding_top",
+      "label": "Mobile card top padding",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_card_padding_bottom",
+      "label": "Mobile card bottom padding",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_card_padding_horizontal",
+      "label": "Mobile card horizontal padding",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_quote_font_size",
+      "label": "Mobile quote font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 17
     }
+
   ],
+
+
   "blocks": [
+
     {
       "type": "testimonial",
       "name": "Testimonial",
+
       "settings": [
+
         {
           "type": "range",
           "id": "rating",
@@ -160,33 +1094,44 @@
           "step": 1,
           "default": 5
         },
+
         {
           "type": "richtext",
           "id": "quote",
           "label": "Quote",
           "default": "<p>The English translation on the back makes me feel more empowered to choose a karakia suited to what I need.</p>"
         },
+
         {
           "type": "text",
           "id": "name",
           "label": "Name",
           "default": "Julie C."
         },
+
         {
           "type": "text",
           "id": "role",
           "label": "Role or location",
           "default": "Maha Bundle"
         }
+
       ]
     }
+
   ],
+
+
   "presets": [
+
     {
       "name": "Pūkenga Testimonials",
+
       "blocks": [
+
         {
           "type": "testimonial",
+
           "settings": {
             "rating": 5,
             "quote": "<p>The English translation on the back makes me feel more empowered to choose a karakia suited to what I need.</p>",
@@ -194,8 +1139,10 @@
             "role": "Maha Bundle"
           }
         },
+
         {
           "type": "testimonial",
+
           "settings": {
             "rating": 5,
             "quote": "<p>My team feel more comfortable using karakia regularly. Thank you for such a fine set.</p>",
@@ -203,8 +1150,10 @@
             "role": "A7 Set"
           }
         },
+
         {
           "type": "testimonial",
+
           "settings": {
             "rating": 5,
             "quote": "<p>A game changer for my pronunciation. The audio really brings the karakia to life.</p>",
@@ -212,8 +1161,10 @@
             "role": "Audio Collection"
           }
         }
+
       ]
     }
+
   ]
 }
 {% endschema %}
