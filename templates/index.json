@@ -85,7 +85,37 @@
       "type": "pukenga-about"
     },
     "pukenga_testimonials": {
-      "type": "pukenga-testimonials"
+      "type": "pukenga-testimonials",
+      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"],
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>The English translation on the back makes me feel more empowered to choose a karakia suited to what I need.</p>",
+            "name": "Julie C.",
+            "role": "Maha Bundle"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>My team feel more comfortable using karakia regularly. Thank you for such a fine set.</p>",
+            "name": "Kathryn M.",
+            "role": "A7 Set"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>A game changer for my pronunciation. The audio really brings the karakia to life.</p>",
+            "name": "Rebecca S.",
+            "role": "Audio Collection"
+          }
+        }
+      }
     },
     "pukenga_newsletter": {
       "type": "pukenga-newsletter"
