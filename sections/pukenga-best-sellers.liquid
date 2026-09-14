@@ -1,6 +1,6 @@
 {{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
 
-<div class="pukenga-best-sellers pukenga-section">
+<div class="pukenga-best-sellers pukenga-section section">
   <div class="pukenga-container">
     <div class="pukenga-best-sellers__header">
       <div>
@@ -26,6 +26,13 @@
                 {{ block.settings.custom_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'pukenga-product-card__image', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900' }}
               {%- elsif product != blank and product.featured_image -%}
                 {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'pukenga-product-card__image', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900' }}
+              {%- else -%}
+                {%- case forloop.index0 -%}
+                  {%- when 0 -%}{%- assign fallback_image = 'pukenga-product-karakia-set.jpg' -%}
+                  {%- when 1 -%}{%- assign fallback_image = 'pukenga-product-maha-bundle.jpg' -%}
+                  {%- else -%}{%- assign fallback_image = 'pukenga-product-audio-collection.jpg' -%}
+                {%- endcase -%}
+                <img src="{{ fallback_image | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" class="pukenga-product-card__image">
               {%- endif -%}
               {%- if block.settings.show_sale_badge -%}
                 <span class="pukenga-product-card__badge">Sale</span>

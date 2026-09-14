@@ -3,7 +3,7 @@
   assign subheading = section.settings.subheading
 %}
 
-<section class="pukenga-hero color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-hero section color-{{ section.settings.color_scheme }}" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-hero__media">
     {%- if section.settings.image != blank -%}
       <img

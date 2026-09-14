@@ -1,4 +1,4 @@
-<section class="pukenga-promo" style="{% render 'spacing-style', settings: section.settings %}">
+<section class="pukenga-section section pukenga-promo" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-promo__media">
     {%- if section.settings.image != blank -%}
       <img
@@ -36,7 +36,7 @@
   .pukenga-promo {
     position: relative;
     min-height: 460px;
-    display: flex;
+    display: grid;
     align-items: center;
     overflow: hidden;
   }
