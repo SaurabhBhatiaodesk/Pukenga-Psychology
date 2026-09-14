@@ -18,10 +18,13 @@
           "type": "_announcement",
           "settings": {
             "text": "Welcome to our store",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
+            "weight": "",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": ""
           },
           "blocks": {}
         }
@@ -29,6 +32,7 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
+      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -38,6 +42,28 @@
         "divider_color": "{{ settings.color_palette.color2 }}",
         "padding-block-start": 15,
         "padding-block-end": 15
+      }
+    },
+    "pukenga_announcement_bar_wNxUBD": {
+      "type": "pukenga-announcement-bar",
+      "name": "Pukenga Announcement Bar",
+      "settings": {
+        "message": "He koha ki a koe. Use code <strong>KAHA10</strong> for 10% off your first order.",
+        "code": "",
+        "background_color": "#e0b784",
+        "text_color": "#16281b",
+        "code_background_color": "rgba(0,0,0,0)",
+        "code_text_color": "#f2ecdc",
+        "code_border_color": "#f2ecdc",
+        "text_alignment": "center",
+        "font_size": 13,
+        "padding_top": 5,
+        "padding_bottom": 5,
+        "code_border_radius": 40,
+        "code_padding_horizontal": 10,
+        "mobile_font_size": 12,
+        "mobile_padding_top": 5,
+        "mobile_padding_bottom": 5
       }
     },
     "header_section": {
@@ -58,6 +84,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
@@ -67,6 +95,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
@@ -76,8 +106,9 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -93,16 +124,35 @@
         "enable_sticky_header": "always",
         "divider_width": 0,
         "divider_size": "page-width",
+        "divider_color": "",
         "border_width": 0,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "background_color_top": "{{ settings.color_palette.background }}",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     }
   },
   "order": [
     "header_announcements_9jGBFp",
+    "pukenga_announcement_bar_wNxUBD",
     "header_section"
   ]
 }
