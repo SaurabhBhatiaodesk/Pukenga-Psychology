@@ -11,7 +11,18 @@
   "sections": {
     "pukenga_hero": {
       "type": "pukenga-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/1d0febc5-0019-4e42-9469-d49f46d766e5.jpg",
+        "eyebrow": "Oranga Ngākau",
+        "heading": "Whakatōngia te karakia",
+        "subheading": "<p>Plant karakia into the rhythm of your day</p>",
+        "button_label": "Hokona · Shop packs",
+        "button_link": "",
+        "button_label_2": "Mauri Tau",
+        "button_link_2": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "pukenga_features": {
       "type": "pukenga-feature-grid",
@@ -43,6 +54,7 @@
         "quote_1": {
           "type": "quote",
           "settings": {
+            "show_text_overlay": false,
             "quote": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>",
             "attribution": "From the Hinātore set"
           }
@@ -54,7 +66,12 @@
         "feature_3",
         "quote_1"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
     },
     "pukenga_best_sellers": {
       "type": "pukenga-best-sellers",
@@ -62,24 +79,34 @@
         "product_1": {
           "type": "product",
           "settings": {
+            "product": "",
             "title": "Ngākau Karakia Set",
-            "price": "$55"
+            "price": "$55",
+            "compare_at_price": "",
+            "show_sale_badge": false,
+            "link": ""
           }
         },
         "product_2": {
           "type": "product",
           "settings": {
+            "product": "",
             "title": "Maha Oranga Bundle",
             "price": "$140",
             "compare_at_price": "$486",
-            "show_sale_badge": true
+            "show_sale_badge": true,
+            "link": ""
           }
         },
         "product_3": {
           "type": "product",
           "settings": {
+            "product": "",
             "title": "Audio Karakia Collection",
-            "price": "$19.99"
+            "price": "$19.99",
+            "compare_at_price": "",
+            "show_sale_badge": false,
+            "link": ""
           }
         }
       },
@@ -88,15 +115,37 @@
         "product_2",
         "product_3"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "best sellers",
+        "heading": "Ngā mea rongonui",
+        "view_all_label": "Toa katoa · View all",
+        "view_all_link": ""
+      }
     },
     "pukenga_promo": {
       "type": "pukenga-promo-banner",
-      "settings": {}
+      "settings": {
+        "eyebrow": "On-demand program",
+        "heading": "<p>Discover the power of Mauri Tau</p>",
+        "text": "<p>Grounded in mātauranga Māori. Learn to cultivate a state of inner calm and balance to support your wellbeing.</p>",
+        "button_label": "Join now",
+        "button_link": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "pukenga_about": {
       "type": "pukenga-about",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Ko wai au",
+        "heading": "<p>Kia ora, I'm Dr Jessica</p>",
+        "text": "<p>A Registered Clinical Psychologist committed to creating Māori wellbeing resources for everyday people, to help you whakapiki your hauora.</p><p>I make aspects of Te Ao Māori easily accessible for those who need it.</p>",
+        "signature": "",
+        "button_label": "Pānui atu · Read more",
+        "button_link": "",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
     },
     "pukenga_testimonials": {
       "type": "pukenga-testimonials",
@@ -134,11 +183,24 @@
         "testimonial_2",
         "testimonial_3"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "<p>What people are saying</p>",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
     },
     "pukenga_newsletter": {
       "type": "pukenga-newsletter",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "<p>Hauora to your inbox</p>",
+        "text": "<p>Hauora practices, karakia and gentle prompts, whenever we share them.</p>",
+        "button_label": "Tuhi · Sign up",
+        "success_text": "Thanks — you are on the list.",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
     }
   },
   "order": [
