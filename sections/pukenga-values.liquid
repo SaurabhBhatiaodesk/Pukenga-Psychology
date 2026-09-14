@@ -1,3 +1,15 @@
+{% liquid
+  assign heading_font_stack = "var(--pukenga-font-heading, 'Spectral', serif)"
+  if section.settings.heading_font == 'body'
+    assign heading_font_stack = "var(--pukenga-font-body, 'Instrument Sans', sans-serif)"
+  endif
+
+  assign body_font_stack = "var(--pukenga-font-body, 'Instrument Sans', sans-serif)"
+  if section.settings.body_font == 'heading'
+    assign body_font_stack = "var(--pukenga-font-heading, 'Spectral', serif)"
+  endif
+%}
+
 <section
   id="pukenga-values-{{ section.id }}"
   class="pukenga-values-section"
@@ -68,7 +80,7 @@
   #pukenga-values-{{ section.id }} .pukenga-value__heading {
     margin: 0 0 {{ section.settings.heading_spacing }}px;
 
-    font-family: {{ section.settings.heading_font }};
+    font-family: {{ heading_font_stack }};
     font-size: {{ section.settings.heading_size }}px;
     font-weight: {{ section.settings.heading_weight }};
     line-height: 1.2;
@@ -79,7 +91,7 @@
   #pukenga-values-{{ section.id }} .pukenga-value__text {
     max-width: {{ section.settings.text_max_width }}px;
 
-    font-family: {{ section.settings.body_font }};
+    font-family: {{ body_font_stack }};
     font-size: {{ section.settings.text_size }}px;
     font-weight: {{ section.settings.text_weight }};
     line-height: {{ section.settings.text_line_height }};
@@ -128,6 +140,9 @@
   "name": "Pūkenga Values",
   "tag": "section",
   "class": "section-pukenga-values",
+  "enabled_on": {
+    "templates": ["index"]
+  },
 
   "settings": [
 
@@ -262,15 +277,15 @@
       "label": "Heading font",
       "options": [
         {
-          "value": "var(--pukenga-font-heading, 'Spectral', serif)",
+          "value": "heading",
           "label": "Heading font"
         },
         {
-          "value": "var(--pukenga-font-body, 'Instrument Sans', sans-serif)",
+          "value": "body",
           "label": "Body font"
         }
       ],
-      "default": "var(--pukenga-font-heading, 'Spectral', serif)"
+      "default": "heading"
     },
 
 
@@ -312,14 +327,24 @@
     },
 
     {
-      "type": "range",
+      "type": "select",
       "id": "text_line_height",
       "label": "Text line height",
-      "min": 1,
-      "max": 2,
-      "step": 0.1,
-      "unit": "x",
-      "default": 1.5
+      "options": [
+        {
+          "value": "1.3",
+          "label": "Tight"
+        },
+        {
+          "value": "1.5",
+          "label": "Normal"
+        },
+        {
+          "value": "1.7",
+          "label": "Loose"
+        }
+      ],
+      "default": "1.5"
     },
 
     {
@@ -339,15 +364,15 @@
       "label": "Text font",
       "options": [
         {
-          "value": "var(--pukenga-font-body, 'Instrument Sans', sans-serif)",
+          "value": "body",
           "label": "Body font"
         },
         {
-          "value": "var(--pukenga-font-heading, 'Spectral', serif)",
+          "value": "heading",
           "label": "Heading font"
         }
       ],
-      "default": "var(--pukenga-font-body, 'Instrument Sans', sans-serif)"
+      "default": "body"
     },
 
 
