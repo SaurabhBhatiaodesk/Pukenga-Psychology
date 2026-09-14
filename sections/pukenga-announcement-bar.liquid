@@ -1,71 +1,58 @@
+<div
+  class="pukenga-announcement"
+  style="
+    --announcement-bg: {{ section.settings.background_color }};
+    --announcement-text: {{ section.settings.text_color }};
+  "
+>
+  <div class="pukenga-section section">
+    <div class="pukenga-container pukenga-announcement__inner">
 
+      {%- if section.settings.message != blank -%}
+        <div class="pukenga-announcement__text">
+          {{ section.settings.message }}
+        </div>
+      {%- endif -%}
 
-<div class="pukenga-section section pukenga-announcement">
-  <div class="pukenga-container pukenga-announcement__inner">
-
-    {% if section.settings.message != blank or section.settings.code != blank %}
-
-      <p class="pukenga-announcement__text">
-
-        {% if section.settings.message != blank %}
-          <span class="pukenga-announcement__message">
-            {{ section.settings.message }}
-          </span>
-        {% endif %}
-
-        {% if section.settings.code != blank %}
-          <span class="pukenga-announcement__code">
-            {{ section.settings.code }}
-          </span>
-        {% endif %}
-
-      </p>
-
-    {% endif %}
-
+    </div>
   </div>
 </div>
 
-
 <style>
-
   .pukenga-announcement {
     width: 100%;
-    background: {{ section.settings.background_color }};
-    color: {{ section.settings.text_color }};
-    font-family: var(--pukenga-font-body);
+    background-color: var(--announcement-bg) !important;
+    color: var(--announcement-text) !important;
+    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  }
+
+  .pukenga-announcement .pukenga-section {
+    width: 100%;
+    background-color: transparent !important;
+    color: inherit !important;
   }
 
   .pukenga-announcement__inner {
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.text_alignment }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    padding-left: 24px;
-    padding-right: 24px;
-    text-align: {{ section.settings.text_alignment }};
   }
 
   .pukenga-announcement__text {
     margin: 0;
+    padding: 0;
+    color: var(--announcement-text) !important;
     font-size: {{ section.settings.font_size }}px;
+    font-weight: {{ section.settings.font_weight }};
     line-height: 1.4;
-    letter-spacing: 0.02em;
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    text-align: {{ section.settings.text_alignment }};
   }
 
-  .pukenga-announcement__message {
-    display: inline;
-  }
-
-  .pukenga-announcement__code {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px {{ section.settings.code_padding_horizontal }}px;
-    border: 1px solid {{ section.settings.code_border_color }};
-    border-radius: {{ section.settings.code_border_radius }}px;
-    background: {{ section.settings.code_background_color }};
-    color: {{ section.settings.code_text_color }};
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    line-height: 1.4;
+  .pukenga-announcement__text * {
+    color: inherit !important;
   }
 
   @media screen and (max-width: 749px) {
@@ -73,26 +60,21 @@
     .pukenga-announcement__inner {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
-      padding-left: 16px;
-      padding-right: 16px;
     }
 
     .pukenga-announcement__text {
       font-size: {{ section.settings.mobile_font_size }}px;
-    }
-
-    .pukenga-announcement__code {
-      margin-left: 6px;
+      line-height: 1.35;
     }
 
   }
-
 </style>
 
 {% schema %}
 {
   "name": "Pukenga Announcement Bar",
   "tag": "section",
+  "class": "section-pukenga-announcement",
 
   "settings": [
 
@@ -104,17 +86,9 @@
     {
       "type": "inline_richtext",
       "id": "message",
-      "label": "Message",
-      "default": "He koha ki a koe. Use code for 10% off your first order."
+      "label": "Announcement text",
+      "default": "He koha ki a koe. Use code KAHA10 for 10% off your first order."
     },
-
-    {
-      "type": "text",
-      "id": "code",
-      "label": "Discount code",
-      "default": "KAHA10"
-    },
-
 
     {
       "type": "header",
@@ -124,38 +98,16 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
-      "default": "#16281b"
+      "label": "Background colour",
+      "default": "#E0B784"
     },
 
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
-      "default": "#f2ecdc"
+      "label": "Text colour",
+      "default": "#16281B"
     },
-
-    {
-      "type": "color",
-      "id": "code_background_color",
-      "label": "Code background color",
-      "default": "#16281b"
-    },
-
-    {
-      "type": "color",
-      "id": "code_text_color",
-      "label": "Code text color",
-      "default": "#f2ecdc"
-    },
-
-    {
-      "type": "color",
-      "id": "code_border_color",
-      "label": "Code border color",
-      "default": "#f2ecdc"
-    },
-
 
     {
       "type": "header",
@@ -168,26 +120,26 @@
       "label": "Text alignment",
       "options": [
         {
-          "value": "left",
+          "value": "flex-start",
           "label": "Left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "Centre"
         },
         {
-          "value": "right",
+          "value": "flex-end",
           "label": "Right"
         }
       ],
       "default": "center"
     },
 
-
     {
       "type": "header",
-      "content": "Desktop Typography"
+      "content": "Desktop"
     },
+
 
     {
       "type": "range",
@@ -197,13 +149,43 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 14
     },
 
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
 
     {
-      "type": "header",
-      "content": "Desktop Spacing"
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": "px",
+      "default": 0.2
     },
 
     {
@@ -211,10 +193,10 @@
       "id": "padding_top",
       "label": "Top padding",
       "min": 0,
-      "max": 40,
+      "max": 30,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 6
     },
 
     {
@@ -222,40 +204,11 @@
       "id": "padding_bottom",
       "label": "Bottom padding",
       "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "default": 10
-    },
-
-
-    {
-      "type": "header",
-      "content": "Discount Code"
-    },
-
-    {
-      "type": "range",
-      "id": "code_border_radius",
-      "label": "Code border radius",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "default": 40
-    },
-
-    {
-      "type": "range",
-      "id": "code_padding_horizontal",
-      "label": "Code horizontal padding",
-      "min": 0,
       "max": 30,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 6
     },
-
 
     {
       "type": "header",
@@ -278,10 +231,10 @@
       "id": "mobile_padding_top",
       "label": "Mobile top padding",
       "min": 0,
-      "max": 30,
+      "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 8
+      "default": 5
     },
 
     {
@@ -289,10 +242,10 @@
       "id": "mobile_padding_bottom",
       "label": "Mobile bottom padding",
       "min": 0,
-      "max": 30,
+      "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 8
+      "default": 5
     }
 
   ],
