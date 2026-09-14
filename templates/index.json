@@ -24,7 +24,7 @@
         "padding-block-end": 0
       }
     },
-    "pukenga_features": {
+    "pukenga_values": {
       "type": "pukenga-values",
       "blocks": {
         "value_1": {
@@ -193,7 +193,7 @@
   },
   "order": [
     "pukenga_hero",
-    "pukenga_features",
+    "pukenga_values",
     "pukenga_best_sellers",
     "pukenga_promo",
     "pukenga_about",

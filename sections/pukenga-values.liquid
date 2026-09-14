@@ -36,6 +36,25 @@
           {% endif %}
 
         </div>
+      {% else %}
+        <div class="pukenga-value">
+          <h3 class="pukenga-value__heading">Mātauranga</h3>
+          <div class="pukenga-value__text">
+            <p>Bring Te Ao Māori into everyday life.</p>
+          </div>
+        </div>
+        <div class="pukenga-value">
+          <h3 class="pukenga-value__heading">Mō te katoa</h3>
+          <div class="pukenga-value__text">
+            <p>Taonga made for ages 5+, can be used anywhere, anytime.</p>
+          </div>
+        </div>
+        <div class="pukenga-value">
+          <h3 class="pukenga-value__heading">Hauora</h3>
+          <div class="pukenga-value__text">
+            <p>Settle and nourish your mauri.</p>
+          </div>
+        </div>
       {% endfor %}
 
     </div>
@@ -137,12 +156,9 @@
 
 {% schema %}
 {
-  "name": "Pūkenga Values",
+  "name": "Pukenga Values",
   "tag": "section",
   "class": "section-pukenga-values",
-  "enabled_on": {
-    "templates": ["index"]
-  },
 
   "settings": [
 
@@ -467,7 +483,7 @@
 
   "presets": [
     {
-      "name": "Pūkenga Values",
+      "name": "Pukenga Values",
 
       "blocks": [
         {
