@@ -89,8 +89,97 @@
 .pukenga-link:hover {
   opacity: 0.85;
 }
+
+.pukenga-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
 @media screen and (max-width: 749px) {
   .pukenga-container {
     padding: 0 20px;
   }
+}
+
+/* Shared star-rating glyphs */
+.pukenga-stars {
+  color: var(--pukenga-gold);
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+/* Shared accordion pattern (product info / FAQ style disclosures) */
+.pukenga-accordion__item {
+  border-bottom: 1px solid rgba(242, 236, 220, 0.14);
+}
+
+.pukenga-accordion__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 16px 0;
+  font-family: var(--pukenga-font-heading);
+  font-size: 18px;
+  color: var(--pukenga-cream-soft);
+  cursor: pointer;
+}
+
+.pukenga-accordion__icon {
+  flex-shrink: 0;
+  color: var(--pukenga-gold);
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.pukenga-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.pukenga-accordion__panel-inner {
+  overflow: hidden;
+}
+
+.pukenga-accordion__item[open] .pukenga-accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.pukenga-accordion__body {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--pukenga-muted);
+  padding: 0 0 16px;
+  margin: 0;
+}
+
+/* Shared size / variant pill picker */
+.pukenga-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pukenga-pill {
+  border: 1px solid rgba(242, 236, 220, 0.35);
+  background: transparent;
+  color: var(--pukenga-cream-soft);
+  border-radius: var(--pukenga-radius-pill);
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-family: var(--pukenga-font-body);
+  cursor: pointer;
+}
+
+.pukenga-pill.is-selected,
+.pukenga-pill:checked + label {
+  border-color: var(--pukenga-gold);
+  background: var(--pukenga-gold);
+  color: var(--pukenga-bg);
 }
