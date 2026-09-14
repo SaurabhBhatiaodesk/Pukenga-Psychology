@@ -89,13 +89,6 @@
 .pukenga-link:hover {
   opacity: 0.85;
 }
-
-.pukenga-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
 @media screen and (max-width: 749px) {
   .pukenga-container {
     padding: 0 20px;
