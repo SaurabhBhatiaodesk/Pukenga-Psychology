@@ -1,14 +1,19 @@
 <section
-  id="pukenga-footer-{{ section.id }}"
   class="pukenga-footer"
+  style="
+    --pukenga-footer-bg: {{ section.settings.background_color }};
+    --pukenga-footer-text: {{ section.settings.text_color }};
+    --pukenga-footer-heading: {{ section.settings.heading_color }};
+    --pukenga-footer-link: {{ section.settings.link_color }};
+    --pukenga-footer-hover: {{ section.settings.link_hover_color }};
+    --pukenga-footer-border: {{ section.settings.border_color }};
+  "
 >
-  <div class="section pukenga-container">
-
-    <div class="pukenga-footer__inner">
+  <div class="pukenga-section section">
+    <div class="pukenga-container pukenga-footer__inner">
 
       <div class="pukenga-footer__top">
 
-        <!-- BRAND -->
         <div class="pukenga-footer__brand">
 
           <a
@@ -16,19 +21,15 @@
             href="{{ routes.root_url }}"
             aria-label="{{ shop.name | escape }}"
           >
-
-            {% if section.settings.logo != blank %}
-
+            {%- if section.settings.logo != blank -%}
               <img
-                src="{{ section.settings.logo | image_url: width: 500 }}"
+                src="{{ section.settings.logo | image_url: width: 440 }}"
                 width="{{ section.settings.logo.width }}"
                 height="{{ section.settings.logo.height }}"
                 alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
                 loading="lazy"
               >
-
-            {% else %}
-
+            {%- else -%}
               <img
                 src="{{ 'pukenga-logo-mark.png' | asset_url }}"
                 width="36"
@@ -37,417 +38,304 @@
                 loading="lazy"
               >
 
-              <span
-                class="pukenga-footer__wordmark"
-                aria-hidden="true"
-              >
+              <span class="pukenga-footer__wordmark" aria-hidden="true">
                 <span>Pūkenga</span>
                 <span>Psychology</span>
               </span>
-
-            {% endif %}
-
+            {%- endif -%}
           </a>
 
-
-          {% if section.settings.description != blank %}
-
+          {%- if section.settings.description != blank -%}
             <div class="pukenga-footer__description">
               {{ section.settings.description }}
             </div>
-
-          {% endif %}
+          {%- endif -%}
 
         </div>
 
 
-        <!-- NAVIGATION -->
-        {% if section.blocks.size > 0 %}
+        <nav
+          class="pukenga-footer__nav"
+          aria-label="Footer navigation"
+        >
+          {%- for block in section.blocks -%}
 
-          <nav
-            class="pukenga-footer__nav"
-            aria-label="Footer navigation"
-          >
+            <div
+              class="pukenga-footer__column"
+              {{ block.shopify_attributes }}
+            >
 
-            {% for block in section.blocks %}
+              {%- if block.settings.heading != blank -%}
+                <h2>
+                  {{ block.settings.heading | escape }}
+                </h2>
+              {%- endif -%}
 
-              <div
-                class="pukenga-footer__column"
-                {{ block.shopify_attributes }}
-              >
+              <ul>
 
-                {% if block.settings.heading != blank %}
+                {%- if block.settings.link_label_1 != blank -%}
+                  <li>
+                    <a href="{{ block.settings.link_url_1 | default: '#' }}">
+                      {{ block.settings.link_label_1 | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
 
-                  <h2>
-                    {{ block.settings.heading | escape }}
-                  </h2>
+                {%- if block.settings.link_label_2 != blank -%}
+                  <li>
+                    <a href="{{ block.settings.link_url_2 | default: '#' }}">
+                      {{ block.settings.link_label_2 | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
 
-                {% endif %}
+                {%- if block.settings.link_label_3 != blank -%}
+                  <li>
+                    <a href="{{ block.settings.link_url_3 | default: '#' }}">
+                      {{ block.settings.link_label_3 | escape }}
+                    </a>
+                  </li>
+                {%- endif -%}
 
+              </ul>
 
-                <ul>
+            </div>
 
-                  {% if block.settings.link_label_1 != blank %}
-
-                    <li>
-                      <a
-                        href="{{ block.settings.link_url_1 | default: '#' }}"
-                      >
-                        {{ block.settings.link_label_1 | escape }}
-                      </a>
-                    </li>
-
-                  {% endif %}
-
-
-                  {% if block.settings.link_label_2 != blank %}
-
-                    <li>
-                      <a
-                        href="{{ block.settings.link_url_2 | default: '#' }}"
-                      >
-                        {{ block.settings.link_label_2 | escape }}
-                      </a>
-                    </li>
-
-                  {% endif %}
-
-
-                  {% if block.settings.link_label_3 != blank %}
-
-                    <li>
-                      <a
-                        href="{{ block.settings.link_url_3 | default: '#' }}"
-                      >
-                        {{ block.settings.link_label_3 | escape }}
-                      </a>
-                    </li>
-
-                  {% endif %}
-
-                </ul>
-
-              </div>
-
-            {% endfor %}
-
-          </nav>
-
-        {% endif %}
+          {%- endfor -%}
+        </nav>
 
       </div>
 
 
-      <!-- BOTTOM -->
-      {% if section.settings.copyright_text != blank %}
-
-        <div class="pukenga-footer__bottom">
-
-          <p>
-            {{ section.settings.copyright_text }}
-          </p>
-
-        </div>
-
-      {% endif %}
+      <div class="pukenga-footer__bottom">
+        {%- if section.settings.copyright_text != blank -%}
+          <p>{{ section.settings.copyright_text }}</p>
+        {%- endif -%}
+      </div>
 
     </div>
-
   </div>
 </section>
 
 
 <style>
 
-  /* =========================================================
-     PŪKENGA FOOTER
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} {
+  .pukenga-footer {
     width: 100%;
-    background: {{ section.settings.background_color }};
-    color: {{ section.settings.text_color }};
+    background: var(--pukenga-footer-bg);
+    color: var(--pukenga-footer-text);
     font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__inner {
+  .pukenga-footer__inner {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
 
-  /* =========================================================
-     TOP
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__top {
+  .pukenga-footer__top {
     display: grid;
     grid-template-columns: minmax(280px, 1fr) auto;
     gap: {{ section.settings.column_gap }}px;
     align-items: start;
-
-    padding-bottom: {{ section.settings.top_bottom_spacing }}px;
-
-    border-bottom: 1px solid {{ section.settings.divider_color }};
+    padding-bottom: {{ section.settings.top_section_spacing }}px;
+    border-bottom: 1px solid var(--pukenga-footer-border);
   }
 
 
-  /* =========================================================
-     BRAND
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__brand {
-    max-width: {{ section.settings.description_width }}px;
+  .pukenga-footer__brand {
+    max-width: {{ section.settings.brand_max_width }}px;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__logo {
+  .pukenga-footer__logo {
     display: inline-flex;
     align-items: center;
-    gap: 18px;
-
-    color: {{ section.settings.heading_color }};
+    gap: {{ section.settings.logo_gap }}px;
+    color: var(--pukenga-footer-heading);
     text-decoration: none;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__logo img {
+  .pukenga-footer__logo img {
     display: block;
-
     width: auto;
-    max-width: {{ section.settings.logo_width }}px;
+    max-width: {{ section.settings.logo_max_width }}px;
     height: {{ section.settings.logo_height }}px;
-
     object-fit: contain;
   }
 
 
-  /* =========================================================
-     FALLBACK WORDMARK
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__wordmark {
+  .pukenga-footer__wordmark {
     display: grid;
     gap: 2px;
-
-    color: {{ section.settings.heading_color }};
-
+    color: var(--pukenga-footer-heading);
     line-height: 1;
     text-transform: uppercase;
   }
 
+  .pukenga-footer__wordmark span:first-child {
+      font-family: var(--pukenga-font-heading, 'Spectral', serif);
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+  }
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__wordmark span:first-child {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
-    font-size: 31px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
+  .pukenga-footer__wordmark span:last-child {
+      font-family: var(--pukenga-font-heading, 'Spectral', serif);
+      font-size: 15px;
+      letter-spacing: 0.34em;
+      opacity: 0.85;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__wordmark span:last-child {
-    font-family: var(--pukenga-font-heading, 'Spectral', serif);
-    font-size: 17px;
-    letter-spacing: 0.34em;
-  }
-
-
-  /* =========================================================
-     DESCRIPTION
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__description {
-    max-width: {{ section.settings.description_width }}px;
-
+  .pukenga-footer__description {
     margin-top: {{ section.settings.description_spacing }}px;
-
-    color: {{ section.settings.description_color }};
-
+    color: var(--pukenga-footer-text);
+    opacity: 0.82;
     font-size: {{ section.settings.description_font_size }}px;
     line-height: 1.62;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__description p {
+  .pukenga-footer__description p {
     margin: 0;
   }
 
 
-  /* =========================================================
-     NAVIGATION
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__nav {
+  .pukenga-footer__nav {
     display: grid;
-
-    grid-template-columns:
-      repeat({{ section.settings.columns_count }}, minmax(116px, 1fr));
-
-    gap: {{ section.settings.nav_gap }}px;
-
+    grid-template-columns: repeat(3, minmax(116px, 1fr));
+    gap: {{ section.settings.navigation_gap }}px;
     min-width: 382px;
   }
 
 
-  /* =========================================================
-     COLUMN
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__column h2 {
-    margin: 0 0 {{ section.settings.heading_spacing }}px;
-
-    color: {{ section.settings.heading_color }};
-
+  .pukenga-footer__column h2 {
+    margin: 0 0 16px;
+    color: var(--pukenga-footer-heading);
     font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
-
     font-size: {{ section.settings.heading_font_size }}px;
     font-weight: 700;
     line-height: 1.2;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__column ul {
+  .pukenga-footer__column ul {
     display: grid;
-
-    gap: {{ section.settings.link_spacing }}px;
-
+    gap: {{ section.settings.link_gap }}px;
     margin: 0;
     padding: 0;
-
     list-style: none;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__column a {
-    color: {{ section.settings.link_color }};
-
+  .pukenga-footer__column a {
+    color: var(--pukenga-footer-link);
     font-size: {{ section.settings.link_font_size }}px;
     line-height: 1.35;
-
     text-decoration: none;
-
-    transition:
-      color 0.2s ease,
-      opacity 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__column a:hover {
-    color: {{ section.settings.link_hover_color }};
+  .pukenga-footer__column a:hover {
+    color: var(--pukenga-footer-hover);
   }
 
 
-  /* =========================================================
-     BOTTOM
-     ========================================================= */
-
-  #pukenga-footer-{{ section.id }} .pukenga-footer__bottom {
-    padding-top: {{ section.settings.bottom_spacing }}px;
+  .pukenga-footer__bottom {
+    padding-top: {{ section.settings.copyright_spacing }}px;
   }
 
 
-  #pukenga-footer-{{ section.id }} .pukenga-footer__bottom p {
+  .pukenga-footer__bottom p {
     margin: 0;
-
-    color: {{ section.settings.copyright_color }};
-
+    color: var(--pukenga-footer-text);
+    opacity: 0.42;
     font-size: {{ section.settings.copyright_font_size }}px;
     line-height: 1.5;
   }
 
 
-  /* =========================================================
-     MOBILE
-     ========================================================= */
-
   @media screen and (max-width: 749px) {
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__inner {
+    .pukenga-footer__inner {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__top {
+    .pukenga-footer__top {
       display: block;
-
-      padding-bottom: {{ section.settings.mobile_top_bottom_spacing }}px;
+      padding-bottom: {{ section.settings.mobile_top_section_spacing }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__brand {
+    .pukenga-footer__brand {
       max-width: none;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__logo {
-      gap: 13px;
+    .pukenga-footer__logo {
+      gap: {{ section.settings.mobile_logo_gap }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__logo img {
+    .pukenga-footer__logo img {
       height: {{ section.settings.mobile_logo_height }}px;
-      max-width: {{ section.settings.mobile_logo_width }}px;
+      max-width: {{ section.settings.mobile_logo_max_width }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__wordmark span:first-child {
+    .pukenga-footer__wordmark span:first-child {
       font-size: 23px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__wordmark span:last-child {
+    .pukenga-footer__wordmark span:last-child {
       font-size: 13px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__description {
-      max-width: none;
-
+    .pukenga-footer__description {
       margin-top: {{ section.settings.mobile_description_spacing }}px;
-
       font-size: {{ section.settings.mobile_description_font_size }}px;
       line-height: 1.55;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__nav {
-
-      grid-template-columns:
-        repeat({{ section.settings.mobile_columns_count }}, minmax(0, 1fr));
-
-      gap: {{ section.settings.mobile_nav_gap }}px;
-
+    .pukenga-footer__nav {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: {{ section.settings.mobile_navigation_gap }}px;
       min-width: 0;
-
-      margin-top: {{ section.settings.mobile_nav_spacing }}px;
+      margin-top: {{ section.settings.mobile_navigation_spacing }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__column h2 {
-      margin-bottom: {{ section.settings.mobile_heading_spacing }}px;
-
+    .pukenga-footer__column h2 {
+      margin-bottom: 14px;
       font-size: {{ section.settings.mobile_heading_font_size }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__column ul {
-      gap: {{ section.settings.mobile_link_spacing }}px;
+    .pukenga-footer__column ul {
+      gap: {{ section.settings.mobile_link_gap }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__column a {
+    .pukenga-footer__column a {
       font-size: {{ section.settings.mobile_link_font_size }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__bottom {
-      padding-top: {{ section.settings.mobile_bottom_spacing }}px;
+    .pukenga-footer__bottom {
+      padding-top: {{ section.settings.mobile_copyright_spacing }}px;
     }
 
 
-    #pukenga-footer-{{ section.id }} .pukenga-footer__bottom p {
+    .pukenga-footer__bottom p {
       font-size: {{ section.settings.mobile_copyright_font_size }}px;
     }
 
@@ -470,28 +358,21 @@
 
     {
       "type": "header",
-      "content": "Brand"
+      "content": "Logo"
     },
 
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo"
-    },
-
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Māori wellbeing resources to whakapiki your hauora.</p>"
+      "label": "Logo image"
     },
 
     {
       "type": "range",
-      "id": "logo_width",
-      "label": "Logo width",
+      "id": "logo_max_width",
+      "label": "Logo maximum width",
       "min": 50,
-      "max": 300,
+      "max": 400,
       "step": 5,
       "unit": "px",
       "default": 220
@@ -502,21 +383,41 @@
       "id": "logo_height",
       "label": "Logo height",
       "min": 30,
-      "max": 100,
-      "step": 5,
+      "max": 120,
+      "step": 1,
       "unit": "px",
       "default": 67
     },
 
     {
       "type": "range",
-      "id": "description_width",
-      "label": "Description maximum width",
-      "min": 250,
-      "max": 600,
-      "step": 10,
+      "id": "logo_gap",
+      "label": "Logo gap",
+      "min": 0,
+      "max": 40,
+      "step": 1,
       "unit": "px",
-      "default": 400
+      "default": 18
+    },
+
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Māori wellbeing resources to whakapiki your hauora.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© Pūkenga Psychology 2026 · All rights reserved"
     },
 
 
@@ -534,13 +435,6 @@
 
     {
       "type": "color",
-      "id": "heading_color",
-      "label": "Heading colour",
-      "default": "#F2ECDC"
-    },
-
-    {
-      "type": "color",
       "id": "text_color",
       "label": "Text colour",
       "default": "#ECE5D4"
@@ -548,16 +442,16 @@
 
     {
       "type": "color",
-      "id": "description_color",
-      "label": "Description colour",
-      "default": "#CFC8B8"
+      "id": "heading_color",
+      "label": "Heading colour",
+      "default": "#F2ECDC"
     },
 
     {
       "type": "color",
       "id": "link_color",
       "label": "Link colour",
-      "default": "#CFC8B8"
+      "default": "#ECE5D4"
     },
 
     {
@@ -569,31 +463,24 @@
 
     {
       "type": "color",
-      "id": "copyright_color",
-      "label": "Copyright colour",
-      "default": "#777C72"
-    },
-
-    {
-      "type": "color",
-      "id": "divider_color",
-      "label": "Divider colour",
-      "default": "#304337"
+      "id": "border_color",
+      "label": "Border colour",
+      "default": "#304237"
     },
 
 
     {
       "type": "header",
-      "content": "Desktop layout"
+      "content": "Desktop Layout"
     },
 
     {
       "type": "range",
       "id": "padding_top",
-      "label": "Top spacing",
+      "label": "Top padding",
       "min": 20,
       "max": 120,
-      "step": 5,
+      "step": 1,
       "unit": "px",
       "default": 72
     },
@@ -601,103 +488,82 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Bottom spacing",
+      "label": "Bottom padding",
       "min": 20,
       "max": 100,
-      "step": 5,
+      "step": 1,
       "unit": "px",
       "default": 40
     },
 
     {
       "type": "range",
+      "id": "brand_max_width",
+      "label": "Brand maximum width",
+      "min": 250,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+
+    {
+      "type": "range",
       "id": "column_gap",
-      "label": "Brand and navigation gap",
+      "label": "Main column gap",
       "min": 20,
       "max": 120,
-      "step": 5,
+      "step": 1,
       "unit": "px",
       "default": 72
     },
 
     {
       "type": "range",
-      "id": "nav_gap",
+      "id": "navigation_gap",
       "label": "Navigation column gap",
-      "min": 15,
+      "min": 20,
       "max": 100,
-      "step": 5,
+      "step": 1,
       "unit": "px",
       "default": 58
     },
 
     {
-      "type": "select",
-      "id": "columns_count",
-      "label": "Number of link columns",
-      "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        }
-      ],
-      "default": "3"
+      "type": "range",
+      "id": "top_section_spacing",
+      "label": "Top section bottom spacing",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 43
+    },
+
+    {
+      "type": "range",
+      "id": "copyright_spacing",
+      "label": "Copyright top spacing",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 27
     },
 
 
     {
       "type": "header",
-      "content": "Typography"
-    },
-
-    {
-      "type": "range",
-      "id": "description_font_size",
-      "label": "Description size",
-      "min": 12,
-      "max": 22,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-
-    {
-      "type": "range",
-      "id": "description_spacing",
-      "label": "Description top spacing",
-      "min": 10,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 26
+      "content": "Desktop Typography"
     },
 
     {
       "type": "range",
       "id": "heading_font_size",
-      "label": "Link heading size",
+      "label": "Heading font size",
       "min": 12,
-      "max": 22,
+      "max": 24,
       "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-
-    {
-      "type": "range",
-      "id": "heading_spacing",
-      "label": "Heading bottom spacing",
-      "min": 8,
-      "max": 30,
-      "step": 2,
       "unit": "px",
       "default": 16
     },
@@ -707,7 +573,7 @@
       "id": "link_font_size",
       "label": "Link font size",
       "min": 12,
-      "max": 20,
+      "max": 22,
       "step": 1,
       "unit": "px",
       "default": 16
@@ -715,48 +581,13 @@
 
     {
       "type": "range",
-      "id": "link_spacing",
-      "label": "Link spacing",
-      "min": 5,
-      "max": 25,
+      "id": "description_font_size",
+      "label": "Description font size",
+      "min": 12,
+      "max": 22,
       "step": 1,
       "unit": "px",
-      "default": 12
-    },
-
-
-    {
-      "type": "header",
-      "content": "Footer bottom"
-    },
-
-    {
-      "type": "text",
-      "id": "copyright_text",
-      "label": "Copyright text",
-      "default": "© Pūkenga Psychology 2026 · All rights reserved"
-    },
-
-    {
-      "type": "range",
-      "id": "top_bottom_spacing",
-      "label": "Top section bottom spacing",
-      "min": 20,
-      "max": 70,
-      "step": 5,
-      "unit": "px",
-      "default": 43
-    },
-
-    {
-      "type": "range",
-      "id": "bottom_spacing",
-      "label": "Copyright top spacing",
-      "min": 15,
-      "max": 50,
-      "step": 1,
-      "unit": "px",
-      "default": 27
+      "default": 16
     },
 
     {
@@ -770,43 +601,32 @@
       "default": 14
     },
 
+    {
+      "type": "range",
+      "id": "description_spacing",
+      "label": "Description spacing",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+
+    {
+      "type": "range",
+      "id": "link_gap",
+      "label": "Link spacing",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+
 
     {
       "type": "header",
-      "content": "Mobile"
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_padding_top",
-      "label": "Mobile top spacing",
-      "min": 20,
-      "max": 80,
-      "step": 5,
-      "unit": "px",
-      "default": 50
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_padding_bottom",
-      "label": "Mobile bottom spacing",
-      "min": 20,
-      "max": 80,
-      "step": 5,
-      "unit": "px",
-      "default": 33
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_logo_width",
-      "label": "Mobile logo width",
-      "min": 50,
-      "max": 220,
-      "step": 5,
-      "unit": "px",
-      "default": 190
+      "content": "Mobile Logo"
     },
 
     {
@@ -814,138 +634,101 @@
       "id": "mobile_logo_height",
       "label": "Mobile logo height",
       "min": 30,
-      "max": 80,
-      "step": 2,
+      "max": 100,
+      "step": 1,
       "unit": "px",
       "default": 56
     },
 
     {
       "type": "range",
-      "id": "mobile_description_spacing",
-      "label": "Mobile description top spacing",
-      "min": 10,
-      "max": 35,
-      "step": 1,
-      "unit": "px",
-      "default": 22
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_description_font_size",
-      "label": "Mobile description size",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-
-    {
-      "type": "select",
-      "id": "mobile_columns_count",
-      "label": "Mobile link columns",
-      "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        }
-      ],
-      "default": "3"
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_nav_spacing",
-      "label": "Mobile navigation top spacing",
-      "min": 20,
-      "max": 60,
+      "id": "mobile_logo_max_width",
+      "label": "Mobile logo maximum width",
+      "min": 50,
+      "max": 300,
       "step": 5,
       "unit": "px",
-      "default": 35
+      "default": 190
     },
 
     {
       "type": "range",
-      "id": "mobile_nav_gap",
-      "label": "Mobile navigation gap",
-      "min": 10,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "default": 28
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_heading_font_size",
-      "label": "Mobile heading size",
-      "min": 12,
-      "max": 20,
+      "id": "mobile_logo_gap",
+      "label": "Mobile logo gap",
+      "min": 0,
+      "max": 30,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 13
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile Layout"
     },
 
     {
       "type": "range",
-      "id": "mobile_heading_spacing",
-      "label": "Mobile heading spacing",
-      "min": 8,
-      "max": 25,
-      "step": 1,
-      "unit": "px",
-      "default": 14
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_link_font_size",
-      "label": "Mobile link size",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_link_spacing",
-      "label": "Mobile link spacing",
-      "min": 5,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 11
-    },
-
-    {
-      "type": "range",
-      "id": "mobile_top_bottom_spacing",
-      "label": "Mobile section bottom spacing",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
       "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 51
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 20,
+      "max": 70,
+      "step": 1,
+      "unit": "px",
+      "default": 33
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_top_section_spacing",
+      "label": "Mobile top section spacing",
+      "min": 15,
       "max": 60,
-      "step": 2,
+      "step": 1,
       "unit": "px",
       "default": 32
     },
 
     {
       "type": "range",
-      "id": "mobile_bottom_spacing",
-      "label": "Mobile copyright top spacing",
+      "id": "mobile_navigation_spacing",
+      "label": "Mobile navigation spacing",
       "min": 15,
-      "max": 40,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 35
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_navigation_gap",
+      "label": "Mobile navigation gap",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_copyright_spacing",
+      "label": "Mobile copyright spacing",
+      "min": 10,
+      "max": 50,
       "step": 1,
       "unit": "px",
       "default": 24
@@ -953,27 +736,85 @@
 
     {
       "type": "range",
+      "id": "mobile_description_spacing",
+      "label": "Mobile description spacing",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile Typography"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_heading_font_size",
+      "label": "Mobile heading font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_link_font_size",
+      "label": "Mobile link font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_description_font_size",
+      "label": "Mobile description font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
       "id": "mobile_copyright_font_size",
-      "label": "Mobile copyright size",
+      "label": "Mobile copyright font size",
       "min": 10,
       "max": 18,
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_link_gap",
+      "label": "Mobile link spacing",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
     }
 
   ],
 
-
   "blocks": [
-
     {
       "type": "link_column",
       "name": "Link column",
       "limit": 3,
 
       "settings": [
-
         {
           "type": "text",
           "id": "heading",
@@ -1019,23 +860,17 @@
           "id": "link_url_3",
           "label": "Link 3 URL"
         }
-
       ]
     }
-
   ],
 
-
   "presets": [
-
     {
       "name": "Pūkenga Footer",
 
       "blocks": [
-
         {
           "type": "link_column",
-
           "settings": {
             "heading": "Toa",
             "link_label_1": "Karakia packs",
@@ -1046,7 +881,6 @@
 
         {
           "type": "link_column",
-
           "settings": {
             "heading": "Tūhono",
             "link_label_1": "Mauri Tau",
@@ -1057,7 +891,6 @@
 
         {
           "type": "link_column",
-
           "settings": {
             "heading": "Whakapā",
             "link_label_1": "Instagram",
@@ -1065,10 +898,8 @@
             "link_label_3": "Contact"
           }
         }
-
       ]
     }
-
   ]
 }
 {% endschema %}
