@@ -60,23 +60,9 @@
         "heading_color": "#E5B76D",
         "text_color": "#D8D3C5",
         "divider_color": "#304637",
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "column_padding": 30,
-        "heading_size": 25,
-        "heading_weight": "400",
-        "heading_spacing": 12,
-        "heading_font": "heading",
-        "text_size": 16,
-        "text_weight": "400",
-        "text_line_height": "1.5",
-        "text_max_width": 360,
-        "body_font": "body",
-        "mobile_padding_top": 35,
-        "mobile_padding_bottom": 35,
-        "mobile_column_padding": 24,
-        "mobile_heading_size": 23,
-        "mobile_text_size": 15
+        "padding_y": 50,
+        "padding_x": 30,
+        "mobile_padding_y": 35
       }
     },
     "pukenga_about_eNePzt": {
