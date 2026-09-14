@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "pukenga_breadcrumb": {
       "type": "pukenga-breadcrumb",
@@ -40,7 +41,12 @@
           }
         }
       },
-      "block_order": ["item_1", "item_2", "item_3"]
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {}
     },
     "pukenga_product_quote": {
       "type": "pukenga-product-quote",
@@ -80,7 +86,11 @@
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3"],
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
       "settings": {
         "heading": "Arotakenga · Reviews",
         "padding-block-start": 72,
@@ -369,7 +379,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",

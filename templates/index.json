@@ -1,16 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "pukenga_hero": {
-      "type": "pukenga-hero"
+      "type": "pukenga-hero",
+      "settings": {}
     },
     "pukenga_features": {
       "type": "pukenga-feature-grid",
-      "block_order": [
-        "feature_1",
-        "feature_2",
-        "feature_3",
-        "quote_1"
-      ],
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -43,15 +47,17 @@
             "attribution": "From the Hinātore set"
           }
         }
-      }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "quote_1"
+      ],
+      "settings": {}
     },
     "pukenga_best_sellers": {
       "type": "pukenga-best-sellers",
-      "block_order": [
-        "product_1",
-        "product_2",
-        "product_3"
-      ],
       "blocks": {
         "product_1": {
           "type": "product",
@@ -76,17 +82,24 @@
             "price": "$19.99"
           }
         }
-      }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3"
+      ],
+      "settings": {}
     },
     "pukenga_promo": {
-      "type": "pukenga-promo-banner"
+      "type": "pukenga-promo-banner",
+      "settings": {}
     },
     "pukenga_about": {
-      "type": "pukenga-about"
+      "type": "pukenga-about",
+      "settings": {}
     },
     "pukenga_testimonials": {
       "type": "pukenga-testimonials",
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"],
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
@@ -115,10 +128,17 @@
             "role": "Audio Collection"
           }
         }
-      }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {}
     },
     "pukenga_newsletter": {
-      "type": "pukenga-newsletter"
+      "type": "pukenga-newsletter",
+      "settings": {}
     }
   },
   "order": [
