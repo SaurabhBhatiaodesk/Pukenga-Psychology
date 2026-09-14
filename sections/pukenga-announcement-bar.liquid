@@ -1,70 +1,320 @@
 {{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
 
-<div class="pukenga-announcement" style="background:{{ section.settings.background_color }};color:{{ section.settings.text_color }};">
-  <div class="pukenga-container pukenga-announcement__inner">
-    <p class="pukenga-announcement__text">
-      {{ section.settings.message }}
-      {%- if section.settings.code != blank -%}
-        <span class="pukenga-announcement__code">{{ section.settings.code }}</span>
-      {%- endif -%}
-    </p>
+<div
+  class="pukenga-announcement"
+  style="
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    --announcement-font-size: {{ section.settings.font_size }}px;
+    --announcement-mobile-font-size: {{ section.settings.mobile_font_size }}px;
+    --announcement-padding-top: {{ section.settings.padding_top }}px;
+    --announcement-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --announcement-mobile-padding-top: {{ section.settings.mobile_padding_top }}px;
+    --announcement-mobile-padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    --announcement-code-background: {{ section.settings.code_background_color }};
+    --announcement-code-text: {{ section.settings.code_text_color }};
+    --announcement-code-border: {{ section.settings.code_border_color }};
+    --announcement-code-radius: {{ section.settings.code_border_radius }}px;
+    --announcement-code-padding-horizontal: {{ section.settings.code_padding_horizontal }}px;
+  "
+>
+  <div
+    class="pukenga-container pukenga-announcement__inner"
+    style="text-align: {{ section.settings.text_alignment }};"
+  >
+
+    {% if section.settings.message != blank or section.settings.code != blank %}
+
+      <p class="pukenga-announcement__text">
+
+        {% if section.settings.message != blank %}
+          <span class="pukenga-announcement__message">
+            {{ section.settings.message }}
+          </span>
+        {% endif %}
+
+        {% if section.settings.code != blank %}
+          <span class="pukenga-announcement__code">
+            {{ section.settings.code }}
+          </span>
+        {% endif %}
+
+      </p>
+
+    {% endif %}
+
   </div>
 </div>
 
+
 {% stylesheet %}
+
   .pukenga-announcement {
+    width: 100%;
     font-family: var(--pukenga-font-body);
   }
+
   .pukenga-announcement__inner {
-    padding: 10px 24px;
-    text-align: center;
+    padding-top: var(--announcement-padding-top);
+    padding-bottom: var(--announcement-padding-bottom);
+    padding-left: 24px;
+    padding-right: 24px;
   }
+
   .pukenga-announcement__text {
     margin: 0;
-    font-size: 13px;
+    font-size: var(--announcement-font-size);
+    line-height: 1.4;
     letter-spacing: 0.02em;
   }
+
+  .pukenga-announcement__message {
+    display: inline;
+  }
+
   .pukenga-announcement__code {
     display: inline-block;
     margin-left: 8px;
-    padding: 2px 10px;
-    border: 1px solid currentColor;
-    border-radius: 40px;
+    padding: 2px var(--announcement-code-padding-horizontal);
+    border: 1px solid var(--announcement-code-border);
+    border-radius: var(--announcement-code-radius);
+    background: var(--announcement-code-background);
+    color: var(--announcement-code-text);
     font-weight: 600;
     letter-spacing: 0.08em;
+    line-height: 1.4;
   }
+
+  @media screen and (max-width: 749px) {
+
+    .pukenga-announcement__inner {
+      padding-top: var(--announcement-mobile-padding-top);
+      padding-bottom: var(--announcement-mobile-padding-bottom);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .pukenga-announcement__text {
+      font-size: var(--announcement-mobile-font-size);
+    }
+
+    .pukenga-announcement__code {
+      margin-left: 6px;
+    }
+
+  }
+
 {% endstylesheet %}
+
 
 {% schema %}
 {
   "name": "Pukenga Announcement Bar",
   "tag": "section",
+
   "settings": [
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+
     {
       "type": "text",
       "id": "message",
       "label": "Message",
       "default": "He koha ki a koe. Use code for 10% off your first order."
     },
+
     {
       "type": "text",
       "id": "code",
       "label": "Discount code",
       "default": "KAHA10"
     },
+
+
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+
     {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
       "default": "#16281b"
     },
+
     {
       "type": "color",
       "id": "text_color",
       "label": "Text color",
       "default": "#f2ecdc"
+    },
+
+    {
+      "type": "color",
+      "id": "code_background_color",
+      "label": "Code background color",
+      "default": "transparent"
+    },
+
+    {
+      "type": "color",
+      "id": "code_text_color",
+      "label": "Code text color",
+      "default": "#f2ecdc"
+    },
+
+    {
+      "type": "color",
+      "id": "code_border_color",
+      "label": "Code border color",
+      "default": "#f2ecdc"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Alignment"
+    },
+
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop typography"
+    },
+
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+
+
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+
+
+    {
+      "type": "header",
+      "content": "Discount code"
+    },
+
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "label": "Code border radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+
+    {
+      "type": "range",
+      "id": "code_padding_horizontal",
+      "label": "Code horizontal padding",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+
+
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "Mobile font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8
     }
+
   ],
+
   "presets": [
     {
       "name": "Pukenga Announcement Bar"
