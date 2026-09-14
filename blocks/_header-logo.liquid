@@ -57,14 +57,24 @@
     {% endif %}
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {% if settings.logo == blank %}
+      <span class="pukenga-logo">
+        <img src="{{ 'pukenga-logo-mark.png' | asset_url }}" alt="" class="pukenga-logo__mark" loading="eager">
+        <span class="pukenga-logo__wordmark">
+          <span class="pukenga-logo__line1">Pūkenga</span>
+          <span class="pukenga-logo__line2">Psychology</span>
+        </span>
+      </span>
+    {% else %}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {% endif %}
   </span>
 
   {% if use_inverse_logo %}
@@ -139,6 +149,53 @@
 
   .header-logo__transparent-header-image-container {
     display: var(--header-logo-inverse-display, none);
+  }
+
+  .pukenga-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pukenga-logo__mark {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .pukenga-logo__wordmark {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Marcellus', serif;
+    line-height: 1.05;
+    color: var(--pukenga-cream-soft, #ece5d4);
+    text-transform: uppercase;
+  }
+
+  .pukenga-logo__line1 {
+    font-size: 19px;
+    letter-spacing: 0.12em;
+  }
+
+  .pukenga-logo__line2 {
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    .pukenga-logo__mark {
+      height: 64px;
+    }
+
+    .pukenga-logo__line1 {
+      font-size: 26px;
+    }
+
+    .pukenga-logo__line2 {
+      font-size: 15px;
+    }
   }
 {% endstylesheet %}
 
