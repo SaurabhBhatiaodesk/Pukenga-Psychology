@@ -150,35 +150,58 @@
   }
 
 
-  /* =========================================
-     DESKTOP IMAGE POSITION
-  ========================================= */
+/* =========================================
+   DESKTOP IMAGE POSITION FIX
+========================================= */
+
+@media screen and (min-width: 990px) {
+
+  .pukenga-about__grid {
+    display: grid;
+    grid-template-columns:
+      {{ section.settings.desktop_content_width }}
+      {{ section.settings.desktop_image_width }};
+    gap: {{ section.settings.desktop_gap }}px;
+    align-items: {{ section.settings.vertical_alignment }};
+  }
+
 
   {% if section.settings.desktop_image_position == 'left' %}
 
-    .pukenga-about__content {
-      grid-column: 2;
-      grid-row: 1;
-    }
+  .pukenga-about__media {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    order: 1;
+  }
 
-    .pukenga-about__media {
-      grid-column: 1;
-      grid-row: 1;
-    }
+
+  .pukenga-about__content {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    order: 2;
+  }
+
 
   {% else %}
 
-    .pukenga-about__content {
-      grid-column: 1;
-      grid-row: 1;
-    }
 
-    .pukenga-about__media {
-      grid-column: 2;
-      grid-row: 1;
-    }
+  .pukenga-about__content {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    order: 1;
+  }
+
+
+  .pukenga-about__media {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    order: 2;
+  }
+
 
   {% endif %}
+
+}
 
 
   /* =========================================
