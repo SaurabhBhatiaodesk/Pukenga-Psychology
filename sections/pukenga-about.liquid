@@ -1,4 +1,4 @@
-<section class="pukenga-section pukenga-about">
+<section class="pukenga-section pukenga-about pukenga-about-{{ section.id }}">
   <div class="section">
     <div class="pukenga-container pukenga-about__grid">
 
@@ -104,9 +104,19 @@
 
   /* =========================================
      MAIN SECTION
+     All selectors below are scoped to
+     .pukenga-about-{{ section.id }} because this
+     section can appear more than once on a page
+     (e.g. the bio block and the quote block both
+     use it) and this is a plain <style> tag, not
+     {% stylesheet %} -- unscoped rules here would
+     leak and the LAST rendered instance's CSS
+     would silently win for every instance on the
+     page, regardless of each instance's own
+     settings.
   ========================================= */
 
-  .pukenga-about {
+  .pukenga-about-{{ section.id }} {
     width: 100%;
     background: {{ section.settings.background_color }};
 
@@ -119,7 +129,7 @@
      CONTAINER
   ========================================= */
 
-  .pukenga-about .pukenga-container {
+  .pukenga-about-{{ section.id }} .pukenga-container {
     width: 100%;
   }
 
@@ -128,7 +138,7 @@
      DESKTOP GRID
   ========================================= */
 
-  .pukenga-about__grid {
+  .pukenga-about-{{ section.id }} .pukenga-about__grid {
     display: grid;
     gap: {{ section.settings.desktop_gap }}px;
     align-items: {{ section.settings.vertical_alignment }};
@@ -151,7 +161,7 @@
      CONTENT
   ========================================= */
 
-  .pukenga-about__content {
+  .pukenga-about-{{ section.id }} .pukenga-about__content {
     grid-area: content;
     width: 100%;
   }
@@ -161,7 +171,7 @@
      IMAGE AREA PLACEMENT
   ========================================= */
 
-  .pukenga-about__media {
+  .pukenga-about-{{ section.id }} .pukenga-about__media {
     grid-area: media;
   }
 
@@ -170,7 +180,7 @@
      IMAGE
   ========================================= */
 
-  .pukenga-about__media {
+  .pukenga-about-{{ section.id }} .pukenga-about__media {
     width: 100%;
     overflow: hidden;
 
@@ -179,7 +189,7 @@
   }
 
 
-  .pukenga-about__image {
+  .pukenga-about-{{ section.id }} .pukenga-about__image {
     display: block;
 
     width: 100%;
@@ -193,7 +203,7 @@
      DESKTOP IMAGE
   ========================================= */
 
-  .pukenga-about__image--desktop {
+  .pukenga-about-{{ section.id }} .pukenga-about__image--desktop {
     display: block;
 
     aspect-ratio:
@@ -209,7 +219,7 @@
      MOBILE IMAGE HIDDEN BY DEFAULT
   ========================================= */
 
-  .pukenga-about__image--mobile {
+  .pukenga-about-{{ section.id }} .pukenga-about__image--mobile {
     display: none;
   }
 
@@ -218,7 +228,7 @@
      HEADING
   ========================================= */
 
-  .pukenga-about__heading {
+  .pukenga-about-{{ section.id }} .pukenga-about__heading {
     font-size: {{ section.settings.heading_max_size }}px;
 
     margin-bottom:
@@ -230,7 +240,7 @@
      TEXT
   ========================================= */
 
-  .pukenga-about__text {
+  .pukenga-about-{{ section.id }} .pukenga-about__text {
     font-size: 15.5px;
     line-height: 1.75;
     opacity: 0.85;
@@ -245,7 +255,7 @@
      SIGNATURE
   ========================================= */
 
-  .pukenga-about__signature {
+  .pukenga-about-{{ section.id }} .pukenga-about__signature {
     font-family:
       var(--pukenga-font-heading, 'Spectral', serif);
 
@@ -263,7 +273,7 @@
      LINK
   ========================================= */
 
-  .pukenga-about__link {
+  .pukenga-about-{{ section.id }} .pukenga-about__link {
     display: inline-block;
   }
 
@@ -274,13 +284,13 @@
 
   @media screen and (max-width: 989px) {
 
-    .pukenga-about {
+    .pukenga-about-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
 
 
-    .pukenga-about__grid {
+    .pukenga-about-{{ section.id }} .pukenga-about__grid {
       grid-template-columns: 1fr;
       grid-template-areas: "media" "content";
 
@@ -291,7 +301,7 @@
 
     /* IMAGE FIRST */
 
-    .pukenga-about__media {
+    .pukenga-about-{{ section.id }} .pukenga-about__media {
       grid-column: 1;
       grid-row: 1;
 
@@ -302,7 +312,7 @@
 
     /* CONTENT SECOND */
 
-    .pukenga-about__content {
+    .pukenga-about-{{ section.id }} .pukenga-about__content {
       grid-column: 1;
       grid-row: 2;
 
@@ -312,14 +322,14 @@
 
     /* DESKTOP IMAGE HIDDEN */
 
-    .pukenga-about__image--desktop {
+    .pukenga-about-{{ section.id }} .pukenga-about__image--desktop {
       display: none;
     }
 
 
     /* MOBILE IMAGE SHOWN */
 
-    .pukenga-about__image--mobile {
+    .pukenga-about-{{ section.id }} .pukenga-about__image--mobile {
       display: block;
 
       width: 100%;
@@ -344,26 +354,26 @@
 
   @media screen and (max-width: 749px) {
 
-    .pukenga-about {
+    .pukenga-about-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
 
-    .pukenga-about .section {
+    .pukenga-about-{{ section.id }} .section {
       display: block;
     }
 
-    .pukenga-about__content {
+    .pukenga-about-{{ section.id }} .pukenga-about__content {
       padding: 44px 26px;
     }
 
-    .pukenga-about__grid {
+    .pukenga-about-{{ section.id }} .pukenga-about__grid {
       gap:
         {{ section.settings.small_mobile_gap }}px;
     }
 
 
-    .pukenga-about__heading {
+    .pukenga-about-{{ section.id }} .pukenga-about__heading {
       font-size:
         {{ section.settings.mobile_heading_size }}px;
 
