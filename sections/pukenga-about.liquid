@@ -153,44 +153,32 @@
   /* =========================================
      DESKTOP IMAGE POSITION
   ========================================= */
-{% if section.settings.desktop_image_position == 'left' %}
 
-.pukenga-about__grid {
-  grid-template-columns:
-  {{ section.settings.desktop_image_width }}
-  {{ section.settings.desktop_content_width }};
-}
+  {% if section.settings.desktop_image_position == 'left' %}
 
-.pukenga-about__content {
-  grid-column: 2;
-  grid-row: 1;
-}
+    .pukenga-about__content {
+      grid-column: 2;
+      grid-row: 1;
+    }
 
-.pukenga-about__media {
-  grid-column: 1;
-  grid-row: 1;
-}
+    .pukenga-about__media {
+      grid-column: 1;
+      grid-row: 1;
+    }
 
+  {% else %}
 
-{% else %}
+    .pukenga-about__content {
+      grid-column: 1;
+      grid-row: 1;
+    }
 
-.pukenga-about__grid {
-  grid-template-columns:
-  {{ section.settings.desktop_content_width }}
-  {{ section.settings.desktop_image_width }};
-}
+    .pukenga-about__media {
+      grid-column: 2;
+      grid-row: 1;
+    }
 
-.pukenga-about__content {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.pukenga-about__media {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-{% endif %}
+  {% endif %}
 
 
   /* =========================================
