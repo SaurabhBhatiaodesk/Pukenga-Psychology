@@ -22,7 +22,7 @@
 }
 
 body {
-    font-family: 'Instrument Sans',system-ui,sans-serif;
+    font-family: 'Instrument Sans',system-ui,sans-serif !important;
 }
 
 .pukenga-heading {
