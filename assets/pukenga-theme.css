@@ -26,9 +26,16 @@ body .yotpo-bold-layout .yotpo-headline {
   font-weight: 300;
   font-family: var(--pukenga-font-heading);
 }
-
+body .yotpo-bottom-line-basic-text {
+  color: var(--pukenga-cream, #f2ecdc);
+}
 body  .card-container[data-v-5fd642f6]{
   background: #fff;
+}
+body  .yotpo-vertical-pagination .yotpo-reviews-pagination-item[data-v-7efcf362] {
+    padding: 10px;
+    height: auto;
+    background: #f2ecdc;
 }
 
 
