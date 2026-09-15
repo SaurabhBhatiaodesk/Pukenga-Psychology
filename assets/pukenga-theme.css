@@ -14,6 +14,13 @@
 }
 
 
+body .yotpo-base-layout {
+    margin: 0 auto;
+    width: 100% !important;
+}
+
+
+
 /* banner  */
 .pukenga-section {
   background: var(--pukenga-bg);
