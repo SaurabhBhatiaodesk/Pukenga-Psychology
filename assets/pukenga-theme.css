@@ -27,6 +27,10 @@ body .yotpo-bold-layout .yotpo-headline {
   font-family: var(--pukenga-font-heading);
 }
 
+body  .card-container[data-v-5fd642f6]{
+  background: #fff;
+}
+
 
 /* banner  */
 .pukenga-section {
