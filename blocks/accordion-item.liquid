@@ -1,7 +1,9 @@
 <details 
   class="pukenga-accordion-item"
+  {% if block.settings.open_default %}open{% endif %}
   {{ block.shopify_attributes }}
 >
+
 
   <summary class="pukenga-accordion-item__heading">
 
@@ -9,9 +11,19 @@
       {{ block.settings.heading }}
     </span>
 
+
     <span class="pukenga-accordion-item__icon">
-      +
+
+      <span class="icon-plus">
+        +
+      </span>
+
+      <span class="icon-minus">
+        −
+      </span>
+
     </span>
+
 
   </summary>
 
@@ -26,10 +38,11 @@
 </details>
 
 
+
 <style>
 
-.pukenga-accordion-item {
-  border-bottom: 1px solid {{ block.settings.border_color }};
+.pukenga-accordion-item summary {
+  border-bottom:1px solid {{ block.settings.border_color }};
 }
 
 
@@ -39,32 +52,77 @@
 
 
 .pukenga-accordion-item summary::-webkit-details-marker {
+
   display:none;
+
 }
 
 
+
 .pukenga-accordion-item__heading {
-    font-family: Spectral, serif;
+
+  font-family: Spectral, serif;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 
   cursor:pointer;
 
   padding-top:{{ block.settings.padding }}px;
+
   padding-bottom:{{ block.settings.padding }}px;
 
+
   color:{{ block.settings.heading_color }};
+
   font-size:{{ block.settings.heading_size }}px;
 
 }
 
 
+
+.pukenga-accordion-item__icon {
+
+  color:{{ block.settings.icon_color }};
+
+}
+
+
+
+.icon-minus {
+
+  display:none;
+
+}
+
+
+.pukenga-accordion-item[open] .icon-plus {
+
+  display:none;
+
+}
+
+
+.pukenga-accordion-item[open] .icon-minus {
+
+  display:inline;
+
+}
+
+
+
 .pukenga-accordion-item__content {
-    opacity: 0.82;
-  padding-bottom:20px;
+
+  opacity:0.82;
+
+  padding-top:20px;
+
 
   color:{{ block.settings.content_color }};
+
   font-size:{{ block.settings.content_size }}px;
 
   line-height:1.6;
@@ -72,29 +130,24 @@
 }
 
 
-.pukenga-accordion-item[open] 
-.pukenga-accordion-item__icon {
 
-  transform:rotate(45deg);
+@media screen and (max-width:749px){
+
+
+.pukenga-accordion-item__heading {
+
+  font-size:{{ block.settings.mobile_heading_size }}px;
 
 }
 
 
 
-@media screen and (max-width:749px){
+.pukenga-accordion-item__content {
 
-  .pukenga-accordion-item__heading {
+  font-size:{{ block.settings.mobile_content_size }}px;
 
-    font-size:{{ block.settings.mobile_heading_size }}px;
+}
 
-  }
-
-
-  .pukenga-accordion-item__content {
-
-    font-size:{{ block.settings.mobile_content_size }}px;
-
-  }
 
 }
 
@@ -110,13 +163,19 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "What's inside"
+      "default": "Kei roto · What's inside"
     },
     {
       "type": "richtext",
       "id": "content",
       "label": "Content",
       "default": "<p>Add your content here.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_default",
+      "label": "Open by default",
+      "default": false
     },
     {
       "type": "range",
@@ -185,12 +244,18 @@
       "id": "border_color",
       "label": "Border color",
       "default": "#294332"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#c9a45c"
     }
   ],
   "presets": [
     {
-        "name": "Accordion Item"
+      "name": "Accordion Item"
     }
-    ]
+  ]
 }
 {% endschema %}
