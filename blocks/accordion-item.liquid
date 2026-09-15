@@ -1,0 +1,196 @@
+<details 
+  class="pukenga-accordion-item"
+  {{ block.shopify_attributes }}
+>
+
+  <summary class="pukenga-accordion-item__heading">
+
+    <span>
+      {{ block.settings.heading }}
+    </span>
+
+    <span class="pukenga-accordion-item__icon">
+      +
+    </span>
+
+  </summary>
+
+
+  <div class="pukenga-accordion-item__content">
+
+    {{ block.settings.content }}
+
+  </div>
+
+
+</details>
+
+
+<style>
+
+.pukenga-accordion-item {
+  border-bottom: 1px solid {{ block.settings.border_color }};
+}
+
+
+.pukenga-accordion-item summary {
+  list-style:none;
+}
+
+
+.pukenga-accordion-item summary::-webkit-details-marker {
+  display:none;
+}
+
+
+.pukenga-accordion-item__heading {
+    font-family: Spectral, serif;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  cursor:pointer;
+
+  padding-top:{{ block.settings.padding }}px;
+  padding-bottom:{{ block.settings.padding }}px;
+
+  color:{{ block.settings.heading_color }};
+  font-size:{{ block.settings.heading_size }}px;
+
+}
+
+
+.pukenga-accordion-item__content {
+    opacity: 0.82;
+  padding-bottom:20px;
+
+  color:{{ block.settings.content_color }};
+  font-size:{{ block.settings.content_size }}px;
+
+  line-height:1.6;
+
+}
+
+
+.pukenga-accordion-item[open] 
+.pukenga-accordion-item__icon {
+
+  transform:rotate(45deg);
+
+}
+
+
+
+@media screen and (max-width:749px){
+
+  .pukenga-accordion-item__heading {
+
+    font-size:{{ block.settings.mobile_heading_size }}px;
+
+  }
+
+
+  .pukenga-accordion-item__content {
+
+    font-size:{{ block.settings.mobile_content_size }}px;
+
+  }
+
+}
+
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Accordion Item",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's inside"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Add your content here.</p>"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Heading padding",
+      "min": 2,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Desktop heading size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile heading size",
+      "min": 12,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_size",
+      "label": "Desktop content size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_size",
+      "label": "Mobile content size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#f2ecdc"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#f2ecdc"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#294332"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Accordion Item"
+    }
+    ]
+}
+{% endschema %}

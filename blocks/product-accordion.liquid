@@ -1,0 +1,97 @@
+<div 
+  class="pukenga-product-accordion"
+  {{ block.shopify_attributes }}
+>
+
+  <div class="pukenga-product-accordion__wrapper">
+
+    {% content_for 'blocks' %}
+
+  </div>
+
+</div>
+
+
+<style>
+
+.pukenga-product-accordion {
+  padding-top: {{ block.settings.padding_top }}px;
+  padding-bottom: {{ block.settings.padding_bottom }}px;
+}
+
+
+.pukenga-product-accordion__wrapper {
+  width: 100%;
+}
+
+
+
+@media screen and (max-width:749px){
+
+  .pukenga-product-accordion {
+    padding-top: {{ block.settings.mobile_padding_top }}px;
+    padding-bottom: {{ block.settings.mobile_padding_bottom }}px;
+  }
+
+}
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Product Accordion",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Accordion"
+    }
+  ]
+}
+{% endschema %}
