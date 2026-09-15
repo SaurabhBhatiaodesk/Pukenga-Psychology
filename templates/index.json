@@ -70,8 +70,8 @@
       "settings": {
         "image": "shopify://shop_images/773f9f74-e8a9-4753-887f-e73b5648024a.jpg",
         "desktop_image_position": "left",
-        "desktop_content_width": "0.9fr",
-        "desktop_image_width": "1.1fr",
+        "desktop_content_width": "1fr",
+        "desktop_image_width": "1fr",
         "desktop_image_ratio": "1 / 1",
         "desktop_image_position_x": 50,
         "desktop_image_position_y": 50,
