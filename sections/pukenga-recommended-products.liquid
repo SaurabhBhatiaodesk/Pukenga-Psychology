@@ -216,15 +216,19 @@
     opacity: 0;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .pukenga-recommended .pukenga-product-card:hover .pukenga-product-card__image--hover {
-      opacity: 1;
-    }
+@media (hover: hover) and (pointer: fine) {
 
-    .pukenga-recommended .pukenga-product-card:hover .pukenga-product-card__image:not(.pukenga-product-card__image--hover) {
-      opacity: 0;
-    }
+  .pukenga-product-card:has(.pukenga-product-card__image--hover):hover 
+  .pukenga-product-card__image--hover {
+    opacity: 1;
   }
+
+  .pukenga-product-card:has(.pukenga-product-card__image--hover):hover 
+  .pukenga-product-card__image:not(.pukenga-product-card__image--hover) {
+    opacity: 0;
+  }
+
+}
 
   .pukenga-recommended .pukenga-product-card__placeholder {
     width: 100%;
