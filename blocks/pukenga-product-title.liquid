@@ -10,14 +10,14 @@
 <style>
 
 .pukenga-product-title {
-  padding-top: {{ section.settings.padding_top }}px;
-  padding-bottom: {{ section.settings.padding_bottom }}px;
+  padding-top: {{ block.settings.padding_top }}px;
+  padding-bottom: {{ block.settings.padding_bottom }}px;
 }
 
 .pukenga-product-title h1 {
   margin: 0;
-  color: {{ section.settings.desktop_color }};
-  font-size: {{ section.settings.desktop_title_size }}px;
+  color: {{ block.settings.desktop_color }};
+  font-size: {{ block.settings.desktop_title_size }}px;
   line-height: 1.2;
     font-weight: 300;
   font-family: Spectral, serif;
@@ -27,8 +27,8 @@
 @media screen and (max-width: 749px) {
 
   .pukenga-product-title h1 {
-    color: {{ section.settings.mobile_color }};
-    font-size: {{ section.settings.mobile_title_size }}px;
+    color: {{ block.settings.mobile_color }};
+    font-size: {{ block.settings.mobile_title_size }}px;
   }
 
 }
