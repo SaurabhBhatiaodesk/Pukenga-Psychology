@@ -1,6 +1,6 @@
 {{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
 
-<div class="pukenga-product-reviews pukenga-section section" style="{% render 'spacing-style', settings: section.settings %}">
+<div class="pukenga-product-reviews section" style="{% render 'spacing-style', settings: section.settings %}">
   <div class="pukenga-container">
     {%- if section.settings.heading != blank -%}
       <h2 class="pukenga-heading pukenga-product-reviews__heading">{{ section.settings.heading }}</h2>
