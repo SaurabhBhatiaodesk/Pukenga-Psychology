@@ -1,0 +1,169 @@
+<div class="pukenga-product-info-bar" {{ block.shopify_attributes }}>
+
+  {% if block.settings.item_1 != blank %}
+    <div class="pukenga-product-info-bar__item">
+      {{ block.settings.item_1 }}
+    </div>
+  {% endif %}
+
+  {% if block.settings.item_2 != blank %}
+    <div class="pukenga-product-info-bar__item">
+      {{ block.settings.item_2 }}
+    </div>
+  {% endif %}
+
+  {% if block.settings.item_3 != blank %}
+    <div class="pukenga-product-info-bar__item">
+      {{ block.settings.item_3 }}
+    </div>
+  {% endif %}
+
+</div>
+
+
+<style>
+
+.pukenga-product-info-bar {
+  display: flex;
+  align-items: center;
+  gap: {{ block.settings.gap }}px;
+  padding-top: {{ block.settings.padding_top }}px;
+  padding-bottom: {{ block.settings.padding_bottom }}px;
+  border-top: 1px solid {{ block.settings.border_color }};
+  border-bottom: 1px solid {{ block.settings.border_color }};
+  flex-wrap: wrap;
+}
+
+.pukenga-product-info-bar__item {
+  color: {{ block.settings.desktop_color }};
+  font-size: {{ block.settings.desktop_font }}px;
+  font-family: inherit;
+  line-height: 1.4;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .pukenga-product-info-bar {
+    gap: {{ block.settings.mobile_gap }}px;
+  }
+
+  .pukenga-product-info-bar__item {
+    color: {{ block.settings.mobile_color }};
+    font-size: {{ block.settings.mobile_font }}px;
+  }
+
+}
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Product Info Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "First text",
+      "default": "Ships in 1–2 days"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Second text",
+      "default": "NZ made"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Third text",
+      "default": "Ages 5+"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Desktop items gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile items gap",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_font",
+      "label": "Desktop font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_font",
+      "label": "Mobile font size",
+      "min": 10,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "desktop_color",
+      "label": "Desktop text color",
+      "default": "#f2ecdc"
+    },
+    {
+      "type": "color",
+      "id": "mobile_color",
+      "label": "Mobile text color",
+      "default": "#f2ecdc"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#294332"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Info Bar"
+    }
+  ]
+}
+{% endschema %}
