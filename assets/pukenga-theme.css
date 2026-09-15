@@ -26,14 +26,7 @@ body .yotpo-bold-layout .yotpo-headline {
   font-weight: 300;
   font-family: var(--pukenga-font-heading);
 }
-body .yotpo-title-text,
-body .yotpo-body-text{
-  color: var(--pukenga-cream, #f2ecdc);
-  font-family: var(--pukenga-font-heading);
-}
-body .yotpo-review-title{
-  color: var(--pukenga-cream, #f2ecdc);
-}
+
 
 /* banner  */
 .pukenga-section {
