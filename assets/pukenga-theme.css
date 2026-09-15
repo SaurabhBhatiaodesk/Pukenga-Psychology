@@ -18,8 +18,19 @@ body .yotpo-base-layout {
     margin: 0 auto;
     width: 100% !important;
 }
-
-
+body .yotpo-bold-layout .yotpo-headline {
+  margin: 0;
+  color: var(--pukenga-cream, #f2ecdc);
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 300;
+  font-family: var(--pukenga-font-heading);
+}
+body .yotpo-title-text,
+body .yotpo-body-text{
+  color: var(--pukenga-cream, #f2ecdc);
+  font-family: var(--pukenga-font-heading);
+}
 
 /* banner  */
 .pukenga-section {
