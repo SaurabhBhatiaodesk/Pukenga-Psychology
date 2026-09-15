@@ -21,7 +21,9 @@
   font-family: var(--pukenga-font-body);
 }
 
-
+body {
+    font-family: 'Instrument Sans',system-ui,sans-serif;
+}
 
 .pukenga-heading {
   font-family: var(--pukenga-font-heading);
