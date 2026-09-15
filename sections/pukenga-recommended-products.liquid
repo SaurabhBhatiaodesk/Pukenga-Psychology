@@ -1,0 +1,141 @@
+<section
+  class="pukenga-section pukenga-best-sellers pukenga-recommended"
+  id="recommended-products"
+>
+  <div class="section">
+
+    <div class="pukenga-best-sellers__header">
+
+      <div class="pukenga-best-sellers__title-wrap">
+
+        <h2 class="pukenga-heading pukenga-best-sellers__heading">
+          {{ section.settings.heading }}
+        </h2>
+
+        <span class="pukenga-best-sellers__eyebrow">
+          {{ section.settings.eyebrow }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="pukenga-best-sellers__grid"
+      id="recommendation-products"
+    >
+
+      {% for product in recommendations.products
+        limit: section.settings.products_to_show %}
+
+        {% assign current_variant = product.selected_or_first_available_variant %}
+
+        <article class="pukenga-product-card">
+
+          <div class="pukenga-product-card__media">
+
+            <a href="{{ product.url }}"
+              class="pukenga-product-card__image-link">
+
+              {% if product.featured_image %}
+
+              {{
+                product.featured_image
+                | image_url: width:1200
+                | image_tag:
+                loading:'lazy',
+                class:'pukenga-product-card__image'
+              }}
+
+              {% endif %}
+
+            </a>
+
+          </div>
+
+
+          <div class="pukenga-product-card__info">
+
+            <h3 class="pukenga-product-card__title">
+              <a href="{{ product.url }}">
+                {{ product.title }}
+              </a>
+            </h3>
+
+
+            <div class="pukenga-product-card__bottom">
+
+              <div class="pukenga-product-card__price">
+
+                <span class="pukenga-product-card__price-current">
+                  {{ product.price | money }}
+                </span>
+
+              </div>
+
+
+              <button
+                class="pukenga-product-card__add"
+                data-add-to-cart
+                data-variant-id="{{ current_variant.id }}"
+              >
+                ADD
+              </button>
+
+
+            </div>
+
+          </div>
+
+
+        </article>
+
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</section>
+
+
+{% schema %}
+{
+  "name": "Recommended Products",
+
+  "settings": [
+
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"Heading",
+      "default":"Recommended For You"
+    },
+
+    {
+      "type":"text",
+      "id":"eyebrow",
+      "label":"Eyebrow",
+      "default":"/ you may also like"
+    },
+
+    {
+      "type":"range",
+      "id":"products_to_show",
+      "label":"Products to show",
+      "min":2,
+      "max":8,
+      "default":4
+    }
+
+  ],
+
+  "presets":[
+    {
+      "name":"Recommended Products"
+    }
+  ]
+}
+{% endschema %}
