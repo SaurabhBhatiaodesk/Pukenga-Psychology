@@ -3,48 +3,63 @@
 <div class="pukenga-breadcrumb pukenga-section section">
   <div class="pukenga-container">
     <nav class="pukenga-breadcrumb__nav" aria-label="Breadcrumb">
-      <a href="{{ routes.root_url }}" class="pukenga-breadcrumb__link">{{ section.settings.home_label }}</a>
+      <a href="{{ routes.root_url }}" class="pukenga-breadcrumb__link">
+        {{ section.settings.home_label }}
+      </a>
+
       <span class="pukenga-breadcrumb__sep" aria-hidden="true">/</span>
-      <a href="{{ routes.all_products_collection_url }}" class="pukenga-breadcrumb__link">{{ section.settings.shop_label }}</a>
+
+      <a href="{{ routes.all_products_collection_url }}" class="pukenga-breadcrumb__link">
+        {{ section.settings.shop_label }}
+      </a>
+
       {%- if product != blank -%}
         <span class="pukenga-breadcrumb__sep" aria-hidden="true">/</span>
-        <span class="pukenga-breadcrumb__current">{{ product.title }}</span>
+
+        <span class="pukenga-breadcrumb__current">
+          {{ product.title }}
+        </span>
       {%- endif -%}
     </nav>
   </div>
 </div>
 
+
 {% stylesheet %}
-  .pukenga-breadcrumb {
-    padding-block: 18px 0;
-  }
 
-  .pukenga-breadcrumb__nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--pukenga-muted);
-  }
+.pukenga-breadcrumb {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
 
-  .pukenga-breadcrumb__link {
-    color: var(--pukenga-muted);
-    text-decoration: none;
-  }
+.pukenga-breadcrumb__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: {{ section.settings.item_gap }}px;
+  font-size: 13px;
+  color: var(--pukenga-muted);
+}
 
-  .pukenga-breadcrumb__link:hover {
-    color: var(--pukenga-gold);
-  }
+.pukenga-breadcrumb__link {
+  color: var(--pukenga-muted);
+  text-decoration: none;
+}
 
-  .pukenga-breadcrumb__sep {
-    opacity: 0.5;
-  }
+.pukenga-breadcrumb__link:hover {
+  color: var(--pukenga-gold);
+}
 
-  .pukenga-breadcrumb__current {
-    color: var(--pukenga-cream-soft);
-  }
+.pukenga-breadcrumb__sep {
+  opacity: 0.5;
+}
+
+.pukenga-breadcrumb__current {
+  color: var(--pukenga-cream-soft);
+}
+
 {% endstylesheet %}
+
 
 {% schema %}
 {
@@ -62,6 +77,40 @@
       "id": "shop_label",
       "label": "Shop label",
       "default": "Toa · Shop"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Breadcrumb item gap",
+      "min": 2,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
     }
   ],
   "presets": [

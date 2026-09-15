@@ -130,6 +130,12 @@
         </div>
       {%- endif -%}
     </div>
+
+    <div
+      class="pukenga-recommended__dots"
+      aria-label="Recommended products navigation"
+      data-recommended-dots
+    ></div>
   </div>
 </section>
 
@@ -340,6 +346,10 @@
     color: var(--pukenga-cream-soft, #ece5d4);
   }
 
+  .pukenga-recommended__dots {
+    display: none;
+  }
+
   @media screen and (max-width: 989px) {
     .pukenga-recommended .pukenga-best-sellers__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -374,9 +384,65 @@
       font-size: 21px;
     }
 
+    .pukenga-recommended .pukenga-recommended__content {
+      margin-right: -20px;
+    }
+
     .pukenga-recommended .pukenga-best-sellers__grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      display: flex;
+      width: 100%;
+      gap: {{ section.settings.mobile_grid_gap }}px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+      padding-right: 20px;
+    }
+
+    .pukenga-recommended .pukenga-best-sellers__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pukenga-recommended .pukenga-product-card {
+      flex: 0 0 calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      width: calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      min-width: calc(
+        (
+          100% -
+          (
+            {{ section.settings.mobile_columns }} - 1
+          ) *
+          {{ section.settings.mobile_grid_gap }}px
+        ) /
+        {{ section.settings.mobile_columns }}
+      );
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
 
     .pukenga-recommended .pukenga-product-card__media {
@@ -394,6 +460,38 @@
     .pukenga-recommended .pukenga-product-card__title {
       font-size: 19px;
       margin-bottom: 8px;
+    }
+
+    .pukenga-recommended__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .pukenga-recommended__dot {
+      display: block;
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(242, 236, 220, 0.28);
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition:
+        width 0.25s ease,
+        background 0.25s ease,
+        border-radius 0.25s ease;
+    }
+
+    .pukenga-recommended__dot.is-active {
+      width: 26px;
+      border-radius: 10px;
+      background: var(--pukenga-gold, #e0b784);
     }
   }
 
@@ -415,6 +513,79 @@
 
     const content = section.querySelector('[data-recommendations-content]');
     const url = content && content.dataset.url;
+    const dotsContainer = section.querySelector('[data-recommended-dots]');
+    let dotCleanup;
+
+    function setupMobileDots() {
+      const slider = section.querySelector('.pukenga-best-sellers__grid');
+      const cards = slider ? Array.from(slider.querySelectorAll('.pukenga-product-card')) : [];
+
+      if (!slider || !dotsContainer || cards.length <= 1) {
+        if (dotsContainer) dotsContainer.innerHTML = '';
+        return;
+      }
+
+      if (dotCleanup) dotCleanup();
+
+      dotsContainer.innerHTML = '';
+
+      cards.forEach(function (card, index) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pukenga-recommended__dot' + (index === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to recommended product ' + (index + 1));
+
+        dot.addEventListener('click', function () {
+          slider.scrollTo({
+            left: card.offsetLeft,
+            behavior: 'smooth'
+          });
+        });
+
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsContainer.querySelectorAll('.pukenga-recommended__dot'));
+      let ticking = false;
+
+      function updateActiveDot() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cards.forEach(function (card, index) {
+          const distance = Math.abs(card.offsetLeft - slider.scrollLeft);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        dots.forEach(function (dot, index) {
+          dot.classList.toggle('is-active', index === closestIndex);
+        });
+      }
+
+      function handleScroll() {
+        if (ticking) return;
+
+        window.requestAnimationFrame(function () {
+          updateActiveDot();
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+
+      slider.addEventListener('scroll', handleScroll);
+      window.addEventListener('resize', updateActiveDot);
+      updateActiveDot();
+
+      dotCleanup = function () {
+        slider.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', updateActiveDot);
+      };
+    }
 
     if (url && !content.querySelector('.pukenga-product-card')) {
       fetch(url)
@@ -428,11 +599,14 @@
 
           if (updatedContent && updatedContent.innerHTML.trim().length) {
             content.innerHTML = updatedContent.innerHTML;
+            setupMobileDots();
           }
         })
         .catch(function (error) {
           console.error(error);
         });
+    } else {
+      setupMobileDots();
     }
 
     section.addEventListener('click', function (event) {
@@ -596,6 +770,29 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Mobile slider"
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Visible cards",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.35
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_gap",
+      "label": "Card gap",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
     }
   ],
   "presets": [
