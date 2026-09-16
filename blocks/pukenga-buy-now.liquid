@@ -1,0 +1,154 @@
+{% liquid
+  assign product_resource = closest.product
+  if request.visual_preview_mode and product_resource == blank
+    assign product_resource = collections.all.products.first
+  endif
+
+  assign current_variant = product_resource.selected_or_first_available_variant
+%}
+
+{% if product_resource != blank %}
+  <div
+    class="pukenga-buy-now-block pukenga-buy-now-block--{{ block.id }}"
+    {{ block.shopify_attributes }}
+  >
+    <button
+      type="button"
+      class="pukenga-buy-now-button"
+      data-pukenga-buy-now
+      {% unless current_variant.available %}
+        disabled
+      {% endunless %}
+    >
+      {{ block.settings.label | escape }}
+    </button>
+  </div>
+
+  <style>
+    .pukenga-buy-now-block--{{ block.id }} {
+      width: 100%;
+      padding-top: {{ block.settings.padding_top }}px;
+      padding-bottom: {{ block.settings.padding_bottom }}px;
+    }
+
+    .pukenga-buy-now-block--{{ block.id }} .pukenga-buy-now-button {
+      height: {{ block.settings.height }}px;
+      border-color: {{ block.settings.border_color }};
+      color: {{ block.settings.text_color }};
+      font-size: {{ block.settings.font_size }}px;
+      background: {{ block.settings.background_color }};
+    }
+  </style>
+
+  <script>
+    (function () {
+      const block = document.currentScript.previousElementSibling.previousElementSibling;
+      const button = block && block.querySelector('[data-pukenga-buy-now]');
+
+      if (!button) return;
+
+      button.addEventListener('click', function () {
+        const productForm = document.getElementById('BuyButtons-ProductForm-{{ section.id }}')
+          || document.querySelector('product-form-component form[action*="/cart/add"]');
+
+        if (!productForm) return;
+
+        let returnTo = productForm.querySelector('input[name="return_to"]');
+
+        if (!returnTo) {
+          returnTo = document.createElement('input');
+          returnTo.type = 'hidden';
+          returnTo.name = 'return_to';
+          productForm.appendChild(returnTo);
+        }
+
+        returnTo.value = '/checkout';
+
+        if (typeof productForm.requestSubmit === 'function') {
+          productForm.requestSubmit();
+        } else {
+          productForm.submit();
+        }
+      });
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Pukenga Buy Now",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button label",
+      "default": "Buy it now"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Button height",
+      "min": 44,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 62
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "rgba(0,0,0,0)",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#f2ecdc"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#697767"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pukenga Buy Now"
+    }
+  ]
+}
+{% endschema %}
