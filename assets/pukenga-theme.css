@@ -35,6 +35,9 @@ body .yotpo-bottom-line-basic-text {
 body  .card-container[data-v-5fd642f6]{
   background: #fff;
 }
+body .yotpo-body-text{
+  color: var(--pukenga-cream, #f2ecdc);
+}
 body  .yotpo-vertical-pagination .yotpo-reviews-pagination-item[data-v-7efcf362] {
     padding: 10px;
     height: auto;
@@ -287,5 +290,97 @@ body {
   .product-information .add-to-cart-button,
   .product-information .pukenga-buy-now-button {
     height: 58px;
+  }
+}
+
+/* Product variant pills */
+.product-information .variant-picker {
+  margin-bottom: 6px;
+}
+
+.product-information .variant-option--buttons {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-information .variant-option--equal-width-buttons {
+  grid-template-columns: none !important;
+}
+
+.product-information .variant-option--buttons legend {
+  width: 100%;
+  margin: 0 0 10px;
+  color: rgba(242, 236, 220, 0.66);
+  font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.product-information .variant-option__button-label {
+  flex: 0 0 auto;
+  min-width: 0 !important;
+  min-height: 48px;
+  padding: 0 26px !important;
+  border: 1px solid rgba(242, 236, 220, 0.36);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pukenga-cream, #f2ecdc);
+  font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.product-information .variant-option__button-label::before,
+.product-information .variant-option__button-label::after {
+  display: none;
+}
+
+.product-information .variant-option__button-label__pill {
+  inset: 0;
+  width: 100% !important;
+  transform: none !important;
+  border-radius: inherit;
+  background: transparent;
+}
+
+.product-information .variant-option__button-label:has(:checked) {
+  border-color: var(--pukenga-gold, #e0b784);
+  color: var(--pukenga-bg, #16281b);
+}
+
+.product-information .variant-option__button-label:has(:checked) .variant-option__button-label__pill {
+  background: var(--pukenga-gold, #e0b784);
+}
+
+.product-information .variant-option__button-label:hover {
+  border-color: rgba(224, 183, 132, 0.78);
+  background: rgba(224, 183, 132, 0.06);
+  color: var(--pukenga-cream, #f2ecdc);
+}
+
+.product-information .variant-option__button-label:has(:checked):hover {
+  color: var(--pukenga-bg, #16281b);
+}
+
+.product-information .variant-option__button-label__text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  .product-information .variant-option--buttons {
+    gap: 10px;
+  }
+
+  .product-information .variant-option__button-label {
+    min-height: 46px;
+    padding-inline: 24px !important;
+    font-size: 14px;
   }
 }
