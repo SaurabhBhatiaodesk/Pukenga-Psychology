@@ -26,6 +26,9 @@ body .yotpo-bold-layout .yotpo-headline {
   font-weight: 300;
   font-family: var(--pukenga-font-heading);
 }
+body .yotpo-filters-container .yotpo-filters-container-inner{
+  color: var(--pukenga-cream, #f2ecdc);
+}
 body .yotpo-bottom-line-basic-text {
   color: var(--pukenga-cream, #f2ecdc);
 }
