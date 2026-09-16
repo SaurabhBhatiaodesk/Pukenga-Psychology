@@ -237,17 +237,7 @@ body {
   font-weight: 600;
 }
 
-.product-information .add-to-cart-button {
-  height: 60px;
-  border: 1px solid var(--pukenga-gold, #e0b784) !important;
-  border-radius: 999px !important;
-  background: var(--pukenga-gold, #e0b784) !important;
-  color: var(--pukenga-bg, #16281b) !important;
-  font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: none;
-}
+
 
 .product-information .add-to-cart-button .add-to-cart-icon {
   display: none;
