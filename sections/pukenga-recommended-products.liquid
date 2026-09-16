@@ -365,25 +365,35 @@
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px !important;
     }
 
+    .pukenga-recommended .section {
+      overflow: hidden;
+    }
+
     .pukenga-recommended .pukenga-best-sellers__header {
       align-items: flex-start;
-      margin-bottom: 30px;
+      margin-bottom: 34px;
     }
 
     .pukenga-recommended .pukenga-best-sellers__title-wrap {
+      display: block;
       gap: 8px;
     }
 
     .pukenga-recommended .pukenga-best-sellers__heading {
-      font-size: 30px;
+      max-width: 390px;
+      font-size: 32px;
+      line-height: 1.35;
     }
 
     .pukenga-recommended .pukenga-best-sellers__eyebrow {
-      font-size: 21px;
+      display: block;
+      margin-top: 4px;
+      font-size: 24px;
+      line-height: 1.2;
     }
 
     .pukenga-recommended .pukenga-recommended__content {
-      margin-right: -20px;
+      margin-right: -32px;
     }
 
     .pukenga-recommended .pukenga-best-sellers__grid {
@@ -398,7 +408,7 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       overscroll-behavior-x: contain;
-      padding-right: 20px;
+      padding-right: 32px;
     }
 
     .pukenga-recommended .pukenga-best-sellers__grid::-webkit-scrollbar {
@@ -406,49 +416,21 @@
     }
 
     .pukenga-recommended .pukenga-product-card {
-      flex: 0 0 calc(
-        (
-          100% -
-          (
-            {{ section.settings.mobile_columns }} - 1
-          ) *
-          {{ section.settings.mobile_grid_gap }}px
-        ) /
-        {{ section.settings.mobile_columns }}
-      );
-
-      width: calc(
-        (
-          100% -
-          (
-            {{ section.settings.mobile_columns }} - 1
-          ) *
-          {{ section.settings.mobile_grid_gap }}px
-        ) /
-        {{ section.settings.mobile_columns }}
-      );
-
-      min-width: calc(
-        (
-          100% -
-          (
-            {{ section.settings.mobile_columns }} - 1
-          ) *
-          {{ section.settings.mobile_grid_gap }}px
-        ) /
-        {{ section.settings.mobile_columns }}
-      );
-
+      flex: 0 0 min(72vw, 290px);
+      width: min(72vw, 290px);
+      min-width: min(72vw, 290px);
+      border-radius: 10px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
     }
 
     .pukenga-recommended .pukenga-product-card__media {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
     }
 
     .pukenga-recommended .pukenga-product-card__info {
-      padding: 20px;
+      min-height: 140px;
+      padding: 22px 24px 26px;
     }
 
     .pukenga-recommended .pukenga-product-card__price-current {
@@ -456,16 +438,13 @@
     }
 
     .pukenga-recommended .pukenga-product-card__title {
-      font-size: 19px;
+      font-size: 23px;
+      line-height: 1.4;
       margin-bottom: 8px;
     }
 
     .pukenga-recommended__dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-top: 24px;
+      display: none;
     }
 
     .pukenga-recommended__dot {
