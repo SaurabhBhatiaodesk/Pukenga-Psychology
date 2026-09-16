@@ -1,4 +1,15 @@
+{%- liquid
+  assign about_section_id = section.settings.section_id | strip
+
+  if about_section_id == blank
+    assign about_section_id = 'pukenga-about-' | append: section.id
+  else
+    assign about_section_id = about_section_id | handleize
+  endif
+-%}
+
 <section
+  id="{{ about_section_id }}"
   class="pukenga-about pukenga-about-{{ section.id }}"
   style="background: {{ section.settings.background_color }};"
 >
@@ -394,6 +405,13 @@
   "class": "section-pukenga-about",
 
   "settings": [
+
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Optional anchor ID. Leave blank to use this section's unique Shopify ID."
+    },
 
     {
       "type": "header",
