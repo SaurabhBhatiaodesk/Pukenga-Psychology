@@ -212,8 +212,6 @@ body {
 }
 
 .product-information .quantity-selector {
-  width: 130px;
-  height: 60px;
   border: 1px solid rgba(242, 236, 220, 0.32);
   border-radius: 999px;
   background: transparent;
@@ -271,10 +269,7 @@ body {
     min-width: 128px;
   }
 
-  .product-information .quantity-selector {
-    width: 128px;
-    height: 58px;
-  }
+
 
   .product-information .add-to-cart-button,
   .product-information .pukenga-buy-now-button {
