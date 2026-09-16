@@ -68,6 +68,7 @@
     "pukenga_about_eNePzt": {
       "type": "pukenga-about",
       "settings": {
+        "section_id": "",
         "image": "shopify://shop_images/773f9f74-e8a9-4753-887f-e73b5648024a.jpg",
         "desktop_image_position": "left",
         "desktop_content_width": "1fr",
@@ -94,8 +95,11 @@
         "text_margin_bottom": 20,
         "signature_margin_bottom": 24,
         "mobile_gap": 32,
-        "small_mobile_gap": 24,
-        "mobile_heading_size": 32,
+        "small_mobile_gap": 10,
+        "mobile_heading_size": 22,
+        "mobile_content_padding_top": 22,
+        "mobile_content_padding_horizontal": 16,
+        "mobile_content_padding_bottom": 0,
         "padding_top": 0,
         "padding_bottom": 0,
         "mobile_padding_top": 0,
@@ -160,6 +164,7 @@
     "pukenga_about": {
       "type": "pukenga-about",
       "settings": {
+        "section_id": "",
         "image": "shopify://shop_images/c6ce96ec-cc98-4c88-bc26-2a2193ea51ed.jpg",
         "mobile_image": "shopify://shop_images/88d83923-64cd-4eaf-8e0c-f4daba7d1d2f.jpg",
         "desktop_image_position": "right",
@@ -189,10 +194,13 @@
         "mobile_gap": 32,
         "small_mobile_gap": 24,
         "mobile_heading_size": 32,
+        "mobile_content_padding_top": 22,
+        "mobile_content_padding_horizontal": 16,
+        "mobile_content_padding_bottom": 0,
         "padding_top": 0,
         "padding_bottom": 0,
         "mobile_padding_top": 0,
-        "mobile_padding_bottom": 0
+        "mobile_padding_bottom": 40
       }
     },
     "pukenga_testimonials": {
