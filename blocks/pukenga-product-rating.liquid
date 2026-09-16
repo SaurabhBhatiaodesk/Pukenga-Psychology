@@ -1,29 +1,36 @@
-<div class="pukenga-product-rating" {{ block.shopify_attributes }}>
+<div
+  id="pukenga-product-rating-{{ block.id }}"
+  class="pukenga-product-rating"
+  {{ block.shopify_attributes }}
+>
 
+  <!-- PRICE -->
   <div class="pukenga-product-rating__price-wrapper">
-
     <span class="pukenga-product-rating__price">
       {{ product.price | money }}
     </span>
-
   </div>
 
 
+  <!-- RATING -->
   <div class="pukenga-product-rating__reviews">
 
+    <!-- YOTPO STARS -->
     <div
       class="yotpo-widget-instance pukenga-product-rating__yotpo"
       data-yotpo-instance-id="{{ block.settings.yotpo_instance_id }}"
       data-yotpo-product-id="{{ product.id }}"
       data-yotpo-cart-product-id="{{ product.id }}"
-      data-yotpo-name="{{ product.title | escape }}"
-      data-yotpo-url="{{ shop.url }}{{ product.url }}"
-      data-yotpo-image-url="{{ product.featured_image | product_img_url: 'large' | prepend: 'https:' | replace: '?', '%3F' | replace: '&', '%26' }}"
-      data-yotpo-price="{{ product.price | divided_by: 100.00 }}"
-      data-yotpo-currency="{{ shop.currency }}"
-      data-yotpo-description="{{ product.description | escape }}"
-      data-yotpo-section-id="{{ template.name }}">
-    </div>
+      data-yotpo-section-id="{{ template.name }}"
+    ></div>
+
+
+    <!-- ACTUAL REVIEW COUNT -->
+    <span
+      class="pukenga-product-rating__count"
+      data-pukenga-review-count
+      hidden
+    ></span>
 
   </div>
 
@@ -32,112 +39,724 @@
 
 <style>
 
-.pukenga-product-rating {
+  /* ==========================================
+     WRAPPER
+  ========================================== */
 
-  display:flex;
-  align-items:center;
-  gap:18px;
-
-}
-
-
-.pukenga-product-rating__price-wrapper {
-
-  display:flex;
-  align-items:center;
-
-}
-
-
-.pukenga-product-rating__price {
-
-  color:{{ block.settings.price_color }};
-  font-size:{{ block.settings.price_size }}px;
-  font-weight:400;
-  line-height:1;
-
-}
-
-
-.pukenga-product-rating__reviews {
-
-  display:flex;
-  align-items:center;
-  min-height:22px;
-
-}
-
-
-@media screen and (max-width:749px){
-
-  .pukenga-product-rating {
-
-    gap:12px;
-
+  #pukenga-product-rating-{{ block.id }} {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: {{ block.settings.desktop_gap }}px;
   }
 
 
+  /* ==========================================
+     PRICE
+  ========================================== */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__price-wrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+
+  #pukenga-product-rating-{{ block.id }}
   .pukenga-product-rating__price {
-
-    font-size:{{ block.settings.mobile_price_size }}px;
-
+    color: {{ block.settings.price_color }};
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: {{ block.settings.price_weight }};
+    line-height: 1;
   }
 
-}
+
+  /* ==========================================
+     REVIEWS
+  ========================================== */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__reviews {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.review_gap }}px;
+    min-height: 24px;
+  }
+
+
+  /* ==========================================
+     YOTPO STARS
+  ========================================== */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__yotpo {
+    display: flex;
+    align-items: center;
+  }
+
+
+  /*
+    Hide Yotpo native count text because
+    we display the synced actual count separately.
+  */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__yotpo
+  .yotpo-sr-bottom-line-text {
+    display: none !important;
+  }
+
+
+  /* ==========================================
+     REVIEW COUNT
+  ========================================== */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__count {
+    display: inline-flex;
+    align-items: center;
+
+    color: {{ block.settings.review_color }};
+
+    font-size: {{ block.settings.review_size }}px;
+    font-weight: 400;
+
+    line-height: 1;
+    white-space: nowrap;
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-product-rating__count[hidden] {
+    display: none !important;
+  }
+
+
+  /* ==========================================
+     MOBILE
+  ========================================== */
+
+  @media screen and (max-width: 749px) {
+
+    #pukenga-product-rating-{{ block.id }} {
+      gap: {{ block.settings.mobile_gap }}px;
+    }
+
+
+    #pukenga-product-rating-{{ block.id }}
+    .pukenga-product-rating__price {
+      font-size: {{ block.settings.mobile_price_size }}px;
+    }
+
+
+    #pukenga-product-rating-{{ block.id }}
+    .pukenga-product-rating__reviews {
+      gap: {{ block.settings.mobile_review_gap }}px;
+    }
+
+
+    #pukenga-product-rating-{{ block.id }}
+    .pukenga-product-rating__count {
+      font-size: {{ block.settings.mobile_review_size }}px;
+    }
+
+  }
 
 </style>
+
+
+<script>
+  (function () {
+
+    const root = document.getElementById(
+      'pukenga-product-rating-{{ block.id }}'
+    );
+
+    if (!root) return;
+
+
+    const starWidget = root.querySelector(
+      '.pukenga-product-rating__yotpo'
+    );
+
+    const countElement = root.querySelector(
+      '[data-pukenga-review-count]'
+    );
+
+
+    if (!countElement) return;
+
+
+    let reviewCountFound = false;
+
+
+    /* ==========================================
+       FORMAT COUNT
+    ========================================== */
+
+    function showReviewCount(count) {
+
+      if (!count) return;
+
+      count = String(count)
+        .replace(/,/g, '')
+        .trim();
+
+
+      if (!/^\d+$/.test(count)) {
+        return;
+      }
+
+
+      const number = parseInt(count, 10);
+
+      if (Number.isNaN(number)) {
+        return;
+      }
+
+
+      countElement.textContent =
+        '' +
+        number +
+        ' ' +
+        (number === 1 ? 'review' : ' arotakenga · reviews') +
+        '';
+
+
+      countElement.hidden = false;
+
+      reviewCountFound = true;
+
+    }
+
+
+    /* ==========================================
+       1. GET COUNT FROM STAR RATING WIDGET
+    ========================================== */
+
+    function getCountFromStarWidget() {
+
+      if (!starWidget) return false;
+
+
+      const selectors = [
+        '.yotpo-sr-bottom-line-text',
+        '[class*="bottom-line-text"]',
+        '[class*="review-count"]',
+        '[class*="reviews-count"]'
+      ];
+
+
+      for (let i = 0; i < selectors.length; i++) {
+
+        const elements =
+          starWidget.querySelectorAll(selectors[i]);
+
+
+        for (let j = 0; j < elements.length; j++) {
+
+          const text =
+            elements[j].textContent.trim();
+
+
+          const match =
+            text.match(/([\d,]+)\s*reviews?/i);
+
+
+          if (match && match[1]) {
+
+            showReviewCount(match[1]);
+
+            return true;
+
+          }
+
+        }
+
+      }
+
+
+      return false;
+
+    }
+
+
+    /* ==========================================
+       2. GET COUNT FROM MAIN YOTPO REVIEWS
+       
+       Example:
+       "Based on 16 reviews"
+    ========================================== */
+
+    function getCountFromMainReviews() {
+
+      const selectors = [
+
+        '.yotpo-reviews-main-widget',
+
+        '.yotpo-main-widget',
+
+        '[id*="yotpo-reviews"]',
+
+        '[class*="yotpo-reviews"]',
+
+        '[data-yotpo-element-id]'
+
+      ];
+
+
+      const checked = new Set();
+
+
+      for (let i = 0; i < selectors.length; i++) {
+
+        const elements =
+          document.querySelectorAll(selectors[i]);
+
+
+        for (let j = 0; j < elements.length; j++) {
+
+          const element = elements[j];
+
+
+          if (
+            element === root ||
+            root.contains(element)
+          ) {
+            continue;
+          }
+
+
+          if (checked.has(element)) {
+            continue;
+          }
+
+
+          checked.add(element);
+
+
+          const text =
+            element.innerText ||
+            element.textContent ||
+            '';
+
+
+          /*
+            FIRST PRIORITY:
+
+            Based on 16 reviews
+          */
+
+          const basedOnMatch =
+            text.match(
+              /based\s+on\s+([\d,]+)\s+reviews?/i
+            );
+
+
+          if (
+            basedOnMatch &&
+            basedOnMatch[1]
+          ) {
+
+            showReviewCount(
+              basedOnMatch[1]
+            );
+
+            return true;
+
+          }
+
+        }
+
+      }
+
+
+      return false;
+
+    }
+
+
+    /* ==========================================
+       3. FIND "BASED ON X REVIEWS" ANYWHERE
+       INSIDE YOTPO ELEMENTS
+    ========================================== */
+
+    function getCountFromYotpoText() {
+
+      const allElements =
+        document.querySelectorAll(
+          '[class*="yotpo"], [id*="yotpo"]'
+        );
+
+
+      for (
+        let i = 0;
+        i < allElements.length;
+        i++
+      ) {
+
+        const element =
+          allElements[i];
+
+
+        if (
+          element === root ||
+          root.contains(element)
+        ) {
+          continue;
+        }
+
+
+        const text =
+          element.innerText ||
+          element.textContent ||
+          '';
+
+
+        const match =
+          text.match(
+            /based\s+on\s+([\d,]+)\s+reviews?/i
+          );
+
+
+        if (
+          match &&
+          match[1]
+        ) {
+
+          showReviewCount(
+            match[1]
+          );
+
+          return true;
+
+        }
+
+      }
+
+
+      return false;
+
+    }
+
+
+    /* ==========================================
+       FIND REVIEW COUNT
+    ========================================== */
+
+    function findReviewCount() {
+
+      /*
+        Always prefer the actual
+        main reviews count first.
+
+        Example:
+        Based on 16 reviews
+      */
+
+      if (getCountFromMainReviews()) {
+        return;
+      }
+
+
+      if (getCountFromYotpoText()) {
+        return;
+      }
+
+
+      /*
+        Fallback:
+        Star Rating own count
+      */
+
+      getCountFromStarWidget();
+
+    }
+
+
+    /* ==========================================
+       FIRST RUN
+    ========================================== */
+
+    findReviewCount();
+
+
+    /* ==========================================
+       YOTPO LOADS ASYNC,
+       SO CHECK AGAIN FOR A FEW SECONDS
+    ========================================== */
+
+    let attempts = 0;
+
+    const maxAttempts = 30;
+
+
+    const interval = window.setInterval(
+      function () {
+
+        attempts++;
+
+
+        /*
+          Keep checking because Yotpo
+          may load main reviews after stars.
+        */
+
+        findReviewCount();
+
+
+        if (
+          attempts >= maxAttempts
+        ) {
+
+          window.clearInterval(interval);
+
+        }
+
+      },
+      500
+    );
+
+
+    /* ==========================================
+       OBSERVE YOTPO ASYNC CHANGES
+    ========================================== */
+
+    let observerTimer;
+
+
+    const observer =
+      new MutationObserver(function () {
+
+        window.clearTimeout(
+          observerTimer
+        );
+
+
+        observerTimer =
+          window.setTimeout(
+            function () {
+
+              findReviewCount();
+
+            },
+            100
+          );
+
+      });
+
+
+    observer.observe(
+      document.body,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+
+
+    /*
+      Stop observer after 20 seconds
+      to avoid running forever.
+    */
+
+    window.setTimeout(
+      function () {
+
+        observer.disconnect();
+
+        window.clearTimeout(
+          observerTimer
+        );
+
+        window.clearInterval(
+          interval
+        );
+
+      },
+      20000
+    );
+
+  })();
+</script>
 
 
 {% schema %}
 {
   "name": "Product Price Review",
+
   "settings": [
+
+    {
+      "type": "header",
+      "content": "Yotpo"
+    },
 
     {
       "type": "text",
       "id": "yotpo_instance_id",
-      "label": "Yotpo Rating Instance ID",
+      "label": "Yotpo Star Rating Instance ID",
       "default": "379774"
     },
 
 
     {
+      "type": "header",
+      "content": "Price"
+    },
+
+    {
       "type": "range",
       "id": "price_size",
       "label": "Desktop price size",
-      "min":18,
-      "max":60,
-      "step":2,
-      "unit":"px",
-      "default":32
+      "min": 18,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_price_size",
+      "label": "Mobile price size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+
+    {
+      "type": "select",
+      "id": "price_weight",
+      "label": "Price font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#e0b784"
     },
 
 
     {
-      "type":"range",
-      "id":"mobile_price_size",
-      "label":"Mobile price size",
-      "min":16,
-      "max":40,
-      "step":2,
-      "unit":"px",
-      "default":24
+      "type": "header",
+      "content": "Review count"
+    },
+
+    {
+      "type": "range",
+      "id": "review_size",
+      "label": "Desktop review count size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_review_size",
+      "label": "Mobile review count size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+
+    {
+      "type": "color",
+      "id": "review_color",
+      "label": "Review count color",
+      "default": "#e0b784"
     },
 
 
     {
-      "type":"color",
-      "id":"price_color",
-      "label":"Price color",
-      "default":"#d98b4e"
+      "type": "header",
+      "content": "Spacing"
+    },
+
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "label": "Price and rating gap",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+
+    {
+      "type": "range",
+      "id": "review_gap",
+      "label": "Stars and review count gap",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile price and rating gap",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_review_gap",
+      "label": "Mobile stars and review count gap",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 6
     }
 
   ],
 
-
-  "presets":[
+  "presets": [
     {
-      "name":"Product Price Review"
+      "name": "Product Price Review"
     }
   ]
 }
