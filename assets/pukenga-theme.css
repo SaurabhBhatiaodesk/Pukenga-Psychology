@@ -253,8 +253,8 @@ body {
   background: transparent;
   color: var(--pukenga-cream, #f2ecdc);
   font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight:600;
   cursor: pointer;
 }
 
@@ -271,10 +271,10 @@ body {
 
 
 
-  .product-information .add-to-cart-button,
+  /* .product-information .add-to-cart-button,
   .product-information .pukenga-buy-now-button {
     height: 58px;
-  }
+  } */
 }
 
 /* Product variant pills */
