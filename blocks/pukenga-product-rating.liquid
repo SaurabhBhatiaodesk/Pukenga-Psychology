@@ -30,16 +30,6 @@
         data-yotpo-section-id="{{ template.name }}">
       </div>
 
-      {%- if block.settings.show_count_fallback -%}
-        <span
-          class="pukenga-product-rating__count"
-          data-yotpo-review-count
-          data-yotpo-app-key="{{ block.settings.yotpo_app_key | escape }}"
-          data-yotpo-product-id="{{ product.id }}"
-          hidden
-        ></span>
-      {%- endif -%}
-
     </div>
   {%- endif -%}
 
@@ -102,24 +92,6 @@
 
 }
 
-.pukenga-product-rating__count {
-
-  color:{{ block.settings.count_color }};
-  font-size:{{ block.settings.count_size }}px;
-  line-height:1;
-  white-space:nowrap;
-
-}
-
-.pukenga-product-rating__count:not([hidden]) {
-
-  display:inline-flex;
-  align-items:center;
-
-}
-
-
-
 @media screen and (max-width:749px){
 
   .pukenga-product-rating {
@@ -138,35 +110,6 @@
 }
 
 </style>
-
-<script>
-  (function () {
-    const root = document.getElementById('pukenga-product-rating-{{ block.id }}');
-    if (!root) return;
-
-    const count = root.querySelector('[data-yotpo-review-count]');
-    if (!count) return;
-
-    const appKey = count.getAttribute('data-yotpo-app-key');
-    const productId = count.getAttribute('data-yotpo-product-id');
-    if (!appKey || !productId) return;
-
-    fetch('https://api-cdn.yotpo.com/v1/widget/' + encodeURIComponent(appKey) + '/products/' + encodeURIComponent(productId) + '/reviews.json?per_page=1')
-      .then(function (response) {
-        if (!response.ok) throw new Error('Unable to load Yotpo review count.');
-        return response.json();
-      })
-      .then(function (data) {
-        const bottomline = data && data.response && data.response.bottomline;
-        const total = bottomline && Number(bottomline.total_review);
-        if (!total || total < 1) return;
-
-        count.textContent = '(' + total + ' reviews)';
-        count.hidden = false;
-      })
-      .catch(function () {});
-  })();
-</script>
 
 
 
@@ -188,22 +131,6 @@
       "id": "yotpo_instance_id",
       "label": "Yotpo Instance ID",
       "default": "379774"
-    },
-
-
-    {
-      "type": "checkbox",
-      "id": "show_count_fallback",
-      "label": "Show review count fallback",
-      "default": true
-    },
-
-
-    {
-      "type": "text",
-      "id": "yotpo_app_key",
-      "label": "Yotpo app key",
-      "default": "LmBJp2Tmc8izhsGB2HM6BjseonnuA3cQqtS3I7yk"
     },
 
 
@@ -236,26 +163,6 @@
       "id":"price_color",
       "label":"Price color",
       "default":"#d98b4e"
-    },
-
-
-    {
-      "type":"range",
-      "id":"count_size",
-      "label":"Review count size",
-      "min":10,
-      "max":24,
-      "step":1,
-      "unit":"px",
-      "default":13
-    },
-
-
-    {
-      "type":"color",
-      "id":"count_color",
-      "label":"Review count color",
-      "default":"#f2ecdc"
     }
 
   ],
