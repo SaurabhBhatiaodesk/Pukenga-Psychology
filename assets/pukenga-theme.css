@@ -352,6 +352,9 @@ body {
   text-align: center;
   text-wrap: nowrap;
 }
+body .yotpo-dropdown-label.yotpo-dropdown-label--inside{
+  color:#000;
+}
 
 @media screen and (max-width: 749px) {
   .product-information .variant-option--buttons {
