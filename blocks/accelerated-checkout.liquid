@@ -18,15 +18,9 @@
   endif
 %}
 
-{% capture accelerated_checkout_button %}
-  {% if product != blank and form_obj != blank %}
-    {{ form_obj | payment_button }}
-  {% endif %}
-{% endcapture %}
-
-{% if accelerated_checkout_button != blank %}
+{% if product != blank and form_obj != blank %}
   <div
-    class="accelerated-checkout-block"
+    class="accelerated-checkout-block pukenga-buy-now-block"
     ref="acceleratedCheckoutButtonContainer"
     {{ block.shopify_attributes }}
     {% if request.visual_preview_mode %}
@@ -36,7 +30,17 @@
       hidden
     {% endunless %}
   >
-    {{ accelerated_checkout_button }}
+    <button
+      type="submit"
+      name="return_to"
+      value="/checkout"
+      class="pukenga-buy-now-button"
+      {% unless can_add_to_cart %}
+        disabled
+      {% endunless %}
+    >
+      Buy it now
+    </button>
   </div>
 {% endif %}
 
