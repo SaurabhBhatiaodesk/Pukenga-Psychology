@@ -352,6 +352,10 @@ body {
   text-align: center;
   text-wrap: nowrap;
 }
+body .yotpo-filters-top-panel .yotpo-selected-value__value{
+  color:#000;
+  font-weight:300;
+}
 body .yotpo-dropdown-label.yotpo-dropdown-label--inside{
   color:#000;
 }
