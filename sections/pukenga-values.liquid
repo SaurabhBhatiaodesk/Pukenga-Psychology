@@ -1,5 +1,5 @@
 <section class="pukenga-values" id="pukenga-values-{{ section.id }}">
-  <div class="pukenga-values__inner">
+  <div class="pukenga-values__inner" data-pukenga-values-slider>
     {%- for block in section.blocks -%}
       <div class="pukenga-values__item" {{ block.shopify_attributes }}>
         {%- if block.settings.heading != blank -%}
@@ -12,6 +12,22 @@
       </div>
     {%- endfor -%}
   </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="pukenga-values__dots" data-pukenga-values-dots aria-label="Pukenga values navigation">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="pukenga-values__dot{% if forloop.first %} is-active{% endif %}"
+          data-pukenga-values-dot
+          aria-label="Go to value {{ forloop.index }}"
+          {% if forloop.first %}
+            aria-current="true"
+          {% endif %}
+        ></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
@@ -61,22 +77,127 @@
     margin: 0;
   }
 
+  #pukenga-values-{{ section.id }} .pukenga-values__dots {
+    display: none;
+  }
+
   @media screen and (max-width: 749px) {
     #pukenga-values-{{ section.id }} .pukenga-values__inner {
-      grid-template-columns: 1fr;
+      display: flex;
+      max-width: none;
+      margin: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__inner::-webkit-scrollbar {
+      display: none;
     }
 
     #pukenga-values-{{ section.id }} .pukenga-values__item {
+      flex: 0 0 100%;
       padding: {{ section.settings.mobile_padding_y }}px 24px;
       border-right: 0;
-      border-bottom: 1px solid {{ section.settings.divider_color }};
+      border-bottom: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
 
-    #pukenga-values-{{ section.id }} .pukenga-values__item:last-child {
-      border-bottom: 0;
+    #pukenga-values-{{ section.id }} .pukenga-values__dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 0 18px;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(216, 211, 197, 0.35);
+      cursor: pointer;
+    }
+
+    #pukenga-values-{{ section.id }} .pukenga-values__dot.is-active {
+      width: 18px;
+      background: {{ section.settings.heading_color }};
     }
   }
 </style>
+
+<script>
+  (function () {
+    const section = document.getElementById('pukenga-values-{{ section.id }}');
+    if (!section) return;
+
+    const slider = section.querySelector('[data-pukenga-values-slider]');
+    const dots = Array.from(section.querySelectorAll('[data-pukenga-values-dot]'));
+    const items = Array.from(section.querySelectorAll('.pukenga-values__item'));
+
+    if (!slider || dots.length < 2 || items.length < 2) return;
+
+    let ticking = false;
+
+    function setActiveDot(index) {
+      dots.forEach(function (dot, dotIndex) {
+        const isActive = dotIndex === index;
+        dot.classList.toggle('is-active', isActive);
+
+        if (isActive) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function updateActiveDot() {
+      let activeIndex = 0;
+      let closestDistance = Infinity;
+
+      items.forEach(function (item, index) {
+        const distance = Math.abs(item.offsetLeft - slider.scrollLeft);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeIndex = index;
+        }
+      });
+
+      setActiveDot(activeIndex);
+    }
+
+    dots.forEach(function (dot, index) {
+      dot.addEventListener('click', function () {
+        slider.scrollTo({
+          left: items[index].offsetLeft,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    slider.addEventListener('scroll', function () {
+      if (ticking) return;
+
+      ticking = true;
+
+      window.requestAnimationFrame(function () {
+        updateActiveDot();
+        ticking = false;
+      });
+    });
+
+    window.addEventListener('resize', updateActiveDot);
+    updateActiveDot();
+  })();
+</script>
 
 {% schema %}
 {
