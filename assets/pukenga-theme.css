@@ -359,8 +359,8 @@ body {
   }
 
   .product-information .variant-option__button-label {
-    min-height: 46px;
-    padding-inline: 24px !important;
-    font-size: 14px;
+    min-height: 38px;
+    padding-inline: 15px;
+    font-size: 13.5px;
   }
 }
