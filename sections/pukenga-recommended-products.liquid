@@ -392,33 +392,36 @@
       line-height: 1.2;
     }
 
-    .pukenga-recommended .pukenga-recommended__content {
-      margin-right: -32px;
+    #recommended-products-{{ section.id }} .pukenga-recommended__content {
+      margin-right: -72px;
     }
 
-    .pukenga-recommended .pukenga-best-sellers__grid {
-      display: flex;
+    #recommended-products-{{ section.id }} .pukenga-best-sellers__grid {
+      display: flex !important;
       width: 100%;
+      max-width: none;
       gap: {{ section.settings.mobile_grid_gap }}px;
       overflow-x: auto;
       overflow-y: hidden;
+      grid-template-columns: none !important;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       -ms-overflow-style: none;
       overscroll-behavior-x: contain;
-      padding-right: 32px;
+      padding-right: 72px;
     }
 
-    .pukenga-recommended .pukenga-best-sellers__grid::-webkit-scrollbar {
+    #recommended-products-{{ section.id }} .pukenga-best-sellers__grid::-webkit-scrollbar {
       display: none;
     }
 
-    .pukenga-recommended .pukenga-product-card {
-      flex: 0 0 min(72vw, 290px);
-      width: min(72vw, 290px);
-      min-width: min(72vw, 290px);
+    #recommended-products-{{ section.id }} .pukenga-product-card {
+      flex: 0 0 min(82vw, 360px) !important;
+      width: min(82vw, 360px) !important;
+      min-width: min(82vw, 360px) !important;
+      max-width: min(82vw, 360px) !important;
       border-radius: 10px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
