@@ -241,10 +241,6 @@ body {
   display: none;
 }
 
-.product-information .pukenga-buy-now-block {
-  flex: 1 0 100% !important;
-  width: 100%;
-}
 
 .product-information .pukenga-buy-now-button {
   width: 100%;
