@@ -1,3 +1,18 @@
+{%- liquid
+  assign rating_value = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count
+
+  if rating_value == blank and block.settings.fallback_rating > 0
+    assign rating_value = block.settings.fallback_rating
+  endif
+
+  if rating_count == blank and block.settings.fallback_review_count > 0
+    assign rating_count = block.settings.fallback_review_count
+  endif
+
+  assign filled_stars = rating_value | round
+-%}
+
 <div
   id="pukenga-product-rating-{{ block.id }}"
   class="pukenga-product-rating"
@@ -13,20 +28,22 @@
   </div>
 
 
-  {%- if block.settings.show_yotpo_widget -%}
+  {%- if rating_value != blank -%}
     <div class="pukenga-product-rating__reviews">
+      <span
+        class="pukenga-product-rating__stars"
+        aria-label="{{ rating_value | round: 1 }} out of 5 stars"
+      >
+        {%- for star in (1..5) -%}
+          <span class="pukenga-product-rating__star{% if star <= filled_stars %} is-filled{% endif %}" aria-hidden="true">&#9733;</span>
+        {%- endfor -%}
+      </span>
 
-      <div
-        class="yotpo-widget-instance"
-        data-yotpo-instance-id="379775"
-        data-yotpo-product-id="{{ product.id }}"
-        data-yotpo-name="{{ product.title | escape }}"
-        data-yotpo-url="{{ shop.url }}{{ product.url }}"
-        data-yotpo-image-url="{{ product.featured_image | product_img_url: 'large' | prepend: 'https:' | replace: '?', '%3F' | replace: '&', '%26' }}"
-        data-yotpo-price="{{ product.price | divided_by: 100.00 }}"
-        data-yotpo-currency="{{ shop.currency }}"
-        data-yotpo-description="{{ product.description | escape }}">
-      </div>
+      {%- if rating_count != blank and rating_count > 0 -%}
+        <span class="pukenga-product-rating__count">
+          ({{ rating_count }} reviews)
+        </span>
+      {%- endif -%}
 
     </div>
   {%- endif -%}
@@ -69,6 +86,40 @@
 
   display:flex;
   align-items:center;
+  gap:5px;
+
+}
+
+.pukenga-product-rating__stars {
+
+  display:flex;
+  align-items:center;
+  gap:2px;
+  color:{{ block.settings.empty_star_color }};
+  font-size:{{ block.settings.star_size }}px;
+  line-height:1;
+
+}
+
+.pukenga-product-rating__star.is-filled {
+
+  color:{{ block.settings.star_color }};
+  opacity:1;
+
+}
+
+.pukenga-product-rating__star:not(.is-filled) {
+
+  opacity:0.28;
+
+}
+
+.pukenga-product-rating__count {
+
+  color:{{ block.settings.count_color }};
+  font-size:{{ block.settings.count_size }}px;
+  line-height:1;
+  white-space:nowrap;
 
 }
 
@@ -88,6 +139,18 @@
 
   }
 
+  .pukenga-product-rating__stars {
+
+    font-size:{{ block.settings.mobile_star_size }}px;
+
+  }
+
+  .pukenga-product-rating__count {
+
+    font-size:{{ block.settings.mobile_count_size }}px;
+
+  }
+
 }
 
 </style>
@@ -98,14 +161,6 @@
 {
   "name": "Product Price Review",
   "settings": [
-
-    {
-      "type": "checkbox",
-      "id": "show_yotpo_widget",
-      "label": "Show Yotpo rating widget",
-      "default": true
-    },
-
     {
       "type": "range",
       "id": "price_size",
@@ -135,6 +190,97 @@
       "id":"price_color",
       "label":"Price color",
       "default":"#d98b4e"
+    },
+
+
+    {
+      "type":"range",
+      "id":"star_size",
+      "label":"Desktop star size",
+      "min":12,
+      "max":32,
+      "step":1,
+      "unit":"px",
+      "default":18
+    },
+
+
+    {
+      "type":"range",
+      "id":"mobile_star_size",
+      "label":"Mobile star size",
+      "min":12,
+      "max":28,
+      "step":1,
+      "unit":"px",
+      "default":16
+    },
+
+
+    {
+      "type":"range",
+      "id":"count_size",
+      "label":"Desktop count size",
+      "min":10,
+      "max":24,
+      "step":1,
+      "unit":"px",
+      "default":14
+    },
+
+
+    {
+      "type":"range",
+      "id":"mobile_count_size",
+      "label":"Mobile count size",
+      "min":10,
+      "max":22,
+      "step":1,
+      "unit":"px",
+      "default":13
+    },
+
+
+    {
+      "type":"color",
+      "id":"star_color",
+      "label":"Star color",
+      "default":"#f47b20"
+    },
+
+
+    {
+      "type":"color",
+      "id":"empty_star_color",
+      "label":"Empty star color",
+      "default":"#f47b20"
+    },
+
+
+    {
+      "type":"color",
+      "id":"count_color",
+      "label":"Review count color",
+      "default":"#f2ecdc"
+    },
+
+
+    {
+      "type":"range",
+      "id":"fallback_rating",
+      "label":"Fallback rating",
+      "min":0,
+      "max":5,
+      "step":1,
+      "default":0
+    },
+
+
+    {
+      "type":"number",
+      "id":"fallback_review_count",
+      "label":"Fallback review count",
+      "default":0
     }
 
   ],
