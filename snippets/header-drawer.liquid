@@ -60,14 +60,17 @@
     ref="details"
     scroll-lock
   >
-    <summary
+      <summary
       class="header__icon header__icon--menu header__icon--summary"
       aria-label="{{ 'accessibility.menu' | t }}"
       on:click="/toggle"
     >
-      <span class="svg-wrapper header-drawer-icon header-drawer-icon--open">
-        {{- 'icon-menu.svg' | inline_asset_content -}}
+      <span class="header-drawer-icon header-drawer-icon--open custom-menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
       </span>
+
       <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
         {{- 'icon-close-menu.svg' | inline_asset_content -}}
       </span>
@@ -785,6 +788,36 @@
 </header-drawer>
 
 {% stylesheet %}
+
+  .custom-menu-icon {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .custom-menu-icon span {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+
+  .custom-menu-icon span:nth-child(1) {
+    width: 28px;
+  }
+
+  .custom-menu-icon span:nth-child(2) {
+    width: 22px;
+  }
+
+  .custom-menu-icon span:nth-child(3) {
+    width: 28px;
+  }
+
+
   .icon-caret--forward svg {
     transform: rotate(-90deg);
   }
