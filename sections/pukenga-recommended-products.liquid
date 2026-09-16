@@ -570,7 +570,7 @@
 
     cursor: pointer;
 
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: *background* 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   }
 
@@ -665,8 +665,11 @@
     }
 
     .pukenga-recommended .pukenga-best-sellers__heading {
+
       max-width: 390px;
+
       font-size: 26px;
+
       line-height: 1.35;
 
     }
@@ -684,42 +687,87 @@
     }
 
     /* Mobile: horizontal swipe slider with the next card peeking in. */
+
     #recommended-products-{{ section.id }} .pukenga-recommended__content {
+
       width: 100%;
+
       min-width: 0;
+
     }
 
     #recommended-products-{{ section.id }} .pukenga-best-sellers__grid {
+
       display: flex !important;
+
       width: 100%;
+
       max-width: none;
+
       gap: {{ section.settings.mobile_grid_gap }}px;
+
       overflow-x: auto;
+
       overflow-y: hidden;
+
       grid-template-columns: none !important;
+
       scroll-snap-type: x mandatory;
+
       scroll-padding-left: 0;
+
       scroll-behavior: smooth;
+
       -webkit-overflow-scrolling: touch;
+
       scrollbar-width: none;
+
       -ms-overflow-style: none;
+
       overscroll-behavior-x: contain;
-      touch-action: pan-y pinch-zoom;
+
+      touch-action: pan-x pan-y;
+
       padding: 0 18px 4px 0;
+
+      cursor: grab;
+
+      user-select: none;
+
+    }
+
+    #recommended-products-{{ section.id }} .pukenga-best-sellers__grid.is-dragging {
+
+      cursor: grabbing;
+
+      scroll-snap-type: none;
+
+      scroll-behavior: auto;
+
     }
 
     #recommended-products-{{ section.id }} .pukenga-best-sellers__grid::-webkit-scrollbar {
+
       display: none;
+
     }
 
     #recommended-products-{{ section.id }} .pukenga-product-card {
+
       flex: 0 0 {{ pukenga_mobile_card_width }}% !important;
+
       width: {{ pukenga_mobile_card_width }}% !important;
+
       min-width: {{ pukenga_mobile_card_width }}% !important;
+
       max-width: {{ pukenga_mobile_card_width }}% !important;
+
       border-radius: 10px;
+
       scroll-snap-align: start;
+
       scroll-snap-stop: always;
+
     }
 
     .pukenga-recommended .pukenga-product-card__media {
@@ -786,7 +834,7 @@
 
         width 0.25s ease,
 
-        background 0.25s ease,
+        *background* 0.25s ease,
 
         border-radius 0.25s ease;
 
@@ -833,32 +881,27 @@
     const dotsContainer = section.querySelector('[data-recommended-dots]');
     const mobileQuery = window.matchMedia('(max-width: 749px)');
 
-    let dotCleanup;
+    let sliderCleanup = null;
 
     function setupMobileSlider() {
-      const slider = section.querySelector('.pukenga-best-sellers__grid');
+      if (sliderCleanup) {
+        sliderCleanup();
+        sliderCleanup = null;
+      }
 
+      const slider = section.querySelector('.pukenga-best-sellers__grid');
       const cards = slider
         ? Array.from(slider.querySelectorAll('.pukenga-product-card'))
         : [];
-    
-      if (!slider || cards.length <= 1) {
-        if (dotsContainer) {
-          dotsContainer.innerHTML = '';
-        }
+
+      if (!slider || cards.length <= 1 || !mobileQuery.matches) {
+        if (dotsContainer) dotsContainer.innerHTML = '';
         return;
       }
 
-      if (dotCleanup) {
-        dotCleanup();
-      }
-
-      /*
-      =========================================
-      DOTS
-      =========================================
-      */
-
+      /* =========================================================
+         DOTS
+      ========================================================= */
       if (dotsContainer) {
         dotsContainer.innerHTML = '';
 
@@ -866,7 +909,6 @@
           const dot = document.createElement('button');
 
           dot.type = 'button';
-
           dot.className =
             'pukenga-recommended__dot' +
             (index === 0 ? ' is-active' : '');
@@ -894,21 +936,18 @@
         : [];
 
       let ticking = false;
-
-      /*
-      =========================================
-      CURRENT CARD DETECT
-      =========================================
-      */
+      let isDragging = false;
+      let didDrag = false;
+      let activePointerId = null;
+      let dragStartX = 0;
+      let dragStartScrollLeft = 0;
 
       function getClosestIndex() {
         let closestIndex = 0;
         let closestDistance = Infinity;
 
         cards.forEach(function (card, index) {
-          const distance = Math.abs(
-            card.offsetLeft - slider.scrollLeft
-          );
+          const distance = Math.abs(card.offsetLeft - slider.scrollLeft);
 
           if (distance < closestDistance) {
             closestDistance = distance;
@@ -919,28 +958,13 @@
         return closestIndex;
       }
 
-      /*
-      =========================================
-      UPDATE DOT
-      =========================================
-      */
-
       function updateActiveDot() {
         const activeIndex = getClosestIndex();
 
         dots.forEach(function (dot, index) {
-          dot.classList.toggle(
-            'is-active',
-            index === activeIndex
-          );
+          dot.classList.toggle('is-active', index === activeIndex);
         });
       }
-
-      /*
-      =========================================
-      DRAG / SWIPE SCROLL
-      =========================================
-      */
 
       function handleScroll() {
         if (ticking) return;
@@ -953,186 +977,225 @@
         });
       }
 
-      slider.addEventListener(
-        'scroll',
-        handleScroll,
-        {
-          passive: true
-        }
-      );
+      function snapToClosestCard() {
+        const index = getClosestIndex();
+        const card = cards[index];
 
-      window.addEventListener(
-        'resize',
-        updateActiveDot
-      );
+        if (!card) return;
+
+        slider.scrollTo({
+          left: card.offsetLeft,
+          behavior: 'smooth'
+        });
+      }
+
+      /* =========================================================
+         MOUSE / TRACKPAD POINTER DRAG
+         Touch devices use native horizontal swipe from CSS.
+      ========================================================= */
+      function handlePointerDown(event) {
+        if (event.pointerType !== 'mouse') return;
+        if (event.button !== 0) return;
+
+        isDragging = true;
+        didDrag = false;
+        activePointerId = event.pointerId;
+        dragStartX = event.clientX;
+        dragStartScrollLeft = slider.scrollLeft;
+
+        slider.classList.add('is-dragging');
+
+        if (slider.setPointerCapture) {
+          try {
+            slider.setPointerCapture(activePointerId);
+          } catch (error) {
+            // Ignore pointer capture errors.
+          }
+        }
+      }
+
+      function handlePointerMove(event) {
+        if (!isDragging || event.pointerId !== activePointerId) return;
+
+        const deltaX = event.clientX - dragStartX;
+
+        if (Math.abs(deltaX) > 4) {
+          didDrag = true;
+        }
+
+        slider.scrollLeft = dragStartScrollLeft - deltaX;
+
+        if (didDrag) {
+          event.preventDefault();
+        }
+      }
+
+      function finishPointerDrag(event) {
+        if (!isDragging) return;
+
+        if (
+          event &&
+          activePointerId !== null &&
+          event.pointerId !== activePointerId
+        ) {
+          return;
+        }
+
+        if (
+          activePointerId !== null &&
+          slider.hasPointerCapture &&
+          slider.hasPointerCapture(activePointerId)
+        ) {
+          try {
+            slider.releasePointerCapture(activePointerId);
+          } catch (error) {
+            // Ignore pointer capture errors.
+          }
+        }
+
+        isDragging = false;
+        activePointerId = null;
+        slider.classList.remove('is-dragging');
+
+        if (didDrag) {
+          snapToClosestCard();
+
+          window.setTimeout(function () {
+            didDrag = false;
+          }, 0);
+        }
+      }
+
+      function preventClickAfterDrag(event) {
+        if (!didDrag) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      slider.addEventListener('scroll', handleScroll, { passive: true });
+      slider.addEventListener('pointerdown', handlePointerDown);
+      slider.addEventListener('pointermove', handlePointerMove);
+      slider.addEventListener('pointerup', finishPointerDrag);
+      slider.addEventListener('pointercancel', finishPointerDrag);
+      slider.addEventListener('lostpointercapture', finishPointerDrag);
+      slider.addEventListener('click', preventClickAfterDrag, true);
+      window.addEventListener('resize', updateActiveDot);
 
       updateActiveDot();
 
-      dotCleanup = function () {
-        slider.removeEventListener(
-          'scroll',
-          handleScroll
-        );
-
-        window.removeEventListener(
-          'resize',
-          updateActiveDot
-        );
+      sliderCleanup = function () {
+        slider.removeEventListener('scroll', handleScroll);
+        slider.removeEventListener('pointerdown', handlePointerDown);
+        slider.removeEventListener('pointermove', handlePointerMove);
+        slider.removeEventListener('pointerup', finishPointerDrag);
+        slider.removeEventListener('pointercancel', finishPointerDrag);
+        slider.removeEventListener('lostpointercapture', finishPointerDrag);
+        slider.removeEventListener('click', preventClickAfterDrag, true);
+        window.removeEventListener('resize', updateActiveDot);
+        slider.classList.remove('is-dragging');
       };
     }
 
-    /*
-    =========================================
-    MOBILE MEDIA QUERY
-    =========================================
-    */
-
+    /* =========================================================
+       MOBILE BREAKPOINT CHANGE
+    ========================================================= */
     if (mobileQuery.addEventListener) {
-      mobileQuery.addEventListener(
-        'change',
-        setupMobileSlider
-      );
+      mobileQuery.addEventListener('change', setupMobileSlider);
     } else if (mobileQuery.addListener) {
-      mobileQuery.addListener(
-        setupMobileSlider
-      );
+      mobileQuery.addListener(setupMobileSlider);
     }
 
-    /*
-    =========================================
-    SHOPIFY RECOMMENDATIONS LOAD
-    =========================================
-    */
-
-    if (
-      url &&
-      !content.querySelector('.pukenga-product-card')
-    ) {
+    /* =========================================================
+       SHOPIFY PRODUCT RECOMMENDATIONS
+    ========================================================= */
+    if (url && !content.querySelector('.pukenga-product-card')) {
       fetch(url)
-
         .then(function (response) {
           return response.text();
         })
-
         .then(function (text) {
           const html = document.createElement('div');
-
           html.innerHTML = text;
 
-          const updatedContent =
-            html.querySelector(
-              '#recommended-products-{{ section.id }} [data-recommendations-content]'
-            );
+          const updatedContent = html.querySelector(
+            '#recommended-products-{{ section.id }} [data-recommendations-content]'
+          );
 
           if (
             updatedContent &&
             updatedContent.innerHTML.trim().length
           ) {
-            content.innerHTML =
-              updatedContent.innerHTML;
+            content.innerHTML = updatedContent.innerHTML;
 
             window.requestAnimationFrame(function () {
               setupMobileSlider();
             });
           }
         })
-
         .catch(function (error) {
-          console.error(
-            'Recommended products error:',
-            error
-          );
+          console.error('Recommended products error:', error);
         });
-
     } else {
       setupMobileSlider();
     }
 
-    /*
-    =========================================
-    ADD TO CART
-    =========================================
-    */
+    /* =========================================================
+       ADD TO CART
+    ========================================================= */
+    section.addEventListener('click', function (event) {
+      const button = event.target.closest('[data-pukenga-recommended-add]');
 
-    section.addEventListener(
-      'click',
-      function (event) {
-        const button = event.target.closest(
-          '[data-pukenga-recommended-add]'
-        );
+      if (!button || button.disabled) return;
 
-        if (!button || button.disabled) {
-          return;
-        }
+      const variantId = button.getAttribute('data-variant-id');
 
-        const variantId =
-          button.getAttribute('data-variant-id');
+      if (!variantId) return;
 
-        if (!variantId) {
-          return;
-        }
+      button.classList.add('pukenga-product-card__add--loading');
+      button.textContent = 'ADDING';
 
-        button.classList.add(
-          'pukenga-product-card__add--loading'
-        );
-
-        button.textContent = 'ADDING';
-
-        fetch(
-          window.Shopify.routes.root + 'cart/add.js',
-          {
-            method: 'POST',
-
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json'
-            },
-
-            body: JSON.stringify({
-              items: [
-                {
-                  id: Number(variantId),
-                  quantity: 1
-                }
-              ]
-            })
-          }
-        )
-
-          .then(function (response) {
-            if (!response.ok) {
-              throw new Error(
-                'Unable to add product to cart.'
-              );
+      fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          items: [
+            {
+              id: Number(variantId),
+              quantity: 1
             }
+          ]
+        })
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Unable to add product to cart.');
+          }
 
-            return response.json();
-          })
+          return response.json();
+        })
+        .then(function () {
+          window.location.href = '/cart';
+        })
+        .catch(function (error) {
+          console.error(error);
 
-          .then(function () {
-            window.location.href = '/cart';
-          })
+          button.textContent = 'ERROR';
+          button.classList.remove('pukenga-product-card__add--loading');
 
-          .catch(function (error) {
-            console.error(error);
-
-            button.textContent = 'ERROR';
-
-            button.classList.remove(
-              'pukenga-product-card__add--loading'
-            );
-
-            setTimeout(function () {
-              button.textContent =
-                '{{ section.settings.add_button_label | escape }}';
-            }, 1500);
-          });
-      }
-    );
+          setTimeout(function () {
+            button.textContent = '{{ section.settings.add_button_label | escape }}';
+          }, 1500);
+        });
+    });
   })();
 </script>
 
 {% schema %}
+
 {
 
   "name": "Recommended Pukenga",
