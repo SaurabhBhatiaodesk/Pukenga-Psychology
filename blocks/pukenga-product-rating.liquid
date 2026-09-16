@@ -17,14 +17,12 @@
     <div class="pukenga-product-rating__reviews">
 
       <div
-        class="yotpo-widget-instance pukenga-product-rating__yotpo"
-        data-yotpo-instance-id="{{ block.settings.yotpo_instance_id }}"
+        class="yotpo-widget-instance"
+        data-yotpo-instance-id="379775"
         data-yotpo-product-id="{{ product.id }}"
         data-yotpo-name="{{ product.title | escape }}"
         data-yotpo-url="{{ shop.url }}{{ product.url }}"
-        {% if product.featured_image != blank %}
         data-yotpo-image-url="{{ product.featured_image | product_img_url: 'large' | prepend: 'https:' | replace: '?', '%3F' | replace: '&', '%26' }}"
-        {% endif %}
         data-yotpo-price="{{ product.price | divided_by: 100.00 }}"
         data-yotpo-currency="{{ shop.currency }}"
         data-yotpo-description="{{ product.description | escape }}">
@@ -75,23 +73,6 @@
 }
 
 
-.pukenga-product-rating .pukenga-product-rating__yotpo {
-
-  display:flex;
-  align-items:center;
-
-}
-
-
-
-/* remove extra yotpo spacing */
-
-.pukenga-product-rating .pukenga-product-rating__yotpo > div {
-
-  margin:0 !important;
-
-}
-
 @media screen and (max-width:749px){
 
   .pukenga-product-rating {
@@ -124,15 +105,6 @@
       "label": "Show Yotpo rating widget",
       "default": true
     },
-
-
-    {
-      "type": "text",
-      "id": "yotpo_instance_id",
-      "label": "Yotpo Instance ID",
-      "default": "379775"
-    },
-
 
     {
       "type": "range",
