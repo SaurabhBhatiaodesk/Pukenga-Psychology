@@ -123,9 +123,8 @@
      .pukenga-about-{{ section.id }} because this
      section can appear more than once on a page
      (e.g. the bio block and the quote block both
-     use it) and this is a plain <style> tag, not
-     {% stylesheet %} -- unscoped rules here would
-     leak and the LAST rendered instance's CSS
+     use it) and this is a plain style tag; unscoped
+     rules here would leak and the LAST rendered instance's CSS
      would silently win for every instance on the
      page, regardless of each instance's own
      settings.
