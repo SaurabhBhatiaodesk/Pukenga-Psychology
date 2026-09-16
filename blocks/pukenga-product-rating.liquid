@@ -5,25 +5,22 @@
     <span class="pukenga-product-rating__price">
       {{ product.price | money }}
     </span>
-    {% if product.compare_at_price > product.price %}
-      <span class="pukenga-product-rating__compare-price">
-        {{ product.compare_at_price | money }}
-      </span>
-    {% endif %}
 
   </div>
 
 
-  <div class="pukenga-product-rating__reviews">
+  {%- if block.settings.show_yotpo_widget -%}
+    <div class="pukenga-product-rating__reviews">
 
-    <div 
-      class="yotpo-widget-instance" 
-      data-yotpo-instance-id="{{ block.settings.yotpo_instance_id }}"
-      data-yotpo-product-id="{{ product.id }}"
-      data-yotpo-section-id="{{ template.name }}">
+      <div
+        class="yotpo-widget-instance pukenga-product-rating__yotpo"
+        data-yotpo-instance-id="{{ block.settings.yotpo_instance_id }}"
+        data-yotpo-product-id="{{ product.id }}"
+        data-yotpo-section-id="pukenga-rating-{{ block.id }}">
+      </div>
+
     </div>
-
-  </div>
+  {%- endif -%}
 
 
 </div>
@@ -45,7 +42,6 @@
 
   display:flex;
   align-items:center;
-  gap:10px;
 
 }
 
@@ -55,16 +51,7 @@
   color:{{ block.settings.price_color }};
   font-size:{{ block.settings.price_size }}px;
   font-weight:400;
-
-}
-
-
-.pukenga-product-rating__compare-price {
-
-  color:{{ block.settings.compare_price_color }};
-  font-size:{{ block.settings.compare_price_size }}px;
-  text-decoration:line-through;
-  opacity:0.6;
+  line-height:1;
 
 }
 
@@ -77,12 +64,20 @@
 }
 
 
-/* Yotpo adjustment */
-
-.yotpo-widget-instance {
+.pukenga-product-rating .pukenga-product-rating__yotpo {
 
   display:flex;
   align-items:center;
+
+}
+
+
+
+/* remove extra yotpo spacing */
+
+.pukenga-product-rating .pukenga-product-rating__yotpo > div {
+
+  margin:0 !important;
 
 }
 
@@ -103,13 +98,6 @@
 
   }
 
-
-  .pukenga-product-rating__compare-price {
-
-    font-size:{{ block.settings.mobile_compare_price_size }}px;
-
-  }
-
 }
 
 </style>
@@ -120,6 +108,14 @@
 {
   "name": "Product Price Review",
   "settings": [
+
+    {
+      "type": "checkbox",
+      "id": "show_yotpo_widget",
+      "label": "Show Yotpo rating widget",
+      "default": true
+    },
+
 
     {
       "type": "text",
@@ -154,42 +150,10 @@
 
 
     {
-      "type":"range",
-      "id":"compare_price_size",
-      "label":"Desktop compare price size",
-      "min":12,
-      "max":40,
-      "step":2,
-      "unit":"px",
-      "default":20
-    },
-
-
-    {
-      "type":"range",
-      "id":"mobile_compare_price_size",
-      "label":"Mobile compare price size",
-      "min":10,
-      "max":30,
-      "step":2,
-      "unit":"px",
-      "default":16
-    },
-
-
-    {
       "type":"color",
       "id":"price_color",
       "label":"Price color",
       "default":"#d98b4e"
-    },
-
-
-    {
-      "type":"color",
-      "id":"compare_price_color",
-      "label":"Compare price color",
-      "default":"#f2ecdc"
     }
 
   ],
