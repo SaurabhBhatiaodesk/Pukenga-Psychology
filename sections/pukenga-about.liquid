@@ -254,7 +254,7 @@
   ========================================= */
 
   .pukenga-about-{{ section.id }} .pukenga-about__text {
-    font-size: 15.5px;
+    font-size: {{ section.settings.text_font_size | default: 16 }}px;
     line-height: 1.75;
     opacity: 0.85;
     color: #ece5d4;
@@ -370,7 +370,7 @@
 
   @media screen and (max-width: 749px) {
     .pukenga-about-{{ section.id }} .pukenga-about__text{
-      font-size:11px;
+      font-size: {{ section.settings.mobile_text_font_size | default: 11 }}px;
     }
     .pukenga-about-{{ section.id }} {
       padding-top: {{ section.settings.mobile_padding_top }}px;
@@ -780,6 +780,17 @@
 
     {
       "type": "range",
+      "id": "text_font_size",
+      "label": "Text font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "range",
       "id": "text_margin_bottom",
       "label": "Text bottom spacing",
       "min": 0,
@@ -841,6 +852,17 @@
       "step": 1,
       "unit": "px",
       "default": 38
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_text_font_size",
+      "label": "Mobile text font size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
     },
 
     {
