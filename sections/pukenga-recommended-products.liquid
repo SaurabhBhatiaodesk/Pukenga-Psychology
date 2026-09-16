@@ -491,7 +491,9 @@
     const content = section.querySelector('[data-recommendations-content]');
     const url = content && content.dataset.url;
     const dotsContainer = section.querySelector('[data-recommended-dots]');
+    const mobileQuery = window.matchMedia('(max-width: 749px)');
     let dotCleanup;
+    let autoplayCleanup;
 
     function setupMobileDots() {
       const slider = section.querySelector('.pukenga-best-sellers__grid');
@@ -564,6 +566,101 @@
       };
     }
 
+    function setupMobileAutoplay() {
+      const slider = section.querySelector('.pukenga-best-sellers__grid');
+      const cards = slider ? Array.from(slider.querySelectorAll('.pukenga-product-card')) : [];
+
+      if (autoplayCleanup) autoplayCleanup();
+      if (!slider || cards.length <= 1 || !mobileQuery.matches) return;
+
+      let index = 0;
+      let timer;
+      let resumeTimer;
+      const interval = 2600;
+
+      function goToCard(nextIndex) {
+        index = nextIndex >= cards.length ? 0 : nextIndex;
+
+        slider.scrollTo({
+          left: cards[index].offsetLeft,
+          behavior: 'smooth'
+        });
+      }
+
+      function start() {
+        stop();
+        timer = window.setInterval(function () {
+          goToCard(index + 1);
+        }, interval);
+      }
+
+      function stop() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function pauseThenResume() {
+        stop();
+        window.clearTimeout(resumeTimer);
+        resumeTimer = window.setTimeout(start, 2200);
+      }
+
+      function syncIndex() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cards.forEach(function (card, cardIndex) {
+          const distance = Math.abs(card.offsetLeft - slider.scrollLeft);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = cardIndex;
+          }
+        });
+
+        index = closestIndex;
+      }
+
+      function handleVisibilityChange() {
+        if (document.hidden) {
+          stop();
+        } else {
+          start();
+        }
+      }
+
+      slider.addEventListener('touchstart', pauseThenResume, { passive: true });
+      slider.addEventListener('pointerdown', pauseThenResume);
+      slider.addEventListener('scroll', syncIndex, { passive: true });
+      window.addEventListener('resize', pauseThenResume);
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+
+      start();
+
+      autoplayCleanup = function () {
+        stop();
+        window.clearTimeout(resumeTimer);
+        slider.removeEventListener('touchstart', pauseThenResume);
+        slider.removeEventListener('pointerdown', pauseThenResume);
+        slider.removeEventListener('scroll', syncIndex);
+        window.removeEventListener('resize', pauseThenResume);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      };
+    }
+
+    function setupMobileSlider() {
+      setupMobileDots();
+      setupMobileAutoplay();
+    }
+
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener('change', setupMobileSlider);
+    } else if (mobileQuery.addListener) {
+      mobileQuery.addListener(setupMobileSlider);
+    }
+
     if (url && !content.querySelector('.pukenga-product-card')) {
       fetch(url)
         .then(function (response) {
@@ -576,14 +673,14 @@
 
           if (updatedContent && updatedContent.innerHTML.trim().length) {
             content.innerHTML = updatedContent.innerHTML;
-            setupMobileDots();
+            setupMobileSlider();
           }
         })
         .catch(function (error) {
           console.error(error);
         });
     } else {
-      setupMobileDots();
+      setupMobileSlider();
     }
 
     section.addEventListener('click', function (event) {
