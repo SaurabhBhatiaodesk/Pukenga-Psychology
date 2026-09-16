@@ -823,409 +823,549 @@
 </style>
 
 <script>
-
   (function () {
-
     const section = document.getElementById('recommended-products-{{ section.id }}');
 
     if (!section) return;
 
     const content = section.querySelector('[data-recommendations-content]');
-
     const url = content && content.dataset.url;
-
     const dotsContainer = section.querySelector('[data-recommended-dots]');
-
     const mobileQuery = window.matchMedia('(max-width: 749px)');
 
     let dotCleanup;
-
     let autoplayCleanup;
 
-    function setupMobileDots() {
+    /*
+    ============================================================
+    MOBILE DOTS
+    ============================================================
+    */
 
+    function setupMobileDots() {
       const slider = section.querySelector('.pukenga-best-sellers__grid');
 
-      const cards = slider ? Array.from(slider.querySelectorAll('.pukenga-product-card')) : [];
+      const cards = slider
+        ? Array.from(slider.querySelectorAll('.pukenga-product-card'))
+        : [];
 
       if (!slider || !dotsContainer || cards.length <= 1) {
-
-        if (dotsContainer) dotsContainer.innerHTML = '';
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+        }
 
         return;
-
       }
 
-      if (dotCleanup) dotCleanup();
+      if (dotCleanup) {
+        dotCleanup();
+      }
 
       dotsContainer.innerHTML = '';
 
       cards.forEach(function (card, index) {
-
         const dot = document.createElement('button');
 
         dot.type = 'button';
 
-        dot.className = 'pukenga-recommended__dot' + (index === 0 ? ' is-active' : '');
+        dot.className =
+          'pukenga-recommended__dot' +
+          (index === 0 ? ' is-active' : '');
 
-        dot.setAttribute('aria-label', 'Go to recommended product ' + (index + 1));
+        dot.setAttribute(
+          'aria-label',
+          'Go to recommended product ' + (index + 1)
+        );
 
         dot.addEventListener('click', function () {
-
           slider.scrollTo({
-
             left: card.offsetLeft,
-
             behavior: 'smooth'
-
           });
-
         });
 
         dotsContainer.appendChild(dot);
-
       });
 
-      const dots = Array.from(dotsContainer.querySelectorAll('.pukenga-recommended__dot'));
+      const dots = Array.from(
+        dotsContainer.querySelectorAll('.pukenga-recommended__dot')
+      );
 
       let ticking = false;
 
       function updateActiveDot() {
-
         let closestIndex = 0;
-
         let closestDistance = Infinity;
 
         cards.forEach(function (card, index) {
-
-          const distance = Math.abs(card.offsetLeft - slider.scrollLeft);
+          const distance = Math.abs(
+            card.offsetLeft - slider.scrollLeft
+          );
 
           if (distance < closestDistance) {
-
             closestDistance = distance;
-
             closestIndex = index;
-
           }
-
         });
 
         dots.forEach(function (dot, index) {
-
-          dot.classList.toggle('is-active', index === closestIndex);
-
+          dot.classList.toggle(
+            'is-active',
+            index === closestIndex
+          );
         });
-
       }
 
       function handleScroll() {
-
         if (ticking) return;
-
-        window.requestAnimationFrame(function () {
-
-          updateActiveDot();
-
-          ticking = false;
-
-        });
 
         ticking = true;
 
+        window.requestAnimationFrame(function () {
+          updateActiveDot();
+          ticking = false;
+        });
       }
 
-      slider.addEventListener('scroll', handleScroll);
+      slider.addEventListener('scroll', handleScroll, {
+        passive: true
+      });
 
       window.addEventListener('resize', updateActiveDot);
 
       updateActiveDot();
 
       dotCleanup = function () {
-
         slider.removeEventListener('scroll', handleScroll);
-
         window.removeEventListener('resize', updateActiveDot);
-
       };
-
     }
 
+
+    /*
+    ============================================================
+    MOBILE AUTOPLAY + LOOP
+    ============================================================
+    */
+
     function setupMobileAutoplay() {
+      const slider = section.querySelector(
+        '.pukenga-best-sellers__grid'
+      );
 
-      const slider = section.querySelector('.pukenga-best-sellers__grid');
+      const cards = slider
+        ? Array.from(
+            slider.querySelectorAll('.pukenga-product-card')
+          )
+        : [];
 
-      const cards = slider ? Array.from(slider.querySelectorAll('.pukenga-product-card')) : [];
+      if (autoplayCleanup) {
+        autoplayCleanup();
+      }
 
-      if (autoplayCleanup) autoplayCleanup();
-
-      if (!slider || cards.length <= 1 || !mobileQuery.matches) return;
+      if (
+        !slider ||
+        cards.length <= 1 ||
+        !mobileQuery.matches
+      ) {
+        return;
+      }
 
       let index = 0;
+      let timer = null;
+      let resumeTimer = null;
 
-      let timer;
-
-      let resumeTimer;
-
+      /*
+       * Change autoplay speed here.
+       * 2600 = 2.6 seconds
+       */
       const interval = 2600;
 
-      function goToCard(nextIndex) {
+      /*
+      ==========================================================
+      FIND CURRENT CARD
+      ==========================================================
+      */
 
-        index = nextIndex >= cards.length ? 0 : nextIndex;
-
-        slider.scrollTo({
-
-          left: cards[index].offsetLeft,
-
-          behavior: 'smooth'
-
-        });
-
-      }
-
-      function start() {
-
-        stop();
-
-        timer = window.setInterval(function () {
-
-          goToCard(index + 1);
-
-        }, interval);
-
-      }
-
-      function stop() {
-
-        if (timer) {
-
-          window.clearInterval(timer);
-
-          timer = null;
-
-        }
-
-      }
-
-      function pauseThenResume() {
-
-        stop();
-
-        window.clearTimeout(resumeTimer);
-
-        resumeTimer = window.setTimeout(start, 2200);
-
-      }
-
-      function syncIndex() {
-
+      function getClosestIndex() {
         let closestIndex = 0;
-
         let closestDistance = Infinity;
 
         cards.forEach(function (card, cardIndex) {
-
-          const distance = Math.abs(card.offsetLeft - slider.scrollLeft);
+          const distance = Math.abs(
+            card.offsetLeft - slider.scrollLeft
+          );
 
           if (distance < closestDistance) {
-
             closestDistance = distance;
-
             closestIndex = cardIndex;
-
           }
-
         });
 
-        index = closestIndex;
-
+        return closestIndex;
       }
 
-      function handleVisibilityChange() {
 
-        if (document.hidden) {
+      /*
+      ==========================================================
+      GO TO PRODUCT
+      LOOP ENABLED HERE
+      ==========================================================
+      */
 
-          stop();
+      function goToCard(nextIndex) {
+        if (!cards.length) return;
 
-        } else {
+        /*
+         * Infinite circular index
+         *
+         * 0 → 1 → 2 → 3 → 0
+         */
+        index =
+          (nextIndex + cards.length) %
+          cards.length;
 
-          start();
+        slider.scrollTo({
+          left: cards[index].offsetLeft,
+          behavior: 'smooth'
+        });
+      }
 
+
+      /*
+      ==========================================================
+      START AUTOPLAY
+      ==========================================================
+      */
+
+      function start() {
+        stop();
+
+        if (!mobileQuery.matches) {
+          return;
         }
 
+        timer = window.setInterval(function () {
+          goToCard(index + 1);
+        }, interval);
       }
 
-      slider.addEventListener('touchstart', pauseThenResume, { passive: true });
 
-      slider.addEventListener('pointerdown', pauseThenResume);
+      /*
+      ==========================================================
+      STOP AUTOPLAY
+      ==========================================================
+      */
 
-      slider.addEventListener('scroll', syncIndex, { passive: true });
+      function stop() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
 
-      window.addEventListener('resize', pauseThenResume);
 
-      document.addEventListener('visibilitychange', handleVisibilityChange);
+      /*
+      ==========================================================
+      USER TOUCH / DRAG
+      ==========================================================
+      */
 
-      start();
-
-      autoplayCleanup = function () {
-
+      function pauseThenResume() {
         stop();
 
         window.clearTimeout(resumeTimer);
 
-        slider.removeEventListener('touchstart', pauseThenResume);
+        resumeTimer = window.setTimeout(function () {
+          index = getClosestIndex();
+          start();
+        }, 2200);
+      }
 
-        slider.removeEventListener('pointerdown', pauseThenResume);
 
-        slider.removeEventListener('scroll', syncIndex);
+      /*
+      ==========================================================
+      SYNC CURRENT INDEX AFTER MANUAL SWIPE
+      ==========================================================
+      */
 
-        window.removeEventListener('resize', pauseThenResume);
+      function syncIndex() {
+        index = getClosestIndex();
+      }
 
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
 
+      /*
+      ==========================================================
+      TAB VISIBILITY
+      ==========================================================
+      */
+
+      function handleVisibilityChange() {
+        if (document.hidden) {
+          stop();
+        } else {
+          index = getClosestIndex();
+          start();
+        }
+      }
+
+
+      /*
+      ==========================================================
+      EVENTS
+      ==========================================================
+      */
+
+      slider.addEventListener(
+        'touchstart',
+        pauseThenResume,
+        {
+          passive: true
+        }
+      );
+
+      slider.addEventListener(
+        'pointerdown',
+        pauseThenResume
+      );
+
+      slider.addEventListener(
+        'scroll',
+        syncIndex,
+        {
+          passive: true
+        }
+      );
+
+      window.addEventListener(
+        'resize',
+        pauseThenResume
+      );
+
+      document.addEventListener(
+        'visibilitychange',
+        handleVisibilityChange
+      );
+
+
+      /*
+      ==========================================================
+      INITIAL START
+      ==========================================================
+      */
+
+      index = getClosestIndex();
+
+      start();
+
+
+      /*
+      ==========================================================
+      CLEANUP
+      ==========================================================
+      */
+
+      autoplayCleanup = function () {
+        stop();
+
+        window.clearTimeout(resumeTimer);
+
+        slider.removeEventListener(
+          'touchstart',
+          pauseThenResume
+        );
+
+        slider.removeEventListener(
+          'pointerdown',
+          pauseThenResume
+        );
+
+        slider.removeEventListener(
+          'scroll',
+          syncIndex
+        );
+
+        window.removeEventListener(
+          'resize',
+          pauseThenResume
+        );
+
+        document.removeEventListener(
+          'visibilitychange',
+          handleVisibilityChange
+        );
       };
-
     }
+
+
+    /*
+    ============================================================
+    SETUP MOBILE SLIDER
+    ============================================================
+    */
 
     function setupMobileSlider() {
-
       setupMobileDots();
-
       setupMobileAutoplay();
-
     }
+
+
+    /*
+    ============================================================
+    SCREEN SIZE CHANGE
+    ============================================================
+    */
 
     if (mobileQuery.addEventListener) {
-
-      mobileQuery.addEventListener('change', setupMobileSlider);
-
+      mobileQuery.addEventListener(
+        'change',
+        setupMobileSlider
+      );
     } else if (mobileQuery.addListener) {
-
-      mobileQuery.addListener(setupMobileSlider);
-
+      mobileQuery.addListener(
+        setupMobileSlider
+      );
     }
 
-    if (url && !content.querySelector('.pukenga-product-card')) {
 
+    /*
+    ============================================================
+    LOAD SHOPIFY RECOMMENDATIONS
+    ============================================================
+    */
+
+    if (
+      url &&
+      !content.querySelector('.pukenga-product-card')
+    ) {
       fetch(url)
 
         .then(function (response) {
-
           return response.text();
-
         })
 
         .then(function (text) {
-
           const html = document.createElement('div');
 
           html.innerHTML = text;
 
-          const updatedContent = html.querySelector('#recommended-products-{{ section.id }} [data-recommendations-content]');
+          const updatedContent =
+            html.querySelector(
+              '#recommended-products-{{ section.id }} [data-recommendations-content]'
+            );
 
-          if (updatedContent && updatedContent.innerHTML.trim().length) {
+          if (
+            updatedContent &&
+            updatedContent.innerHTML.trim().length
+          ) {
+            content.innerHTML =
+              updatedContent.innerHTML;
 
-            content.innerHTML = updatedContent.innerHTML;
-
-            setupMobileSlider();
-
+            /*
+             * Wait for new HTML to render
+             */
+            window.requestAnimationFrame(function () {
+              setupMobileSlider();
+            });
           }
-
         })
 
         .catch(function (error) {
-
-          console.error(error);
-
+          console.error(
+            'Recommended products error:',
+            error
+          );
         });
 
     } else {
-
       setupMobileSlider();
-
     }
 
-    section.addEventListener('click', function (event) {
 
-      const button = event.target.closest('[data-pukenga-recommended-add]');
+    /*
+    ============================================================
+    ADD TO CART
+    ============================================================
+    */
 
-      if (!button || button.disabled) return;
+    section.addEventListener(
+      'click',
+      function (event) {
+        const button = event.target.closest(
+          '[data-pukenga-recommended-add]'
+        );
 
-      const variantId = button.getAttribute('data-variant-id');
+        if (!button || button.disabled) {
+          return;
+        }
 
-      if (!variantId) return;
+        const variantId =
+          button.getAttribute('data-variant-id');
 
-      button.classList.add('pukenga-product-card__add--loading');
+        if (!variantId) {
+          return;
+        }
 
-      button.textContent = 'ADDING';
+        button.classList.add(
+          'pukenga-product-card__add--loading'
+        );
 
-      fetch(window.Shopify.routes.root + 'cart/add.js', {
+        button.textContent = 'ADDING';
 
-        method: 'POST',
+        fetch(
+          window.Shopify.routes.root +
+            'cart/add.js',
+          {
+            method: 'POST',
 
-        headers: {
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
 
-          'Content-Type': 'application/json',
+            body: JSON.stringify({
+              items: [
+                {
+                  id: Number(variantId),
+                  quantity: 1
+                }
+              ]
+            })
+          }
+        )
 
-          'Accept': 'application/json'
-
-        },
-
-        body: JSON.stringify({
-
-          items: [
-
-            {
-
-              id: Number(variantId),
-
-              quantity: 1
-
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error(
+                'Unable to add product to cart.'
+              );
             }
 
-          ]
+            return response.json();
+          })
 
-        })
+          .then(function () {
+            window.location.href = '/cart';
+          })
 
-      })
+          .catch(function (error) {
+            console.error(error);
 
-        .then(function (response) {
+            button.textContent = 'ERROR';
 
-          if (!response.ok) {
+            button.classList.remove(
+              'pukenga-product-card__add--loading'
+            );
 
-            throw new Error('Unable to add product to cart.');
-
-          }
-
-          return response.json();
-
-        })
-
-        .then(function () {
-
-          window.location.href = '/cart';
-
-        })
-
-        .catch(function (error) {
-
-          console.error(error);
-
-          button.textContent = 'ERROR';
-
-          button.classList.remove('pukenga-product-card__add--loading');
-
-          setTimeout(function () {
-
-            button.textContent = '{{ section.settings.add_button_label | escape }}';
-
-          }, 1500);
-
-        });
-
-    });
+            setTimeout(function () {
+              button.textContent =
+                '{{ section.settings.add_button_label | escape }}';
+            }, 1500);
+          });
+      }
+    );
 
   })();
-
 </script>
 
 {% schema %}
