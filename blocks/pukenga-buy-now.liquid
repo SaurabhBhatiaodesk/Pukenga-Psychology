@@ -10,6 +10,7 @@
 {% if product_resource != blank %}
   <div
     class="pukenga-buy-now-block pukenga-buy-now-block--{{ block.id }}"
+    data-fallback-variant-id="{{ current_variant.id }}"
     {{ block.shopify_attributes }}
   >
     <button
@@ -53,22 +54,50 @@
 
         if (!productForm) return;
 
-        let returnTo = productForm.querySelector('input[name="return_to"]');
+        const variantInput = productForm.querySelector('input[name="id"]');
+        const quantityInput = productForm.querySelector('input[name="quantity"]');
+        const variantId = variantInput && variantInput.value
+          ? variantInput.value
+          : block.getAttribute('data-fallback-variant-id');
+        const quantity = quantityInput && Number(quantityInput.value) > 0
+          ? Number(quantityInput.value)
+          : 1;
 
-        if (!returnTo) {
-          returnTo = document.createElement('input');
-          returnTo.type = 'hidden';
-          returnTo.name = 'return_to';
-          productForm.appendChild(returnTo);
-        }
+        if (!variantId) return;
 
-        returnTo.value = '/checkout';
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
 
-        if (typeof productForm.requestSubmit === 'function') {
-          productForm.requestSubmit();
-        } else {
-          productForm.submit();
-        }
+        fetch((window.Shopify && window.Shopify.routes ? window.Shopify.routes.root : '/') + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [
+              {
+                id: Number(variantId),
+                quantity: quantity
+              }
+            ]
+          })
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Unable to add item to cart.');
+            }
+
+            return response.json();
+          })
+          .then(function () {
+            window.location.href = (window.Shopify && window.Shopify.routes ? window.Shopify.routes.root : '/') + 'checkout';
+          })
+          .catch(function (error) {
+            console.error(error);
+            button.disabled = false;
+            button.removeAttribute('aria-busy');
+          });
       });
     })();
   </script>

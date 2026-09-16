@@ -21,6 +21,7 @@
 {% if product != blank and form_obj != blank %}
   <div
     class="accelerated-checkout-block pukenga-buy-now-block"
+    data-fallback-variant-id="{{ product.selected_or_first_available_variant.id }}"
     ref="acceleratedCheckoutButtonContainer"
     {{ block.shopify_attributes }}
     {% if request.visual_preview_mode %}
@@ -31,10 +32,9 @@
     {% endunless %}
   >
     <button
-      type="submit"
-      name="return_to"
-      value="/checkout"
+      type="button"
       class="pukenga-buy-now-button"
+      data-pukenga-buy-now
       {% unless can_add_to_cart %}
         disabled
       {% endunless %}
@@ -42,6 +42,67 @@
       Buy it now
     </button>
   </div>
+
+  <script>
+    (function () {
+      const block = document.currentScript.previousElementSibling;
+      const button = block && block.querySelector('[data-pukenga-buy-now]');
+
+      if (!button) return;
+
+      button.addEventListener('click', function () {
+        const productForm = document.getElementById('BuyButtons-ProductForm-{{ section.id }}')
+          || document.querySelector('product-form-component form[action*="/cart/add"]');
+
+        if (!productForm) return;
+
+        const variantInput = productForm.querySelector('input[name="id"]');
+        const quantityInput = productForm.querySelector('input[name="quantity"]');
+        const variantId = variantInput && variantInput.value
+          ? variantInput.value
+          : block.getAttribute('data-fallback-variant-id');
+        const quantity = quantityInput && Number(quantityInput.value) > 0
+          ? Number(quantityInput.value)
+          : 1;
+
+        if (!variantId) return;
+
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+
+        fetch((window.Shopify && window.Shopify.routes ? window.Shopify.routes.root : '/') + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [
+              {
+                id: Number(variantId),
+                quantity: quantity
+              }
+            ]
+          })
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Unable to add item to cart.');
+            }
+
+            return response.json();
+          })
+          .then(function () {
+            window.location.href = (window.Shopify && window.Shopify.routes ? window.Shopify.routes.root : '/') + 'checkout';
+          })
+          .catch(function (error) {
+            console.error(error);
+            button.disabled = false;
+            button.removeAttribute('aria-busy');
+          });
+      });
+    })();
+  </script>
 {% endif %}
 
 {% render 'buy-buttons-styles' %}
