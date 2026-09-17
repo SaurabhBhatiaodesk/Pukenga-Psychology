@@ -1,13 +1,13 @@
-{%- assign first_product_tag = product.tags | first -%}
+{%- assign product_tag = product.metafields.custom.product_tag.value -%}
 
-{% if first_product_tag != blank %}
+{% if product_tag != blank %}
 
   <div
     class="pukenga-product-tag"
     {{ block.shopify_attributes }}
   >
     <span class="pukenga-product-tag__text">
-      {{ first_product_tag }}
+      {{ product_tag }}
     </span>
   </div>
 
@@ -22,7 +22,6 @@
 
   .pukenga-product-tag__text {
     display: inline-block;
-
     margin: 0;
 
     color: {{ block.settings.text_color }};
@@ -81,7 +80,6 @@
       "unit": "px",
       "default": 12
     },
-
     {
       "type": "header",
       "content": "Mobile spacing"
@@ -106,7 +104,6 @@
       "unit": "px",
       "default": 10
     },
-
     {
       "type": "header",
       "content": "Typography"
