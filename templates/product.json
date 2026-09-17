@@ -13,88 +13,10 @@
       "type": "pukenga-breadcrumb",
       "settings": {
         "home_label": "Kāinga · Home",
-        "shop_label": "Toa · Shop"
-      }
-    },
-    "pukenga_product_accordion": {
-      "type": "pukenga-product-accordion",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "Kei roto · What's inside",
-            "body": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Me pēhea te whakamahi · How to use",
-            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "heading": "Tuku & whakahoki · Shipping & returns",
-            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3"
-      ],
-      "settings": {}
-    },
-    "pukenga_product_quote": {
-      "type": "pukenga-product-quote",
-      "settings": {
-        "eyebrow": "He kupu",
-        "quote": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>",
-        "caption": "One of 20 karakia in the set",
-        "padding-block-start": 72,
-        "padding-block-end": 72
-      }
-    },
-    "pukenga_product_reviews": {
-      "type": "pukenga-product-reviews",
-      "blocks": {
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "I keep the smaller cards in my bag to use on the go and the larger ones on my desk. Thoroughly recommend.",
-            "name": "Julie C."
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "Utilise them with whānau and mahi when I get stumped for the right karakia. Ngā mihi maioha.",
-            "name": "Rauweti S."
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "quote": "Reconnecting me back to tikanga. I'm rediscovering my heritage. A true testament to relearn what was lost.",
-            "name": "Vanessa P."
-          }
-        }
-      },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3"
-      ],
-      "settings": {
-        "heading": "Arotakenga · Reviews",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "shop_label": "Toa · Shop",
+        "padding_top": 18,
+        "padding_bottom": 18,
+        "item_gap": 8
       }
     },
     "main": {
@@ -104,19 +26,20 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
-            "slideshow_controls_style": "counter",
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "thumbnail_radius": 0,
-            "aspect_ratio": "adapt",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 72,
+            "thumbnail_radius": 10,
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 10,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -138,7 +61,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 18,
             "sticky_details_desktop": true,
             "background_media": "none",
             "background_color": "",
@@ -149,7 +72,7 @@
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 24,
+            "padding-block-start": 0,
             "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -166,7 +89,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
+                "gap": 10,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -186,6 +109,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
+                "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 0,
@@ -194,72 +118,66 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_xrnftG": {
-                  "type": "text",
-                  "name": "t:names.product_title",
+                "pukenga_product_tags_LggbCE": {
+                  "type": "pukenga-product-tags",
+                  "name": "Product Tags",
                   "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "font_size": 12,
+                    "mobile_font_size": 11,
+                    "text_color": "#e0b784"
                   },
                   "blocks": {}
                 },
-                "price_tVjtKg": {
-                  "type": "price",
+                "pukenga_product_title_iGhnpW": {
+                  "type": "pukenga-product-title",
+                  "name": "Custom Product Title",
                   "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "text_color": "",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "desktop_title_size": 40,
+                    "mobile_title_size": 36,
+                    "desktop_color": "#ece5d4",
+                    "mobile_color": "#ece5d4"
+                  },
+                  "blocks": {}
+                },
+                "pukenga_product_rating_h8GcjL": {
+                  "type": "pukenga-product-rating",
+                  "name": "Product Rating",
+                  "settings": {
+                    "yotpo_instance_id": "379774",
+                    "price_size": 24,
+                    "mobile_price_size": 22,
+                    "price_weight": "400",
+                    "price_color": "#e0b784",
+                    "review_size": 14,
+                    "mobile_review_size": 13,
+                    "review_color": "#e0b784",
+                    "desktop_gap": 18,
+                    "review_gap": 8,
+                    "mobile_gap": 12,
+                    "mobile_review_gap": 6
+                  },
+                  "blocks": {}
+                },
+                "product_subheading_NGgCxE": {
+                  "type": "product-subheading",
+                  "name": "SEO Meta Description",
+                  "settings": {
+                    "padding_top": 0,
+                    "padding_bottom": 0
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
-                "text_xrnftG",
-                "price_tVjtKg"
+                "pukenga_product_tags_LggbCE",
+                "pukenga_product_title_iGhnpW",
+                "pukenga_product_rating_h8GcjL",
+                "product_subheading_NGgCxE"
               ]
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color2 }}",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
@@ -314,12 +232,12 @@
                   "type": "quantity",
                   "static": true,
                   "settings": {
-                    "input_style": "default",
+                    "input_style": "custom",
                     "input_background_color": "{{ settings.color_palette.background }}",
                     "input_text_color": "{{ settings.color_palette.foreground }}",
-                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.color2 }}",
                     "border_width": 1,
-                    "border_radius": 0
+                    "border_radius": 30
                   },
                   "blocks": {}
                 },
@@ -327,8 +245,8 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button",
-                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "style_class": "button-custom",
+                    "custom_button_background": "#e0b784",
                     "custom_button_text": "{{ settings.color_palette.background }}",
                     "custom_button_border": "{{ settings.color_palette.background }}"
                   },
@@ -336,6 +254,7 @@
                 },
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
+                  "disabled": true,
                   "static": true,
                   "settings": {},
                   "blocks": {}
@@ -343,9 +262,118 @@
               },
               "block_order": []
             },
+            "pukenga_buy_now_T4bbwG": {
+              "type": "pukenga-buy-now",
+              "name": "Pukenga Buy Now",
+              "settings": {
+                "label": "Buy it now",
+                "height": 50,
+                "font_size": 16,
+                "background_color": "rgba(0,0,0,0)",
+                "text_color": "#f2ecdc",
+                "border_color": "#697767",
+                "padding_top": 0,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "pukenga_product_info_bar_qBtchB": {
+              "type": "pukenga-product-info-bar",
+              "name": "Product Info Bar",
+              "settings": {
+                "item_1": "✦ Ships in 1–2 days",
+                "item_2": "✦ NZ made",
+                "item_3": "✦ Ages 5+",
+                "gap": 35,
+                "mobile_gap": 20,
+                "padding_top": 20,
+                "padding_bottom": 20,
+                "desktop_font": 13,
+                "mobile_font": 13,
+                "desktop_color": "#ece5d4",
+                "mobile_color": "#ece5d4",
+                "border_color": "{{ settings.color_palette.color2 }}"
+              },
+              "blocks": {}
+            },
+            "product_accordion_M7bg46": {
+              "type": "product-accordion",
+              "name": "Product Accordion",
+              "settings": {
+                "padding_top": 0,
+                "padding_bottom": 0,
+                "mobile_padding_top": 0,
+                "mobile_padding_bottom": 0
+              },
+              "blocks": {
+                "accordion_item_TxUjRe": {
+                  "type": "accordion-item",
+                  "name": "Accordion Item",
+                  "settings": {
+                    "heading": "Kei roto · What's inside",
+                    "content": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>",
+                    "open_default": false,
+                    "padding": 18,
+                    "heading_size": 18,
+                    "mobile_heading_size": 16,
+                    "content_size": 15,
+                    "mobile_content_size": 14,
+                    "heading_color": "#ece5d4",
+                    "content_color": "#ece5d4",
+                    "border_color": "#294332",
+                    "icon_color": "#c9a45c"
+                  },
+                  "blocks": {}
+                },
+                "accordion_item_ercWcb": {
+                  "type": "accordion-item",
+                  "name": "Accordion Item",
+                  "settings": {
+                    "heading": "Me pēhea te whakamahi · How to use",
+                    "content": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>",
+                    "open_default": false,
+                    "padding": 18,
+                    "heading_size": 18,
+                    "mobile_heading_size": 16,
+                    "content_size": 15,
+                    "mobile_content_size": 14,
+                    "heading_color": "#ece5d4",
+                    "content_color": "#ece5d4",
+                    "border_color": "#294332",
+                    "icon_color": "#c9a45c"
+                  },
+                  "blocks": {}
+                },
+                "accordion_item_tDyVie": {
+                  "type": "accordion-item",
+                  "name": "Accordion Item",
+                  "settings": {
+                    "heading": "Tuku & whakahoki · Shipping & returns",
+                    "content": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>",
+                    "open_default": false,
+                    "padding": 18,
+                    "heading_size": 18,
+                    "mobile_heading_size": 16,
+                    "content_size": 15,
+                    "mobile_content_size": 14,
+                    "heading_color": "#ece5d4",
+                    "content_color": "#ece5d4",
+                    "border_color": "#294332",
+                    "icon_color": "#c9a45c"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_item_TxUjRe",
+                "accordion_item_ercWcb",
+                "accordion_item_tDyVie"
+              ]
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
+              "disabled": true,
               "settings": {
                 "text": "{{ closest.product.description }}",
                 "width": "100%",
@@ -372,9 +400,11 @@
           },
           "block_order": [
             "group_icgrde",
-            "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "pukenga_buy_now_T4bbwG",
+            "pukenga_product_info_bar_qBtchB",
+            "product_accordion_M7bg46",
             "text_aEtTtq"
           ]
         }
@@ -382,155 +412,243 @@
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": true,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 60
       }
     },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
+    "pukenga_product_accordion": {
+      "type": "pukenga-product-accordion",
       "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
+        "item_1": {
+          "type": "item",
           "settings": {
-            "text": "<h3>You may also like </h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "heading": "Kei roto · What's inside",
+            "body": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "item_2": {
+          "type": "item",
           "settings": {
-            "product_card_gap": 8,
-            "background_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "text_color": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
-          ]
+            "heading": "Me pēhea te whakamahi · How to use",
+            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "heading": "Tuku & whakahoki · Shipping & returns",
+            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
+          }
         }
       },
       "block_order": [
-        "text_cbcgyb"
+        "item_1",
+        "item_2",
+        "item_3"
       ],
-      "name": "t:names.product_recommendations",
+      "disabled": true,
+      "settings": {}
+    },
+    "pukenga_product_reviews": {
+      "type": "pukenga-product-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "I keep the smaller cards in my bag to use on the go and the larger ones on my desk. Thoroughly recommend.",
+            "name": "Julie C."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Utilise them with whānau and mahi when I get stumped for the right karakia. Ngā mihi maioha.",
+            "name": "Rauweti S."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Reconnecting me back to tikanga. I'm rediscovering my heritage. A true testament to relearn what was lost.",
+            "name": "Vanessa P."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "disabled": true,
       "settings": {
-        "product": "{{ closest.product }}",
+        "heading": "Arotakenga · Reviews",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
+    "pukenga_about_FcnLML": {
+      "type": "pukenga-about",
+      "name": "Pūkenga About",
+      "settings": {
+        "section_id": "",
+        "image": "shopify://shop_images/c69091fa-b6ea-4c8b-a233-4fca1e4950f4.jpg",
+        "mobile_image": "shopify://shop_images/c69091fa-b6ea-4c8b-a233-4fca1e4950f4.jpg",
+        "desktop_image_position": "right",
+        "desktop_content_width": "1fr",
+        "desktop_image_width": "1fr",
+        "desktop_image_ratio": "1 / 1",
+        "desktop_image_position_x": 50,
+        "desktop_image_position_y": 50,
+        "image_border_radius": 0,
+        "mobile_image_ratio": "4 / 5",
+        "mobile_image_position_x": 50,
+        "mobile_image_position_y": 25,
+        "mobile_image_border_radius": 0,
+        "eyebrow": "He kupu",
+        "heading": "<p>\"Papatūānuku welcomes your heaviness. Let it pour into her.\"</p>",
+        "text": "<p>One of 20 karakia in the set</p>",
+        "signature": "",
+        "button_label": "",
+        "button_link": "",
+        "background_color": "#1d3323",
+        "desktop_gap": 64,
+        "vertical_alignment": "center",
+        "heading_max_size": 38,
+        "heading_margin_bottom": 20,
+        "text_font_size": 16,
+        "text_margin_bottom": 20,
+        "signature_margin_bottom": 24,
+        "mobile_gap": 32,
+        "small_mobile_gap": 10,
+        "mobile_heading_size": 23,
+        "mobile_text_font_size": 14,
+        "mobile_content_padding_top": 22,
+        "mobile_content_padding_horizontal": 16,
+        "mobile_content_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 12
+      }
+    },
+    "pukenga_testimonials_n6GwLy": {
+      "type": "pukenga-testimonials",
+      "blocks": {
+        "testimonial_Q38twc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>\"I keep the smaller cards in my bag to use on the go and the larger ones on my desk. Thoroughly recommend.\"</p>",
+            "name": "Julie C",
+            "role": ""
+          }
+        },
+        "testimonial_GTREqt": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>\"Utilise them with whānau and mahi when I get stumped for the right karakia. Ngā mihi maioha.\"</p>",
+            "name": "Rauweti S.",
+            "role": ""
+          }
+        },
+        "testimonial_wXVMxb": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>\"Reconnecting me back to tikanga. I'm rediscovering my heritage. A true testament to relearn what was lost.\"</p>",
+            "name": "Vanessa P.",
+            "role": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_Q38twc",
+        "testimonial_GTREqt",
+        "testimonial_wXVMxb"
+      ],
+      "name": "Pūkenga Testimonials",
+      "settings": {
+        "eyebrow": "",
+        "heading": "<p>Arotakenga · Reviews</p>",
+        "background_color": "#16281b",
+        "heading_color": "#f2ecdc",
+        "card_border_color": "#444c46",
+        "star_color": "#e0b784",
+        "quote_color": "#ece5d4",
+        "name_color": "#e0b784",
+        "role_color": "#a8a087",
+        "text_alignment": "left",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "columns": 3,
+        "grid_gap": 24,
+        "heading_max_width": 640,
+        "heading_bottom_spacing": 40,
+        "heading_min_size": 28,
+        "heading_max_size": 35,
+        "quote_font_size": 17,
+        "quote_bottom_spacing": 18,
+        "star_size": 14,
+        "star_spacing": 2,
+        "star_bottom_spacing": 16,
+        "card_padding_top": 30,
+        "card_padding_bottom": 30,
+        "card_padding_horizontal": 28,
+        "card_border_width": 1,
+        "card_border_radius": 14,
+        "author_gap": 10,
+        "name_font_size": 13,
+        "role_font_size": 13,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48,
+        "mobile_columns": 1.2,
+        "mobile_grid_gap": 20,
+        "mobile_heading_size": 28,
+        "mobile_heading_bottom_spacing": 32,
+        "mobile_card_padding_top": 28,
+        "mobile_card_padding_bottom": 28,
+        "mobile_card_padding_horizontal": 24,
+        "mobile_quote_font_size": 16
+      }
+    },
+    "pukenga_recommended_products_XL3tfd": {
+      "type": "pukenga-recommended-products",
+      "name": "Recommended Pukenga",
+      "settings": {
         "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "products_to_show": 3,
+        "heading": "Ka rata pea koe ki · You may also like",
+        "eyebrow": "",
+        "add_button_label": "ADD",
+        "sold_out_label": "SOLD OUT",
+        "sale_label": "SALE",
+        "empty_text": "No recommendations found.",
+        "padding_top": 20,
+        "padding_bottom": 72,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 48,
+        "mobile_columns": 1.2,
+        "mobile_grid_gap": 17
+      }
+    },
+    "custom_liquid_EzmNpC": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"yotpo-widget-instance\" data-yotpo-instance-id=\"379775\" data-yotpo-product-id=\"{{product.id}}\" data-yotpo-name=\"{{ product.title | escape }}\" data-yotpo-url=\"{{ shop.url }}{{ product.url }}\" data-yotpo-image-url=\"{{ product.featured_image | product_img_url: \"large\" | prepend: \"https:\" | replace: '?', '%3F' | replace: '&','%26'}}\" data-yotpo-price=\"{{ product.price | divided_by: 100.00 }}\" data-yotpo-currency=\"{{ shop.currency }}\" data-yotpo-description=\"{{ product.description | escape }}\"></div>",
+        "background_color": "#1d3323",
         "section_width": "page-width",
-        "gap": 28,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
@@ -538,8 +656,10 @@
     "pukenga_breadcrumb",
     "main",
     "pukenga_product_accordion",
-    "pukenga_product_quote",
     "pukenga_product_reviews",
-    "product_recommendations_qggXJq"
+    "pukenga_about_FcnLML",
+    "pukenga_testimonials_n6GwLy",
+    "pukenga_recommended_products_XL3tfd",
+    "custom_liquid_EzmNpC"
   ]
 }
