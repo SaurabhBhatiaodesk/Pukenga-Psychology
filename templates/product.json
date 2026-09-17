@@ -532,7 +532,7 @@
         "mobile_gap": 32,
         "small_mobile_gap": 10,
         "mobile_heading_size": 23,
-        "mobile_text_font_size": 14,
+        "mobile_text_font_size": 11,
         "mobile_content_padding_top": 22,
         "mobile_content_padding_horizontal": 16,
         "mobile_content_padding_bottom": 0,
