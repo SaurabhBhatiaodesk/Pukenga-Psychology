@@ -4,7 +4,9 @@
   {{ block.shopify_attributes }}
 >
 
-  <!-- PRICE -->
+  <!-- =========================================
+       PRICE
+  ========================================== -->
   <div class="pukenga-product-rating__price-wrapper">
     <span class="pukenga-product-rating__price">
       {{ product.price | money }}
@@ -12,10 +14,12 @@
   </div>
 
 
-  <!-- RATING -->
+  <!-- =========================================
+       RATING
+  ========================================== -->
   <div class="pukenga-product-rating__reviews">
 
-    <!-- YOTPO STARS -->
+    <!-- YOTPO STAR RATING -->
     <div
       class="yotpo-widget-instance pukenga-product-rating__yotpo"
       data-yotpo-instance-id="{{ block.settings.yotpo_instance_id }}"
@@ -25,7 +29,7 @@
     ></div>
 
 
-    <!-- ACTUAL REVIEW COUNT -->
+    <!-- CUSTOM REVIEW COUNT -->
     <span
       class="pukenga-product-rating__count"
       data-pukenga-review-count
@@ -33,6 +37,29 @@
     ></span>
 
   </div>
+
+
+  <!-- =========================================
+       HIDDEN MAIN YOTPO REVIEWS WIDGET
+
+       This stays in DOM so we can read the
+       real "Based on X reviews" count.
+  ========================================== -->
+
+  {% if block.settings.yotpo_reviews_instance_id != blank %}
+    <div class="pukenga-hidden-yotpo-reviews" aria-hidden="true">
+
+      <div
+        class="yotpo-widget-instance"
+        data-yotpo-instance-id="{{ block.settings.yotpo_reviews_instance_id }}"
+        data-yotpo-product-id="{{ product.id }}"
+        data-yotpo-cart-product-id="{{ product.id }}"
+        data-yotpo-section-id="{{ template.name }}"
+        data-pukenga-main-reviews
+      ></div>
+
+    </div>
+  {% endif %}
 
 </div>
 
@@ -48,6 +75,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: {{ block.settings.desktop_gap }}px;
+    position: relative;
   }
 
 
@@ -97,8 +125,10 @@
 
 
   /*
-    Hide Yotpo native count text because
-    we display the synced actual count separately.
+    Hide Yotpo's own review count text.
+
+    We only need the stars here because our
+    custom count appears separately.
   */
 
   #pukenga-product-rating-{{ block.id }}
@@ -109,7 +139,7 @@
 
 
   /* ==========================================
-     REVIEW COUNT
+     CUSTOM REVIEW COUNT
   ========================================== */
 
   #pukenga-product-rating-{{ block.id }}
@@ -133,6 +163,40 @@
   #pukenga-product-rating-{{ block.id }}
   .pukenga-product-rating__count[hidden] {
     display: none !important;
+  }
+
+
+  /* ==========================================
+     HIDDEN MAIN YOTPO REVIEWS
+
+     IMPORTANT:
+     Do NOT use display:none here.
+
+     Yotpo needs this widget available so
+     it can load the actual review data.
+  ========================================== */
+
+  #pukenga-product-rating-{{ block.id }}
+  .pukenga-hidden-yotpo-reviews {
+    position: absolute !important;
+
+    width: 1px !important;
+    height: 1px !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+    left: -9999px !important;
+    top: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
   }
 
 
@@ -170,238 +234,291 @@
 
 
 <script>
-  (function () {
+(function () {
 
-    const root = document.getElementById(
-      'pukenga-product-rating-{{ block.id }}'
-    );
+  const root = document.getElementById(
+    'pukenga-product-rating-{{ block.id }}'
+  );
 
-    if (!root) return;
-
-
-    const starWidget = root.querySelector(
-      '.pukenga-product-rating__yotpo'
-    );
-
-    const countElement = root.querySelector(
-      '[data-pukenga-review-count]'
-    );
+  if (!root) return;
 
 
-    if (!countElement) return;
+  const starWidget = root.querySelector(
+    '.pukenga-product-rating__yotpo'
+  );
 
 
-    let reviewCountFound = false;
+  const hiddenMainWidget = root.querySelector(
+    '[data-pukenga-main-reviews]'
+  );
 
 
-    /* ==========================================
-       FORMAT COUNT
-    ========================================== */
-
-    function showReviewCount(count) {
-
-      if (!count) return;
-
-      count = String(count)
-        .replace(/,/g, '')
-        .trim();
+  const countElement = root.querySelector(
+    '[data-pukenga-review-count]'
+  );
 
 
-      if (!/^\d+$/.test(count)) {
-        return;
-      }
+  if (!countElement) return;
 
 
-      const number = parseInt(count, 10);
+  /* ==========================================
+     LIQUID / METAFIELD FALLBACK
+  ========================================== */
 
-      if (Number.isNaN(number)) {
-        return;
-      }
-
-
-      countElement.textContent =
-        '' +
-        number +
-        ' ' +
-        (number === 1 ? 'review' : ' arotakenga · reviews') +
-        '';
+  const metafieldReviewCount =
+    {{ product.metafields.yotpo.reviews_count.value | default: product.metafields.yotpo.reviews_count | default: 0 | json }};
 
 
-      countElement.hidden = false;
+  /* ==========================================
+     NORMALIZE NUMBER
+  ========================================== */
 
-      reviewCountFound = true;
+  function normalizeCount(value) {
 
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return null;
     }
 
 
-    /* ==========================================
-       1. GET COUNT FROM STAR RATING WIDGET
-    ========================================== */
-
-    function getCountFromStarWidget() {
-
-      if (!starWidget) return false;
+    const cleaned = String(value)
+      .replace(/,/g, '')
+      .replace(/[^\d]/g, '')
+      .trim();
 
 
-      const selectors = [
-        '.yotpo-sr-bottom-line-text',
-        '[class*="bottom-line-text"]',
-        '[class*="review-count"]',
-        '[class*="reviews-count"]'
-      ];
+    if (!cleaned) {
+      return null;
+    }
 
 
-      for (let i = 0; i < selectors.length; i++) {
-
-        const elements =
-          starWidget.querySelectorAll(selectors[i]);
+    const number = parseInt(cleaned, 10);
 
 
-        for (let j = 0; j < elements.length; j++) {
-
-          const text =
-            elements[j].textContent.trim();
-
-
-          const match =
-            text.match(/([\d,]+)\s*reviews?/i);
+    if (
+      Number.isNaN(number) ||
+      number < 0
+    ) {
+      return null;
+    }
 
 
-          if (match && match[1]) {
+    return number;
 
-            showReviewCount(match[1]);
-
-            return true;
-
-          }
-
-        }
-
-      }
+  }
 
 
+  /* ==========================================
+     DISPLAY REVIEW COUNT
+  ========================================== */
+
+  function showReviewCount(value) {
+
+    const number = normalizeCount(value);
+
+
+    if (
+      number === null ||
+      number <= 0
+    ) {
       return false;
-
     }
 
 
-    /* ==========================================
-       2. GET COUNT FROM MAIN YOTPO REVIEWS
-       
-       Example:
-       "Based on 16 reviews"
-    ========================================== */
-
-    function getCountFromMainReviews() {
-
-      const selectors = [
-
-        '.yotpo-reviews-main-widget',
-
-        '.yotpo-main-widget',
-
-        '[id*="yotpo-reviews"]',
-
-        '[class*="yotpo-reviews"]',
-
-        '[data-yotpo-element-id]'
-
-      ];
+    countElement.textContent =
+      number +
+      ' ' +
+      (
+        number === 1
+          ? 'arotakenga · review'
+          : 'arotakenga · reviews'
+      );
 
 
-      const checked = new Set();
+    countElement.hidden = false;
 
 
-      for (let i = 0; i < selectors.length; i++) {
+    return true;
 
-        const elements =
-          document.querySelectorAll(selectors[i]);
-
-
-        for (let j = 0; j < elements.length; j++) {
-
-          const element = elements[j];
+  }
 
 
-          if (
-            element === root ||
-            root.contains(element)
-          ) {
-            continue;
-          }
+  /* ==========================================
+     EXTRACT COUNT FROM TEXT
+  ========================================== */
+
+  function extractReviewCount(text) {
+
+    if (!text) {
+      return null;
+    }
 
 
-          if (checked.has(element)) {
-            continue;
-          }
+    /*
+      Example:
+      Based on 16 reviews
+    */
+
+    let match = text.match(
+      /based\s+on\s+([\d,]+)\s+reviews?/i
+    );
 
 
-          checked.add(element);
+    if (match && match[1]) {
+      return match[1];
+    }
 
 
-          const text =
-            element.innerText ||
-            element.textContent ||
-            '';
+    /*
+      Example:
+      16 Reviews
+      16 reviews
+      16 review
+    */
+
+    match = text.match(
+      /([\d,]+)\s+reviews?/i
+    );
 
 
-          /*
-            FIRST PRIORITY:
-
-            Based on 16 reviews
-          */
-
-          const basedOnMatch =
-            text.match(
-              /based\s+on\s+([\d,]+)\s+reviews?/i
-            );
+    if (match && match[1]) {
+      return match[1];
+    }
 
 
-          if (
-            basedOnMatch &&
-            basedOnMatch[1]
-          ) {
+    /*
+      Example:
+      Reviews (16)
+    */
 
-            showReviewCount(
-              basedOnMatch[1]
-            );
+    match = text.match(
+      /reviews?\s*\(\s*([\d,]+)\s*\)/i
+    );
 
-            return true;
 
-          }
+    if (match && match[1]) {
+      return match[1];
+    }
 
-        }
 
+    return null;
+
+  }
+
+
+  /* ==========================================
+     1. HIDDEN MAIN REVIEWS WIDGET
+  ========================================== */
+
+  function getCountFromHiddenMainWidget() {
+
+    if (!hiddenMainWidget) {
+      return false;
+    }
+
+
+    const text =
+      hiddenMainWidget.textContent || '';
+
+
+    const count =
+      extractReviewCount(text);
+
+
+    if (count) {
+      return showReviewCount(count);
+    }
+
+
+    /*
+      Search children because Yotpo can render
+      count inside nested elements.
+    */
+
+    const elements =
+      hiddenMainWidget.querySelectorAll('*');
+
+
+    for (
+      let i = 0;
+      i < elements.length;
+      i++
+    ) {
+
+      const childText =
+        elements[i].textContent || '';
+
+
+      const childCount =
+        extractReviewCount(childText);
+
+
+      if (childCount) {
+        return showReviewCount(childCount);
       }
 
-
-      return false;
-
     }
 
 
-    /* ==========================================
-       3. FIND "BASED ON X REVIEWS" ANYWHERE
-       INSIDE YOTPO ELEMENTS
-    ========================================== */
+    return false;
 
-    function getCountFromYotpoText() {
+  }
 
-      const allElements =
+
+  /* ==========================================
+     2. FIND EXISTING MAIN YOTPO WIDGET
+        ANYWHERE ON PAGE
+  ========================================== */
+
+  function getCountFromExistingMainReviews() {
+
+    const selectors = [
+
+      '.yotpo-reviews-main-widget',
+
+      '.yotpo-main-widget',
+
+      '[id*="yotpo-reviews"]',
+
+      '[class*="yotpo-reviews"]',
+
+      '[data-yotpo-element-id]'
+
+    ];
+
+
+    const checked =
+      new Set();
+
+
+    for (
+      let i = 0;
+      i < selectors.length;
+      i++
+    ) {
+
+      const elements =
         document.querySelectorAll(
-          '[class*="yotpo"], [id*="yotpo"]'
+          selectors[i]
         );
 
 
       for (
-        let i = 0;
-        i < allElements.length;
-        i++
+        let j = 0;
+        j < elements.length;
+        j++
       ) {
 
         const element =
-          allElements[i];
+          elements[j];
 
+
+        /*
+          Ignore this custom block.
+        */
 
         if (
           element === root ||
@@ -411,100 +528,302 @@
         }
 
 
-        const text =
-          element.innerText ||
-          element.textContent ||
-          '';
-
-
-        const match =
-          text.match(
-            /based\s+on\s+([\d,]+)\s+reviews?/i
-          );
-
-
         if (
-          match &&
-          match[1]
+          checked.has(element)
         ) {
+          continue;
+        }
 
-          showReviewCount(
-            match[1]
-          );
 
-          return true;
+        checked.add(element);
+
+
+        /*
+          Use textContent because it still works
+          even when parent is visually hidden.
+        */
+
+        const text =
+          element.textContent || '';
+
+
+        const count =
+          extractReviewCount(text);
+
+
+        if (count) {
+
+          if (
+            showReviewCount(count)
+          ) {
+            return true;
+          }
 
         }
 
       }
 
+    }
 
+
+    return false;
+
+  }
+
+
+  /* ==========================================
+     3. STAR RATING WIDGET COUNT
+  ========================================== */
+
+  function getCountFromStarWidget() {
+
+    if (!starWidget) {
       return false;
+    }
+
+
+    const selectors = [
+
+      '.yotpo-sr-bottom-line-text',
+
+      '[class*="bottom-line-text"]',
+
+      '[class*="review-count"]',
+
+      '[class*="reviews-count"]',
+
+      '[aria-label*="review"]'
+
+    ];
+
+
+    for (
+      let i = 0;
+      i < selectors.length;
+      i++
+    ) {
+
+      const elements =
+        starWidget.querySelectorAll(
+          selectors[i]
+        );
+
+
+      for (
+        let j = 0;
+        j < elements.length;
+        j++
+      ) {
+
+        const element =
+          elements[j];
+
+
+        const text = [
+          element.textContent || '',
+          element.getAttribute('aria-label') || ''
+        ].join(' ');
+
+
+        const count =
+          extractReviewCount(text);
+
+
+        if (count) {
+
+          if (
+            showReviewCount(count)
+          ) {
+            return true;
+          }
+
+        }
+
+      }
 
     }
 
 
-    /* ==========================================
-       FIND REVIEW COUNT
-    ========================================== */
+    /*
+      Last check against complete
+      Star Widget text.
+    */
 
-    function findReviewCount() {
+    const widgetText =
+      starWidget.textContent || '';
 
-      /*
-        Always prefer the actual
-        main reviews count first.
 
-        Example:
-        Based on 16 reviews
-      */
+    const widgetCount =
+      extractReviewCount(widgetText);
 
-      if (getCountFromMainReviews()) {
-        return;
+
+    if (widgetCount) {
+      return showReviewCount(widgetCount);
+    }
+
+
+    return false;
+
+  }
+
+
+  /* ==========================================
+     4. SEARCH YOTPO TEXT ANYWHERE
+  ========================================== */
+
+  function getCountFromAnyYotpoElement() {
+
+    const elements =
+      document.querySelectorAll(
+        '[class*="yotpo"], [id*="yotpo"]'
+      );
+
+
+    for (
+      let i = 0;
+      i < elements.length;
+      i++
+    ) {
+
+      const element =
+        elements[i];
+
+
+      const text =
+        element.textContent || '';
+
+
+      const count =
+        extractReviewCount(text);
+
+
+      if (count) {
+
+        if (
+          showReviewCount(count)
+        ) {
+          return true;
+        }
+
       }
-
-
-      if (getCountFromYotpoText()) {
-        return;
-      }
-
-
-      /*
-        Fallback:
-        Star Rating own count
-      */
-
-      getCountFromStarWidget();
 
     }
 
 
-    /* ==========================================
-       FIRST RUN
-    ========================================== */
+    return false;
 
-    findReviewCount();
+  }
 
 
-    /* ==========================================
-       YOTPO LOADS ASYNC,
-       SO CHECK AGAIN FOR A FEW SECONDS
-    ========================================== */
+  /* ==========================================
+     5. METAFIELD FALLBACK
+  ========================================== */
 
-    let attempts = 0;
+  function getCountFromMetafield() {
 
-    const maxAttempts = 30;
+    if (!metafieldReviewCount) {
+      return false;
+    }
 
 
-    const interval = window.setInterval(
+    return showReviewCount(
+      metafieldReviewCount
+    );
+
+  }
+
+
+  /* ==========================================
+     FIND BEST REVIEW COUNT
+  ========================================== */
+
+  function findReviewCount() {
+
+    /*
+      Priority 1:
+      Hidden Main Yotpo Reviews widget.
+    */
+
+    if (
+      getCountFromHiddenMainWidget()
+    ) {
+      return true;
+    }
+
+
+    /*
+      Priority 2:
+      Any existing Reviews widget elsewhere.
+    */
+
+    if (
+      getCountFromExistingMainReviews()
+    ) {
+      return true;
+    }
+
+
+    /*
+      Priority 3:
+      Star Rating Widget.
+    */
+
+    if (
+      getCountFromStarWidget()
+    ) {
+      return true;
+    }
+
+
+    /*
+      Priority 4:
+      Search Yotpo DOM.
+    */
+
+    if (
+      getCountFromAnyYotpoElement()
+    ) {
+      return true;
+    }
+
+
+    /*
+      Priority 5:
+      Shopify / Yotpo metafield fallback.
+    */
+
+    getCountFromMetafield();
+
+
+    return false;
+
+  }
+
+
+  /* ==========================================
+     FIRST RUN
+  ========================================== */
+
+  findReviewCount();
+
+
+  /* ==========================================
+     YOTPO LOADS ASYNC
+
+     Check repeatedly for 20 seconds.
+  ========================================== */
+
+  let attempts = 0;
+
+  const maxAttempts = 40;
+
+
+  const interval =
+    window.setInterval(
       function () {
 
         attempts++;
 
-
-        /*
-          Keep checking because Yotpo
-          may load main reviews after stars.
-        */
 
         findReviewCount();
 
@@ -513,7 +832,9 @@
           attempts >= maxAttempts
         ) {
 
-          window.clearInterval(interval);
+          window.clearInterval(
+            interval
+          );
 
         }
 
@@ -522,15 +843,16 @@
     );
 
 
-    /* ==========================================
-       OBSERVE YOTPO ASYNC CHANGES
-    ========================================== */
+  /* ==========================================
+     WATCH YOTPO DOM CHANGES
+  ========================================== */
 
-    let observerTimer;
+  let observerTimer;
 
 
-    const observer =
-      new MutationObserver(function () {
+  const observer =
+    new MutationObserver(
+      function () {
 
         window.clearTimeout(
           observerTimer
@@ -547,48 +869,50 @@
             100
           );
 
-      });
-
-
-    observer.observe(
-      document.body,
-      {
-        childList: true,
-        subtree: true
       }
     );
 
 
-    /*
-      Stop observer after 20 seconds
-      to avoid running forever.
-    */
+  observer.observe(
+    document.body,
+    {
+      childList: true,
+      subtree: true,
+      characterData: true
+    }
+  );
 
-    window.setTimeout(
-      function () {
 
-        observer.disconnect();
+  /* ==========================================
+     STOP OBSERVER
+  ========================================== */
 
-        window.clearTimeout(
-          observerTimer
-        );
+  window.setTimeout(
+    function () {
 
-        window.clearInterval(
-          interval
-        );
+      observer.disconnect();
 
-      },
-      20000
-    );
 
-  })();
+      window.clearTimeout(
+        observerTimer
+      );
+
+
+      window.clearInterval(
+        interval
+      );
+
+    },
+    20000
+  );
+
+})();
 </script>
 
 
 {% schema %}
 {
   "name": "Product Price Review",
-
   "settings": [
 
     {
@@ -601,6 +925,13 @@
       "id": "yotpo_instance_id",
       "label": "Yotpo Star Rating Instance ID",
       "default": "379774"
+    },
+
+    {
+      "type": "text",
+      "id": "yotpo_reviews_instance_id",
+      "label": "Yotpo Main Reviews Instance ID",
+      "info": "Add the instance ID of your main Yotpo Reviews widget. It will load invisibly so the real review count can still be retrieved."
     },
 
 
