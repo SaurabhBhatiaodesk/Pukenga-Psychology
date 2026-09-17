@@ -151,6 +151,7 @@
                   "name": "Product Rating",
                   "settings": {
                     "yotpo_instance_id": "379774",
+                    "yotpo_reviews_instance_id": "",
                     "price_size": 24,
                     "mobile_price_size": 22,
                     "price_weight": "400",
@@ -645,6 +646,7 @@
     "custom_liquid_EzmNpC": {
       "type": "custom-liquid",
       "disabled": true,
+      "custom_css": [],
       "name": "t:names.custom_liquid",
       "settings": {
         "custom_liquid": "<div class=\"yotpo-widget-instance\" data-yotpo-instance-id=\"379775\" data-yotpo-product-id=\"{{product.id}}\" data-yotpo-name=\"{{ product.title | escape }}\" data-yotpo-url=\"{{ shop.url }}{{ product.url }}\" data-yotpo-image-url=\"{{ product.featured_image | product_img_url: \"large\" | prepend: \"https:\" | replace: '?', '%3F' | replace: '&','%26'}}\" data-yotpo-price=\"{{ product.price | divided_by: 100.00 }}\" data-yotpo-currency=\"{{ shop.currency }}\" data-yotpo-description=\"{{ product.description | escape }}\"></div>",
