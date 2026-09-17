@@ -91,10 +91,10 @@
         "mobile_navigation_gap": 28,
         "mobile_copyright_spacing": 24,
         "mobile_description_spacing": 22,
-        "mobile_heading_font_size": 16,
-        "mobile_link_font_size": 16,
-        "mobile_description_font_size": 16,
-        "mobile_copyright_font_size": 14,
+        "mobile_heading_font_size": 13,
+        "mobile_link_font_size": 13,
+        "mobile_description_font_size": 13,
+        "mobile_copyright_font_size": 13,
         "mobile_link_gap": 11
       }
     }
