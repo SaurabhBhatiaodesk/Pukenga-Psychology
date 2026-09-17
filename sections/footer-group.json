@@ -67,7 +67,7 @@
         "heading_color": "#f2ecdc",
         "link_color": "{{ settings.color_palette.color1 }}",
         "link_hover_color": "#e0b784",
-        "border_color": "#304237",
+        "border_color": "{{ settings.color_palette.color2 }}",
         "padding_top": 56,
         "padding_bottom": 34,
         "brand_max_width": 400,
