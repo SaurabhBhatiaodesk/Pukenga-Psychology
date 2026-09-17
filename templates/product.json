@@ -151,6 +151,7 @@
                   "name": "Product Rating",
                   "settings": {
                     "yotpo_instance_id": "379774",
+                    "yotpo_reviews_instance_id": "",
                     "price_size": 24,
                     "mobile_price_size": 22,
                     "price_weight": "400",
