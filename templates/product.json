@@ -524,7 +524,7 @@
         "background_color": "#1d3323",
         "desktop_gap": 64,
         "vertical_alignment": "center",
-        "heading_max_size": 38,
+        "heading_max_size": 28,
         "heading_margin_bottom": 20,
         "text_font_size": 12,
         "text_margin_bottom": 20,
