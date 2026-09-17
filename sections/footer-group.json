@@ -65,7 +65,7 @@
         "background_color": "#0F1D13",
         "text_color": "#ece5d4",
         "heading_color": "#f2ecdc",
-        "link_color": "#ece5d4",
+        "link_color": "{{ settings.color_palette.color1 }}",
         "link_hover_color": "#e0b784",
         "border_color": "#304237",
         "padding_top": 72,
