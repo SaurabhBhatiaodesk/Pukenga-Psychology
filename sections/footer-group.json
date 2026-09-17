@@ -90,7 +90,7 @@
         "mobile_navigation_spacing": 35,
         "mobile_navigation_gap": 28,
         "mobile_copyright_spacing": 24,
-        "mobile_description_spacing": 22,
+        "mobile_description_spacing": 10,
         "mobile_heading_font_size": 13,
         "mobile_link_font_size": 13,
         "mobile_description_font_size": 13,
