@@ -1,159 +1,138 @@
-<details 
+<details
   class="pukenga-accordion-item"
-  {% if block.settings.open_default %}open{% endif %}
+  {% if block.settings.open_default %}
+    open
+  {% endif %}
   {{ block.shopify_attributes }}
 >
-
-
   <summary class="pukenga-accordion-item__heading">
-
     <span>
       {{ block.settings.heading }}
     </span>
 
-
     <span class="pukenga-accordion-item__icon">
+      <span class="icon-plus"> + </span>
 
-      <span class="icon-plus">
-        +
-      </span>
-
-      <span class="icon-minus">
-        −
-      </span>
-
+      <span class="icon-minus"> − </span>
     </span>
-
-
   </summary>
 
-
   <div class="pukenga-accordion-item__content">
-
     {{ block.settings.content }}
-
   </div>
-
-
 </details>
 
-
-
 <style>
+  .pukenga-accordion-item summary {
+    border-bottom:1px solid {{ block.settings.border_color }};
+  }
 
-.pukenga-accordion-item summary {
-  border-bottom:1px solid {{ block.settings.border_color }};
-}
 
+  .pukenga-accordion-item summary {
+    list-style:none;
+  }
 
-.pukenga-accordion-item summary {
-  list-style:none;
-}
 
+  .pukenga-accordion-item summary::-webkit-details-marker {
 
-.pukenga-accordion-item summary::-webkit-details-marker {
+    display:none;
 
-  display:none;
+  }
 
-}
 
 
+  .pukenga-accordion-item__heading {
 
-.pukenga-accordion-item__heading {
+    font-family: Spectral, serif;
 
-  font-family: Spectral, serif;
+    display:flex;
 
-  display:flex;
+    justify-content:space-between;
 
-  justify-content:space-between;
+    align-items:center;
 
-  align-items:center;
+    cursor:pointer;
 
-  cursor:pointer;
+    padding-top:{{ block.settings.padding }}px;
 
-  padding-top:{{ block.settings.padding }}px;
+    padding-bottom:{{ block.settings.padding }}px;
 
-  padding-bottom:{{ block.settings.padding }}px;
 
+    color:{{ block.settings.heading_color }};
 
-  color:{{ block.settings.heading_color }};
+    font-size:{{ block.settings.heading_size }}px;
 
-  font-size:{{ block.settings.heading_size }}px;
+  }
 
-}
 
 
+  .pukenga-accordion-item__icon {
 
-.pukenga-accordion-item__icon {
+    color:{{ block.settings.icon_color }};
 
-  color:{{ block.settings.icon_color }};
+  }
 
-}
 
 
+  .icon-minus {
 
-.icon-minus {
+    display:none;
 
-  display:none;
+  }
 
-}
 
+  .pukenga-accordion-item[open] .icon-plus {
 
-.pukenga-accordion-item[open] .icon-plus {
+    display:none;
 
-  display:none;
+  }
 
-}
 
+  .pukenga-accordion-item[open] .icon-minus {
 
-.pukenga-accordion-item[open] .icon-minus {
+    display:inline;
 
-  display:inline;
+  }
 
-}
 
 
+  .pukenga-accordion-item__content {
 
-.pukenga-accordion-item__content {
+    opacity:0.82;
 
-  opacity:0.82;
+    padding-top:20px;
 
-  padding-top:20px;
 
+    color:{{ block.settings.content_color }};
 
-  color:{{ block.settings.content_color }};
+    font-size:{{ block.settings.content_size }}px;
 
-  font-size:{{ block.settings.content_size }}px;
+    line-height:1.6;
 
-  line-height:1.6;
+  }
 
-}
 
 
+  @media screen and (max-width:749px){
 
-@media screen and (max-width:749px){
 
+  .pukenga-accordion-item__heading {
 
-.pukenga-accordion-item__heading {
+    font-size:{{ block.settings.mobile_heading_size }}px;
 
-  font-size:{{ block.settings.mobile_heading_size }}px;
+  }
 
-}
 
 
+  .pukenga-accordion-item__content {
 
-.pukenga-accordion-item__content {
+    font-size:{{ block.settings.mobile_content_size }}px;
 
-  font-size:{{ block.settings.mobile_content_size }}px;
+  }
 
-}
 
-
-}
-
+  }
 </style>
-
-
 
 {% schema %}
 {
