@@ -5,11 +5,70 @@
 
   <div class="pukenga-product-accordion__wrapper">
 
-    {% content_for 'blocks' %}
+
+    {% assign product_accordions = product.metafields.custom.product_accordians.value %}
+
+
+    {% if product_accordions != blank %}
+
+
+      {% for accordion in product_accordions %}
+
+        <details 
+          class="pukenga-accordion-item"
+          {% if forloop.first %}open{% endif %}
+        >
+
+          <summary class="pukenga-accordion-item__heading">
+
+            <span>
+              {{ accordion.title }}
+            </span>
+
+
+            <span class="pukenga-accordion-item__icon">
+
+              <span class="icon-plus">
+                +
+              </span>
+
+              <span class="icon-minus">
+                −
+              </span>
+
+            </span>
+
+          </summary>
+
+
+          <div class="pukenga-accordion-item__content">
+
+            {{ accordion.content }}
+
+          </div>
+
+
+        </details>
+
+
+      {% endfor %}
+
+
+
+    {% else %}
+
+
+      {% content_for 'blocks' %}
+
+
+    {% endif %}
+
+
 
   </div>
 
 </div>
+
 
 
 <style>
@@ -21,18 +80,69 @@
 
 
 .pukenga-product-accordion__wrapper {
-  width: 100%;
+  width:100%;
 }
 
 
-@media screen and (max-width:749px){
+.pukenga-accordion-item summary {
+  list-style:none;
+  border-bottom:1px solid #294332;
+}
 
-  .pukenga-product-accordion {
-    padding-top: {{ block.settings.mobile_padding_top }}px;
-    padding-bottom: {{ block.settings.mobile_padding_bottom }}px;
-  }
+
+.pukenga-accordion-item summary::-webkit-details-marker {
+  display:none;
+}
+
+
+.pukenga-accordion-item__heading {
+
+  font-family:Spectral, serif;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  cursor:pointer;
+
+  padding:20px 0;
+
+  color:#f2ecdc;
+
+  font-size:18px;
 
 }
+
+
+.pukenga-product-accordion .icon-minus {
+  display:none;
+}
+
+
+.pukenga-product-accordion .pukenga-accordion-item[open] .icon-plus {
+  display:none;
+}
+
+
+.pukenga-product-accordion .pukenga-accordion-item[open] .icon-minus {
+  display:inline;
+}
+
+
+.pukenga-accordion-item__content {
+
+  padding-top:20px;
+
+  color:#f2ecdc;
+
+  opacity:0.82;
+
+  font-size:15px;
+
+  line-height:1.6;
+
+}
+
 
 </style>
 
