@@ -1,104 +1,41 @@
-{{ 'pukenga-theme.css' | asset_url | stylesheet_tag }}
-
-<div class="pukenga-product-accordion pukenga-section section">
-  <div class="pukenga-container pukenga-product-accordion__inner">
-
-    {% assign product_accordions = product.metafields.custom.product_accordians.value %}
-
-
-    {% if product_accordions != blank %}
-
-      {% comment %}
-      METAOBJECT DATA
-      {% endcomment %}
-
-      {% for accordion in product_accordions %}
-
-        <details 
-          class="pukenga-accordion-item"
-          {% if forloop.first %}open{% endif %}
-        >
-
-          <summary class="pukenga-accordion-item__heading">
-
-            <span>
-              {{ accordion.title }}
-            </span>
-
-            <span class="pukenga-accordion-item__icon">
-
-              <span class="icon-plus">+</span>
-              <span class="icon-minus">−</span>
-
-            </span>
-
-          </summary>
+<details 
+  class="pukenga-accordion-item"
+  {% if block.settings.open_default %}open{% endif %}
+  {{ block.shopify_attributes }}
+>
 
 
-          <div class="pukenga-accordion-item__content">
+  <summary class="pukenga-accordion-item__heading">
 
-            {{ accordion.content }}
-
-          </div>
-
-        </details>
+    <span>
+      {{ block.settings.heading }}
+    </span>
 
 
-      {% endfor %}
+    <span class="pukenga-accordion-item__icon">
+
+      <span class="icon-plus">
+        +
+      </span>
+
+      <span class="icon-minus">
+        −
+      </span>
+
+    </span>
 
 
-
-    {% else %}
-
-
-      {% comment %}
-      FALLBACK SECTION BLOCKS
-      {% endcomment %}
+  </summary>
 
 
-      {% for block in section.blocks %}
+  <div class="pukenga-accordion-item__content">
 
-        <details
-          class="pukenga-accordion-item"
-          {% if block.settings.open_default %}open{% endif %}
-          {{ block.shopify_attributes }}
-        >
-
-          <summary class="pukenga-accordion-item__heading">
-
-            <span>
-              {{ block.settings.heading }}
-            </span>
-
-
-            <span class="pukenga-accordion-item__icon">
-
-              <span class="icon-plus">+</span>
-              <span class="icon-minus">−</span>
-
-            </span>
-
-          </summary>
-
-
-          <div class="pukenga-accordion-item__content">
-
-            {{ block.settings.content }}
-
-          </div>
-
-
-        </details>
-
-
-      {% endfor %}
-
-
-    {% endif %}
-
+    {{ block.settings.content }}
 
   </div>
-</div>
+
+
+</details>
 
 
 
