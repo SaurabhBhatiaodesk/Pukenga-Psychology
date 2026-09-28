@@ -11,6 +11,57 @@
   background_color: section.settings.background_color
 %}
 
+
+<style>
+  /* Pūkenga typography treatment — scoped to this section instance */
+  #shopify-section-{{ section.id }} h1,
+  #shopify-section-{{ section.id }} h2,
+  #shopify-section-{{ section.id }} h3,
+  #shopify-section-{{ section.id }} h4,
+  #shopify-section-{{ section.id }} h5,
+  #shopify-section-{{ section.id }} h6 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 1.04;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  #shopify-section-{{ section.id }} p {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} h1,
+    #shopify-section-{{ section.id }} h2,
+    #shopify-section-{{ section.id }} h3,
+    #shopify-section-{{ section.id }} h4,
+    #shopify-section-{{ section.id }} h5,
+    #shopify-section-{{ section.id }} h6 {
+      font-size: 38px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    #shopify-section-{{ section.id }} p {
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
 {% schema %}
 {
   "name": "t:names.section",
