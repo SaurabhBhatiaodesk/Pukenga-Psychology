@@ -113,8 +113,8 @@
       "settings": {
         "collection": "bestseller",
         "products_to_show": 3,
-        "heading": "Ngā mea rongonui",
-        "eyebrow": "/ best sellers",
+        "heading": "Ngā mea rongonui / Best sellers",
+        "eyebrow": "",
         "view_all_label": "Toa katoa · View all",
         "view_all_link": "shopify://collections/bestseller",
         "add_button_label": "Add",
