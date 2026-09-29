@@ -1,5 +1,3 @@
-
-
 <script
   src="{{ 'blog-posts-list.js' | asset_url }}"
   type="module"
@@ -208,6 +206,20 @@
   .blog-post-item:has(.blog-post-card__image-container) {
     border: none;
     padding: 0;
+  }
+
+  /* Pūkenga Hero typography: font style and spacing only. Existing font sizes remain unchanged. */
+  .blog-posts {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .blog-posts {
+      margin-bottom: 10px;
+    }
   }
 {% endstylesheet %}
 
