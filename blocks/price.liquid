@@ -92,6 +92,26 @@
 
 {% render 'payment-terms-styles' %}
 
+{% stylesheet %}
+product-price {
+  font-family: var(--pukenga-font-heading, "Spectral", serif);
+  font-weight: 300;
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+product-price .tax-note,
+product-price .installments {
+  font-family: var(--pukenga-font-heading, "Spectral", serif);
+}
+
+@media screen and (max-width: 749px) {
+  product-price {
+    margin-bottom: 10px;
+  }
+}
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_price",
