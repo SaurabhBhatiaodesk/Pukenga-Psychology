@@ -44,11 +44,11 @@
     margin: 0;
     padding: 0;
     color: var(--announcement-text) !important;
-    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-family: var(--pukenga-font-heading, "Instrument Sans", sans-serif);
     font-size: {{ section.settings.font_size }}px;
     font-weight: {{ section.settings.font_weight }};
-    font-style: italic;
-    line-height: 1.35;
+    font-style: normal;
+    line-height: 1.05;
     letter-spacing: {{ section.settings.letter_spacing }}px;
     text-align: {{ section.settings.text_alignment }};
   }
@@ -56,6 +56,7 @@
   .pukenga-announcement__text * {
     color: inherit !important;
     font-family: inherit;
+    font-style: normal;
   }
 
   @media screen and (max-width: 749px) {
@@ -67,7 +68,7 @@
 
     .pukenga-announcement__text {
       font-size: {{ section.settings.mobile_font_size }}px;
-      line-height: 1.35;
+      line-height: 1.05;
     }
 
   }
