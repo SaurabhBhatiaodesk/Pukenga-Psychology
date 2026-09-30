@@ -26,18 +26,116 @@
 </div>
 
 {% stylesheet %}
-.section-content-wrapper {
-  font-family: var(--pukenga-font-heading, "Spectral", serif);
-  font-weight: 300;
-  line-height: 1.35;
-  margin-bottom: 12px;
-}
-
-@media screen and (max-width: 749px) {
   .section-content-wrapper {
-    margin-bottom: 10px;
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    line-height: 1.35;
   }
-}
+
+  /* Main headings — matches Pūkenga Hero */
+  .section-content-wrapper h1 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 1.04;
+    margin: 0 0 12px;
+  }
+
+  /* Secondary headings */
+  .section-content-wrapper h2,
+  .section-content-wrapper h3 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    line-height: 1.05;
+  }
+
+  .section-content-wrapper h2 {
+    font-size: 38px;
+    margin: 0 0 12px;
+  }
+
+  .section-content-wrapper h3 {
+    font-size: 30px;
+    margin: 0 0 12px;
+  }
+
+  /* Body / supporting text — matches Hero subheading */
+  .section-content-wrapper p {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.35;
+    margin: 0 0 30px;
+  }
+
+  /* Italic text — matches Hero subheading */
+  .section-content-wrapper em,
+  .section-content-wrapper i {
+    font-style: italic;
+  }
+
+  /* Buttons — matches Pūkenga Hero */
+  .section-content-wrapper .pukenga-btn,
+  .section-content-wrapper a.button,
+  .section-content-wrapper button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Keep the section content spacing consistent with the Hero */
+  .section-content-wrapper > * {
+    margin-bottom: 12px;
+  }
+
+  .section-content-wrapper > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-content-wrapper {
+      line-height: 1.35;
+    }
+
+    .section-content-wrapper h1 {
+      font-size: 38px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .section-content-wrapper h2 {
+      font-size: 30px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .section-content-wrapper h3 {
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .section-content-wrapper p {
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 24px;
+    }
+
+    .section-content-wrapper > * {
+      margin-bottom: 10px;
+    }
+
+    .section-content-wrapper > *:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-content-wrapper .pukenga-btn,
+    .section-content-wrapper a.button,
+    .section-content-wrapper button {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
