@@ -119,20 +119,29 @@
 
 
 <style>
+  /*
+   * PŪKENGA FOOTER TYPOGRAPHY
+   * Uses the same Spectral-based typography language as the Pūkenga Hero.
+   * !important is intentional so theme/global typography does not override it.
+   */
+
+  .pukenga-footer,
+  .pukenga-footer * {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+  }
 
   .pukenga-footer {
     width: 100%;
     background: var(--pukenga-footer-bg);
     color: var(--pukenga-footer-text);
-    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
+    font-weight: 300 !important;
+    line-height: 1.35 !important;
   }
-
 
   .pukenga-footer__inner {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
-
 
   .pukenga-footer__top {
     display: grid;
@@ -143,11 +152,9 @@
     border-bottom: 1px solid var(--pukenga-footer-border);
   }
 
-
   .pukenga-footer__brand {
     max-width: {{ section.settings.brand_max_width }}px;
   }
-
 
   .pukenga-footer__logo {
     display: inline-flex;
@@ -157,7 +164,6 @@
     text-decoration: none;
   }
 
-
   .pukenga-footer__logo img {
     display: block;
     width: auto;
@@ -166,43 +172,58 @@
     object-fit: contain;
   }
 
-
   .pukenga-footer__wordmark {
     display: grid;
     gap: 2px;
     color: var(--pukenga-footer-heading);
-    line-height: 1;
+    line-height: 1 !important;
     text-transform: uppercase;
   }
 
   .pukenga-footer__wordmark span:first-child {
-      font-family: var(--pukenga-font-heading, 'Spectral', serif);
-      font-size: 26px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 26px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.12em;
   }
 
   .pukenga-footer__wordmark span:last-child {
-      font-family: var(--pukenga-font-heading, 'Spectral', serif);
-      font-size: 15px;
-      letter-spacing: 0.34em;
-      opacity: 0.85;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 15px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.34em;
+    opacity: 0.85;
   }
-
 
   .pukenga-footer__description {
     margin-top: {{ section.settings.description_spacing }}px;
     color: var(--pukenga-footer-text);
     opacity: 0.82;
-    font-size: {{ section.settings.description_font_size }}px;
-    line-height: 1.62;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 26px !important;
+    font-weight: 300 !important;
+    line-height: 1.35 !important;
   }
-
 
   .pukenga-footer__description p {
-    margin: 0;
+    margin: 0 !important;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 26px !important;
+    font-weight: 300 !important;
+    line-height: 1.35 !important;
   }
 
+  .pukenga-footer__description em,
+  .pukenga-footer__description i {
+    font-style: italic !important;
+  }
+
+  .pukenga-footer__description strong,
+  .pukenga-footer__description b {
+    font-weight: 600 !important;
+  }
 
   .pukenga-footer__nav {
     display: grid;
@@ -211,16 +232,14 @@
     min-width: 382px;
   }
 
-
   .pukenga-footer__column h2 {
-    margin: 0 0 16px;
+    margin: 0 0 12px !important;
     color: var(--pukenga-footer-heading);
-    font-family: var(--pukenga-font-body, 'Instrument Sans', sans-serif);
-    font-size: {{ section.settings.heading_font_size }}px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 26px !important;
+    font-weight: 300 !important;
+    line-height: 1.15 !important;
   }
-
 
   .pukenga-footer__column ul {
     display: grid;
@@ -230,81 +249,90 @@
     list-style: none;
   }
 
+  .pukenga-footer__column li,
+  .pukenga-footer__column li a {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+  }
 
   .pukenga-footer__column a {
     color: var(--pukenga-footer-link);
-    font-size: {{ section.settings.link_font_size }}px;
-    line-height: 1.35;
+    font-size: 16px !important;
+    font-weight: 300 !important;
+    line-height: 1.4 !important;
     text-decoration: none;
     transition: color 0.2s ease, opacity 0.2s ease;
   }
-
 
   .pukenga-footer__column a:hover {
     color: var(--pukenga-footer-hover);
   }
 
-
   .pukenga-footer__bottom {
     padding-top: {{ section.settings.copyright_spacing }}px;
   }
 
-
   .pukenga-footer__bottom p {
-    margin: 0;
+    margin: 0 !important;
     color: var(--pukenga-footer-text);
     opacity: 0.42;
-    font-size: {{ section.settings.copyright_font_size }}px;
-    line-height: 1.5;
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 14px !important;
+    font-weight: 300 !important;
+    line-height: 1.5 !important;
   }
 
-
   @media screen and (max-width: 749px) {
+
+    .pukenga-footer {
+      line-height: 1.35 !important;
+    }
 
     .pukenga-footer__inner {
       padding-top: {{ section.settings.mobile_padding_top }}px;
       padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
     }
 
-
     .pukenga-footer__top {
       display: block;
       padding-bottom: {{ section.settings.mobile_top_section_spacing }}px;
     }
 
-
     .pukenga-footer__brand {
       max-width: none;
     }
 
-
     .pukenga-footer__logo {
       gap: {{ section.settings.mobile_logo_gap }}px;
     }
-
 
     .pukenga-footer__logo img {
       height: {{ section.settings.mobile_logo_height }}px;
       max-width: {{ section.settings.mobile_logo_max_width }}px;
     }
 
-
     .pukenga-footer__wordmark span:first-child {
-        font-size: 19px;
+      font-size: 19px !important;
+      font-weight: 300 !important;
     }
-
 
     .pukenga-footer__wordmark span:last-child {
-      font-size:11px;
+      font-size: 11px !important;
+      font-weight: 300 !important;
     }
-
 
     .pukenga-footer__description {
       margin-top: {{ section.settings.mobile_description_spacing }}px;
-      font-size: {{ section.settings.mobile_description_font_size }}px;
-      line-height: 1.55;
+      font-size: 18px !important;
+      font-weight: 300 !important;
+      line-height: 1.35 !important;
     }
 
+    .pukenga-footer__description p {
+      font-size: 18px !important;
+      font-weight: 300 !important;
+      line-height: 1.35 !important;
+    }
 
     .pukenga-footer__nav {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -313,34 +341,33 @@
       margin-top: {{ section.settings.mobile_navigation_spacing }}px;
     }
 
-
     .pukenga-footer__column h2 {
-      margin-bottom: 14px;
-      font-size: {{ section.settings.mobile_heading_font_size }}px;
+      margin-bottom: 10px !important;
+      font-size: 21px !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
     }
-
 
     .pukenga-footer__column ul {
       gap: {{ section.settings.mobile_link_gap }}px;
     }
 
-
     .pukenga-footer__column a {
-      font-size: {{ section.settings.mobile_link_font_size }}px;
+      font-size: 15px !important;
+      font-weight: 300 !important;
+      line-height: 1.4 !important;
     }
-
 
     .pukenga-footer__bottom {
       padding-top: {{ section.settings.mobile_copyright_spacing }}px;
     }
 
-
     .pukenga-footer__bottom p {
-      font-size: {{ section.settings.mobile_copyright_font_size }}px;
+      font-size: 12px !important;
+      font-weight: 300 !important;
+      line-height: 1.5 !important;
     }
-
   }
-
 </style>
 
 
