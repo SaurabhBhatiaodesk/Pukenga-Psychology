@@ -1,6 +1,162 @@
+<div class="pukenga-text-block">
+  {% render 'text', block: block %}
+</div>
 
+{% stylesheet %}
+  .pukenga-text-block {
+    font-family: var(--pukenga-font-heading, "Spectral", serif);
+    font-weight: 300;
+    line-height: 1.35;
+  }
 
-{% render 'text', block: block %}
+  /* Main heading — matches Pūkenga Hero */
+  .pukenga-text-block h1 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    font-size: 60px !important;
+    line-height: 1.04 !important;
+    margin: 0 0 12px;
+  }
+
+  /* Secondary heading — matches the responsive Hero hierarchy */
+  .pukenga-text-block h2 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    font-size: 38px !important;
+    line-height: 1.05 !important;
+    margin: 0 0 12px;
+  }
+
+  .pukenga-text-block h3 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    font-size: 30px !important;
+    line-height: 1.05 !important;
+    margin: 0 0 12px;
+  }
+
+  .pukenga-text-block h4 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    font-size: 26px !important;
+    line-height: 1.15 !important;
+    margin: 0 0 12px;
+  }
+
+  .pukenga-text-block h5,
+  .pukenga-text-block h6 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    line-height: 1.2 !important;
+    margin: 0 0 12px;
+  }
+
+  .pukenga-text-block h5 {
+    font-size: 22px !important;
+  }
+
+  .pukenga-text-block h6 {
+    font-size: 18px !important;
+  }
+
+  /* Paragraph / body text — matches Pūkenga Hero subheading */
+  .pukenga-text-block p {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-weight: 300 !important;
+    font-size: 26px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 30px;
+  }
+
+  /* Italic text */
+  .pukenga-text-block em,
+  .pukenga-text-block i {
+    font-style: italic;
+  }
+
+  /* Strong / bold text */
+  .pukenga-text-block strong,
+  .pukenga-text-block b {
+    font-weight: 600;
+  }
+
+  /* Links inherit the Spectral typography */
+  .pukenga-text-block a {
+    font-family: inherit;
+  }
+
+  /* Prevent the final text element from creating unnecessary bottom spacing */
+  .pukenga-text-block > *:last-child,
+  .pukenga-text-block p:last-child,
+  .pukenga-text-block h1:last-child,
+  .pukenga-text-block h2:last-child,
+  .pukenga-text-block h3:last-child,
+  .pukenga-text-block h4:last-child,
+  .pukenga-text-block h5:last-child,
+  .pukenga-text-block h6:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .pukenga-text-block {
+      line-height: 1.35;
+    }
+
+    /* Mobile Hero heading size */
+    .pukenga-text-block h1 {
+      font-size: 38px !important;
+      line-height: 1.05 !important;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile secondary heading */
+    .pukenga-text-block h2 {
+      font-size: 30px !important;
+      line-height: 1.05 !important;
+      margin-bottom: 10px;
+    }
+
+    .pukenga-text-block h3 {
+      font-size: 24px !important;
+      line-height: 1.1 !important;
+      margin-bottom: 10px;
+    }
+
+    .pukenga-text-block h4 {
+      font-size: 21px !important;
+      line-height: 1.15 !important;
+      margin-bottom: 10px;
+    }
+
+    .pukenga-text-block h5 {
+      font-size: 19px !important;
+      margin-bottom: 10px;
+    }
+
+    .pukenga-text-block h6 {
+      font-size: 17px !important;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile Hero subheading size */
+    .pukenga-text-block p {
+      font-size: 18px !important;
+      line-height: 1.35 !important;
+      margin-bottom: 24px;
+    }
+
+    .pukenga-text-block > *:last-child,
+    .pukenga-text-block p:last-child,
+    .pukenga-text-block h1:last-child,
+    .pukenga-text-block h2:last-child,
+    .pukenga-text-block h3:last-child,
+    .pukenga-text-block h4:last-child,
+    .pukenga-text-block h5:last-child,
+    .pukenga-text-block h6:last-child {
+      margin-bottom: 0;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
