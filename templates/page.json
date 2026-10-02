@@ -86,10 +86,91 @@
             "text_color": "#F2ECDC"
           },
           "blocks": {}
+        },
+        "ai_gen_block_ce27432_j89KHP": {
+          "type": "ai_gen_block_ce27432",
+          "settings": {
+            "image": "shopify://shop_images/Pukenga7.webp",
+            "heading": "Training",
+            "heading_bold": true,
+            "heading_size": 36,
+            "text": "<p>Embracing the wisdom of both Western psychology and Te Ao Māori, I offer customized trainings designed to resonate with diverse audiences. Topics span from mental health, burn out and stress, effective communication, right through to behavioral management.<br/><br/>These can be tailored for various settings from kura, residential right through to support services.<br/><br/></p>",
+            "button_label": "Learn more",
+            "button_link": "",
+            "chat_label": "Let's chat",
+            "chat_link": "",
+            "chat_spacing": 16,
+            "chat_padding": 10,
+            "chat_radius": 4,
+            "image_position": "right",
+            "desktop_width_percent": 100,
+            "column_gap": 32,
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "image_radius": 8,
+            "background_color": "#16281B",
+            "text_color": "#F2ECDC"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_ce27432_bbfjn7": {
+          "type": "ai_gen_block_ce27432",
+          "settings": {
+            "image": "shopify://shop_images/Pukenga19.webp",
+            "heading": "Supervision",
+            "heading_bold": true,
+            "heading_size": 36,
+            "text": "<p>Drawing from a wealth of experience in the field, I offer supervision to fellow health professionals seeking to deepen their practice. Through collaborative sessions, I provide a nurturing space for reflection, skill refinement, and ethical considerations. My approach integrates Western psychology and Te Ao Māori perspectives, ensuring a holistic approach to professional development. Together, we'll embark on a journey towards greater competence, confidence, and compassionate care in your healing profession.<br/><br/></p>",
+            "button_label": "Learn more",
+            "button_link": "",
+            "chat_label": "Let's chat",
+            "chat_link": "",
+            "chat_spacing": 16,
+            "chat_padding": 10,
+            "chat_radius": 4,
+            "image_position": "left",
+            "desktop_width_percent": 100,
+            "column_gap": 32,
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "image_radius": 8,
+            "background_color": "#16281B",
+            "text_color": "#F2ECDC"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_ce27432_QRAAPr": {
+          "type": "ai_gen_block_ce27432",
+          "settings": {
+            "image": "shopify://shop_images/Pukenga1.webp",
+            "heading": "Assessment & Therapy",
+            "heading_bold": true,
+            "heading_size": 36,
+            "text": "<p>In the midst of life's challenges, I'm here to provide support tailored just for you. Through comprehensive assessment and therapy, we'll navigate the complexities together. Whether it's anxiety, stress, or other disorders, my approach is centered around your unique journey, offering practical solutions for your present needs. Let's take this step towards healing and growth, right where you are.<br/><br/></p>",
+            "button_label": "At This Time, We Have No Capacity For New Therapy Clients. Please Check Back Later For Availability",
+            "button_link": "",
+            "chat_label": "Let's chat",
+            "chat_link": "",
+            "chat_spacing": 16,
+            "chat_padding": 10,
+            "chat_radius": 4,
+            "image_position": "left",
+            "desktop_width_percent": 100,
+            "column_gap": 32,
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "image_radius": 8,
+            "background_color": "#16281B",
+            "text_color": "#F2ECDC"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_ce27432_gAhAcU"
+        "ai_gen_block_ce27432_gAhAcU",
+        "ai_gen_block_ce27432_j89KHP",
+        "ai_gen_block_ce27432_bbfjn7",
+        "ai_gen_block_ce27432_QRAAPr"
       ],
       "settings": {
         "content_direction": "column",
