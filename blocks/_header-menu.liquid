@@ -1134,6 +1134,101 @@
 {% endstyle %}
 
 
+
+<script>
+  (() => {
+    const applyPukengaMegaMenuTypography = () => {
+      const parentLinks = document.querySelectorAll(
+        '.mega-menu__link.mega-menu__link--parent'
+      );
+
+      parentLinks.forEach((element) => {
+        element.style.setProperty('font-family', '"Spectral", serif', 'important');
+        element.style.setProperty('font-style', 'normal', 'important');
+        element.style.setProperty('font-weight', '300', 'important');
+        element.style.setProperty('font-size', '18px', 'important');
+        element.style.setProperty('line-height', '1.25', 'important');
+        element.style.setProperty('letter-spacing', 'normal', 'important');
+        element.style.setProperty('text-transform', 'none', 'important');
+
+        const text = element.querySelector('.wrap-text');
+
+        if (text) {
+          text.style.setProperty('font-family', '"Spectral", serif', 'important');
+          text.style.setProperty('font-style', 'normal', 'important');
+          text.style.setProperty('font-weight', '300', 'important');
+          text.style.setProperty('font-size', '18px', 'important');
+          text.style.setProperty('line-height', '1.25', 'important');
+          text.style.setProperty('letter-spacing', 'normal', 'important');
+          text.style.setProperty('text-transform', 'none', 'important');
+        }
+      });
+
+      const childLinks = document.querySelectorAll(
+        '.mega-menu__link:not(.mega-menu__link--parent)'
+      );
+
+      childLinks.forEach((element) => {
+        element.style.setProperty('font-family', '"Spectral", serif', 'important');
+        element.style.setProperty('font-style', 'normal', 'important');
+        element.style.setProperty('font-weight', '300', 'important');
+        element.style.setProperty('font-size', '16px', 'important');
+        element.style.setProperty('line-height', '1.35', 'important');
+        element.style.setProperty('letter-spacing', 'normal', 'important');
+        element.style.setProperty('text-transform', 'none', 'important');
+
+        const text = element.querySelector('.wrap-text');
+
+        if (text) {
+          text.style.setProperty('font-family', '"Spectral", serif', 'important');
+          text.style.setProperty('font-style', 'normal', 'important');
+          text.style.setProperty('font-weight', '300', 'important');
+          text.style.setProperty('font-size', '16px', 'important');
+          text.style.setProperty('line-height', '1.35', 'important');
+          text.style.setProperty('letter-spacing', 'normal', 'important');
+          text.style.setProperty('text-transform', 'none', 'important');
+        }
+      });
+
+      const imageLinks = document.querySelectorAll(
+        '.mega-menu__link:has(.mega-menu__link-image)'
+      );
+
+      imageLinks.forEach((element) => {
+        element.style.setProperty('font-family', '"Spectral", serif', 'important');
+        element.style.setProperty('font-weight', '300', 'important');
+
+        const text = element.querySelector('.wrap-text');
+
+        if (text) {
+          text.style.setProperty('font-family', '"Spectral", serif', 'important');
+          text.style.setProperty('font-weight', '300', 'important');
+        }
+      });
+    };
+
+    const start = () => {
+      applyPukengaMegaMenuTypography();
+
+      const observer = new MutationObserver(() => {
+        applyPukengaMegaMenuTypography();
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start, { once: true });
+    } else {
+      start();
+    }
+  })();
+</script>
+
+
 {% schema %}
 {
   "name": "t:names.menu",
