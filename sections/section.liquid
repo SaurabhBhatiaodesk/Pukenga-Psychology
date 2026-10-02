@@ -36,12 +36,43 @@
     margin-bottom: 30px;
   }
 
-  /* Put the image after the text when the right position is selected. */
-  {% if section.settings.image_position == 'right' and section.settings.content_direction == 'row' %}
+  /*
+   * Image with text positioning
+   *
+   * The image_with_text preset outputs two top-level blocks:
+   *   1. image
+   *   2. text group
+   *
+   * Explicit flex ordering is used instead of row-reverse so the Image
+   * position setting cannot be defeated by the section's base alignment CSS.
+   */
+  {% if section.settings.content_direction == 'row' %}
     @media screen and (min-width: 750px) {
       #shopify-section-{{ section.id }} .section-content {
-        flex-direction: row-reverse;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap;
       }
+
+      {% if section.settings.image_position == 'right' %}
+        /* RIGHT: text first, image second */
+        #shopify-section-{{ section.id }} .section-content > *:first-child {
+          order: 2 !important;
+        }
+
+        #shopify-section-{{ section.id }} .section-content > *:nth-child(2) {
+          order: 1 !important;
+        }
+      {% else %}
+        /* LEFT: image first, text second */
+        #shopify-section-{{ section.id }} .section-content > *:first-child {
+          order: 1 !important;
+        }
+
+        #shopify-section-{{ section.id }} .section-content > *:nth-child(2) {
+          order: 2 !important;
+        }
+      {% endif %}
     }
   {% endif %}
 
@@ -125,7 +156,8 @@
       ],
       "default": "left",
       "visible_if": "{{ section.settings.content_direction == 'row' }}"
-    },    {
+    },
+    {
       "type": "checkbox",
       "id": "vertical_on_mobile",
       "label": "t:settings.vertical_on_mobile",
@@ -1414,6 +1446,7 @@
       "category": "t:categories.storytelling",
       "settings": {
         "content_direction": "row",
+        "image_position": "left",
         "gap": 32,
         "padding-block-start": 40,
         "padding-block-end": 40
