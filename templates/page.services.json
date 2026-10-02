@@ -69,6 +69,7 @@
             "heading_size": 40,
             "text": "<p>I offer specialized consultancy services tailored to NGOs, government entities, research institutions, and startups. With a proven track record of empowering organizations, I bring a unique blend of psychological expertise and practical insights to the table.</p><p>My consultancy services are designed to help you navigate the complexities of human dynamics, fostering environments of resilience, creativity, and productivity. From crafting effective mental health initiatives to optimizing team dynamics, I provide actionable strategies rooted in evidence-based practices. Whether you're aiming to enhance employee well-being, foster inclusive cultures, or conduct impactful research, my tailored solutions will propel your mission forward.</p>",
             "button_label": "Learn more",
+            "button_text_alignment": "center",
             "button_link": "",
             "chat_label": "Let's chat",
             "chat_link": "shopify://pages/service-enquiry",
@@ -93,6 +94,7 @@
             "heading_size": 40,
             "text": "<p>Embracing the wisdom of both Western psychology and Te Ao Māori, I offer customized trainings designed to resonate with diverse audiences. Topics span from mental health, burn out and stress, effective communication, right through to behavioral management.<br/><br/>These can be tailored for various settings from kura, residential right through to support services.<br/><br/></p>",
             "button_label": "Learn more",
+            "button_text_alignment": "center",
             "button_link": "",
             "chat_label": "Let's chat",
             "chat_link": "shopify://pages/service-enquiry",
@@ -117,6 +119,7 @@
             "heading_size": 40,
             "text": "<p>Drawing from a wealth of experience in the field, I offer supervision to fellow health professionals seeking to deepen their practice. Through collaborative sessions, I provide a nurturing space for reflection, skill refinement, and ethical considerations. My approach integrates Western psychology and Te Ao Māori perspectives, ensuring a holistic approach to professional development. Together, we'll embark on a journey towards greater competence, confidence, and compassionate care in your healing profession.<br/><br/></p>",
             "button_label": "Learn more",
+            "button_text_alignment": "center",
             "button_link": "",
             "chat_label": "Let's chat",
             "chat_link": "shopify://pages/service-enquiry",
@@ -141,6 +144,7 @@
             "heading_size": 40,
             "text": "<p>In the midst of life's challenges, I'm here to provide support tailored just for you. Through comprehensive assessment and therapy, we'll navigate the complexities together. Whether it's anxiety, stress, or other disorders, my approach is centered around your unique journey, offering practical solutions for your present needs. Let's take this step towards healing and growth, right where you are.<br/><br/></p>",
             "button_label": "",
+            "button_text_alignment": "center",
             "button_link": "",
             "chat_label": "At This Time, We Have No Capacity For New Therapy Clients. Please Check Back Later For Availability",
             "chat_link": "shopify://pages/service-enquiry",
@@ -164,6 +168,7 @@
         "ai_gen_block_ce27432_bbfjn7",
         "ai_gen_block_ce27432_QRAAPr"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -192,10 +197,187 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "section_mTAV6J": {
+      "type": "section",
+      "blocks": {
+        "image_fQVGUP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Pukenga17.webp",
+            "link": "",
+            "image_ratio": "square",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_Dwgx9r": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_wrrRBY": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Consultancy</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_wRxWpK": {
+              "type": "text",
+              "settings": {
+                "text": "<p>I offer specialized consultancy services tailored to NGOs, government entities, research institutions, and startups. With a proven track record of empowering organizations, I bring a unique blend of psychological expertise and practical insights to the table.</p><p>My consultancy services are designed to help you navigate the complexities of human dynamics, fostering environments of resilience, creativity, and productivity. From crafting effective mental health initiatives to optimizing team dynamics, I provide actionable strategies rooted in evidence-based practices. Whether you're aiming to enhance employee well-being, foster inclusive cultures, or conduct impactful research, my tailored solutions will propel your mission forward.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_BGNhMf": {
+              "type": "button",
+              "settings": {
+                "label": "Let's Chat",
+                "link": "shopify://pages/service-enquiry",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_wrrRBY",
+            "text_wRxWpK",
+            "button_BGNhMf"
+          ]
+        }
+      },
+      "block_order": [
+        "image_fQVGUP",
+        "group_Dwgx9r"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
     }
   },
   "order": [
     "main",
-    "1790915066ecbf6cbf"
+    "1790915066ecbf6cbf",
+    "section_mTAV6J"
   ]
 }
