@@ -105,7 +105,10 @@
 .ai-image-text-{{ ai_gen_id }}__link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: {% if block.settings.button_text_alignment == 'left' %}flex-start{% elsif block.settings.button_text_alignment == 'right' %}flex-end{% else %}center{% endif %};
+  min-width: 148px;
+  box-sizing: border-box;
+  text-align: {{ block.settings.button_text_alignment }};
   margin-top: 24px;
   padding: 12px 22px;
   border: 1px solid {{ block.settings.text_color }};
@@ -117,7 +120,10 @@
 .ai-image-text-{{ ai_gen_id }}__chat {
   display: inline-flex !important;
   align-items: center;
-  justify-content: center;
+  justify-content: {% if block.settings.button_text_alignment == 'left' %}flex-start{% elsif block.settings.button_text_alignment == 'right' %}flex-end{% else %}center{% endif %};
+  min-width: 148px;
+  box-sizing: border-box;
+  text-align: {{ block.settings.button_text_alignment }};
   box-sizing: border-box;
   width: fit-content;
   min-height: 44px;
@@ -262,6 +268,17 @@
       "default": "<p>Share information about your service, practice, or story. Use this space to help visitors understand how you can support them.</p>"
     },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn more" },
+    {
+      "type": "select",
+      "id": "button_text_alignment",
+      "label": "Button text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "header", "content": "Chat button" },
     { "type": "text", "id": "chat_label", "label": "Button text", "default": "Let's chat" },
