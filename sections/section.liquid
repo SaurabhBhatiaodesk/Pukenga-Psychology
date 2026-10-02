@@ -37,18 +37,18 @@
   }
 
   /*
-   * Image with text positioning
+   * Image with text position — desktop only.
    *
-   * The image_with_text preset outputs two top-level blocks:
-   *   1. image
-   *   2. text group
+   * IMPORTANT: the actual flex container is `.section-content-wrapper`.
+   * The previous code targeted `.section-content`, which does not exist
+   * in this section structure, so the position setting could not work.
    *
-   * Explicit flex ordering is used instead of row-reverse so the Image
-   * position setting cannot be defeated by the section's base alignment CSS.
+   * LEFT  = image | text
+   * RIGHT = text  | image
    */
   {% if section.settings.content_direction == 'row' %}
     @media screen and (min-width: 750px) {
-      #shopify-section-{{ section.id }} .section-content {
+      #shopify-section-{{ section.id }} .section-content-wrapper {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap;
@@ -56,20 +56,20 @@
 
       {% if section.settings.image_position == 'right' %}
         /* RIGHT: text first, image second */
-        #shopify-section-{{ section.id }} .section-content > *:first-child {
+        #shopify-section-{{ section.id }} .section-content-wrapper > *:first-child {
           order: 2 !important;
         }
 
-        #shopify-section-{{ section.id }} .section-content > *:nth-child(2) {
+        #shopify-section-{{ section.id }} .section-content-wrapper > *:nth-child(2) {
           order: 1 !important;
         }
       {% else %}
         /* LEFT: image first, text second */
-        #shopify-section-{{ section.id }} .section-content > *:first-child {
+        #shopify-section-{{ section.id }} .section-content-wrapper > *:first-child {
           order: 1 !important;
         }
 
-        #shopify-section-{{ section.id }} .section-content > *:nth-child(2) {
+        #shopify-section-{{ section.id }} .section-content-wrapper > *:nth-child(2) {
           order: 2 !important;
         }
       {% endif %}
@@ -156,8 +156,7 @@
       ],
       "default": "left",
       "visible_if": "{{ section.settings.content_direction == 'row' }}"
-    },
-    {
+    },    {
       "type": "checkbox",
       "id": "vertical_on_mobile",
       "label": "t:settings.vertical_on_mobile",
