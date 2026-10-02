@@ -818,21 +818,23 @@
 
 {% style %}
   /*
-   * PŪKENGA HEADER TYPOGRAPHY OVERRIDE
-   * Loaded after the theme's existing menu stylesheet so the Spectral
-   * typography is actually applied to the rendered header/menu elements.
+   * PŪKENGA HEADER MENU TYPOGRAPHY
+   * Consolidated final override. Loads after the theme menu stylesheet.
    */
 
   .header-menu,
-  .header-menu .menu-list,
-  .header-menu .menu-list *,
+  .header-menu *,
   .menu-list--mobile,
   .menu-list--mobile * {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
   }
 
-  /* Main desktop navigation */
-  .header-menu .menu-list__link {
+  /* =========================
+     TOP-LEVEL DESKTOP MENU
+     ========================= */
+  .header-menu .menu-list > .overflow-menu .menu-list__link,
+  .header-menu .menu-list .menu-list__list-item > .menu-list__link,
+  .header-menu .menu-list .menu-list__list-item > .menu-list__trigger > .menu-list__link {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
     font-size: 16px !important;
     font-weight: 300 !important;
@@ -844,67 +846,95 @@
 
   .header-menu .menu-list__link-title {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: inherit !important;
     font-weight: 300 !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
   }
 
-  /* Submenu / mega-menu links */
-  .header-menu .mega-menu__link,
-  .header-menu .mega-menu__link--parent {
+  /* =========================
+     MORE BUTTON / OVERFLOW
+     ========================= */
+  .header-menu [data-testid="header-menu-more-button"],
+  .header-menu [data-testid="header-menu-more-button"] .menu-list__link-title,
+  .header-menu .menu-list__list-item[slot="more"] > .menu-list__link {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-size: 16px !important;
     font-weight: 300 !important;
     font-style: normal !important;
+    line-height: 1.25 !important;
+    letter-spacing: normal !important;
     text-transform: none !important;
   }
 
-  .header-menu .mega-menu__link {
-    font-size: 16px !important;
-    line-height: 1.35 !important;
-  }
-
-  .header-menu .mega-menu__link--parent {
+  /* =========================
+     MEGA-MENU PARENT LINKS
+     ========================= */
+  .header-menu .mega-menu__link--parent,
+  .header-menu .mega-menu__submenu .mega-menu__link--parent {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
     font-size: 18px !important;
-    line-height: 1.25 !important;
-  }
-
-  /* "More" button */
-  .header-menu .menu-list__link.button-unstyled,
-  .header-menu [data-testid="header-menu-more-button"],
-  .header-menu [data-testid="header-menu-more-button"] .menu-list__link-title {
-    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
-    font-size: 16px !important;
     font-weight: 300 !important;
+    font-style: normal !important;
     line-height: 1.25 !important;
+    letter-spacing: normal !important;
     text-transform: none !important;
   }
 
-  /* Mobile navigation bar */
-  .menu-list--mobile .menu-list__item {
+  /* =========================
+     MEGA-MENU CHILD LINKS
+     ========================= */
+  .header-menu .mega-menu__link,
+  .header-menu .mega-menu__submenu .mega-menu__link {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
     font-size: 16px !important;
     font-weight: 300 !important;
-    line-height: 1.25 !important;
+    font-style: normal !important;
+    line-height: 1.35 !important;
+    letter-spacing: normal !important;
     text-transform: none !important;
   }
 
-  .menu-list--mobile .menu-list__item .menu-list__link {
+  /* =========================
+     MOBILE NAVIGATION BAR
+     ========================= */
+  .menu-list--mobile .menu-list__item,
+  .menu-list--mobile .menu-list__item.menu-list__link,
+  .menu-list--mobile a.menu-list__item,
+  .menu-list--mobile .menu-list__link {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
     font-size: 16px !important;
     font-weight: 300 !important;
-    line-height: 1.25 !important;
+    font-style: normal !important;
+    line-height: 1.3 !important;
+    letter-spacing: normal !important;
     text-transform: none !important;
   }
 
-  /* Mobile sizing */
+  /* =========================
+     DISCLOSURE / SUPPORTING TEXT
+     ========================= */
+  .header-menu .menu-list__disclosure,
+  .header-menu .menu-list__disclosure .visually-hidden,
+  .header-menu .menu-list__disclosure-icon {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+  }
+
+  /* =========================
+     MOBILE BREAKPOINT
+     ========================= */
   @media screen and (max-width: 749px) {
     .header-menu .menu-list__link,
-    .header-menu .menu-list__link.button-unstyled,
+    .header-menu .menu-list__link-title,
     .header-menu [data-testid="header-menu-more-button"],
     .header-menu [data-testid="header-menu-more-button"] .menu-list__link-title,
     .menu-list--mobile .menu-list__item,
-    .menu-list--mobile .menu-list__item .menu-list__link {
+    .menu-list--mobile .menu-list__link {
       font-size: 16px !important;
       font-weight: 300 !important;
       line-height: 1.3 !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
     }
 
     .header-menu .mega-menu__link {
@@ -918,12 +948,17 @@
     }
   }
 
-  /* Keep menu links readable while preserving the theme's color behavior. */
+  /* Preserve the theme's color and interaction behavior. */
+  .header-menu .menu-list__link,
   .header-menu .menu-list__link:hover,
   .header-menu .menu-list__link:focus,
+  .header-menu .mega-menu__link,
   .header-menu .mega-menu__link:hover,
+  .header-menu .mega-menu__link--parent,
   .header-menu .mega-menu__link--parent:hover,
-  .menu-list--mobile .menu-list__item a:hover {
+  .menu-list--mobile .menu-list__item,
+  .menu-list--mobile .menu-list__item:hover,
+  .menu-list--mobile .menu-list__item:focus {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
   }
 {% endstyle %}
