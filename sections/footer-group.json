@@ -21,9 +21,9 @@
             "link_label_1": "Karakia packs",
             "link_url_1": "shopify://collections/karakia",
             "link_label_2": "Audio",
-            "link_url_2": "/collections/all",
+            "link_url_2": "shopify://collections/audio",
             "link_label_3": "Bundles",
-            "link_url_3": "shopify://pages/bundles"
+            "link_url_3": "shopify://collections/bundles"
           }
         },
         "footer_tuhono": {
