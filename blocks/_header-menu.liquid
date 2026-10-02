@@ -1037,6 +1037,100 @@
     }
   }
 
+
+  /*
+   * FINAL MEGA-MENU HEADING OVERRIDE
+   * Explicitly use "Spectral", serif rather than theme font variables.
+   */
+
+  .header-menu .mega-menu,
+  .header-menu .mega-menu *,
+  .header-menu .mega-menu__grid,
+  .header-menu .mega-menu__column,
+  .header-menu .mega-menu__column > div {
+    font-family: "Spectral", serif !important;
+  }
+
+  /* Heading above the text/image sections */
+  .header-menu .mega-menu .mega-menu__link--parent,
+  .header-menu .mega-menu .mega-menu__link--parent span,
+  .header-menu .mega-menu .mega-menu__link--parent strong,
+  .header-menu .mega-menu .mega-menu__link--parent b,
+  .header-menu .mega-menu h1,
+  .header-menu .mega-menu h2,
+  .header-menu .mega-menu h3,
+  .header-menu .mega-menu h4,
+  .header-menu .mega-menu h5,
+  .header-menu .mega-menu h6 {
+    font-family: "Spectral", serif !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  /* Text directly underneath the heading */
+  .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent),
+  .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent) span,
+  .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent) p {
+    font-family: "Spectral", serif !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  /* Prevent inline/theme variables from changing the parent heading font. */
+  .header-menu .mega-menu {
+    --menu-parent-font-family: "Spectral", serif !important;
+    --menu-parent-font-weight: 300 !important;
+    --menu-parent-font-style: normal !important;
+    --menu-parent-font-size: 18px !important;
+    --menu-parent-font-line-height: 1.25 !important;
+    --menu-parent-font-case: none !important;
+
+    --menu-child-font-family: "Spectral", serif !important;
+    --menu-child-font-weight: 300 !important;
+    --menu-child-font-style: normal !important;
+    --menu-child-font-size: 16px !important;
+    --menu-child-font-line-height: 1.35 !important;
+    --menu-child-font-case: none !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-menu .mega-menu,
+    .header-menu .mega-menu * {
+      font-family: "Spectral", serif !important;
+    }
+
+    .header-menu .mega-menu .mega-menu__link--parent,
+    .header-menu .mega-menu .mega-menu__link--parent span,
+    .header-menu .mega-menu h1,
+    .header-menu .mega-menu h2,
+    .header-menu .mega-menu h3,
+    .header-menu .mega-menu h4,
+    .header-menu .mega-menu h5,
+    .header-menu .mega-menu h6 {
+      font-family: "Spectral", serif !important;
+      font-weight: 300 !important;
+      font-size: 18px !important;
+      line-height: 1.25 !important;
+    }
+
+    .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent),
+    .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent) span,
+    .header-menu .mega-menu .mega-menu__link:not(.mega-menu__link--parent) p {
+      font-family: "Spectral", serif !important;
+      font-weight: 300 !important;
+      font-size: 16px !important;
+      line-height: 1.35 !important;
+    }
+  }
+
 {% endstyle %}
 
 
