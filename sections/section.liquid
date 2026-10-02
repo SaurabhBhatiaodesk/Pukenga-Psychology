@@ -36,6 +36,12 @@
     margin-bottom: 30px;
   }
 
+  /* Image with text layout: reverse the row when the image is set to the right. */
+  {% if section.settings.image_position == 'right' and section.settings.content_direction == 'row' %}
+    #shopify-section-{{ section.id }} .section {
+      flex-direction: row-reverse;
+    }
+  {% endif %}
   #shopify-section-{{ section.id }} p:last-child {
     margin-bottom: 0;
   }
@@ -107,6 +113,16 @@
       "default": "column"
     },
     {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.content_direction == 'row' }}"
+    },    {
       "type": "checkbox",
       "id": "vertical_on_mobile",
       "label": "t:settings.vertical_on_mobile",
