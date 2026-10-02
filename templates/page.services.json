@@ -146,7 +146,7 @@
             "chat_link": "shopify://pages/service-enquiry",
             "chat_spacing": 16,
             "chat_radius": 4,
-            "image_position": "left",
+            "image_position": "right",
             "desktop_width_percent": 100,
             "column_gap": 32,
             "padding_top": 20,
