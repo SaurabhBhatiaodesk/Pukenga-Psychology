@@ -961,6 +961,82 @@
   .menu-list--mobile .menu-list__item:focus {
     font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
   }
+
+  /* =========================
+     MEGA-MENU IMAGE / TEXT SECTION HEADINGS
+     These elements are rendered by the mega-menu-list snippet.
+     ========================= */
+
+  .header-menu .mega-menu__column > div > .mega-menu__link--parent,
+  .header-menu .mega-menu__column > div > .mega-menu__link--parent *,
+  .header-menu .mega-menu__column > div > .mega-menu__link:first-child,
+  .header-menu .mega-menu__column > div > .mega-menu__link:first-child *,
+  .header-menu .mega-menu__column h2,
+  .header-menu .mega-menu__column h3,
+  .header-menu .mega-menu__column h4,
+  .header-menu .mega-menu__column h5,
+  .header-menu .mega-menu__column h6,
+  .header-menu .mega-menu__column > div > h2,
+  .header-menu .mega-menu__column > div > h3,
+  .header-menu .mega-menu__column > div > h4,
+  .header-menu .mega-menu__column > div > h5,
+  .header-menu .mega-menu__column > div > h6 {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  /* Larger editorial heading used for the image/text menu sections */
+  .header-menu .mega-menu__column > div > .mega-menu__link--parent,
+  .header-menu .mega-menu__column > div > .mega-menu__link--parent * {
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* If the rendered heading is a heading tag rather than a link */
+  .header-menu .mega-menu__column h2,
+  .header-menu .mega-menu__column h3,
+  .header-menu .mega-menu__column h4,
+  .header-menu .mega-menu__column h5,
+  .header-menu .mega-menu__column h6,
+  .header-menu .mega-menu__column > div > h2,
+  .header-menu .mega-menu__column > div > h3,
+  .header-menu .mega-menu__column > div > h4,
+  .header-menu .mega-menu__column > div > h5,
+  .header-menu .mega-menu__column > div > h6 {
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+    margin: 0 0 12px !important;
+  }
+
+  /* Image-menu cards can contain text directly inside the link */
+  .header-menu .mega-menu__link:has(.mega-menu__link-image),
+  .header-menu .mega-menu__link:has(.mega-menu__link-image) span,
+  .header-menu .mega-menu__link:has(.mega-menu__link-image) strong,
+  .header-menu .mega-menu__link:has(.mega-menu__link-image) b {
+    font-family: var(--pukenga-font-heading, "Spectral", serif) !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-menu .mega-menu__column > div > .mega-menu__link--parent,
+    .header-menu .mega-menu__column > div > .mega-menu__link--parent *,
+    .header-menu .mega-menu__column h2,
+    .header-menu .mega-menu__column h3,
+    .header-menu .mega-menu__column h4,
+    .header-menu .mega-menu__column h5,
+    .header-menu .mega-menu__column h6,
+    .header-menu .mega-menu__column > div > h2,
+    .header-menu .mega-menu__column > div > h3,
+    .header-menu .mega-menu__column > div > h4,
+    .header-menu .mega-menu__column > div > h5,
+    .header-menu .mega-menu__column > div > h6 {
+      font-size: 18px !important;
+      line-height: 1.25 !important;
+    }
+  }
+
 {% endstyle %}
 
 
