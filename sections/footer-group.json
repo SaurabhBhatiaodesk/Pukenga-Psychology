@@ -47,7 +47,7 @@
             "link_label_2": "Facebook",
             "link_url_2": "https://facebook.com",
             "link_label_3": "Contact",
-            "link_url_3": "/pages/contact"
+            "link_url_3": "shopify://pages/contact"
           }
         }
       },
