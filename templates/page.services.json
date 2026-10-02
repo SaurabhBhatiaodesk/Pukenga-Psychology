@@ -283,7 +283,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 50,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -308,7 +308,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 50,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -485,7 +485,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 50,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -646,7 +646,7 @@
             "text_QgBtYy": {
               "type": "text",
               "settings": {
-                "text": "<p>Drawing from a wealth of experience in the field, I offer supervision to fellow health professionals seeking to deepen their practice. Through collaborative sessions, I provide a nurturing space for reflection, skill refinement, and ethical considerations. My approach integrates Western psychology and Te Ao Māori perspectives, ensuring a holistic approach to professional development. Together, we'll embark on a journey towards greater competence, confidence, and compassionate care in your healing profession.<br/><br/></p>",
+                "text": "<p>Drawing from a wealth of experience in the field, I offer supervision to fellow health professionals seeking to deepen their practice. Through collaborative sessions, I provide a nurturing space for reflection, skill refinement, and ethical considerations. My approach integrates Western psychology and Te Ao Māori perspectives, ensuring a holistic approach to professional development. Together, we'll embark on a journey towards greater competence, confidence, and compassionate care in your healing profession.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -662,7 +662,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 50,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -839,7 +839,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 50,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
