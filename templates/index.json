@@ -289,9 +289,9 @@
     "pukenga_newsletter": {
       "type": "pukenga-newsletter",
       "settings": {
-        "eyebrow": "",
-        "heading": "<p>Hauora to your inbox</p>",
-        "text": "<p>Hauora practices, karakia and gentle prompts, whenever we share them.</p>",
+        "eyebrow": "OUR MONTHLY EMAIL NEWSLETTER",
+        "heading": "<p>Nau mai</p>",
+        "text": "<p>Join our monthly pānui for whakataukī, guided reflections, journal prompts and practical hauora practices grounded in te ao Māori.</p><p>A space to reflect, learn and nurture your mauri, delivered to your inbox each month.</p>",
         "input_placeholder": "you@email.com",
         "button_label": "Tuhi · Sign up",
         "success_text": "Thanks — you are on the list.",
