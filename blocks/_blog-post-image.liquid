@@ -14,7 +14,7 @@
   assign loading = image_loading | default: 'eager'
   assign fetch_priority = image_fetch_priority | default: 'auto'
 
-  if loading == 'lazy'
+  if loading == 'lazy' and block_settings.show_full_image == false
     assign sizes = 'auto, ' | append: sizes
   endif
 
@@ -83,7 +83,9 @@
     height: auto !important;
     aspect-ratio: auto !important;
     object-fit: contain;
-    contain: none;
+    contain: none !important;
+    contain-intrinsic-size: none !important;
+    content-visibility: visible !important;
   }
 
   .blog-post-card__image--small {
