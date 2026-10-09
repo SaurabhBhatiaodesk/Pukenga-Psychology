@@ -1,3 +1,101 @@
+{%- if request.page_type == 'product' -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const root = document.querySelector('#shopify-section-{{ section.id }} .pukenga-testimonials');
+    if (!root) return;
+
+    const grid = root.querySelector('.pukenga-testimonials__grid');
+    const dotsContainer = root.querySelector('.pukenga-testimonials__dots');
+    if (!grid) return;
+
+    root.hidden = true;
+
+    function buildReviewCard(review) {
+      const card = document.createElement('blockquote');
+      card.className = 'pukenga-testimonials__item';
+
+      const stars = document.createElement('div');
+      stars.className = 'pukenga-testimonials__stars';
+      stars.setAttribute('aria-label', review.score + ' out of 5 stars');
+      stars.textContent = '★'.repeat(review.score) + '☆'.repeat(5 - review.score);
+      card.appendChild(stars);
+
+      const quote = document.createElement('div');
+      quote.className = 'pukenga-testimonials__quote';
+      const quoteText = document.createElement('p');
+      quoteText.textContent = '“' + review.content + '”';
+      quote.appendChild(quoteText);
+      card.appendChild(quote);
+
+      const author = document.createElement('footer');
+      author.className = 'pukenga-testimonials__author';
+
+      const name = document.createElement('span');
+      name.className = 'pukenga-testimonials__name';
+      name.textContent = review.user && review.user.display_name ? review.user.display_name : 'Verified customer';
+      author.appendChild(name);
+
+      if (review.title) {
+        const role = document.createElement('span');
+        role.className = 'pukenga-testimonials__role';
+        role.textContent = review.title;
+        author.appendChild(role);
+      }
+
+      card.appendChild(author);
+      return card;
+    }
+
+    function rebuildDots() {
+      if (!dotsContainer) return;
+      const cards = Array.from(grid.querySelectorAll('.pukenga-testimonials__item'));
+      dotsContainer.innerHTML = '';
+
+      if (cards.length <= 1) {
+        dotsContainer.style.display = 'none';
+        return;
+      }
+
+      dotsContainer.style.removeProperty('display');
+      cards.forEach(function (card, index) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pukenga-testimonials__dot' + (index === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to review ' + (index + 1));
+        dot.addEventListener('click', function () {
+          grid.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    fetch('https://api.yotpo.com/v1/widget/LmBJp2Tmc8izhsGB2HM6BjseonnuA3cQqtS3I7yk/products/{{ product.id }}/reviews.json?per_page={{ section.settings.columns }}&page=1')
+      .then(function (response) {
+        if (!response.ok) throw new Error('Unable to load Yotpo reviews');
+        return response.json();
+      })
+      .then(function (data) {
+        const reviews = data && data.response && Array.isArray(data.response.reviews)
+          ? data.response.reviews
+          : [];
+
+        if (!reviews.length) return;
+
+        grid.innerHTML = '';
+        reviews.forEach(function (review) {
+          grid.appendChild(buildReviewCard(review));
+        });
+
+        rebuildDots();
+        root.hidden = false;
+      })
+      .catch(function () {
+        root.hidden = true;
+      });
+  });
+</script>
+{%- endif -%}
+
 <section class="pukenga-testimonials">
   <div class="section">
 
