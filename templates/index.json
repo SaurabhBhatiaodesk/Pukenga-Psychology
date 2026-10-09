@@ -32,7 +32,7 @@
           "type": "value",
           "settings": {
             "heading": "Mātauranga",
-            "text": "<p>Bring Te Ao Māori into everyday life.</p>"
+            "text": "<p>Grow your understanding of te ao Māori through learning and everyday practice.</p>"
           }
         },
         "value_2": {
@@ -45,8 +45,8 @@
         "value_3": {
           "type": "value",
           "settings": {
-            "heading": "Hauora",
-            "text": "<p>Settle and nourish your mauri.</p>"
+            "heading": "Mauri Ora",
+            "text": "<p>Create moments to pause, reconnect and nurture your wellbeing.</p>"
           }
         }
       },
