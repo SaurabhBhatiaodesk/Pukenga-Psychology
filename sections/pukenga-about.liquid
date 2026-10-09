@@ -9,6 +9,10 @@
 
   if request.page_type == 'product'
     assign promoted_product = product.metafields.custom.promoted_product.value
+
+    if promoted_product == blank and recommendations.performed
+      assign promoted_product = recommendations.products.first
+    endif
   endif
 -%}
 
@@ -148,6 +152,34 @@
     </div>
   </div>
 </section>
+
+{%- if request.page_type == 'product' and promoted_product == blank and recommendations.performed == false -%}
+  <script>
+    (() => {
+      const section = document.getElementById({{ about_section_id | json }});
+      if (!section) return;
+
+      const url = new URL({{ routes.product_recommendations_url | json }}, window.location.origin);
+      url.searchParams.set('section_id', {{ section.id | json }});
+      url.searchParams.set('product_id', {{ product.id | json }});
+      url.searchParams.set('limit', '1');
+      url.searchParams.set('intent', 'related');
+
+      fetch(url)
+        .then((response) => response.text())
+        .then((html) => {
+          const replacement = new DOMParser()
+            .parseFromString(html, 'text/html')
+            .getElementById({{ about_section_id | json }});
+
+          if (replacement && replacement.querySelector('.pukenga-about__image--product')) {
+            section.replaceWith(replacement);
+          }
+        })
+        .catch(() => {});
+    })();
+  </script>
+{%- endif -%}
 
 
 <style>
