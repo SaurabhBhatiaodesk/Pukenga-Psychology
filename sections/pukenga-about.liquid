@@ -10,8 +10,22 @@
   if request.page_type == 'product'
     assign promoted_product = product.metafields.custom.promoted_product.value
 
-    if promoted_product == blank and recommendations.performed
-      assign promoted_product = recommendations.products.first
+    if promoted_product == blank
+      assign promotion_products = product.collections.first.products
+
+      if promotion_products.size < 2
+        assign promotion_products = collections.all.products
+      endif
+
+      if promotion_products.size > 1
+        assign promotion_index = product.id | modulo: promotion_products.size
+        assign promoted_product = promotion_products[promotion_index]
+
+        if promoted_product.id == product.id
+          assign promotion_index = promotion_index | plus: 1 | modulo: promotion_products.size
+          assign promoted_product = promotion_products[promotion_index]
+        endif
+      endif
     endif
   endif
 -%}
