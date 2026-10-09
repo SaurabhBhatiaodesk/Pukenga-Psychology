@@ -307,7 +307,7 @@
         "padding_top": 72,
         "padding_bottom": 72,
         "content_max_width": 620,
-        "text_max_width": 460,
+        "text_max_width": 700,
         "form_max_width": 440,
         "form_top_spacing": 8,
         "input_button_gap": 10,
