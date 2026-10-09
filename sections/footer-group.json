@@ -17,7 +17,7 @@
         "footer_toa": {
           "type": "link_column",
           "settings": {
-            "heading": "Toa",
+            "heading": "Shop",
             "link_label_1": "Karakia packs",
             "link_url_1": "shopify://collections/karakia",
             "link_label_2": "Audio",
@@ -29,7 +29,7 @@
         "footer_tuhono": {
           "type": "link_column",
           "settings": {
-            "heading": "Tūhono",
+            "heading": "Connect",
             "link_label_1": "Mauri Tau",
             "link_url_1": "shopify://products/mauri-tau-program",
             "link_label_2": "Services",
@@ -41,7 +41,7 @@
         "footer_whakapa": {
           "type": "link_column",
           "settings": {
-            "heading": "Whakapā",
+            "heading": "Contact",
             "link_label_1": "Instagram",
             "link_url_1": "https://www.instagram.com/pukengapsychology/",
             "link_label_2": "Facebook",
