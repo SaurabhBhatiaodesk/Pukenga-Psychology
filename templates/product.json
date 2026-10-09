@@ -288,6 +288,18 @@
                 "item_1": "✦ Ships in 1–2 days",
                 "item_2": "✦ NZ made",
                 "item_3": "✦ Ages 5+",
+                "rule_1_tags": "digital",
+                "rule_1_item_1": "",
+                "rule_1_item_2": "",
+                "rule_1_item_3": "",
+                "rule_2_tags": "",
+                "rule_2_item_1": "",
+                "rule_2_item_2": "",
+                "rule_2_item_3": "",
+                "rule_3_tags": "",
+                "rule_3_item_1": "",
+                "rule_3_item_2": "",
+                "rule_3_item_3": "",
                 "gap": 35,
                 "mobile_gap": 20,
                 "padding_top": 20,
@@ -424,39 +436,6 @@
         "padding-block-start": 0,
         "padding-block-end": 60
       }
-    },
-    "pukenga_product_accordion": {
-      "type": "pukenga-product-accordion",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "heading": "Kei roto · What's inside",
-            "body": "<p>20 karakia cards on premium stock, each pairing reo Māori with an English translation on the back.</p>"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "heading": "Me pēhea te whakamahi · How to use",
-            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "heading": "Tuku & whakahoki · Shipping & returns",
-            "body": "<p>Add your copy here — this accordion item was collapsed in the source design and its body text could not be confirmed from the live DOM.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3"
-      ],
-      "disabled": true,
-      "settings": {}
     },
     "pukenga_product_reviews": {
       "type": "pukenga-product-reviews",
@@ -660,7 +639,6 @@
   "order": [
     "pukenga_breadcrumb",
     "main",
-    "pukenga_product_accordion",
     "pukenga_product_reviews",
     "pukenga_about_FcnLML",
     "pukenga_testimonials_n6GwLy",
