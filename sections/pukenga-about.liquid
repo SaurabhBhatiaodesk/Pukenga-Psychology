@@ -44,7 +44,7 @@
 
         {%- if request.page_type == 'product' and promoted_product != blank -%}
           <p class="pukenga-eyebrow pukenga-about__eyebrow">
-            {{ section.settings.product_eyebrow | default: 'You may also like' | escape }}
+            {{ section.settings.product_eyebrow | default: 'Featured resource' | escape }}
           </p>
 
           <h2 class="pukenga-heading pukenga-about__heading">
@@ -803,7 +803,7 @@
       "type": "text",
       "id": "product_eyebrow",
       "label": "Product promotion eyebrow",
-      "default": "You may also like",
+      "default": "Featured resource",
       "info": "Used only on product pages with a Promoted product metafield."
     },
     {
