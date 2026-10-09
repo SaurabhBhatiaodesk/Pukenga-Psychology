@@ -1,3 +1,4 @@
+
 <script
   src="{{ 'blog-posts-list.js' | asset_url }}"
   type="module"
@@ -49,23 +50,19 @@
       %}
       {% for article in blog.articles %}
         {% liquid
-          # Defaults for compact layout
           assign col_span = 2
           assign scale = 0.6
           assign is_horizontal = false
 
           case items_on_page
             when 1
-              # Single post: full width hero
               assign col_span = 6
               assign scale = 1
               assign is_horizontal = true
             when 2
-              # Two posts: both standard side by side
               assign col_span = 3
               assign scale = 0.8
             when 3
-              # Three posts: hero + 2 standard
               if forloop.index == 1
                 assign col_span = 6
                 assign scale = 1
@@ -75,11 +72,9 @@
                 assign scale = 0.8
               endif
             when 4
-              # Four posts: all standard in 2x2 grid
               assign col_span = 3
               assign scale = 0.8
             when 5
-              # Five posts: hero + 4 standard
               if forloop.index == 1
                 assign col_span = 6
                 assign scale = 1
@@ -89,7 +84,6 @@
                 assign scale = 0.8
               endif
             else
-              # 6+ posts: hero, 2 standard, rest compact
               if forloop.index == 1
                 assign col_span = 6
                 assign scale = 1
@@ -111,7 +105,6 @@
             when 6
               assign image_sizes = hero_image_sizes
             else
-              # Safe fallback for a future span; add a matching sizes value with any new layout.
               assign image_sizes = '100vw'
           endcase
 
@@ -129,7 +122,6 @@
             endif
           endif
         %}
-        {% # Keep the mobile breakpoint in the style block below in sync with the responsive image sizes above. %}
         {% style %}
           [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
             --col-span: {{ col_span }};
@@ -164,14 +156,9 @@
 </blog-posts-list>
 
 {% stylesheet %}
-  /**
-   * Blog posts page layout
-   */
   .blog-posts {
     --page-content-width: var(--narrow-page-width);
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-
-    /* Keep the responsive image sizes above in sync with this gap. */
     --columns-gap: 36px;
     --rows-gap: 36px;
   }
@@ -185,20 +172,9 @@
     row-gap: var(--rows-gap);
   }
 
-  /**
-   * Blog post item grid positioning and scaling.
-   * Layout is calculated in Liquid based on total article count.
-   * Mobile overrides are applied per-item in inline styles for proper specificity.
-   */
   .blog-post-item {
     grid-column: span var(--col-span);
     background-color: var(--color-background);
-  }
-
-  /**
-   * When there's no image, the blog post item has a border.
-   */
-  .blog-post-item {
     border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
     padding: 0 1rem 1rem;
   }
@@ -208,8 +184,6 @@
     padding: 0;
   }
 
-
-  /* Pūkenga Hero typography: font style and spacing only. Existing font sizes remain unchanged. */
   .blog-posts {
     font-family: var(--pukenga-font-heading, "Spectral", serif);
     font-weight: 300;

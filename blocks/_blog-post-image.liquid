@@ -1,5 +1,3 @@
-
-
 {%- doc -%}
   Renders the blog post image block.
 
@@ -116,9 +114,17 @@
   "blocks": [],
   "settings": [
     {
+      "type": "checkbox",
+      "id": "show_full_image",
+      "label": "Show image at full width",
+      "info": "Expand the image across the full card width and use its natural height.",
+      "default": false
+    },
+    {
       "type": "select",
       "id": "height",
       "label": "t:settings.height",
+      "visible_if": "{{ block.settings.show_full_image == false }}",
       "options": [
         {
           "value": "small",
@@ -193,3 +199,5 @@
   ]
 }
 {% endschema %}
+
+
