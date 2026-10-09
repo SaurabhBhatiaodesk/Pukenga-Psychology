@@ -50,6 +50,7 @@
               "type": "_blog-post-image",
               "static": true,
               "settings": {
+                "show_full_image": true,
                 "height": "large",
                 "border": "none",
                 "border_width": 1,
@@ -128,7 +129,6 @@
         "title"
       ],
       "settings": {
-        "show_full_images": true,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 0,
         "padding-block-end": 48
