@@ -153,7 +153,7 @@
   </div>
 </section>
 
-{%- if request.page_type == 'product' and promoted_product == blank and recommendations.performed == false -%}
+{%- if request.page_type == 'product' and promoted_product == blank and recommendations.performed != true -%}
   <script>
     (() => {
       const section = document.getElementById({{ about_section_id | json }});
