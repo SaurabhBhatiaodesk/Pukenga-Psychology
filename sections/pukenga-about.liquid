@@ -61,6 +61,10 @@
             </div>
           {%- endif -%}
 
+          <a href="{{ promoted_product.url }}" class="pukenga-link pukenga-about__link">
+            Check out {{ promoted_product.title | escape }}
+          </a>
+
         {%- else -%}
           {%- if section.settings.eyebrow != blank -%}
             <p class="pukenga-eyebrow pukenga-about__eyebrow">
