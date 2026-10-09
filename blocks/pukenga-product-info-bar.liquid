@@ -1,72 +1,156 @@
-<div class="pukenga-product-info-bar" {{ block.shopify_attributes }}>
+{% liquid
+  assign display_item_1 = block.settings.item_1
+  assign display_item_2 = block.settings.item_2
+  assign display_item_3 = block.settings.item_3
+  assign matched_rule = false
 
-  {% if block.settings.item_1 != blank %}
-    <div class="pukenga-product-info-bar__item">
-      {{ block.settings.item_1 }}
-    </div>
-  {% endif %}
+  if product != blank
+    assign rule_1_tags = block.settings.rule_1_tags | split: ','
 
-  {% if block.settings.item_2 != blank %}
-    <div class="pukenga-product-info-bar__item">
-      {{ block.settings.item_2 }}
-    </div>
-  {% endif %}
+    for rule_tag in rule_1_tags
+      assign clean_rule_tag = rule_tag | strip | downcase
 
-  {% if block.settings.item_3 != blank %}
-    <div class="pukenga-product-info-bar__item">
-      {{ block.settings.item_3 }}
-    </div>
-  {% endif %}
+      for product_tag in product.tags
+        assign clean_product_tag = product_tag | strip | downcase
 
-</div>
+        if clean_rule_tag != blank and clean_rule_tag == clean_product_tag
+          assign display_item_1 = block.settings.rule_1_item_1
+          assign display_item_2 = block.settings.rule_1_item_2
+          assign display_item_3 = block.settings.rule_1_item_3
+          assign matched_rule = true
+          break
+        endif
+      endfor
 
+      if matched_rule
+        break
+      endif
+    endfor
+  endif
+
+  if product != blank and matched_rule == false
+    assign rule_2_tags = block.settings.rule_2_tags | split: ','
+
+    for rule_tag in rule_2_tags
+      assign clean_rule_tag = rule_tag | strip | downcase
+
+      for product_tag in product.tags
+        assign clean_product_tag = product_tag | strip | downcase
+
+        if clean_rule_tag != blank and clean_rule_tag == clean_product_tag
+          assign display_item_1 = block.settings.rule_2_item_1
+          assign display_item_2 = block.settings.rule_2_item_2
+          assign display_item_3 = block.settings.rule_2_item_3
+          assign matched_rule = true
+          break
+        endif
+      endfor
+
+      if matched_rule
+        break
+      endif
+    endfor
+  endif
+
+  if product != blank and matched_rule == false
+    assign rule_3_tags = block.settings.rule_3_tags | split: ','
+
+    for rule_tag in rule_3_tags
+      assign clean_rule_tag = rule_tag | strip | downcase
+
+      for product_tag in product.tags
+        assign clean_product_tag = product_tag | strip | downcase
+
+        if clean_rule_tag != blank and clean_rule_tag == clean_product_tag
+          assign display_item_1 = block.settings.rule_3_item_1
+          assign display_item_2 = block.settings.rule_3_item_2
+          assign display_item_3 = block.settings.rule_3_item_3
+          assign matched_rule = true
+          break
+        endif
+      endfor
+
+      if matched_rule
+        break
+      endif
+    endfor
+  endif
+%}
+
+{% if display_item_1 != blank
+  or display_item_2 != blank
+  or display_item_3 != blank
+%}
+  <div
+    class="pukenga-product-info-bar"
+    {{ block.shopify_attributes }}
+  >
+    {% if display_item_1 != blank %}
+      <div class="pukenga-product-info-bar__item">
+        {{ display_item_1 }}
+      </div>
+    {% endif %}
+
+    {% if display_item_2 != blank %}
+      <div class="pukenga-product-info-bar__item">
+        {{ display_item_2 }}
+      </div>
+    {% endif %}
+
+    {% if display_item_3 != blank %}
+      <div class="pukenga-product-info-bar__item">
+        {{ display_item_3 }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
 
 <style>
-
-.pukenga-product-info-bar {
-  display: flex;
-  align-items: center;
-  gap: {{ block.settings.gap }}px;
-  padding-top: {{ block.settings.padding_top }}px;
-  padding-bottom: {{ block.settings.padding_bottom }}px;
-  border-top: 1px solid {{ block.settings.border_color }};
-  border-bottom: 1px solid {{ block.settings.border_color }};
-  flex-wrap: wrap;
-}
-
-.pukenga-product-info-bar__item {
-  color: {{ block.settings.desktop_color }};
-  font-size: {{ block.settings.desktop_font }}px;
-  font-family: inherit;
-  opacity: 0.8;
-  line-height: 1.4;
-    font-family: 'Instrument Sans', system-ui, sans-serif;
-}
-
-
-@media screen and (max-width: 749px) {
-
   .pukenga-product-info-bar {
-    gap: {{ block.settings.mobile_gap }}px;
-    padding-top: 18px;
-    padding-bottom: 18px;
-
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.gap }}px;
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    border-top: 1px solid {{ block.settings.border_color }};
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    flex-wrap: wrap;
   }
 
   .pukenga-product-info-bar__item {
-    color: {{ block.settings.mobile_color }};
-    font-size: {{ block.settings.mobile_font }}px;
+    color: {{ block.settings.desktop_color }};
+    font-size: {{ block.settings.desktop_font }}px;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    opacity: 0.8;
+    line-height: 1.4;
   }
 
-}
+  @media screen and (max-width: 749px) {
+    .pukenga-product-info-bar {
+      gap: {{ block.settings.mobile_gap }}px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
 
+    .pukenga-product-info-bar__item {
+      color: {{ block.settings.mobile_color }};
+      font-size: {{ block.settings.mobile_font }}px;
+    }
+  }
 </style>
-
 
 {% schema %}
 {
   "name": "Product Info Bar",
   "settings": [
+    {
+      "type": "header",
+      "content": "Default information"
+    },
+    {
+      "type": "paragraph",
+      "content": "These details appear when a product does not match any tag rule below."
+    },
     {
       "type": "text",
       "id": "item_1",
@@ -84,6 +168,85 @@
       "id": "item_3",
       "label": "Third text",
       "default": "Ages 5+"
+    },
+    {
+      "type": "header",
+      "content": "Product tag rule 1"
+    },
+    {
+      "type": "textarea",
+      "id": "rule_1_tags",
+      "label": "Product tags",
+      "info": "Enter exact product tags separated by commas. The rule applies when any tag matches."
+    },
+    {
+      "type": "text",
+      "id": "rule_1_item_1",
+      "label": "First text"
+    },
+    {
+      "type": "text",
+      "id": "rule_1_item_2",
+      "label": "Second text"
+    },
+    {
+      "type": "text",
+      "id": "rule_1_item_3",
+      "label": "Third text"
+    },
+    {
+      "type": "header",
+      "content": "Product tag rule 2"
+    },
+    {
+      "type": "textarea",
+      "id": "rule_2_tags",
+      "label": "Product tags",
+      "info": "Enter exact product tags separated by commas. The rule applies when any tag matches."
+    },
+    {
+      "type": "text",
+      "id": "rule_2_item_1",
+      "label": "First text"
+    },
+    {
+      "type": "text",
+      "id": "rule_2_item_2",
+      "label": "Second text"
+    },
+    {
+      "type": "text",
+      "id": "rule_2_item_3",
+      "label": "Third text"
+    },
+    {
+      "type": "header",
+      "content": "Product tag rule 3"
+    },
+    {
+      "type": "textarea",
+      "id": "rule_3_tags",
+      "label": "Product tags",
+      "info": "Enter exact product tags separated by commas. The rule applies when any tag matches."
+    },
+    {
+      "type": "text",
+      "id": "rule_3_item_1",
+      "label": "First text"
+    },
+    {
+      "type": "text",
+      "id": "rule_3_item_2",
+      "label": "Second text"
+    },
+    {
+      "type": "text",
+      "id": "rule_3_item_3",
+      "label": "Third text"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
     },
     {
       "type": "range",
@@ -124,6 +287,10 @@
       "step": 4,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography and colours"
     },
     {
       "type": "range",
