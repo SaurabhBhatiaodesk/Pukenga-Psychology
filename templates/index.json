@@ -15,12 +15,12 @@
         "section_width": "full-width",
         "image": "shopify://shop_images/1d0febc5-0019-4e42-9469-d49f46d766e5.jpg",
         "eyebrow": "Oranga Ngākau",
-        "heading": "Whakatōngia te karakia",
-        "subheading": "<p>Plant karakia into the rhythm of your day</p>",
-        "button_label": "Hokona · Shop packs",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "Mauri Tau",
-        "button_link_2": "shopify://collections/a7-cards",
+        "heading": "Nurturing mauri, inspiring everyday wellbeing.",
+        "subheading": "<p><br/>Explore thoughtfully created resources, courses and practices that support reflection, connection and hauora in everyday life.<br/><br/></p>",
+        "button_label": "Explore Mauri Tau",
+        "button_link": "shopify://products/mauri-tau-program",
+        "button_label_2": "Shop the Collection",
+        "button_link_2": "shopify://collections/all",
         "padding-block-start": 52,
         "padding-block-end": 52
       }
