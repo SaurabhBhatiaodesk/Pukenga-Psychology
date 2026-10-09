@@ -43,12 +43,16 @@
       <div class="pukenga-about__content">
 
         {%- if request.page_type == 'product' and promoted_product != blank -%}
-          <p class="pukenga-eyebrow pukenga-about__eyebrow">
-            {{ section.settings.product_eyebrow | default: 'Featured resource' | escape }}
-          </p>
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pukenga-eyebrow pukenga-about__eyebrow">
+              {{ section.settings.eyebrow | escape }}
+            </p>
+          {%- endif -%}
 
           <h2 class="pukenga-heading pukenga-about__heading">
-            {{ promoted_product.title | escape }}
+            <a href="{{ promoted_product.url }}" class="pukenga-about__product-link">
+              {{ promoted_product.title | escape }}
+            </a>
           </h2>
 
           {%- if promoted_product.description != blank -%}
@@ -57,9 +61,6 @@
             </div>
           {%- endif -%}
 
-          <a href="{{ promoted_product.url }}" class="pukenga-link pukenga-about__link">
-            {{ section.settings.product_button_label | default: 'View product' | escape }}
-          </a>
         {%- else -%}
           {%- if section.settings.eyebrow != blank -%}
             <p class="pukenga-eyebrow pukenga-about__eyebrow">
@@ -376,6 +377,11 @@
 
   .pukenga-about-{{ section.id }} .pukenga-about__link {
     display: inline-block;
+  }
+
+  .pukenga-about-{{ section.id }} .pukenga-about__product-link {
+    color: inherit;
+    text-decoration: none;
   }
 
 
