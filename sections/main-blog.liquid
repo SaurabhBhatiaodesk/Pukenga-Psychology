@@ -19,7 +19,6 @@
       section
       {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
       blog-posts
-      {% if section.settings.show_full_images %}blog-posts--full-images{% endif %}
       spacing-style
       size-style
     "
@@ -209,20 +208,6 @@
     padding: 0;
   }
 
-  /* Show each article image at its natural ratio when enabled. */
-  .blog-posts--full-images .blog-post-card__image-container {
-    height: auto !important;
-    aspect-ratio: auto !important;
-    overflow: visible;
-  }
-
-  .blog-posts--full-images .blog-post-card__image-container img {
-    display: block;
-    width: 100%;
-    height: auto !important;
-    aspect-ratio: auto !important;
-    object-fit: contain;
-  }
 
   /* Pūkenga Hero typography: font style and spacing only. Existing font sizes remain unchanged. */
   .blog-posts {
@@ -278,13 +263,6 @@
     "groups": ["header"]
   },
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_full_images",
-      "label": "Show full blog images",
-      "info": "Display images at their natural aspect ratio instead of cropping them.",
-      "default": false
-    },
     {
       "type": "color",
       "id": "background_color",

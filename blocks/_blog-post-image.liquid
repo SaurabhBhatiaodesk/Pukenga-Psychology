@@ -31,7 +31,7 @@
 {%- endcapture -%}
 
 <div
-  class="blog-post-card__image-container"
+  class="blog-post-card__image-container{% if block_settings.show_full_image %} blog-post-card__image-container--full{% endif %}"
   {{ block.shopify_attributes }}
 >
   <a href="{{ article.url }}">
@@ -58,6 +58,42 @@
     object-fit: cover;
     object-position: center center;
     height: calc(var(--blog-post-card-img-height) * var(--blog-post-card-scale));
+  }
+
+  .blog-post-card__image-container--full,
+  .blog-post-card__image-container--full a {
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+
+  .blog-post-card__image-container--full {
+    height: auto !important;
+    aspect-ratio: auto !important;
+    overflow: visible;
+  }
+
+  .blog-post-card--horizontal:has(> .blog-post-card__image-container--full) {
+    flex-direction: column;
+  }
+
+  .blog-post-card--horizontal > .blog-post-card__image-container--full {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .blog-post-card--horizontal:has(> .blog-post-card__image-container--full) .blog-post-card__content {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .blog-post-card__image-container--full .blog-post-card__image {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    object-fit: contain;
   }
 
   .blog-post-card__image--small {
