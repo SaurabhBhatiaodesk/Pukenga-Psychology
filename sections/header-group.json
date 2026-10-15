@@ -144,11 +144,53 @@
         "collection_inverse_logo": false,
         "text_color_transparent_collection": ""
       }
+    },
+    "pk_services_XeHCnf": {
+      "type": "pk-services",
+      "name": "Pūkenga services",
+      "settings": {
+        "load_fonts": true,
+        "hero_eyebrow": "Ratonga · Services",
+        "hero_heading": "Where psychology<br>meets <em>Te Ao Māori</em>",
+        "hero_text": "<p>Consultancy, training and supervision from Dr Jessica, Registered Clinical Psychologist. For organisations, kura and health professionals who want wellbeing mahi that fits the people they serve.</p>",
+        "hero_cta": "Start an enquiry",
+        "hero_cta2": "Explore services",
+        "hero_card_title": "Ngāti Pūkenga · Ngāti Pikiao",
+        "hero_card_text": "Registered Clinical Psychologist, based in Tāmaki Makaurau",
+        "sectors_label": "Working alongside",
+        "sectors": "NGOs, Government, Research institutions, Start-ups, Kura, Residential & support services, Health professionals",
+        "services_heading": "Ngā ratonga",
+        "services_subheading": "/ how we can work together",
+        "services_intro": "Every engagement is shaped around your people and kaupapa. Pick a starting point and we'll tailor from there.",
+        "break_after": 2,
+        "break_line1": "Two knowledge systems.",
+        "break_line2": "One way of caring for people.",
+        "steps_eyebrow": "Me pēhea · How it works",
+        "steps_heading": "Three simple steps",
+        "show_band": true,
+        "band_eyebrow": "For teams & organisations",
+        "band_heading": "Bring Mauri Tau to your whole team",
+        "band_text": "Organisations across health, education and social services use the Mauri Tau course for cultural competency and wellbeing training. Group packages available on request.",
+        "band_cta": "Explore Mauri Tau",
+        "band_link": "",
+        "band_cta2": "Ask about group packages",
+        "band_form_value": "Mauri Tau group package",
+        "quote": "",
+        "quote_author": "",
+        "form_eyebrow": "Whakapā mai · Get in touch",
+        "form_heading": "Let's kōrero",
+        "form_text": "Share a little about what you need and I'll come back to you to talk through next steps. No obligation, no hard sell.",
+        "form_facts": "Reply within [X] working days\nBased in Tāmaki Makaurau",
+        "form_options": "Consultancy, Training, Supervision, Therapy waitlist, Mauri Tau group package, Something else",
+        "form_button": "Send enquiry",
+        "form_success": "Ngā mihi, your enquiry is in. I'll be in touch soon."
+      }
     }
   },
   "order": [
     "header_announcements_9jGBFp",
     "pukenga_announcement_bar_wNxUBD",
-    "header_section"
+    "header_section",
+    "pk_services_XeHCnf"
   ]
 }
