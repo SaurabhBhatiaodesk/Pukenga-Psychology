@@ -145,6 +145,14 @@
   .pkc-final{text-align:center}
   .pkc-final p{font-size:clamp(28px,3.4vw,42px);line-height:1.2;margin-bottom:22px}
   .pkc-final p em{color:var(--pk-gold)}
+
+  @media screen and (max-width:749px){
+    .pkc-hero{display:flex;flex-direction:column}
+    .pkc-hero .pkc-img{order:1;min-height:460px}
+    .pkc-hero .pkc-split__text{order:2;padding:44px 20px 52px}
+    .pkc-hero .pkc-img img,
+    .pkc-hero .pkc-img svg{object-position:center}
+  }
 </style>
 
 {%- capture enrol_form -%}
