@@ -125,6 +125,55 @@
   .pk-form__msg--ok{background:rgba(224,183,132,.15);border:1px solid var(--pk-gold)}
   .pk-form__msg--err{background:rgba(192,84,55,.18);border:1px solid #c05437}
   .pk-form .pk-btn{align-self:flex-start}
+
+  /* mobile */
+  @media screen and (max-width:749px){
+    .pk-wrap{padding-left:20px;padding-right:20px}
+
+    .pk-hero{display:flex;flex-direction:column}
+    .pk-hero .pk-img{order:1;min-height:470px}
+    .pk-hero__text{order:2;padding:44px 20px 52px;gap:22px}
+    .pk-hero h1{font-size:42px}
+    .pk-hero__lead{font-size:16px}
+    .pk-hero__card{left:20px;right:20px;bottom:20px;max-width:none}
+    .pk-hero__text .pk-row{display:grid;grid-template-columns:1fr}
+    .pk-hero__text .pk-btn{justify-content:center;width:100%}
+    .pk-jump{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .pk-jump a{text-align:center}
+
+    .pk-sectors{display:grid;grid-template-columns:1fr;gap:12px;padding:30px 20px;text-align:center;font-size:17px}
+    .pk-sectors__label{margin-bottom:6px}
+    .pk-sectors i{display:none}
+
+    .pk-services{padding-top:56px;padding-bottom:36px}
+    .pk-services__head{display:grid;grid-template-columns:1fr;margin-bottom:32px}
+    .pk-svc{grid-template-columns:1fr;gap:24px;padding:36px 0}
+    .pk-svc__num{font-size:48px}
+    .pk-svc h3{font-size:32px}
+    .pk-svc .pk-btn{width:100%;justify-content:center}
+
+    .pk-break{height:360px}
+    .pk-grid3{grid-template-columns:1fr}
+    .pk-step{padding:28px 24px}
+
+    .pk-band{min-height:560px;align-items:flex-end}
+    .pk-band::before{background:linear-gradient(180deg,rgba(15,25,15,.18) 0%,rgba(15,25,15,.88) 62%,rgba(15,25,15,.96) 100%)}
+    .pk-band__inner{padding:52px 20px}
+    .pk-band__inner .pk-row{display:grid;grid-template-columns:1fr;width:100%}
+    .pk-band__inner .pk-btn{justify-content:center;width:100%}
+
+    .pk-enq__grid{grid-template-columns:1fr;gap:32px;padding:0 20px}
+    .pk-form{padding:24px 20px;border-radius:14px}
+    .pk-form__2{grid-template-columns:1fr}
+    .pk-chips{display:grid;grid-template-columns:1fr 1fr}
+    .pk-chip span{width:100%;text-align:center}
+    .pk-form .pk-btn{width:100%;justify-content:center}
+  }
+
+  @media screen and (max-width:420px){
+    .pk-hero h1{font-size:38px}
+    .pk-jump,.pk-chips{grid-template-columns:1fr}
+  }
 </style>
 
 <div class="pk pk-services-page">
