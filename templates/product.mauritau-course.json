@@ -12,46 +12,315 @@
     "main": {
       "type": "pk-course",
       "blocks": {
-        "fy1": { "type": "for_you", "settings": { "text": "You want practical tools to settle your mind and body when stress builds" } },
-        "fy2": { "type": "for_you", "settings": { "text": "You want to understand hauora through a Māori lens, not just read about it" } },
-        "fy3": { "type": "for_you", "settings": { "text": "You're reconnecting with Te Ao Māori and want a gentle, guided place to start" } },
-        "fy4": { "type": "for_you", "settings": { "text": "You'd like a daily practice that fits real life, at your own pace" } },
-
-        "inc1": { "type": "include", "settings": { "icon": "video", "title": "Interactive lessons", "text": "Lectures, discussions and hands-on activities across five modules." } },
-        "inc2": { "type": "include", "settings": { "icon": "workbook", "title": "Downloadable workbook", "text": "Prompts, practices and reflection tools to work through alongside each module." } },
-        "inc3": { "type": "include", "settings": { "icon": "journal", "title": "Digital hauora journal", "text": "Track your practice, notice patterns and see your progress over time." } },
-        "inc4": { "type": "include", "settings": { "icon": "poster", "title": "Whakataukī posters", "text": "Printable whakataukī to keep the kaupapa visible at home or mahi." } },
-        "inc5": { "type": "include", "settings": { "icon": "audio", "title": "Audio karakia pack", "text": "Hear the karakia spoken so you can practise pronunciation and use them with confidence." } },
-        "inc6": { "type": "include", "settings": { "icon": "sleep", "title": "Bonus: sleep hygiene eBook", "text": "A guide to better rest, because a settled mauri starts with sleep." } },
-        "inc7": { "type": "include", "settings": { "icon": "community", "title": "Private community", "text": "An invitation to the private Mauri Tau Facebook group to share the journey." } },
-        "inc8": { "type": "include", "settings": { "icon": "email", "title": "Ongoing support", "text": "Regular emails with bonus insights, encouragement and integration tips for six months." } },
-
-        "m1": { "type": "module", "settings": { "title": "Understanding Hauora from a Māori Perspective", "text": "<p>An introduction to hauora through a Māori lens, including the Te Whare Tapa Whā model and how its four walls hold up your wellbeing.</p>" } },
-        "m2": { "type": "module", "settings": { "title": "Understanding Wairua and Mauri", "text": "<p>What wairua, mauri and tohu are, how they relate, and practices to help you attune to yourself, others and your environment.</p>" } },
-        "m3": { "type": "module", "settings": { "title": "What Mauri Tau Is and Why It Matters", "text": "<p>The concept of mauri tau, its benefits for mental, emotional and spiritual health, and your own reasons for practising.</p>" } },
-        "m4": { "type": "module", "settings": { "title": "The Power of Breath", "text": "<p>Why breath is central to reaching mauri tau, and techniques to regulate it when you need to come back to centre.</p>" } },
-        "m5": { "type": "module", "settings": { "title": "Bringing Mauri Tau into Daily Life", "text": "<p>Different practices to try, building a routine that suits you, personalising it, and tracking your progress and barriers.</p>" } },
-
-        "r1": { "type": "review", "settings": { "quote": "[Mauri Tau course review 1, client to supply]", "name": "[Name]" } },
-        "r2": { "type": "review", "settings": { "quote": "[Mauri Tau course review 2, client to supply]", "name": "[Name]" } },
-        "r3": { "type": "review", "settings": { "quote": "[Mauri Tau course review 3, client to supply]", "name": "[Name]" } },
-
-        "t1": { "type": "timeline", "settings": { "when": "Straight away", "text": "Your workbook, journal and resources land in your inbox." } },
-        "t2": { "type": "timeline", "settings": { "when": "Same day", "text": "You're registered on the course platform and can start Module 1." } },
-        "t3": { "type": "timeline", "settings": { "when": "Your first week", "text": "Join the private Mauri Tau community and settle into your practice." } },
-        "t4": { "type": "timeline", "settings": { "when": "Six months", "text": "Regular emails with insights and encouragement while you build the habit." } },
-
-        "f1": { "type": "faq", "settings": { "question": "Do I need to be Māori to take this course?", "answer": "<p>No. Mauri Tau is open to anyone seeking a more grounded approach to wellbeing, including tauiwi who are open to learning and honouring the kaupapa.</p>" } },
-        "f2": { "type": "faq", "settings": { "question": "How long do I have access?", "answer": "<p>You have six months of access from purchase, so you can revisit lessons at your own pace.</p>" } },
-        "f3": { "type": "faq", "settings": { "question": "How much time will it take each week?", "answer": "<p>[Client to confirm, e.g. lesson length and suggested weekly time.]</p>" } },
-        "f4": { "type": "faq", "settings": { "question": "Is this the same as therapy?", "answer": "<p>No. Mauri Tau is an education course, not a substitute for individual support. If you're struggling, please reach out to your GP or call or text 1737.</p>" } },
-        "f5": { "type": "faq", "settings": { "question": "Can my organisation enrol a team?", "answer": "<p>Yes. Many organisations in health, education and social services use Mauri Tau for cultural competency and wellbeing training. <a href=\"/pages/services#pk-enquire\" title=\"Services enquiry\">Enquire about group packages</a>.</p>" } },
-        "f6": { "type": "faq", "settings": { "question": "How do I log in once I've enrolled?", "answer": "<p>You'll get access by email straight away. After that, log in any time at <a href=\"/apps/my/courses/list\" title=\"Mauri Tau login\">Mauri Tau Login</a>.</p>" } },
-        "f7": { "type": "faq", "settings": { "question": "What's your refund policy?", "answer": "<p>[Client to confirm refund policy for digital courses.]</p>" } }
+        "fy1": {
+          "type": "for_you",
+          "settings": {
+            "text": "You want practical tools to settle your mind and body when stress builds"
+          }
+        },
+        "fy2": {
+          "type": "for_you",
+          "settings": {
+            "text": "You want to understand hauora through a Māori lens, not just read about it"
+          }
+        },
+        "fy3": {
+          "type": "for_you",
+          "settings": {
+            "text": "You're reconnecting with Te Ao Māori and want a gentle, guided place to start"
+          }
+        },
+        "fy4": {
+          "type": "for_you",
+          "settings": {
+            "text": "You'd like a daily practice that fits real life, at your own pace"
+          }
+        },
+        "inc1": {
+          "type": "include",
+          "settings": {
+            "icon": "video",
+            "title": "Interactive lessons",
+            "text": "Lectures, discussions and hands-on activities across five modules."
+          }
+        },
+        "inc2": {
+          "type": "include",
+          "settings": {
+            "icon": "workbook",
+            "title": "Downloadable workbook",
+            "text": "Prompts, practices and reflection tools to work through alongside each module."
+          }
+        },
+        "inc3": {
+          "type": "include",
+          "settings": {
+            "icon": "journal",
+            "title": "Digital hauora journal",
+            "text": "Track your practice, notice patterns and see your progress over time."
+          }
+        },
+        "inc4": {
+          "type": "include",
+          "settings": {
+            "icon": "poster",
+            "title": "Whakataukī posters",
+            "text": "Printable whakataukī to keep the kaupapa visible at home or mahi."
+          }
+        },
+        "inc5": {
+          "type": "include",
+          "settings": {
+            "icon": "audio",
+            "title": "Audio karakia pack",
+            "text": "Hear the karakia spoken so you can practise pronunciation and use them with confidence."
+          }
+        },
+        "inc6": {
+          "type": "include",
+          "settings": {
+            "icon": "sleep",
+            "title": "Bonus: sleep hygiene eBook",
+            "text": "A guide to better rest, because a settled mauri starts with sleep."
+          }
+        },
+        "inc7": {
+          "type": "include",
+          "settings": {
+            "icon": "community",
+            "title": "Private community",
+            "text": "An invitation to the private Mauri Tau Facebook group to share the journey."
+          }
+        },
+        "inc8": {
+          "type": "include",
+          "settings": {
+            "icon": "email",
+            "title": "Ongoing support",
+            "text": "Regular emails with bonus insights, encouragement and integration tips for six months."
+          }
+        },
+        "m1": {
+          "type": "module",
+          "settings": {
+            "title": "Understanding Hauora from a Māori Perspective",
+            "text": "<p>An introduction to hauora through a Māori lens, including the Te Whare Tapa Whā model and how its four walls hold up your wellbeing.</p>"
+          }
+        },
+        "m2": {
+          "type": "module",
+          "settings": {
+            "title": "Understanding Wairua and Mauri",
+            "text": "<p>What wairua, mauri and tohu are, how they relate, and practices to help you attune to yourself, others and your environment.</p>"
+          }
+        },
+        "m3": {
+          "type": "module",
+          "settings": {
+            "title": "What Mauri Tau Is and Why It Matters",
+            "text": "<p>The concept of mauri tau, its benefits for mental, emotional and spiritual health, and your own reasons for practising.</p>"
+          }
+        },
+        "m4": {
+          "type": "module",
+          "settings": {
+            "title": "The Power of Breath",
+            "text": "<p>Why breath is central to reaching mauri tau, and techniques to regulate it when you need to come back to centre.</p>"
+          }
+        },
+        "m5": {
+          "type": "module",
+          "settings": {
+            "title": "Bringing Mauri Tau into Daily Life",
+            "text": "<p>Different practices to try, building a routine that suits you, personalising it, and tracking your progress and barriers.</p>"
+          }
+        },
+        "r1": {
+          "type": "review",
+          "settings": {
+            "quote": "[Mauri Tau course review 1, client to supply]",
+            "name": "[Name]"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "quote": "[Mauri Tau course review 2, client to supply]",
+            "name": "[Name]"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "quote": "[Mauri Tau course review 3, client to supply]",
+            "name": "[Name]"
+          }
+        },
+        "t1": {
+          "type": "timeline",
+          "settings": {
+            "when": "Straight away",
+            "text": "Your workbook, journal and resources land in your inbox."
+          }
+        },
+        "t2": {
+          "type": "timeline",
+          "settings": {
+            "when": "Same day",
+            "text": "You're registered on the course platform and can start Module 1."
+          }
+        },
+        "t3": {
+          "type": "timeline",
+          "settings": {
+            "when": "Your first week",
+            "text": "Join the private Mauri Tau community and settle into your practice."
+          }
+        },
+        "t4": {
+          "type": "timeline",
+          "settings": {
+            "when": "Six months",
+            "text": "Regular emails with insights and encouragement while you build the habit."
+          }
+        },
+        "f1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to be Māori to take this course?",
+            "answer": "<p>No. Mauri Tau is open to anyone seeking a more grounded approach to wellbeing, including tauiwi who are open to learning and honouring the kaupapa.</p>"
+          }
+        },
+        "f2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long do I have access?",
+            "answer": "<p>You have six months of access from purchase, so you can revisit lessons at your own pace.</p>"
+          }
+        },
+        "f3": {
+          "type": "faq",
+          "settings": {
+            "question": "How much time will it take each week?",
+            "answer": "<p>[Client to confirm, e.g. lesson length and suggested weekly time.]</p>"
+          }
+        },
+        "f4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is this the same as therapy?",
+            "answer": "<p>No. Mauri Tau is an education course, not a substitute for individual support. If you're struggling, please reach out to your GP or call or text 1737.</p>"
+          }
+        },
+        "f5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can my organisation enrol a team?",
+            "answer": "<p>Yes. Many organisations in health, education and social services use Mauri Tau for cultural competency and wellbeing training. <a href=\"/pages/services#pk-enquire\" title=\"Services enquiry\">Enquire about group packages</a>.</p>"
+          }
+        },
+        "f6": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I log in once I've enrolled?",
+            "answer": "<p>You'll get access by email straight away. After that, log in any time at <a href=\"/apps/my/courses/list\" title=\"Mauri Tau login\">Mauri Tau Login</a>.</p>"
+          }
+        },
+        "f7": {
+          "type": "faq",
+          "settings": {
+            "question": "What's your refund policy?",
+            "answer": "<p>[Client to confirm refund policy for digital courses.]</p>"
+          }
+        }
       },
-      "block_order": ["fy1","fy2","fy3","fy4","inc1","inc2","inc3","inc4","inc5","inc6","inc7","inc8","m1","m2","m3","m4","m5","r1","r2","r3","t1","t2","t3","t4","f1","f2","f3","f4","f5","f6","f7"],
-      "settings": {}
+      "block_order": [
+        "fy1",
+        "fy2",
+        "fy3",
+        "fy4",
+        "inc1",
+        "inc2",
+        "inc3",
+        "inc4",
+        "inc5",
+        "inc6",
+        "inc7",
+        "inc8",
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5",
+        "r1",
+        "r2",
+        "r3",
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7"
+      ],
+      "settings": {
+        "load_fonts": true,
+        "hero_tag": "Online course",
+        "rating_text": "5.0 · 4 reviews",
+        "hero_title": "Mauri Tau",
+        "hero_sub": "Cultivate inner calm and balance, grounded in mātauranga Māori",
+        "hero_desc": "<p>A self-paced course that introduces mauri, the life force within all living things, and teaches you practical ways to return to a settled, balanced state. Think of it as Māori mindfulness, made easy to bring into everyday life.</p>",
+        "sale_label": "Limited time",
+        "enrol_label": "Enrol now",
+        "trust": "Instant digital access, Self-paced · 6 months access, Created by a Registered Clinical Psychologist",
+        "hero_image": "shopify://shop_images/group-seated.jpg",
+        "foryou_eyebrow": "Is this for you?",
+        "foryou_heading": "If life feels loud and you're craving a steadier place to stand, Mauri Tau is for you.",
+        "foryou_text": "<p>You don't need to be Māori or speak te reo. This course is for anyone looking for a more grounded approach to wellbeing, including tauiwi who are open to learning and honouring the kaupapa.</p>",
+        "about_course_image": "shopify://shop_images/forest.jpg",
+        "what_eyebrow": "He aha te mauri tau?",
+        "what_heading": "A settled mauri is a state you can return to",
+        "what_text": "<p>Mauri is the life force in all living things: people, whenua, wai. When our mauri is unsettled we feel it as stress, overwhelm or disconnection. Mauri tau is the state of calm and balance on the other side.</p><p>This course walks you through the mātauranga behind it, then gives you the tools, including breath, to get there on purpose.</p>",
+        "stat1_n": "5",
+        "stat1_l": "modules",
+        "stat2_n": "6",
+        "stat2_l": "months access",
+        "stat3_n": "7",
+        "stat3_l": "bonus resources",
+        "inc_eyebrow": "Kei roto · What you get",
+        "inc_heading": "Everything you need to make it a practice",
+        "cur_eyebrow": "Course curriculum",
+        "cur_heading": "Five modules, one steady practice",
+        "cur_cta": "Start the course",
+        "fit_heading": "Is this the right fit?",
+        "fit_yes_heading": "Mauri Tau is for you if",
+        "fit_yes": "You're Māori or tauiwi and open to honouring the kaupapa\nYou're a beginner or have some experience with Te Ao Māori\nYou want to learn at your own pace, on your own schedule\nYou work in health, education or social services and want to build cultural competency",
+        "fit_no_heading": "It's not the right fit if",
+        "fit_no": "You're looking for one-on-one therapy (this is an education course)\nYou need urgent support right now. Please contact your GP, or call or text 1737 any time",
+        "bio_eyebrow": "Ko wai au · Your guide",
+        "bio_heading": "Kia ora, I'm Dr Jessica",
+        "bio_text": "<p>I'm a Registered Clinical Psychologist of Ngāti Pūkenga and Ngāti Pikiao descent, based in Tāmaki Makaurau. I create Māori wellbeing resources for everyday people, to help you whakapiki your hauora.</p><p>Mauri Tau brings together my clinical training and mātauranga Māori, so the practices are both grounded and easy to use in real life.</p>",
+        "bio_signoff": "Nā Jessica",
+        "bio_image": "shopify://shop_images/jessica.jpg",
+        "rev_heading": "What Mauri Tau students say",
+        "enrol_image": "shopify://shop_images/group-standing.jpg",
+        "enrol_eyebrow": "Rēhita mai · Enrol",
+        "enrol_heading": "Begin your Mauri Tau journey today",
+        "enrol_text": "Start straight away, move at your own pace and come back to the lessons whenever you need them over six months.",
+        "card_includes": "5 modules of interactive lessons\nWorkbook & digital hauora journal\nWhakataukī posters & audio karakia pack\nBonus sleep hygiene eBook\nPrivate community & 6 months of support",
+        "card_note": "Instant access by email. Enrolling a team? <a href=\"/pages/services#pk-enquire\">Ask about group packages</a>",
+        "time_heading": "What happens after you enrol",
+        "faq_heading": "Frequently asked questions",
+        "final_line1": "Your mauri is worth tending.",
+        "final_line2": "Start today."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
