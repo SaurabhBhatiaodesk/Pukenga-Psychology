@@ -59,146 +59,6 @@
         "padding-block-end": 40
       }
     },
-    "1790915066ecbf6cbf": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_ce27432_gAhAcU": {
-          "type": "ai_gen_block_ce27432",
-          "settings": {
-            "image": "shopify://shop_images/Pukenga17.webp",
-            "heading": "Consultancy",
-            "heading_size": 40,
-            "text": "<p>I offer specialized consultancy services tailored to NGOs, government entities, research institutions, and startups. With a proven track record of empowering organizations, I bring a unique blend of psychological expertise and practical insights to the table.</p><p>My consultancy services are designed to help you navigate the complexities of human dynamics, fostering environments of resilience, creativity, and productivity. From crafting effective mental health initiatives to optimizing team dynamics, I provide actionable strategies rooted in evidence-based practices. Whether you're aiming to enhance employee well-being, foster inclusive cultures, or conduct impactful research, my tailored solutions will propel your mission forward.</p>",
-            "button_label": "Learn more",
-            "button_text_alignment": "center",
-            "button_link": "",
-            "chat_label": "Let's chat",
-            "chat_link": "shopify://pages/service-enquiry",
-            "chat_spacing": 16,
-            "chat_radius": 4,
-            "image_position": "left",
-            "desktop_width_percent": 100,
-            "column_gap": 32,
-            "padding_top": 20,
-            "padding_bottom": 20,
-            "image_radius": 8,
-            "background_color": "#16281b",
-            "text_color": "#f2ecdc"
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_ce27432_j89KHP": {
-          "type": "ai_gen_block_ce27432",
-          "settings": {
-            "image": "shopify://shop_images/Pukenga7.webp",
-            "heading": "Training",
-            "heading_size": 40,
-            "text": "<p>Embracing the wisdom of both Western psychology and Te Ao Māori, I offer customized trainings designed to resonate with diverse audiences. Topics span from mental health, burn out and stress, effective communication, right through to behavioral management.<br/><br/>These can be tailored for various settings from kura, residential right through to support services.<br/><br/></p>",
-            "button_label": "Learn more",
-            "button_text_alignment": "center",
-            "button_link": "",
-            "chat_label": "Let's chat",
-            "chat_link": "shopify://pages/service-enquiry",
-            "chat_spacing": 16,
-            "chat_radius": 4,
-            "image_position": "right",
-            "desktop_width_percent": 100,
-            "column_gap": 32,
-            "padding_top": 20,
-            "padding_bottom": 20,
-            "image_radius": 8,
-            "background_color": "#16281b",
-            "text_color": "#f2ecdc"
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_ce27432_bbfjn7": {
-          "type": "ai_gen_block_ce27432",
-          "settings": {
-            "image": "shopify://shop_images/Pukenga19.webp",
-            "heading": "Supervision",
-            "heading_size": 40,
-            "text": "<p>Drawing from a wealth of experience in the field, I offer supervision to fellow health professionals seeking to deepen their practice. Through collaborative sessions, I provide a nurturing space for reflection, skill refinement, and ethical considerations. My approach integrates Western psychology and Te Ao Māori perspectives, ensuring a holistic approach to professional development. Together, we'll embark on a journey towards greater competence, confidence, and compassionate care in your healing profession.<br/><br/></p>",
-            "button_label": "Learn more",
-            "button_text_alignment": "center",
-            "button_link": "",
-            "chat_label": "Let's chat",
-            "chat_link": "shopify://pages/service-enquiry",
-            "chat_spacing": 16,
-            "chat_radius": 4,
-            "image_position": "left",
-            "desktop_width_percent": 100,
-            "column_gap": 32,
-            "padding_top": 20,
-            "padding_bottom": 20,
-            "image_radius": 8,
-            "background_color": "#16281b",
-            "text_color": "#f2ecdc"
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_ce27432_QRAAPr": {
-          "type": "ai_gen_block_ce27432",
-          "settings": {
-            "image": "shopify://shop_images/Pukenga1.webp",
-            "heading": "Assessment & Therapy",
-            "heading_size": 40,
-            "text": "<p>In the midst of life's challenges, I'm here to provide support tailored just for you. Through comprehensive assessment and therapy, we'll navigate the complexities together. Whether it's anxiety, stress, or other disorders, my approach is centered around your unique journey, offering practical solutions for your present needs. Let's take this step towards healing and growth, right where you are.<br/><br/></p>",
-            "button_label": "",
-            "button_text_alignment": "center",
-            "button_link": "",
-            "chat_label": "At This Time, We Have No Capacity For New Therapy Clients. Please Check Back Later For Availability",
-            "chat_link": "shopify://pages/service-enquiry",
-            "chat_spacing": 16,
-            "chat_radius": 4,
-            "image_position": "right",
-            "desktop_width_percent": 100,
-            "column_gap": 32,
-            "padding_top": 20,
-            "padding_bottom": 20,
-            "image_radius": 8,
-            "background_color": "#16281b",
-            "text_color": "#f2ecdc"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_ce27432_gAhAcU",
-        "ai_gen_block_ce27432_j89KHP",
-        "ai_gen_block_ce27432_bbfjn7",
-        "ai_gen_block_ce27432_QRAAPr"
-      ],
-      "disabled": true,
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "section_mTAV6J": {
       "type": "section",
       "blocks": {
@@ -345,6 +205,7 @@
         "image_fQVGUP",
         "group_Dwgx9r"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -522,6 +383,7 @@
         "image_XERLL6",
         "group_HLtigP"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -699,6 +561,7 @@
         "image_TTUWre",
         "group_mhmRTq"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -876,6 +739,7 @@
         "image_BAV8JQ",
         "group_QdYypT"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -910,7 +774,6 @@
   },
   "order": [
     "main",
-    "1790915066ecbf6cbf",
     "section_mTAV6J",
     "section_ytnyaH",
     "section_mCLA69",
