@@ -1,0 +1,418 @@
+{%- comment -%}
+  Pūkenga Psychology — Services page (Forest Deep look)
+  Template: templates/page.services.json
+  Enquiry form posts to Shopify's contact form, so submissions land in the store's contact inbox.
+{%- endcomment -%}
+
+{%- if section.settings.load_fonts -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  .pk{--pk-bg:#16281b;--pk-panel:#1d3323;--pk-deep:#0f1d13;--pk-text:#ece5d4;--pk-muted:#cfd8cc;--pk-gold:#e0b784;--pk-line:rgba(236,229,212,.16);
+    background:var(--pk-bg);color:var(--pk-text);font-family:'Instrument Sans',system-ui,sans-serif;font-size:16px;line-height:1.5}
+  .pk *{box-sizing:border-box}
+  .pk h1,.pk h2,.pk h3,.pk p{margin:0}
+  .pk a{color:inherit;text-decoration:none}
+  .pk a:hover{opacity:.82}
+  .pk-serif{font-family:'Spectral',Georgia,serif;font-weight:300}
+  .pk-mar{font-family:'Marcellus',Georgia,serif}
+  .pk-eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--pk-gold)}
+  .pk-wrap{max-width:1280px;margin:0 auto;padding-left:clamp(20px,4vw,44px);padding-right:clamp(20px,4vw,44px)}
+  .pk-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:40px;font-weight:600;font-size:14.5px;background:var(--pk-gold);color:var(--pk-bg)!important;border:1px solid var(--pk-gold);cursor:pointer;font-family:inherit}
+  .pk-btn--ghost{background:transparent;color:var(--pk-text)!important;border-color:rgba(236,229,212,.5);font-weight:400}
+  .pk-btn--outline{background:transparent;color:var(--pk-gold)!important}
+  .pk-pill{font-size:12.5px;padding:7px 13px;border:1px solid rgba(236,229,212,.25);border-radius:40px}
+  .pk-img{position:relative;overflow:hidden;min-height:420px}
+  .pk-img img,.pk-img svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* hero */
+  .pk-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))}
+  .pk-hero__text{padding:clamp(48px,7vw,96px) clamp(20px,5vw,72px);display:flex;flex-direction:column;justify-content:center;gap:26px}
+  .pk-hero h1{font-size:clamp(40px,5.2vw,68px);line-height:1.04}
+  .pk-hero h1 em{color:var(--pk-gold)}
+  .pk-hero__lead{font-size:17px;line-height:1.7;opacity:.86;max-width:520px}
+  .pk-row{display:flex;flex-wrap:wrap;gap:14px}
+  .pk-jump{display:flex;flex-wrap:wrap;gap:10px}
+  .pk-jump a{font-size:13px;padding:8px 14px;border-radius:40px;background:var(--pk-panel);color:var(--pk-muted)}
+  .pk-hero .pk-img{min-height:560px}
+  .pk-hero__card{position:absolute;left:24px;right:24px;bottom:24px;max-width:340px;background:rgba(15,29,19,.9);border:1px solid rgba(224,183,132,.35);border-radius:14px;padding:18px 20px;z-index:1}
+  .pk-hero__card .pk-mar{font-size:17px;color:var(--pk-gold);margin-bottom:6px}
+  .pk-hero__card p{font-size:13.5px;line-height:1.55;color:#d8d1bf}
+
+  /* sectors */
+  .pk-sectors{background:var(--pk-deep);border-top:1px solid rgba(236,229,212,.08);border-bottom:1px solid rgba(236,229,212,.08);padding:22px clamp(20px,4vw,44px);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 26px;font-family:'Spectral',Georgia,serif;font-size:18px;color:var(--pk-muted)}
+  .pk-sectors__label{font-family:'Instrument Sans',sans-serif;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--pk-gold)}
+  .pk-sectors i{font-style:normal;color:var(--pk-gold)}
+
+  /* services */
+  .pk-services{padding-top:clamp(64px,8vw,104px);padding-bottom:clamp(40px,6vw,80px)}
+  .pk-services__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:48px}
+  .pk-services__head h2{font-size:clamp(34px,4vw,48px);line-height:1.1}
+  .pk-services__head h2 span{font-style:italic;opacity:.6;font-size:.6em}
+  .pk-services__head p{font-size:15px;line-height:1.7;opacity:.75;max-width:420px}
+  .pk-svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px 48px;padding:44px 0;border-top:1px solid var(--pk-line);scroll-margin-top:100px}
+  .pk-svc__num{font-family:'Marcellus',Georgia,serif;font-size:60px;line-height:1;color:var(--pk-gold)}
+  .pk-svc h3{font-family:'Spectral',Georgia,serif;font-weight:400;font-size:36px;line-height:1.1;margin-top:14px}
+  .pk-svc__badge{display:inline-block;margin-top:14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:40px;background:#3a2a1c;color:#f0cfa4}
+  .pk-svc__desc{font-size:16px;line-height:1.75;opacity:.88}
+  .pk-svc__desc p+p{margin-top:12px}
+  .pk-svc__pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .pk-svc__side{display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+  .pk-svc ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;opacity:.85}
+  .pk-svc ul li::before{content:'✦ ';color:var(--pk-gold)}
+  .pk-svc .pk-btn{align-self:flex-start;font-size:14px;padding:14px 24px}
+
+  /* image break */
+  .pk-break{position:relative;height:clamp(320px,38vw,480px);overflow:hidden}
+  .pk-break img,.pk-break svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pk-break::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,25,15,.15),rgba(15,25,15,.78))}
+  .pk-break p{position:absolute;left:0;right:0;bottom:clamp(28px,4vw,52px);z-index:1;text-align:center;padding:0 24px;font-size:clamp(26px,3.2vw,40px);line-height:1.2;color:#f2ecdc}
+  .pk-break p em{color:var(--pk-gold)}
+
+  /* steps */
+  .pk-steps{background:var(--pk-panel);padding:clamp(64px,8vw,96px) 0}
+  .pk-center{text-align:center;margin-bottom:48px}
+  .pk-center h2{font-size:clamp(32px,3.6vw,44px);line-height:1.1;margin-top:14px}
+  .pk-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:22px}
+  .pk-step{background:var(--pk-bg);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;gap:14px}
+  .pk-step__top{display:flex;align-items:center;gap:14px}
+  .pk-step__n{width:44px;height:44px;border-radius:50%;border:1px solid var(--pk-gold);color:var(--pk-gold);display:flex;align-items:center;justify-content:center;font-family:'Marcellus',Georgia,serif;font-size:18px}
+  .pk-step__label{font-family:'Marcellus',Georgia,serif;font-size:20px;color:var(--pk-gold)}
+  .pk-step h3{font-family:'Spectral',Georgia,serif;font-weight:400;font-size:24px}
+  .pk-step p{font-size:15px;line-height:1.7;opacity:.8}
+
+  /* teams band */
+  .pk-band{position:relative;overflow:hidden;min-height:480px;display:flex;align-items:center}
+  .pk-band>img,.pk-band>svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pk-band::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(15,25,15,.9) 0%,rgba(15,25,15,.6) 55%,rgba(15,25,15,.15) 100%)}
+  .pk-band__inner{position:relative;z-index:2;padding:72px clamp(20px,5vw,72px);max-width:620px;display:flex;flex-direction:column;gap:20px}
+  .pk-band h2{font-size:clamp(32px,3.8vw,46px);line-height:1.08}
+  .pk-band p{font-size:16px;line-height:1.75;opacity:.88}
+
+  /* quote */
+  .pk-quote{padding:clamp(64px,8vw,100px) clamp(20px,4vw,44px);text-align:center}
+  .pk-quote__in{max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:26px}
+  .pk-quote__mark{font-family:'Spectral',Georgia,serif;font-size:80px;line-height:.6;color:var(--pk-gold)}
+  .pk-quote blockquote{margin:0;font-style:italic;font-size:clamp(24px,2.8vw,34px);line-height:1.4}
+  .pk-quote cite{font-style:normal;font-size:13.5px;letter-spacing:.06em;color:var(--pk-gold)}
+
+  /* enquiry */
+  .pk-enq{background:var(--pk-deep);padding:clamp(64px,8vw,104px) 0;scroll-margin-top:80px}
+  .pk-enq__grid{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px}
+  .pk-enq__intro{display:flex;flex-direction:column;gap:22px}
+  .pk-enq__intro h2{font-size:clamp(36px,4.4vw,56px);line-height:1.05}
+  .pk-enq__intro>p{font-size:16px;line-height:1.75;opacity:.85;max-width:440px}
+  .pk-enq__facts{display:flex;flex-direction:column;gap:12px;margin-top:8px;font-size:15px}
+  .pk-enq__facts span::before{content:'✦  ';color:var(--pk-gold)}
+  .pk-form{background:var(--pk-panel);border-radius:20px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:20px}
+  .pk-form__2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px}
+  .pk-form label.pk-field-label{display:flex;flex-direction:column;gap:8px;font-size:13px;letter-spacing:.04em;color:var(--pk-muted)}
+  .pk-field{width:100%;padding:15px 18px;border:1px solid rgba(236,229,212,.28);border-radius:12px;background:var(--pk-bg);color:var(--pk-text);font:inherit;font-size:15px}
+  .pk-field:focus{outline:none;border-color:var(--pk-gold)}
+  .pk-field::placeholder{color:#8e9c8f}
+  .pk-form fieldset{border:none;margin:0;padding:0}
+  .pk-form legend{font-size:13px;letter-spacing:.04em;color:var(--pk-muted);margin-bottom:10px;padding:0}
+  .pk-chips{display:flex;flex-wrap:wrap;gap:10px}
+  .pk-chip{position:relative;display:inline-flex}
+  .pk-chip input{position:absolute;opacity:0;width:1px;height:1px}
+  .pk-chip span{padding:11px 18px;border:1px solid rgba(236,229,212,.35);border-radius:40px;font-size:14px;cursor:pointer}
+  .pk-chip input:checked+span{background:var(--pk-gold);color:var(--pk-bg);border-color:var(--pk-gold)}
+  .pk-chip input:focus-visible+span{outline:2px solid var(--pk-gold);outline-offset:2px}
+  .pk-form__msg{padding:14px 18px;border-radius:12px;font-size:14.5px}
+  .pk-form__msg--ok{background:rgba(224,183,132,.15);border:1px solid var(--pk-gold)}
+  .pk-form__msg--err{background:rgba(192,84,55,.18);border:1px solid #c05437}
+  .pk-form .pk-btn{align-self:flex-start}
+</style>
+
+<div class="pk pk-services-page">
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section class="pk-hero">
+    <div class="pk-hero__text">
+      <div class="pk-eyebrow">{{ section.settings.hero_eyebrow }}</div>
+      <h1 class="pk-serif">{{ section.settings.hero_heading }}</h1>
+      <div class="pk-hero__lead">{{ section.settings.hero_text }}</div>
+      <div class="pk-row">
+        <a class="pk-btn" href="#pk-enquire">{{ section.settings.hero_cta }}</a>
+        <a class="pk-btn pk-btn--ghost" href="#pk-services">{{ section.settings.hero_cta2 }}</a>
+      </div>
+      <nav class="pk-jump" aria-label="Services">
+        {%- assign n = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'service' -%}
+            {%- assign n = n | plus: 1 -%}
+            <a href="#pk-svc-{{ block.id }}">{{ n | prepend: '0' | slice: -2, 2 }} {{ block.settings.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+    <div class="pk-img">
+      {%- if section.settings.hero_image -%}
+        {{ section.settings.hero_image | image_url: width: 1600 | image_tag: loading: 'eager', sizes: '(min-width: 1040px) 50vw, 100vw', alt: section.settings.hero_image.alt, style: 'object-position: 50% 25%' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+      {%- if section.settings.hero_card_title != blank -%}
+        <div class="pk-hero__card"><div class="pk-mar">{{ section.settings.hero_card_title }}</div><p>{{ section.settings.hero_card_text }}</p></div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} SECTORS {%- endcomment -%}
+  {%- if section.settings.sectors != blank -%}
+    {%- assign sectors = section.settings.sectors | split: ',' -%}
+    <div class="pk-sectors">
+      <span class="pk-sectors__label">{{ section.settings.sectors_label }}</span>
+      {%- for s in sectors -%}
+        <span>{{ s | strip }}</span>{%- unless forloop.last -%}<i aria-hidden="true">✦</i>{%- endunless -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} SERVICES (image break sits after service no. X) {%- endcomment -%}
+  <section id="pk-services" class="pk-services">
+    <div class="pk-wrap">
+      <div class="pk-services__head">
+        <h2 class="pk-serif">{{ section.settings.services_heading }} <span>{{ section.settings.services_subheading }}</span></h2>
+        <p>{{ section.settings.services_intro }}</p>
+      </div>
+
+      {%- assign n = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'service' -%}
+          {%- assign n = n | plus: 1 -%}
+          <article id="pk-svc-{{ block.id }}" class="pk-svc" {{ block.shopify_attributes }}>
+            <div>
+              <div class="pk-svc__num">{{ n | prepend: '0' | slice: -2, 2 }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              {%- if block.settings.badge != blank -%}<span class="pk-svc__badge">{{ block.settings.badge }}</span>{%- endif -%}
+            </div>
+            <div>
+              <div class="pk-svc__desc">{{ block.settings.description }}</div>
+              {%- if block.settings.audience != blank -%}
+                <div class="pk-svc__pills">
+                  {%- assign aud = block.settings.audience | split: ',' -%}
+                  {%- for a in aud -%}<span class="pk-pill">{{ a | strip }}</span>{%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="pk-svc__side">
+              {%- if block.settings.points != blank -%}
+                <ul>
+                  {%- assign pts = block.settings.points | newline_to_br | split: '<br />' -%}
+                  {%- for p in pts -%}{%- assign pt = p | strip -%}{%- if pt != blank -%}<li>{{ pt }}</li>{%- endif -%}{%- endfor -%}
+                </ul>
+              {%- endif -%}
+              <a href="#pk-enquire" class="pk-btn{% if block.settings.outline %} pk-btn--outline{% endif %}" data-pk-service="{{ block.settings.form_value | default: block.settings.title | escape }}">{{ block.settings.button_label }} <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          {%- if n == section.settings.break_after -%}
+            </div></section>
+            <div class="pk-break">
+              {%- if section.settings.break_image -%}
+                {{ section.settings.break_image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', alt: section.settings.break_image.alt, style: 'object-position: 50% 40%' }}
+              {%- else -%}
+                {{ 'lifestyle-2' | placeholder_svg_tag }}
+              {%- endif -%}
+              <p class="pk-serif">{{ section.settings.break_line1 }}<br><em>{{ section.settings.break_line2 }}</em></p>
+            </div>
+            <section class="pk-services" style="padding-top:8px"><div class="pk-wrap">
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} HOW IT WORKS {%- endcomment -%}
+  <section class="pk-steps">
+    <div class="pk-wrap">
+      <div class="pk-center">
+        <div class="pk-eyebrow">{{ section.settings.steps_eyebrow }}</div>
+        <h2 class="pk-serif">{{ section.settings.steps_heading }}</h2>
+      </div>
+      <div class="pk-grid3">
+        {%- assign s = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            {%- assign s = s | plus: 1 -%}
+            <div class="pk-step" {{ block.shopify_attributes }}>
+              <div class="pk-step__top"><span class="pk-step__n">{{ s }}</span><span class="pk-step__label">{{ block.settings.label }}</span></div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} MAURI TAU FOR TEAMS {%- endcomment -%}
+  {%- if section.settings.show_band -%}
+    <section class="pk-band">
+      {%- if section.settings.band_image -%}
+        {{ section.settings.band_image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', alt: '' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+      <div class="pk-band__inner">
+        <div class="pk-eyebrow">{{ section.settings.band_eyebrow }}</div>
+        <h2 class="pk-serif">{{ section.settings.band_heading }}</h2>
+        <p>{{ section.settings.band_text }}</p>
+        <div class="pk-row">
+          <a class="pk-btn" href="{{ section.settings.band_link | default: '/products/mauri-tau-program' }}">{{ section.settings.band_cta }}</a>
+          <a class="pk-btn pk-btn--ghost" href="#pk-enquire" data-pk-service="{{ section.settings.band_form_value | escape }}">{{ section.settings.band_cta2 }}</a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} TESTIMONIAL {%- endcomment -%}
+  {%- if section.settings.quote != blank -%}
+    <section class="pk-quote">
+      <div class="pk-quote__in">
+        <div class="pk-quote__mark" aria-hidden="true">“</div>
+        <blockquote class="pk-serif">{{ section.settings.quote }}</blockquote>
+        <cite>{{ section.settings.quote_author }}</cite>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ENQUIRY — Shopify contact form {%- endcomment -%}
+  <section id="pk-enquire" class="pk-enq">
+    <div class="pk-enq__grid">
+      <div class="pk-enq__intro">
+        <div class="pk-eyebrow">{{ section.settings.form_eyebrow }}</div>
+        <h2 class="pk-serif">{{ section.settings.form_heading }}</h2>
+        <p>{{ section.settings.form_text }}</p>
+        <div class="pk-enq__facts">
+          {%- assign facts = section.settings.form_facts | newline_to_br | split: '<br />' -%}
+          {%- for f in facts -%}{%- assign ft = f | strip -%}{%- if ft != blank -%}<span>{{ ft }}</span>{%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+
+      {%- form 'contact', id: 'pk-enquiry-form', class: 'pk-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="pk-form__msg pk-form__msg--ok" role="status">{{ section.settings.form_success }}</div>
+        {%- elsif form.errors -%}
+          <div class="pk-form__msg pk-form__msg--err" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <input type="hidden" name="contact[form]" value="Services enquiry">
+        <div class="pk-form__2">
+          <label class="pk-field-label">Name<input class="pk-field" type="text" name="contact[name]" autocomplete="name" placeholder="Your name" required></label>
+          <label class="pk-field-label">Email<input class="pk-field" type="email" name="contact[email]" autocomplete="email" placeholder="you@email.com" required></label>
+        </div>
+        <label class="pk-field-label">Organisation (optional)<input class="pk-field" type="text" name="contact[organisation]" placeholder="Organisation or kura"></label>
+        <fieldset>
+          <legend>What are you interested in?</legend>
+          <div class="pk-chips">
+            {%- assign opts = section.settings.form_options | split: ',' -%}
+            {%- for o in opts -%}
+              {%- assign ov = o | strip -%}
+              <label class="pk-chip"><input type="radio" name="contact[service]" value="{{ ov | escape }}"{% if forloop.first %} checked{% endif %}><span>{{ ov }}</span></label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+        <label class="pk-field-label">How can I help?<textarea class="pk-field" name="contact[body]" rows="5" placeholder="A few lines about your team, setting and what you need"></textarea></label>
+        <button type="submit" class="pk-btn">{{ section.settings.form_button }}</button>
+      {%- endform -%}
+    </div>
+  </section>
+</div>
+
+<script>
+  (function(){
+    var root=document.querySelector('.pk-services-page'); if(!root) return;
+    root.addEventListener('click',function(e){
+      var a=e.target.closest('[data-pk-service]'); if(!a) return;
+      var v=a.getAttribute('data-pk-service'); if(!v) return;
+      var inputs=root.querySelectorAll('input[name="contact[service]"]');
+      for(var i=0;i<inputs.length;i++){ if(inputs[i].value.toLowerCase()===v.toLowerCase()){ inputs[i].checked=true; } }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pūkenga services",
+  "tag": "div",
+  "class": "pk-services-section",
+  "settings": [
+    { "type": "checkbox", "id": "load_fonts", "label": "Load Spectral / Marcellus / Instrument Sans from Google Fonts", "info": "Untick if the theme already loads these fonts.", "default": true },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Ratonga · Services" },
+    { "type": "html", "id": "hero_heading", "label": "Heading", "info": "Wrap a phrase in <em> to highlight it in gold.", "default": "Where psychology<br>meets <em>Te Ao Māori</em>" },
+    { "type": "richtext", "id": "hero_text", "label": "Intro", "default": "<p>Consultancy, training and supervision from Dr Jessica, Registered Clinical Psychologist. For organisations, kura and health professionals who want wellbeing mahi that fits the people they serve.</p>" },
+    { "type": "text", "id": "hero_cta", "label": "Primary button", "default": "Start an enquiry" },
+    { "type": "text", "id": "hero_cta2", "label": "Secondary button", "default": "Explore services" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Portrait 4:5, 1200 × 1500px" },
+    { "type": "text", "id": "hero_card_title", "label": "Image card title", "default": "Ngāti Pūkenga · Ngāti Pikiao" },
+    { "type": "text", "id": "hero_card_text", "label": "Image card text", "default": "Registered Clinical Psychologist, based in Tāmaki Makaurau" },
+    { "type": "header", "content": "Sectors strip" },
+    { "type": "text", "id": "sectors_label", "label": "Label", "default": "Working alongside" },
+    { "type": "textarea", "id": "sectors", "label": "Sectors (comma separated)", "default": "NGOs, Government, Research institutions, Start-ups, Kura, Residential & support services, Health professionals" },
+    { "type": "header", "content": "Services list" },
+    { "type": "text", "id": "services_heading", "label": "Heading", "default": "Ngā ratonga" },
+    { "type": "text", "id": "services_subheading", "label": "Sub-heading", "default": "/ how we can work together" },
+    { "type": "textarea", "id": "services_intro", "label": "Intro", "default": "Every engagement is shaped around your people and kaupapa. Pick a starting point and we'll tailor from there." },
+    { "type": "header", "content": "Image break" },
+    { "type": "range", "id": "break_after", "label": "Show after service no.", "min": 0, "max": 6, "step": 1, "default": 2, "info": "0 hides it" },
+    { "type": "image_picker", "id": "break_image", "label": "Image", "info": "Landscape 2:1, 2400 × 1200px" },
+    { "type": "text", "id": "break_line1", "label": "Line 1", "default": "Two knowledge systems." },
+    { "type": "text", "id": "break_line2", "label": "Line 2 (gold italic)", "default": "One way of caring for people." },
+    { "type": "header", "content": "How it works" },
+    { "type": "text", "id": "steps_eyebrow", "label": "Eyebrow", "default": "Me pēhea · How it works" },
+    { "type": "text", "id": "steps_heading", "label": "Heading", "default": "Three simple steps" },
+    { "type": "header", "content": "Mauri Tau for teams" },
+    { "type": "checkbox", "id": "show_band", "label": "Show band", "default": true },
+    { "type": "image_picker", "id": "band_image", "label": "Image", "info": "Landscape 2:1, 2400 × 1200px" },
+    { "type": "text", "id": "band_eyebrow", "label": "Eyebrow", "default": "For teams & organisations" },
+    { "type": "text", "id": "band_heading", "label": "Heading", "default": "Bring Mauri Tau to your whole team" },
+    { "type": "textarea", "id": "band_text", "label": "Text", "default": "Organisations across health, education and social services use the Mauri Tau course for cultural competency and wellbeing training. Group packages available on request." },
+    { "type": "text", "id": "band_cta", "label": "Button", "default": "Explore Mauri Tau" },
+    { "type": "url", "id": "band_link", "label": "Button link" },
+    { "type": "text", "id": "band_cta2", "label": "Second button", "default": "Ask about group packages" },
+    { "type": "text", "id": "band_form_value", "label": "Second button preselects form option", "default": "Mauri Tau group package" },
+    { "type": "header", "content": "Testimonial" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "info": "Leave blank to hide." },
+    { "type": "text", "id": "quote_author", "label": "Name · Role, Organisation" },
+    { "type": "header", "content": "Enquiry form" },
+    { "type": "text", "id": "form_eyebrow", "label": "Eyebrow", "default": "Whakapā mai · Get in touch" },
+    { "type": "text", "id": "form_heading", "label": "Heading", "default": "Let's kōrero" },
+    { "type": "textarea", "id": "form_text", "label": "Text", "default": "Share a little about what you need and I'll come back to you to talk through next steps. No obligation, no hard sell." },
+    { "type": "textarea", "id": "form_facts", "label": "Facts (one per line)", "default": "Reply within [X] working days\nBased in Tāmaki Makaurau" },
+    { "type": "text", "id": "form_options", "label": "Interest options (comma separated)", "default": "Consultancy, Training, Supervision, Therapy waitlist, Mauri Tau group package, Something else" },
+    { "type": "text", "id": "form_button", "label": "Button", "default": "Send enquiry" },
+    { "type": "text", "id": "form_success", "label": "Success message", "default": "Ngā mihi, your enquiry is in. I'll be in touch soon." }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Service" },
+        { "type": "text", "id": "badge", "label": "Badge", "info": "e.g. Currently full · Waitlist open" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "text", "id": "audience", "label": "Who it's for (comma separated)" },
+        { "type": "textarea", "id": "points", "label": "Topics (one per line)" },
+        { "type": "text", "id": "button_label", "label": "Button", "default": "Enquire" },
+        { "type": "text", "id": "form_value", "label": "Preselects form option", "info": "Must match an interest option exactly" },
+        { "type": "checkbox", "id": "outline", "label": "Outline button", "default": false }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "How it works step",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Te reo label", "default": "Kōrero" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Step" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Pūkenga services" }]
+}
+{% endschema %}
