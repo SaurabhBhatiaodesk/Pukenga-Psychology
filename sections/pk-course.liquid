@@ -44,6 +44,8 @@
   .pkc-h2{font-size:clamp(32px,3.8vw,46px);line-height:1.1}
   .pkc-body{font-size:16px;line-height:1.75;opacity:.86}
   .pkc-body p+p{margin-top:14px}
+  .pkc-what__text,
+  .pkc-what__text *{font-family:'Instrument Sans',system-ui,sans-serif;font-size:16px!important;font-style:normal;font-weight:400;line-height:1.65!important}
   .pkc-center{text-align:center;margin-bottom:44px;display:flex;flex-direction:column;align-items:center;gap:14px}
   .pkc-sale{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:40px;background:var(--pk-sale);color:#fff}
 
@@ -232,7 +234,7 @@
     <div class="pkc-split__text">
       <div class="pkc-eyebrow">{{ section.settings.what_eyebrow }}</div>
       <h2 class="pkc-serif pkc-h2">{{ section.settings.what_heading }}</h2>
-      <div class="pkc-body">{{ section.settings.what_text }}</div>
+      <div class="pkc-body pkc-what__text">{{ section.settings.what_text }}</div>
       <div class="pkc-stats">
         <div class="pkc-stat"><b>{{ section.settings.stat1_n }}</b><span>{{ section.settings.stat1_l }}</span></div>
         <div class="pkc-stat"><b>{{ section.settings.stat2_n }}</b><span>{{ section.settings.stat2_l }}</span></div>
